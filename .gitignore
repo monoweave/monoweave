@@ -1,0 +1,33 @@
+# OS Specific
+.DS_STORE
+
+# dependency management
+node_modules
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/versions
+!.yarn/sdks
+.pnp.*
+
+# transient files
+*.tmp
+*.log
+.nyc_cache
+.tmp
+
+# build artifacts
+.nyc_output
+coverage
+raw-coverage
+lib
+artifacts
+*.junit.xml
+*.tsbuildinfo
+
+# IDE
+.idea/
+.vim/
+.vscode/*
+!.vscode/launch.json
+!.vscode/extensions.json

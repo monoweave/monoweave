@@ -1,0 +1,133 @@
+import type { MonoweaveConfiguration, PackageVersionMap, YarnContext } from '@monoweave/types'
+import { type Descriptor, Manifest, Report, type Workspace, structUtils } from '@yarnpkg/core'
+import { ppath, xfs } from '@yarnpkg/fslib'
+import * as semver from 'semver'
+
+const patchPackageJsons = async ({
+    config,
+    context,
+    workspaces,
+    registryTags,
+}: {
+    config: MonoweaveConfiguration
+    context: YarnContext
+    workspaces: Set<Workspace>
+    registryTags: PackageVersionMap
+}): Promise<void> => {
+    const regenerateManifestRaw = async (workspace: Workspace): Promise<void> => {
+        const data = {}
+        workspace.manifest.exportTo(data)
+        workspace.manifest.raw = data
+    }
+
+    const patchWorkspace = async (workspace: Workspace): Promise<void> => {
+        const ident = workspace.manifest.name!
+        const pkgName = structUtils.stringifyIdent(ident)
+        const version = registryTags.get(pkgName)
+
+        /* istanbul ignore next: unless invoked directly, all packages have a tag */
+        if (!version) throw new Error(`${pkgName} is missing a version`)
+
+        const workspaceProtocols: {
+            dependencies: Descriptor[]
+            peerDependencies: Descriptor[]
+        } = {
+            dependencies: [],
+            peerDependencies: [],
+        }
+
+        workspace.manifest.version = version
+        for (const dependentSetKey of ['dependencies', 'peerDependencies'] as const) {
+            const dependencySet = workspace.manifest.getForScope(dependentSetKey)
+
+            for (const descriptor of dependencySet.values()) {
+                const depPackageName = structUtils.stringifyIdent(descriptor)
+
+                let dependencyVersion = registryTags.get(depPackageName)
+                if (!dependencyVersion) continue
+
+                if (dependentSetKey === 'peerDependencies') {
+                    const coerceTo = config.versionStrategy?.coerceImplicitPeerDependency ?? 'patch'
+                    if (coerceTo !== 'patch') {
+                        const depVersion = semver.parse(dependencyVersion)
+                        if (depVersion && !depVersion.prerelease.length) {
+                            depVersion.patch = 0
+                            if (coerceTo === 'major') depVersion.minor = 0
+                            dependencyVersion = depVersion.format()
+                        }
+                    }
+                }
+
+                const dependencyIdent = structUtils.convertToIdent(descriptor)
+
+                // If dependency is using "workspace:" protocol, preserve it when
+                // persisting manifest
+                if (descriptor.range.startsWith('workspace:')) {
+                    workspaceProtocols[dependentSetKey].push(
+                        structUtils.makeDescriptor(
+                            dependencyIdent,
+                            `workspace:^${dependencyVersion}`,
+                        ),
+                    )
+                }
+
+                const updatedDescriptor = structUtils.makeDescriptor(
+                    dependencyIdent,
+                    `^${dependencyVersion}`,
+                )
+                dependencySet.set(updatedDescriptor.identHash, updatedDescriptor)
+            }
+        }
+
+        // Publishing uses `workspace.manifest.raw` via packUtils here:
+        // https://github.com/yarnpkg/berry/blob/9d1734d3fcaba1e1fa1f0077005c248166ba1ef6/packages/plugin-pack/sources/packUtils.ts#L142-L142.
+        // If this genPackageManifest script ever changes to use the file from disk, we'll need to re-order the monoweave
+        // pipeline such that we defer restoring workspaces until _after_ publish.
+        await regenerateManifestRaw(workspace)
+
+        // Persist manifest with workspace protocols replaced. We can't use
+        // Manifest.persistManifest as it modifies manifest.raw.
+        const data: Record<string, unknown> = {}
+        workspace.manifest.exportTo(data)
+
+        // Restore "workspace" protocols where used.
+        // Note: only really need to do this if the user wants the manifest persisted
+        if (config.persistVersions) {
+            for (const [dependentSetKey, descriptors] of Object.entries(workspaceProtocols)) {
+                for (const descriptor of descriptors) {
+                    const identString = structUtils.stringifyIdent(descriptor)
+                    const dependencySet = (data[dependentSetKey] ?? {}) as Record<string, string>
+                    dependencySet[identString] = descriptor.range
+                    data[dependentSetKey] = dependencySet
+                }
+            }
+        }
+
+        const path = ppath.join(workspace.cwd, Manifest.fileName)
+        const content = `${JSON.stringify(data, null, workspace.manifest.indent)}\n`
+
+        // Content should never empty. We're asserting as we've noticed some odd behaviour in the wild.
+        if (!content.trim().length) {
+            throw new Error(
+                `[Invariant Violation] The workspace manifest for '${pkgName}' is empty. Aborting.`,
+            )
+        }
+
+        if (!config.dryRun) {
+            await xfs.changeFilePromise(path, content, {
+                automaticNewlines: true,
+            })
+        }
+    }
+
+    const progress = Report.progressViaCounter(workspaces.size)
+    context.report.reportProgress(progress)
+
+    await Promise.all(
+        [...workspaces].map((workspace) =>
+            patchWorkspace(workspace).finally(() => void progress.tick()),
+        ),
+    )
+}
+
+export default patchPackageJsons
