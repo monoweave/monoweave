@@ -1,0 +1,61 @@
+---
+path: '/plugins'
+title: 'Plugins'
+---
+
+export { Layout as default } from '../components/Layout'
+
+## Plugins
+
+You can add a plugin via a config file or CLI:
+
+```raw
+plugins: ['@monoweave/plugin-github']
+```
+
+```bash
+yarn monoweave --plugins @monoweave/plugin-github
+```
+
+A plugin is a module which exports a function as the default. This function takes PluginHooks as the first argument and plugin options as the second.
+
+Plugin options can only be passed through a config file, and are not supported through the command line.
+
+> Note: when passing options to a plugin, the plugin entry must be an array with the plugin name first and the options second
+
+```raw
+plugins: [
+  '@monoweave/plugin-without-options',
+  ['@monoweave/plugin-with-options', { someArbitraryOption: 'value' }]
+]
+```
+
+You can then "tap" into the hooks.
+
+## Available Plugins
+
+### GitHub
+
+Plugin: `@monoweave/plugin-github`.
+
+The GitHub plugin creates GitHub releases. It requires a `GH_TOKEN` environment variable which should be set to a Personal Access Token with write access to GitHub releases.
+
+By default, implicit version updates do not get a dedicated release. To change this behaviour, set `includeImplicitUpdates` to `true`:
+
+```raw
+plugins: [
+  ['@monoweave/plugin-github', { includeImplicitUpdates: true }]
+]
+```
+
+## Plugin Development
+
+We use [tapable](https://github.com/webpack/tapable) for an experimental plugin system.
+
+### Hooks
+
+#### onReleaseAvailable
+
+This hook is triggered once a release is available, after publishing to npm, and after pushing any artifacts such as git tags to the repository (assuming running with autoCommit and push mode).
+
+

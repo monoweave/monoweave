@@ -1,0 +1,63 @@
+{
+  "name": "@monoweave/cli",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monoweave/monoweave.git",
+    "directory": "packages/cli"
+  },
+  "author": {
+    "name": "noahnu",
+    "url": "https://monoweave.github.io"
+  },
+  "license": "BSD-3",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "bin": {
+      "monoweave": "./lib/index.js"
+    },
+    "main": "./lib/index.js",
+    "access": "public",
+    "exports": {
+      ".": "./lib/index.js",
+      "./preset-recommended": "./lib/presets/recommended.js"
+    }
+  },
+  "group": "monoweave",
+  "bin": {
+    "monoweave": "./src/index.ts"
+  },
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./preset-recommended": "./src/presets/recommended.ts"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "clean": "run workspace:clean \"$(pwd)\"",
+    "types:watch": "run workspace:types:watch \"$(pwd)\"",
+    "test:watch": "run workspace:test:watch \"$(pwd)\"",
+    "build:watch": "run workspace:build:watch \"$(pwd)\"",
+    "prepack": "run workspace:build \"$(pwd)\""
+  },
+  "devDependencies": {
+    "@monoweave/test-utils": "link:../../testUtils",
+    "@types/jest": "^29.5.6",
+    "@types/node": "^18.18.6"
+  },
+  "dependencies": {
+    "@monoweave/logging": "workspace:^",
+    "@monoweave/node": "workspace:^",
+    "@monoweave/types": "workspace:^",
+    "@yarnpkg/core": "^4.0.3",
+    "@yarnpkg/fslib": "^3.0.2",
+    "ajv": "^8.12.0",
+    "clipanion": "^3.2.1",
+    "typanion": "^3.14.0"
+  },
+  "engines": {
+    "node": ">=v18"
+  }
+}

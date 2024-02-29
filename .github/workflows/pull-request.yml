@@ -1,0 +1,215 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  ARTIFACT_DIR: ./artifacts
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+  actions: write
+  statuses: write
+  pages: write
+
+jobs:
+  tests:
+    name: Lint & Tests
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-env
+      - name: Validate Constraints
+        run: yarn constraints
+      - name: Build
+        run: yarn build
+      - name: Linting
+        run: yarn lint:ci
+      - name: Tests
+        run: yarn test:ci
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3.1.3
+        with:
+          name: coverage-unit-tests
+          path: ./raw-coverage/jest
+
+  tests_e2es:
+    name: Tests - End to End - ${{ matrix.runner }}
+    runs-on: ${{ matrix.runner}}
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    strategy:
+      matrix:
+        runner: ['ubuntu-latest']
+    env:
+      E2E: 1
+    steps:
+        - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+          with:
+            ref: ${{ github.event.pull_request.head.sha }}
+            fetch-depth: 0
+        - uses: ./.github/actions/setup-env
+          with:
+            cache-prefix: ${{ matrix.runner }}
+        - name: Build Registry Dockerfile
+          run: yarn workspace @monoweave/e2e-tests test:registry:build
+        - name: Run Tests
+          run: yarn test:e2e
+        - name: Upload Artifacts
+          uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3.1.3
+          if: ${{ matrix.runner }} == 'ubuntu-latest'
+          with:
+            name: coverage-e2e-tests
+            path: ./raw-coverage/jest-e2es
+
+  test_report:
+    name: Test Report
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    needs: ['tests_e2es', 'tests']
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-env
+      - name: Download Unit Test Coverage
+        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # tag=v3.0.2
+        with:
+          name: coverage-unit-tests
+          path: ./raw-coverage/jest
+      - name: Download E2E Coverage
+        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # tag=v3.0.2
+        with:
+          name: coverage-e2e-tests
+          path: ./raw-coverage/jest-e2es
+      - name: Log Coverage Files (Jest Unit)
+        run: ls -la ./raw-coverage/jest
+      - name: Log Coverage Files (Jest E2Es)
+        run: ls -la ./raw-coverage/jest-e2es
+      - name: Merge Coverage
+        run: yarn test:coverage:merge
+      - name: Generate Report
+        run: yarn test:coverage:report
+      - name: Upload Coverage Report
+        run: ./.github/codecov.sh $GITHUB_EVENT_PATH
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  tests_compatibility:
+    name: Test Compatibility - ${{ matrix.runner }} / Node ${{ matrix.node-version }}
+    runs-on: ${{ matrix.runner}}
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    strategy:
+      matrix:
+        runner: ['ubuntu-latest', 'windows-latest', 'macos-latest']
+        node-version: ['lts/iron', 'current']
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-env
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache-prefix: ${{ matrix.runner }}
+      - name: Build
+        run: yarn build
+      - name: Tests
+        run: yarn test:ci
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3.1.3
+        with:
+          name: report-artifacts
+          path: ${{ env.ARTIFACT_DIR }}
+
+  publish_preview:
+    name: Publish Preview
+    runs-on: ubuntu-latest
+    needs: [test_report]
+    if: "github.event_name == 'pull_request' && !contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-env
+      - name: Build
+        run: yarn build
+      - name: Run Monoweave in Dry Run Mode
+        run: |
+          echo "<!-- MONOWEAVE:BELOW -->" > ${{ env.ARTIFACT_DIR }}/CHANGELOG.md
+
+          yarn run-local \
+            --dry-run \
+            --log-level 0 \
+            --git-base-branch origin/${{ github.base_ref }} \
+            --conventional-changelog-config @tophat/conventional-changelog-config \
+            --changelog-filename ${{ env.ARTIFACT_DIR }}/CHANGELOG.md \
+            --force-write-change-files \
+            --changeset-ignore-patterns '**/*.test.ts' \
+            --package-group-manifest-field group
+
+          {
+            echo "<!-- MONOWEAVE_CHANGELOG_PREVIEW -->";
+            echo "# Monoweave Publish Preview";
+            echo;
+            echo "This Pull Request introduces the following changes:";
+            echo;
+            cat ${{ env.ARTIFACT_DIR }}/CHANGELOG.md;
+          } >> "${{ runner.temp }}/changelog_preview.md"
+      - name: Check for Changelog Comment
+        uses: peter-evans/find-comment@a54c31d7fa095754bfef525c0c8e5e5674c4b4b1 # tag=v2.4.0
+        id: found-comment
+        if: github.event_name == 'pull_request'
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: <!-- MONOWEAVE_CHANGELOG_PREVIEW -->
+      - name: Post Changelog to PR
+        uses: peter-evans/create-or-update-comment@23ff15729ef2fc348714a3bb66d2f655ca9066f2 # v3.1.0
+        if: github.event_name == 'pull_request'
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          comment-id: ${{ steps.found-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          edit-mode: replace
+          body-path: ${{ runner.temp }}/changelog_preview.md
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3.1.3
+        with:
+          name: build-artifacts
+          path: ${{ env.ARTIFACT_DIR }}
+
+  website:
+    name: Website
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    needs: [test_report]
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-env
+      - name: Build Website
+        if: "github.event_name == 'pull_request'"
+        run: yarn docs
+      - name: Build & Deploy Website
+        if: "github.event_name == 'push' && github.ref == 'refs/heads/main'"
+        run: |
+          git checkout gh-pages
+          git reset --hard main
+          yarn docs
+          git add docs
+          git commit -m "chore: update website" -n
+          git push --force origin gh-pages

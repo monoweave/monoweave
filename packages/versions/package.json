@@ -1,0 +1,69 @@
+{
+  "name": "@monoweave/versions",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monoweave/monoweave.git",
+    "directory": "packages/versions"
+  },
+  "author": {
+    "name": "noahnu",
+    "url": "https://monoweave.github.io"
+  },
+  "license": "BSD-3",
+  "publishConfig": {
+    "main": "./lib/index.js",
+    "registry": "https://registry.npmjs.org/",
+    "types": "./lib/index.d.ts",
+    "access": "public"
+  },
+  "group": "monoweave",
+  "files": [
+    "lib"
+  ],
+  "main": "./src/index.ts",
+  "scripts": {
+    "clean": "run workspace:clean \"$(pwd)\"",
+    "types:watch": "run workspace:types:watch \"$(pwd)\"",
+    "test:watch": "run workspace:test:watch \"$(pwd)\"",
+    "build:watch": "run workspace:build:watch \"$(pwd)\"",
+    "prepack": "run workspace:build \"$(pwd)\""
+  },
+  "dependencies": {
+    "conventional-commits-parser": "^5.0.0",
+    "micromatch": "^4.0.5",
+    "p-limit": "^3.1.0",
+    "semver": "^7.5.4"
+  },
+  "devDependencies": {
+    "@monoweave/changelog": "workspace:*",
+    "@monoweave/dependencies": "workspace:*",
+    "@monoweave/git": "workspace:*",
+    "@monoweave/io": "workspace:*",
+    "@monoweave/logging": "workspace:*",
+    "@monoweave/test-utils": "link:../../testUtils",
+    "@monoweave/types": "workspace:*",
+    "@types/conventional-commits-parser": "^3.0.5",
+    "@types/jest": "^29.5.6",
+    "@types/micromatch": "^4.0.4",
+    "@types/semver": "^7.5.4",
+    "@yarnpkg/cli": "^4.1.0",
+    "@yarnpkg/core": "^4.0.3",
+    "@yarnpkg/fslib": "^3.0.2",
+    "@yarnpkg/plugin-npm": "^3.0.1",
+    "@yarnpkg/plugin-pack": "^4.0.0"
+  },
+  "peerDependencies": {
+    "@monoweave/changelog": "workspace:^",
+    "@monoweave/dependencies": "workspace:^",
+    "@monoweave/git": "workspace:^",
+    "@monoweave/io": "workspace:^",
+    "@monoweave/logging": "workspace:^",
+    "@monoweave/types": "workspace:^",
+    "@yarnpkg/cli": "^4.1.0",
+    "@yarnpkg/core": "^4.0.3",
+    "@yarnpkg/fslib": "^3.0.2",
+    "@yarnpkg/plugin-npm": "^3.0.1",
+    "@yarnpkg/plugin-pack": "^4.0.0"
+  }
+}

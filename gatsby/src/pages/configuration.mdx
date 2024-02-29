@@ -1,0 +1,60 @@
+---
+path: "/configuration"
+title: "Configuration"
+---
+
+export { Layout as default } from '../components/Layout'
+
+import TypeDocInterface from '../components/TypeDocInterface'
+import MonoweaveTypesDocs from '../../../packages/types/docs/documentation.json'
+
+## Configuring Monoweave
+
+For a full list of CLI arguments, run:
+
+```bash
+yarn monoweave --help
+```
+
+To fine-tune monoweave, create a `monoweave.config.js` file and invoke monoweave via:
+
+```bash
+yarn monoweave --config-file monoweave.config.js
+```
+
+Note that monoweave will automatically detect your `monoweave.config.js` file if named correctly.
+
+You can use a preset configuration as a basis for your monoweave config, and add either additional config options or CLI flags to extend the preset. For example:
+
+```bash
+yarn monoweave --dry-run --preset monoweave/preset-recommended
+```
+
+### Presets
+
+A preset can be a filepath (relative or absolute) or the name of an installed npm package. You can pass a preset via the CLI argument or option directly in your config file. Other options are then merged with the values in the preset. In terms of precedence, CLI flags take highest precedence, followed by config file options, followed by preset values, and then finally the built-in defaults.
+
+The preset should ultimately point to a file which exports a monoweave configuration. You can also use any of the built-in presets.
+
+#### monoweave/preset-recommended
+
+```bash
+yarn monoweave --dry-run --preset monoweave/preset-recommended
+```
+
+The "recommended" preset differs from the monoweave default in that it will modify your package.json files, commit the changes, and then automatically push said changes to your remote git repository.
+
+## Configuration File
+
+If you omit a property, a reasonable default will be used. Note that setting a property to `null` is not always the same as omitting the property (or setting it to `undefined`).
+
+```js
+module.exports = {
+    preset: 'monoweave/preset-recommended',
+    changelogFilename: 'CHANGELOG.md',
+}
+```
+
+## Schema
+
+<TypeDocInterface schema={MonoweaveTypesDocs} interfaceName="MonoweaveConfiguration" />
