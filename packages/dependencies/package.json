@@ -1,6 +1,6 @@
 {
   "name": "@monoweave/dependencies",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/monoweave/monoweave.git",
@@ -30,8 +30,8 @@
     "prepack": "run workspace:build \"$(pwd)\""
   },
   "peerDependencies": {
-    "@monoweave/logging": "workspace:^",
-    "@monoweave/types": "workspace:^",
+    "@monoweave/logging": "workspace:^0.0.4",
+    "@monoweave/types": "workspace:^0.0.4",
     "@yarnpkg/core": "^4.0.3"
   },
   "devDependencies": {
