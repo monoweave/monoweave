@@ -1,0 +1,48 @@
+{
+  "name": "@monoweave/plugin-github",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monoweave/monoweave.git",
+    "directory": "packages/plugin-github"
+  },
+  "author": {
+    "name": "noahnu",
+    "url": "https://monoweave.github.io"
+  },
+  "license": "BSD-3",
+  "publishConfig": {
+    "main": "./lib/index.js",
+    "registry": "https://registry.npmjs.org/",
+    "types": "./lib/index.d.ts",
+    "access": "public"
+  },
+  "main": "./src/index.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "clean": "run workspace:clean \"$(pwd)\"",
+    "types:watch": "run workspace:types:watch \"$(pwd)\"",
+    "test:watch": "run workspace:test:watch \"$(pwd)\"",
+    "build:watch": "run workspace:build:watch \"$(pwd)\"",
+    "prepack": "run workspace:build \"$(pwd)\""
+  },
+  "devDependencies": {
+    "@monoweave/test-utils": "link:../../testUtils",
+    "@types/jest": "^29.5.6",
+    "@types/node": "^18.18.6",
+    "tapable": "^2.2.1"
+  },
+  "dependencies": {
+    "@monoweave/git": "workspace:^",
+    "@monoweave/io": "workspace:^",
+    "@monoweave/logging": "workspace:^",
+    "@monoweave/types": "workspace:^",
+    "@octokit/core": "^5.0.1",
+    "@octokit/plugin-throttling": "^8.1.2",
+    "@yarnpkg/core": "^4.0.3",
+    "@yarnpkg/fslib": "^3.0.2",
+    "@yarnpkg/shell": "^4.0.0"
+  }
+}

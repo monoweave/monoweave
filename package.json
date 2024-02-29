@@ -1,0 +1,114 @@
+{
+    "name": "@monoweave/monorepo",
+    "version": "1.0.0",
+    "description": "A small wrapper around yarn berry that makes it easier to use in CI",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/monoweave/monoweave.git"
+    },
+    "author": {
+        "name": "noahnu",
+        "url": "https://monoweave.github.io"
+    },
+    "license": "BSD-3",
+    "private": true,
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/"
+    },
+    "workspaces": [
+        "packages/*",
+        "e2e-tests",
+        "gatsby"
+    ],
+    "scripts": {
+        "clean": "rm -rf ${ARTIFACT_DIR:-artifacts} && yarn workspaces foreach -vpi --worktree run clean",
+        "build": "yarn workspaces foreach -vpi --worktree --topological-dev run prepack",
+        "contrib:add": "all-contributors add",
+        "contrib:check": "all-contributors check",
+        "contrib:generate": "all-contributors generate",
+        "lint:ci": "eslint . --format junit --output-file ${ARTIFACT_DIR:-artifacts}/test_results/eslint/eslint.junit.xml",
+        "lint:fix": "eslint . --fix",
+        "lint": "eslint .",
+        "test:ci": "CI=1 run test --ci --runInBand",
+        "test:watch": "run test --watch",
+        "test": "jest --config=jest.config.js",
+        "test:all": "yarn test:ci && yarn test:e2e && yarn test:coverage:merge && yarn test:coverage:report",
+        "test:e2e": "E2E=1 yarn workspace @monoweave/e2e-tests run test",
+        "test:coverage:merge": "cp ./raw-coverage/jest-e2es/*.json ./raw-coverage/ && cp ./raw-coverage/jest/*.json ./raw-coverage/ && nyc --nycrc-path nyc.config.js merge ./raw-coverage ${ARTIFACT_DIR:-artifacts}/test-coverage.json",
+        "test:coverage:report": "nyc --nycrc-path nyc.config.js report -t ${ARTIFACT_DIR:-artifacts}/",
+        "types:watch": "tsc --noEmit --emitDeclarationOnly false --pretty --watch",
+        "workspace:build:watch": "tsc -p $0/tsconfig.build.json --watch",
+        "workspace:build": "rm -rf $0/lib $0/.tmp && tsc -p $0/tsconfig.build.json",
+        "workspace:clean": "rm -rf $0/lib $0/.tmp && find $0/src -name '*.js' -type f -delete",
+        "workspace:test:watch": "run workspace:test --watch $0",
+        "workspace:test": "jest --config=jest.config.js $0",
+        "workspace:types:watch": "tsc -p $0 --noEmit --emitDeclarationOnly false --pretty --watch",
+        "run-local": "ts-node --ignore '.yarn/plugins/.*' --ignore '(?:^|/)node_modules/' $(yarn bin monoweave)",
+        "docs": "yarn workspace @monoweave/gatsby build",
+        "docs:dev": "yarn workspace @monoweave/gatsby develop",
+        "update:yarn": "echo 'Not implemented.'"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^18.0.0",
+        "@jest/types": "^29.6.3",
+        "@monoweave/cli": "workspace:*",
+        "@monoweave/git": "workspace:*",
+        "@monoweave/io": "workspace:*",
+        "@monoweave/logging": "workspace:*",
+        "@monoweave/plugin-github": "workspace:*",
+        "@monoweave/test-utils": "link:./testUtils",
+        "@monoweave/types": "workspace:*",
+        "@tophat/commitizen-adapter": "^1.0.2",
+        "@tophat/commitlint-config": "^1.0.2",
+        "@tophat/conventional-changelog-config": "^1.0.1",
+        "@tophat/eslint-config": "^9.0.0",
+        "@tophat/eslint-import-resolver-require": "^1.0.0",
+        "@tophat/jest-resolver": "^0.1.0",
+        "@types/jest": "^29.5.6",
+        "@types/node": "^18.18.6",
+        "@typescript-eslint/eslint-plugin": "^6.9.0",
+        "@typescript-eslint/parser": "^6.9.0",
+        "@yarnpkg/cli": "^4.1.0",
+        "@yarnpkg/core": "^4.0.3",
+        "@yarnpkg/fslib": "^3.0.2",
+        "@yarnpkg/plugin-npm": "^3.0.1",
+        "@yarnpkg/plugin-pack": "^4.0.0",
+        "@yarnpkg/sdks": "^3.1.0",
+        "@yarnpkg/shell": "^4.0.0",
+        "@yarnpkg/types": "^4.0.0",
+        "all-contributors-cli": "^6.26.1",
+        "commitizen": "^4.3.0",
+        "eslint": "^8.52.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-import-resolver-node": "^0.3.9",
+        "eslint-import-resolver-typescript": "^3.6.1",
+        "eslint-plugin-import": "^2.29.0",
+        "eslint-plugin-jest": "^27.4.3",
+        "eslint-plugin-jsx-a11y": "^6.7.1",
+        "eslint-plugin-prettier": "^5.0.1",
+        "eslint-plugin-react": "^7.33.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "husky": "^8.0.3",
+        "jest": "^29.7.0",
+        "jest-junit": "^16.0.0",
+        "lint-staged": "^15.0.2",
+        "nyc": "^15.1.0",
+        "prettier": "^3.0.3",
+        "ts-jest": "^29.1.1",
+        "ts-node": "^10.9.1",
+        "typescript": "5.2.2",
+        "yaml-validator": "^5.1.0"
+    },
+    "engines": {
+        "node": ">=18.18.2"
+    },
+    "dependenciesMeta": {
+        "core-js-pure": {
+            "built": false
+        }
+    },
+    "packageManager": "yarn@4.1.0+sha256.81a00df816059803e6b5148acf03ce313cad36b7f6e5af6efa040a15981a6ffb",
+    "resolutions": {
+        "istanbul-lib-coverage": "patch:istanbul-lib-coverage@npm%3A3.2.0#./.yarn/patches/istanbul-lib-coverage-npm-3.2.0-93f84b2c8c.patch"
+    }
+}

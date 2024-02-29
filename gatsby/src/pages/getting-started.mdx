@@ -1,0 +1,143 @@
+---
+path: "/getting-started"
+title: "Getting Started"
+---
+
+export { Layout as default } from '../components/Layout'
+
+## Getting Started
+
+Monoweave supports projects with the following minimum requirements:
+
+- Node v18.12.0
+- Yarn Modern (v4.0.0)
+- Git 2.13
+
+Install `monoweave`:
+
+```bash
+yarn add -D @monoweave/cli
+yarn monoweave --dry-run
+```
+
+Edit your project's root `package.json`:
+
+1. Set "workspaces": ["packages/*"] (you can use a different glob to match your monorepo layout)
+2. Create a `monoweave.config.js` file and set it to:
+
+  ```js
+  module.exports = { preset: 'monoweave/preset-recommended' }
+  ```
+
+  You'll be extending this file as you make changes to your project's publish configuration.
+
+3. If your packages require a compilation step (e.g. TypeScript, Babel), do this in a 'prepack' lifecycle hook per workspace. For more information about when prepack is called, [see Lifecycle Scripts](./architecture#lifecycle-scripts).
+
+For help with the CLI options:
+
+```bash
+yarn monoweave --help
+```
+
+or see the [Configuration](./configuration) page for more details.
+
+### API
+
+Monoweave supports both a Command Line Interface, as well as a Node API.
+
+#### CLI
+
+For the CLI, use the `--help` flag for a list of options.
+
+```bash
+yarn monoweave --help
+```
+
+If you are okay with the defaults, you can go ahead and add a call to monoweave to your CI's publish stage:
+
+```bash
+yarn monoweave --push
+```
+
+If you omit `--push`, you can manually push the tags on success:
+
+```bash
+yarn monoweave && git push --tags
+```
+
+Or to give things a try first, run monoweave in dry run mode with verbose logging. Dry run mode won't modify the remote registry, or git.
+
+```bash
+yarn monoweave --dry-run --log-level 0
+```
+
+The CLI provides a few sensible defaults, however if using the Node API, you will have to provide all relevant information.
+
+You can also pass a `--config-file` flag to load options from a configuration file. The file should export an object matching the MonoweaveConfiguration interface (with all properties as optional). CLI flags take precedence over the configuration file.
+
+Example config file:
+
+```js
+module.exports = {
+    dryRun: false,
+    git: {
+        commitSha: 'HEAD',
+        remote: 'origin',
+        push: true,
+    },
+    conventionalChangelogConfig: '@tophat/conventional-changelog-config',
+    access: 'infer',
+    persistVersions: false,
+    changesetIgnorePatterns: ['**/*.test.js'],
+}
+```
+
+#### Node API
+
+To use the API:
+
+```ts
+import type { MonoweaveConfiguration }  from '@monoweave/types'
+import monoweave from '@monoweave/node'
+
+const config: MonoweaveConfiguration = {
+    cwd: process.cwd(),
+    dryRun: false,
+    git: {
+        commitSha: 'HEAD',
+        remote: 'origin',
+        push: true,
+    },
+    conventionalChangelogConfig: '@tophat/conventional-changelog-config',
+    access: 'infer',
+    persistVersions: false,
+}
+const changeset = await monoweave(config)
+```
+
+Note that configuration presets are not supported when using the Node API.
+
+### Changelog
+
+
+If you choose to use the `--changelog-filename CHANGELOG.md` flag or related API config property, in your CHANGELOG.md file you'll need to insert a marker to let monoweave know where to insert the changelog entries. For example:
+
+```md
+# My Example Changelog
+
+Some blurb here.
+
+<!-- MONOWEAVE:BELOW -->
+
+## v1.0.0
+
+Some entry.
+```
+
+The marker `<!-- MONOWEAVE:BELOW -->` must match exactly. It is whitespace and case-sensitive.
+
+You can use the template variable `<packageDir>` to create individual changelogs per package, like so:
+
+```bash
+--changelog-filename "<packageDir>/CHANGELOG.md"
+```

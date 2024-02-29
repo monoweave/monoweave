@@ -1,0 +1,60 @@
+name: setup-env
+description: Initializes environment.
+
+inputs:
+  node-version:
+    description: Override Node Version
+    required: false
+    default: ''
+  cache-prefix:
+    description: Additional cache prefix
+    required: false
+    default: 'default'
+
+outputs:
+  node-version:
+    value: ${{ steps.detect-node.outputs.version }}
+    description: Detected Node version.
+
+runs:
+  using: "composite"
+  steps:
+    - name: Detect Node Version
+      id: detect-node
+      run: |
+        if [[ -z "${{ inputs.node-version }}" ]]; then
+          echo "version=$(cat .nvmrc | tr -d '\n')" >> $GITHUB_OUTPUT
+        else
+          echo "version=${{ inputs.node-version }}" >> $GITHUB_OUTPUT
+        fi
+      shell: bash
+    - name: Install NodeJS
+      uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3.8.2
+      with:
+        node-version: ${{ steps.detect-node.outputs.version }}
+    - name: Enable Corepack
+      run: corepack enable
+      shell: bash
+    - name: Restore Yarn Cache
+      id: yarn-cache
+      uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+      with:
+        path: |
+          .yarn/cache
+          .pnp.*
+        key: ${{ inputs.cache-prefix }}-${{ steps.detect-node.outputs.version }}-${{ hashFiles('yarn.lock') }}
+    - name: Install Yarn Project
+      run: yarn install --immutable
+      shell: bash
+    - name: Create Artifacts Directory
+      run: mkdir -p artifacts
+      shell: bash
+    - name: Configure Git
+      env:
+        GIT_NAME: ${{ github.actor }}
+        GIT_EMAIL: ${{ format('{0}@users.noreply.github.com', github.actor) }}
+      run: |
+        git config --global user.name "$GIT_NAME"
+        git config --global user.email "$GIT_EMAIL"
+        git config --global init.defaultBranch main
+      shell: bash

@@ -1,0 +1,29 @@
+{
+    "name": "@monoweave/e2e-tests",
+    "private": true,
+    "scripts": {
+        "test:registry:build": "docker build -t monoweave-test-registry .",
+        "test:registry:logs": "docker container logs -f monoweave-registry",
+        "test:registry:start": "docker run -itd -p 4873:4873 --name monoweave-registry monoweave-test-registry",
+        "test:registry:stop": "docker stop monoweave-registry && docker container rm monoweave-registry",
+        "test:registry": "run test:registry:build && run test:registry:start",
+        "test": "run workspace:test $(pwd)"
+    },
+    "devDependencies": {
+        "@monoweave/cli": "workspace:*",
+        "@monoweave/io": "workspace:*",
+        "@monoweave/logging": "workspace:*",
+        "@monoweave/test-utils": "link:../testUtils",
+        "@monoweave/types": "workspace:*",
+        "@tophat/conventional-changelog-config": "^1.0.1",
+        "@types/node": "^18.18.6",
+        "@yarnpkg/core": "^4.0.3",
+        "@yarnpkg/fslib": "^3.0.2",
+        "helpers": "link:./helpers"
+    },
+    "author": {
+        "name": "noahnu",
+        "url": "https://monoweave.github.io"
+    },
+    "license": "BSD-3"
+}
