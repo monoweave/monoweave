@@ -2,6 +2,15 @@
 
 <!-- MONOWEAVE:BELOW -->
 
+## [0.0.5](https://github.com/monoweave/monoweave/compare/@monoweave/cli@0.0.4...@monoweave/cli@0.0.5) "@monoweave/cli" (2024-03-01)<a name="0.0.5"></a>
+
+### Bug Fixes
+
+* add preset to MonoweaveConfigFile type (#3) ([dc522fe](https://github.com/monoweave/monoweave/commits/dc522fe))
+
+
+
+
 ## [0.0.4](https://github.com/monoweave/monoweave/compare/@monoweave/cli@0.0.3...@monoweave/cli@0.0.4) "@monoweave/cli" (2024-02-29)<a name="0.0.4"></a>
 
 ### Bug Fixes

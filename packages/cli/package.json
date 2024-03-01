@@ -1,6 +1,6 @@
 {
   "name": "@monoweave/cli",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/monoweave/monoweave.git",
@@ -49,8 +49,8 @@
   },
   "dependencies": {
     "@monoweave/logging": "workspace:^0.0.4",
-    "@monoweave/node": "workspace:^0.0.4",
-    "@monoweave/types": "workspace:^0.0.4",
+    "@monoweave/node": "workspace:^0.0.5",
+    "@monoweave/types": "workspace:^0.0.5",
     "@yarnpkg/core": "^4.0.3",
     "@yarnpkg/fslib": "^3.0.2",
     "ajv": "^8.12.0",
