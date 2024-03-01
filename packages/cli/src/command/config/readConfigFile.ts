@@ -74,7 +74,8 @@ const readConfigFile = async (
     try {
         const configId = resolvePath(configPath, cwd)
         const fileConfig: unknown = require(configId)
-        const presetPath: string | null = (preset ?? (fileConfig as any)?.preset) || null
+        const presetPath: string | null =
+            (preset ?? (fileConfig as MonoweaveConfigFile)?.preset) || null
         const presetConfig: unknown = loadPresetConfig(presetPath, cwd)
 
         const config = merge(presetConfig, fileConfig)

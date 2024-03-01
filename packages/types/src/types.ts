@@ -384,4 +384,6 @@ export function isNodeError<T = NodeJS.ErrnoException>(error: unknown): error is
     return error instanceof Error || (error as any)?.code !== undefined
 }
 
-export type MonoweaveConfigFile = RecursivePartial<Omit<MonoweaveConfiguration, 'cwd'>>
+export type MonoweaveConfigFile = RecursivePartial<Omit<MonoweaveConfiguration, 'cwd'>> & {
+    preset?: string
+}
