@@ -13,7 +13,7 @@ No. Monoweave uses Yarn Modern's public API to do most of the heavy lifting in r
 
 ### Can I use monoweave for non-JavaScript projects?
 
-Yes. The only requirement is that you organize your project using Yarn Berry (i.e. Yarn v3+). You can create a minimal Yarn project by creating a root `package.json` and then one `package.json` per package/workspace. In this scenario, you likely want to use the "No Registry" mode.
+Yes. The only requirement is that you organize your project using Yarn Modern (i.e. Yarn v4+). You can create a minimal Yarn project by creating a root `package.json` and then one `package.json` per package/workspace. In this scenario, you likely want to use the "No Registry" mode.
 
 Although designed for publishing to NPM, you can disable all npm interactions by passing in a `--registry-mode manifest` flag to the CLI or setting `registryMode` to `manifest` in your config file. A registry mode of `manifest` will set the package.json of each workspace as the source of truth for versions. This means when reading package versions, the package.json is used instead of reading from NPM. Likewise, package publishing to npm is also disabled. If using the "Manifest" registry mode, you should also enable `--persistVersions` (`persistVersions`) and commit the modified package.json files to your repository, otherwise there's no proper reference for the package versions.
 
@@ -55,8 +55,12 @@ Starting in Monoweave v3, fixed version mode can be achieved by setting the `pac
 
 #### Lerna
 
-Unlike Lerna, Monoweave was designed with Yarn Berry support from the ground up and is optimized for Yarn monorepos. In terms of raw functionality, Monoweave supports a workflow where versions are _not_ committed back to the git repository. This is useful when it is not feasible to commit back to a repository in CI (for example when using a tool such as Jenkins with many concurrent developers working in a project).
+Unlike Lerna, Monoweave was designed with Yarn Modern support from the ground up and is optimized for Yarn monorepos. In terms of raw functionality, Monoweave supports a workflow where versions are _not_ committed back to the git repository. This is useful when it is not feasible to commit back to a repository in CI (for example when using a tool such as Jenkins with many concurrent developers working in a project).
 
 #### Yarn's Version Plugin
 
-At a high level, Monoweave is meant for entirely automated workflows, whereas Yarn's version plugin takes a more hands on approach. Monoweave started out as a Lerna replacement to solve some issues we were having internally with Lerna, and so Lerna's features were the ones we were striving to attain parity with. Read through the Yarn Version Plugin documentation and decide which workflow you prefer, there will be pros and cons to either.
+Monoweave started out as a Lerna replacement to solve some issues we were having internally with Lerna, and so Lerna's features were the ones we were striving to attain parity with. Read through the Yarn Version Plugin documentation and decide which workflow you prefer, there will be pros and cons to either. At the time of writing, Monoweave goes beyond Yarn's version plugin in a few notable ways: monoweave does not just determine the version to publish, but also generates git tags, GitHub releases, and changelogs. Monoweave supports an entirely automated release process, where versions are determined via commit messages, whereas Yarn's version plugin requires manual specification of the version strategy per workspace.
+
+#### Changesets
+
+Both changesets and monoweave are comprehensive tools. Changesets has a larger community around it than monoweave. Monoweave however has better integration with Yarn Modern. Notably, monoweave uses Yarn's built-in packing logic, i.e. the same logic that controls how `publishConfig` is treated.

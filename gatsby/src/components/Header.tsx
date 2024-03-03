@@ -2,12 +2,7 @@ import { Link } from 'gatsby'
 import * as React from 'react'
 
 const Header: React.FC<{ siteTitle: string }> = ({ siteTitle = '' }) => (
-    <header
-        style={{
-            background: '#803ed7',
-            marginBottom: '1.45rem',
-        }}
-    >
+    <header className="main">
         <div
             style={{
                 margin: '0 auto',

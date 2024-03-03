@@ -55,7 +55,7 @@ The exact order of lifecycle scripts executed is as follows (this may differ fro
     - This is not directly supported by Yarn Modern, however was introduced by NPM as a replacement for the deprecated 'prepublish' script.
 4. prepack
     - This is the lifecycle hook that you should be using for any compilation, such as compiling TypeScript to JavaScript. Errors thrown here, or in any early pre lifecycle script, will abort the publish process.
-5. ~_publish_~
+5. ~~publish~~
     - At this "stage" we pack and publish each package. We do not call any 'publish' lifecycle scripts here.
 6. postpack
     - This is guaranteed to execute after packing the archive, regardless of failure. This is useful script for build directory cleanup.

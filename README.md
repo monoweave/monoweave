@@ -20,7 +20,7 @@ Monoweave is a powerful tool which aims to simplify the package publishing proce
 
 Monoweave only supports projects using Yarn Modern v4+ with the minimum node version set to Node v18.19.0.
 
-Please see the [Monoweave Website](https://monoweave.github.io/monoweave) for information on how to get started with Monoweave.
+Please see the [Monoweave Website](https://monoweave.github.io/monoweave/) for information on how to get started with Monoweave.
 
 ### Note About Monoweave Package Versioning
 

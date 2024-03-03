@@ -1,17 +1,11 @@
-import Highlight, { type Language, defaultProps } from 'prism-react-renderer'
-import theme from 'prism-react-renderer/themes/vsDark'
+import { Highlight, type Language, themes } from 'prism-react-renderer'
 import React from 'react'
 
 const CodeBlock: React.FC<React.HTMLAttributes<HTMLElement>> = ({ children, className }) => {
     const language = (className?.replace(/language-/, '') as Language | undefined) ?? undefined
 
     return language ? (
-        <Highlight
-            {...defaultProps}
-            theme={theme}
-            code={String(children).trim()}
-            language={language}
-        >
+        <Highlight theme={themes.vsDark} code={String(children).trim()} language={language}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <pre className={className} style={{ ...style, padding: '20px' }}>
                     {tokens.map((line, i) => (
@@ -25,15 +19,7 @@ const CodeBlock: React.FC<React.HTMLAttributes<HTMLElement>> = ({ children, clas
             )}
         </Highlight>
     ) : (
-        <span
-            style={{
-                fontFamily: 'monospace',
-                color: 'rgb(156, 220, 254)',
-                background: 'rgb(30, 30, 30)',
-            }}
-        >
-            {String(children)}
-        </span>
+        <pre className="inline-code">{String(children)}</pre>
     )
 }
 

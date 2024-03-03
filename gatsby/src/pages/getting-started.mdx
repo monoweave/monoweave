@@ -9,11 +9,11 @@ export { Layout as default } from '../components/Layout'
 
 Monoweave supports projects with the following minimum requirements:
 
-- Node v18.12.0
-- Yarn Modern (v4.0.0)
-- Git 2.13
+- Node v18.19.0+
+- Yarn Modern (v4.0.0+)
+- Git 2.13+
 
-Install `monoweave`:
+Install `@monoweave/cli`:
 
 ```bash
 yarn add -D @monoweave/cli
@@ -31,7 +31,7 @@ Edit your project's root `package.json`:
 
   You'll be extending this file as you make changes to your project's publish configuration.
 
-3. If your packages require a compilation step (e.g. TypeScript, Babel), do this in a 'prepack' lifecycle hook per workspace. For more information about when prepack is called, [see Lifecycle Scripts](./architecture#lifecycle-scripts).
+3. If your packages require a compilation step (e.g. TypeScript, Babel), do this in a 'prepack' lifecycle hook per workspace. For more information about when prepack is called, [see Lifecycle Scripts](/architecture#lifecycle-scripts).
 
 For help with the CLI options:
 
@@ -39,7 +39,7 @@ For help with the CLI options:
 yarn monoweave --help
 ```
 
-or see the [Configuration](./configuration) page for more details.
+or see the [Configuration](/configuration) page for more details.
 
 ### API
 

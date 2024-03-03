@@ -76,7 +76,7 @@ function enforceMonoweaveSatisfiesPeersDirectly({ Yarn }) {
 function enforceRequiredWorkspaceFields({ Yarn }) {
     for (const workspace of Yarn.workspaces()) {
         workspace.set(['author', 'name'], 'noahnu')
-        workspace.set(['author', 'url'], 'https://monoweave.github.io')
+        workspace.set(['author', 'url'], 'https://monoweave.github.io/monoweave/')
         workspace.set(['license'], 'BSD-3')
 
         if (workspace.manifest.private) continue
