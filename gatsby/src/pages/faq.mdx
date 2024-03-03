@@ -49,7 +49,7 @@ Monoweave is intended to be entirely automated based on semantic commits. As a r
 
 ### How can I achieve behaviour similar to Lerna's fixed version mode?
 
-Starting in Monoweave v3, fixed version mode can be achieved by setting the `packageGroupManifestField` in your monoweave configuration, or via the CLI argument. This config option should be set to some field in each workspace's manifest file to indicate fixed version grouping. For example, you can add a "group" field set to "components" for some workspaces and "utils" for other workspaces. Monoweave will then ensure all workspaces with changes (or dependent changes) in the "components" group have the same version bump. To achieve fixed versioning of all workspaces, you need to specify a field that all workspaces have in common. You can also enforce this with the use of the Yarn Constraints plugin.
+Fixed version mode can be achieved by setting the `packageGroupManifestField` in your monoweave configuration, or via the CLI argument. This config option should be set to some field in each workspace's manifest file to indicate fixed version grouping. For example, you can add a "group" field set to "components" for some workspaces and "utils" for other workspaces. Monoweave will then ensure all workspaces with changes (or dependent changes) in the "components" group have the same version bump. To achieve fixed versioning of all workspaces, you need to specify a field that all workspaces have in common. You can also enforce this with the use of the Yarn Constraints plugin.
 
 ### How does Monoweave differ from:
 
