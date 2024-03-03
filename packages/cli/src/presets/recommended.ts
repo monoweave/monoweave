@@ -1,13 +1,15 @@
 import type { MonoweaveConfigFile } from '@monoweave/types'
 
 const ConfigRecommended: MonoweaveConfigFile = {
-    persistVersions: true,
-    autoCommit: true,
-    git: {
-        push: true,
-    },
     commitIgnorePatterns: ['\\[skip-ci\\]'],
-    changesetIgnorePatterns: ['**/*.test.*'],
+    changesetIgnorePatterns: [
+        // Common conventions for test files
+        '**/__tests__',
+        '**/*.test.*',
+        // Jest snapshots
+        '**/*.snap',
+    ],
+    changelogFilename: '<packageDir>/CHANGELOG.md',
 }
 
 export = ConfigRecommended

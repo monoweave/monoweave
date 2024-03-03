@@ -1,16 +1,41 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
+import fs from 'node:fs'
+import path from 'node:path'
+
 import type { MonoweaveConfigFile } from '@monoweave/types'
 import { structUtils } from '@yarnpkg/core'
 import { type PortablePath, npath, ppath } from '@yarnpkg/fslib'
+import JSON5 from 'json5'
+import YAML from 'yaml'
 
 import validateConfigFile from './validateConfigFile'
 
 class ResolveFailure extends Error {}
 
-const DEFAULT_CONFIG_FILENAME = 'monoweave.config.js'
+const DEFAULT_CONFIG_BASENAME = 'monoweave.config'
 
-const resolvePath = (name: string, cwd: PortablePath): string => {
+async function loadFile(filename: string): Promise<unknown> {
+    const ext = path.extname(filename)
+    if (ext === '.mjs' || ext === '.cjs') {
+        return await import(filename)
+    }
+    if (!ext || ext === '.js' || ext === '.ts') {
+        return require(filename)
+    }
+
+    const contents = await fs.promises.readFile(filename, { encoding: 'utf-8' })
+    if (ext === '.json' || ext === '.jsonc' || ext === '.json5') {
+        return await JSON5.parse(contents)
+    }
+    if (ext === '.yml' || ext === '.yaml') {
+        return await YAML.parse(contents, { strict: false })
+    }
+
+    throw new Error(`Invalid file extension '${ext}' for monoweave configuration file.`)
+}
+
+async function resolvePath(name: string, cwd: PortablePath): Promise<string> {
     try {
         const nCwd = npath.fromPortablePath(cwd)
 
@@ -21,13 +46,19 @@ const resolvePath = (name: string, cwd: PortablePath): string => {
         }
 
         const absPath = ppath.resolve(cwd, npath.toPortablePath(name))
-        return require.resolve(npath.fromPortablePath(absPath), { paths: [nCwd] })
+        const nativeAbsPath = npath.fromPortablePath(absPath)
+        try {
+            return require.resolve(nativeAbsPath, { paths: [nCwd] })
+        } catch {
+            await fs.promises.access(nativeAbsPath, fs.constants.R_OK)
+            return nativeAbsPath
+        }
     } catch (err) {
         throw new ResolveFailure(String(err))
     }
 }
 
-const merge = (base: any, overrides: any): any => {
+function merge(base: any, overrides: any) {
     if (overrides === undefined && base === undefined) return undefined
     if (overrides !== undefined && base === undefined) return overrides
     if (overrides === undefined && base !== undefined) return base
@@ -50,35 +81,64 @@ const merge = (base: any, overrides: any): any => {
     return overrides
 }
 
-const loadPresetConfig = (presetPath: string | null, cwd: PortablePath) => {
+async function loadPresetConfig(presetPath: string | null, cwd: PortablePath) {
     if (presetPath) {
         if (presetPath.startsWith('monoweave/')) {
             switch (presetPath.split('/')[1]) {
                 case 'preset-recommended':
-                    return require('../../presets/recommended')
+                    return await loadFile('../../presets/recommended')
                 default:
                     break
             }
         }
-        return require(resolvePath(presetPath, cwd))
+        return await loadFile(await resolvePath(presetPath, cwd))
     }
 
     return null
+}
+
+async function discoverDefaultConfigFile(cwd: PortablePath): Promise<string | undefined> {
+    const extensions = ['js', 'yaml', 'yml', 'json5', 'jsonc', 'json']
+
+    // return the first file we can read
+    for (const ext of extensions) {
+        try {
+            const basename = `${DEFAULT_CONFIG_BASENAME}.${ext}`
+            const filename = npath.fromPortablePath(ppath.resolve(cwd, basename))
+            await fs.promises.access(filename, fs.constants.R_OK)
+            return basename
+        } catch {
+            continue
+        }
+    }
+
+    return undefined
 }
 
 const readConfigFile = async (
     configName: string | undefined,
     { cwd, preset }: { cwd: PortablePath; preset: string | undefined },
 ): Promise<MonoweaveConfigFile | undefined> => {
-    const configPath = configName ?? DEFAULT_CONFIG_FILENAME
+    const configPath = configName ?? (await discoverDefaultConfigFile(cwd))
+    if (!configPath) {
+        // No config file found
+        return undefined
+    }
+
     try {
-        const configId = resolvePath(configPath, cwd)
-        const fileConfig: unknown = require(configId)
+        const configId = await resolvePath(configPath, cwd)
+        const fileConfig: unknown = await loadFile(configId)
         const presetPath: string | null =
             (preset ?? (fileConfig as MonoweaveConfigFile)?.preset) || null
-        const presetConfig: unknown = loadPresetConfig(presetPath, cwd)
+        const presetConfig: unknown = await loadPresetConfig(presetPath, cwd)
 
         const config = merge(presetConfig, fileConfig)
+
+        if (config) {
+            // $schema may conflict with our own schema
+            if ('$schema' in config) delete config.$schema
+        }
+
         const validate = validateConfigFile()
         if (validate(config)) {
             return config
