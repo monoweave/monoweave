@@ -58,7 +58,7 @@ describe('Config Merging', () => {
                 push: true,
                 tag: true,
             },
-            conventionalChangelogConfig: '@tophat/conventional-changelog-config',
+            conventionalChangelogConfig: 'conventional-changelog-angular',
             changesetFilename: '/tmp/changeset.json',
             changelogFilename: '/tmp/changelog.md',
             changesetIgnorePatterns: ['*.md'],
