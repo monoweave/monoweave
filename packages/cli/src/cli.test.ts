@@ -31,6 +31,7 @@ describe('CLI', () => {
 
     beforeAll(() => {
         process.env.MONOWEAVE_SUPPRESS_EXIT_CODE = '1'
+        delete process.env.CI
     })
 
     afterAll(() => {
