@@ -61,7 +61,7 @@ exports[`CLI CLI Args passes empty config if no cli flags set 1`] = `
   "commitIgnorePatterns": undefined,
   "conventionalChangelogConfig": undefined,
   "cwd": undefined,
-  "dryRun": undefined,
+  "dryRun": true,
   "forceWriteChangeFiles": undefined,
   "git": {
     "baseBranch": undefined,

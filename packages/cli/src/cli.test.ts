@@ -55,6 +55,61 @@ describe('CLI', () => {
             ).toMatchSnapshot()
         })
 
+        describe('Dry Run', () => {
+            it.each`
+                ci             | expected
+                ${undefined}   | ${true}
+                ${null}        | ${true}
+                ${'undefined'} | ${true}
+                ${'null'}      | ${true}
+                ${''}          | ${true}
+                ${'0'}         | ${true}
+                ${'false'}     | ${true}
+                ${'FALSE'}     | ${true}
+                ${'1'}         | ${false}
+                ${'true'}      | ${false}
+            `(
+                'defaults dryRun to $expected when the environment variable CI is $ci',
+                async ({ ci, expected }) => {
+                    const oldEnv = { ...process.env }
+                    process.env.CI = ci
+
+                    // using "null" (which is an invalid env value as a placeholder to mean unset
+                    if (ci === null) {
+                        delete process.env.CI
+                    }
+
+                    setArgs('--cwd /tmp')
+                    jest.isolateModules(() => {
+                        require('./index')
+                    })
+                    await new Promise((r) => setTimeout(r))
+                    expect(
+                        (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0]
+                            .dryRun,
+                    ).toBe(expected)
+
+                    process.env = { ...oldEnv }
+                },
+            )
+
+            it('allows disabling dry run outside of CI if --no-dry-run is provided', async () => {
+                const oldEnv = { ...process.env }
+                delete process.env.CI
+
+                setArgs('--cwd /tmp --no-dry-run')
+                jest.isolateModules(() => {
+                    require('./index')
+                })
+                await new Promise((r) => setTimeout(r))
+                expect(
+                    (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0].dryRun,
+                ).toBe(false)
+
+                process.env = { ...oldEnv }
+            })
+        })
+
         it('passes empty config if no cli flags set', async () => {
             setArgs('')
             jest.isolateModules(() => {
