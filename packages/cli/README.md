@@ -13,5 +13,5 @@ yarn add @monoweave/cli
 ```sh
 yarn monoweave --cwd <PATH_TO_MONOREPO> \
     --dry-run --log-level 0 \
-    --conventional-changelog-config @tophat/conventional-changelog-config
+    --conventional-changelog-config conventional-changelog-angular
 ```
