@@ -5,7 +5,7 @@ import { createMonorepoContext, getMonoweaveConfig } from '@monoweave/test-utils
 import { generateChangelogEntry } from './changelog'
 
 function filterOutDate(text: string): string {
-    return text.replaceAll(/\(\d{4}-\d{2}-\d{2}\)/g, '<DATE>')
+    return text.replaceAll(/\(\d+[-/]\d+[-/]\d+\)/g, '<DATE>')
 }
 
 describe('Generate Changelog Entry', () => {
