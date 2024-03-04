@@ -9,13 +9,16 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "jest",
             "runtimeExecutable": "yarn",
             "console": "integratedTerminal",
             "args": [
+                "run",
+                "--inspect",
+                "jest",
                 "--config=${workspaceFolder}/jest.config.js",
                 "--no-cache",
                 "--runInBand",
+                "--testTimeout=600000",
                 "${relativeFile}"
             ]
         }

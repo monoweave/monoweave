@@ -37,7 +37,7 @@ const setupExampleMonorepo = async (): Promise<YarnContext> => {
                 name: null, // setupMonorepo sets 'name' to undefined if explicitly set to null
                 private: true,
                 dependencies: {
-                    '@tophat/conventional-changelog-config': '^0.5.0',
+                    'conventional-changelog-angular': '7.0.0',
                 },
             },
         },
@@ -59,7 +59,7 @@ describe('Optional Workspace Identities', () => {
             push: true,
             tag: true,
         },
-        conventionalChangelogConfig: '@tophat/conventional-changelog-config',
+        conventionalChangelogConfig: 'conventional-changelog-angular',
         access: 'public',
         persistVersions: false,
         topological: false,

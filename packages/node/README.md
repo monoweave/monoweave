@@ -23,7 +23,7 @@ const config: MonoweaveConfiguration = {
         remote: 'origin',
         push: true,
     },
-    conventionalChangelogConfig: '@tophat/conventional-changelog-config',
+    conventionalChangelogConfig: 'conventional-changelog-angular',
     access: 'public',
 }
 const changeset = await monoweave(config)

@@ -61,7 +61,7 @@ exports[`CLI CLI Args passes empty config if no cli flags set 1`] = `
   "commitIgnorePatterns": undefined,
   "conventionalChangelogConfig": undefined,
   "cwd": undefined,
-  "dryRun": undefined,
+  "dryRun": true,
   "forceWriteChangeFiles": undefined,
   "git": {
     "baseBranch": undefined,
@@ -176,53 +176,6 @@ exports[`CLI Config File gives precedence to cli flags over config file with neg
   "registryUrl": "http://example.com",
   "topological": false,
   "topologicalDev": false,
-  "versionStrategy": {
-    "minimumStrategy": undefined,
-  },
-}
-`;
-
-exports[`CLI Config File reads from monoweave.config.js by default if it exists 1`] = `
-{
-  "access": "public",
-  "applyChangeset": false,
-  "autoCommit": true,
-  "autoCommitMessage": "chore: release",
-  "changelogFilename": "from_file.changelog.md",
-  "changesetFilename": "from_file.changes.json",
-  "changesetIgnorePatterns": undefined,
-  "commitIgnorePatterns": [
-    "skip-ci",
-  ],
-  "conventionalChangelogConfig": "@my/config-from-file",
-  "cwd": "/tmp/cwd",
-  "dryRun": true,
-  "forceWriteChangeFiles": true,
-  "git": {
-    "baseBranch": "main",
-    "commitSha": "HEAD",
-    "push": true,
-    "remote": "origin",
-    "tag": true,
-  },
-  "jobs": 6,
-  "logLevel": undefined,
-  "maxConcurrentReads": 3,
-  "maxConcurrentWrites": 5,
-  "packageGroupManifestField": undefined,
-  "packageGroups": undefined,
-  "persistVersions": true,
-  "plugins": [
-    "plugin-a",
-    "plugin-b",
-  ],
-  "prerelease": true,
-  "prereleaseId": "alpha",
-  "prereleaseNPMTag": "beta",
-  "registryMode": "npm",
-  "registryUrl": "http://example.com",
-  "topological": true,
-  "topologicalDev": true,
   "versionStrategy": {
     "minimumStrategy": undefined,
   },
@@ -461,16 +414,60 @@ exports[`CLI Presets merges preset with overrides, with preset passed as cli arg
 }
 `;
 
-exports[`CLI Presets reads built-in presets 1`] = `
+exports[`CLI Presets reads built-in presets: legacy 1`] = `
+{
+  "access": undefined,
+  "applyChangeset": false,
+  "autoCommit": undefined,
+  "autoCommitMessage": undefined,
+  "changelogFilename": undefined,
+  "changesetFilename": undefined,
+  "changesetIgnorePatterns": undefined,
+  "commitIgnorePatterns": undefined,
+  "conventionalChangelogConfig": undefined,
+  "cwd": "/tmp/cwd",
+  "dryRun": true,
+  "forceWriteChangeFiles": undefined,
+  "git": {
+    "baseBranch": undefined,
+    "commitSha": undefined,
+    "push": undefined,
+    "remote": undefined,
+    "tag": undefined,
+  },
+  "jobs": 0,
+  "logLevel": undefined,
+  "maxConcurrentReads": 0,
+  "maxConcurrentWrites": 0,
+  "packageGroupManifestField": undefined,
+  "packageGroups": undefined,
+  "persistVersions": undefined,
+  "plugins": undefined,
+  "prerelease": undefined,
+  "prereleaseId": undefined,
+  "prereleaseNPMTag": undefined,
+  "registryMode": undefined,
+  "registryUrl": undefined,
+  "topological": undefined,
+  "topologicalDev": undefined,
+  "versionStrategy": {
+    "minimumStrategy": undefined,
+  },
+}
+`;
+
+exports[`CLI Presets reads built-in presets: recommended 1`] = `
 {
   "access": "public",
   "applyChangeset": false,
-  "autoCommit": true,
+  "autoCommit": undefined,
   "autoCommitMessage": "chore: release",
   "changelogFilename": "from_file.changelog.md",
   "changesetFilename": "from_file.changes.json",
   "changesetIgnorePatterns": [
+    "**/__tests__",
     "**/*.test.*",
+    "**/*.snap",
   ],
   "commitIgnorePatterns": [
     "\\[skip-ci\\]",
@@ -482,7 +479,7 @@ exports[`CLI Presets reads built-in presets 1`] = `
   "git": {
     "baseBranch": "main",
     "commitSha": "HEAD",
-    "push": true,
+    "push": undefined,
     "remote": "origin",
     "tag": true,
   },
@@ -492,7 +489,7 @@ exports[`CLI Presets reads built-in presets 1`] = `
   "maxConcurrentWrites": 5,
   "packageGroupManifestField": undefined,
   "packageGroups": undefined,
-  "persistVersions": true,
+  "persistVersions": undefined,
   "plugins": [
     "plugin-a",
     "plugin-b",

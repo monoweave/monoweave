@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Generate Changelog Entry Default - No Conventional Changelog generates a changelog correctly when no repository url defined 1`] = `
+"## [1.2.3](//compare/pkg-1@1.2.2...pkg-1@1.2.3) "pkg-1" <DATE> <a name="1.2.3"></a>
+
+### Changes
+
+* fix: some fix ([123](//commits/123))"
+`;
+
+exports[`Generate Changelog Entry Default - No Conventional Changelog generates a simple changelog entry 1`] = `""`;
+
+exports[`Generate Changelog Entry Default - No Conventional Changelog generates a simple changelog entry 2`] = `
+"## [1.2.3](https://github.com/some-owner/some-repo/compare/pkg-1@1.2.2...pkg-1@1.2.3) "pkg-1" <DATE> <a name="1.2.3"></a>
+
+### Changes
+
+* feat: this is a feature ([101](https://github.com/some-owner/some-repo/commits/101))"
+`;
+
+exports[`Generate Changelog Entry Default - No Conventional Changelog generates a simple changelog entry 3`] = `
+"## [1.2.3](https://github.com/some-owner/some-repo/compare/pkg-1@1.2.2...pkg-1@1.2.3) "pkg-1" <DATE> <a name="1.2.3"></a>
+
+### Changes
+
+* fix: this is a patch ([100](https://github.com/some-owner/some-repo/commits/100))
+* feat: this is a feature ([101](https://github.com/some-owner/some-repo/commits/101))"
+`;
+
+exports[`Generate Changelog Entry Default - No Conventional Changelog generates a simple changelog entry 4`] = `
+"## [1.2.3](https://github.com/some-owner/some-repo/compare/pkg-1@1.2.2...pkg-1@1.2.3) "pkg-1" <DATE> <a name="1.2.3"></a>
+
+### Changes
+
+* fix: this is a patch ([100](https://github.com/some-owner/some-repo/commits/100))
+* feat: this is a feature ([100](https://github.com/some-owner/some-repo/commits/100))"
+`;
+
+exports[`Generate Changelog Entry Default - No Conventional Changelog generates a simple changelog entry 5`] = `
+"## [1.2.3](https://github.com/some-owner/some-repo/compare/pkg-1@1.2.2...pkg-1@1.2.3) "pkg-1" <DATE> <a name="1.2.3"></a>
+
+### Changes
+
+* fix: this is a patch ([100](https://github.com/some-owner/some-repo/commits/100))
+* feat: this is a feature ([101](https://github.com/some-owner/some-repo/commits/101))
+
+### Notes
+
+* BREAKING CHANGE: This is breaking! ([300](https://github.com/some-owner/some-repo/commits/300))"
+`;
+
+exports[`Generate Changelog Entry Default - No Conventional Changelog generates a simple changelog entry 6`] = `
+"## [1.2.3](https://github.com/some-owner/some-repo/compare/pkg-1@1.2.2...pkg-1@1.2.3) "pkg-1" <DATE> <a name="1.2.3"></a>
+
+### Changes
+
+* NOTE: This is a note! ([100](https://github.com/some-owner/some-repo/commits/100))
+* Revert: This is a revert! ([100](https://github.com/some-owner/some-repo/commits/100))
+
+### Notes
+
+* BREAKING CHANGE: This is breaking ([100](https://github.com/some-owner/some-repo/commits/100))"
+`;

@@ -68,3 +68,23 @@ export async function writeConfig({
     })
     return monoweaveConfigFilename
 }
+
+export async function waitFor<T>(
+    predicate: () => Promise<T>,
+    { maxSteps = 100 }: { maxSteps?: number } = {},
+): Promise<T> {
+    let steps = maxSteps
+    while (steps > 0) {
+        steps--
+        await new Promise((r) => setTimeout(r))
+
+        try {
+            const result = await predicate()
+            return result
+        } catch (err) {
+            if (steps > 0) continue
+            throw err
+        }
+    }
+    throw new Error(`Max steps exceeded (${maxSteps} interations)`)
+}

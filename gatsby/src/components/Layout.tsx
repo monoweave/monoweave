@@ -15,8 +15,21 @@ interface PageContext {
     }
 }
 
-const components: any = {
+type Components = React.ComponentProps<typeof MDXProvider>['components']
+
+const Strikethrough = React.forwardRef<HTMLSpanElement, { children: React.ReactNode }>(
+    ({ children }, ref) => {
+        return (
+            <span className="strikethrough" ref={ref}>
+                {children}
+            </span>
+        )
+    },
+)
+
+const components: Components = {
     code: CodeBlock,
+    delete: Strikethrough,
 }
 
 export const Layout: React.FC<{

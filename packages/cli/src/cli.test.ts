@@ -2,7 +2,14 @@ import { promises as fs } from 'fs'
 import path from 'path'
 
 import monoweave from '@monoweave/node'
-import { createTempDir } from '@monoweave/test-utils'
+import { createTempDir, waitFor } from '@monoweave/test-utils'
+import {
+    type MonoweaveConfigFile,
+    type MonoweaveConfiguration,
+    type RecursivePartial,
+} from '@monoweave/types'
+import JSON5 from 'json5'
+import YAML from 'yaml'
 
 const scriptPath = path.join(__dirname, 'index.ts')
 
@@ -11,11 +18,20 @@ jest.mock('@monoweave/node', () => ({
     default: jest.fn(),
 }))
 
+async function waitForMonoweaveRun(): Promise<RecursivePartial<MonoweaveConfiguration>> {
+    return await waitFor(async () => {
+        const arg = jest.mocked(monoweave).mock.calls[0][0]
+        if (!arg) throw new Error('Missing arg!')
+        return arg
+    })
+}
+
 describe('CLI', () => {
     const origArgs = process.argv
 
     beforeAll(() => {
         process.env.MONOWEAVE_SUPPRESS_EXIT_CODE = '1'
+        delete process.env.CI
     })
 
     afterAll(() => {
@@ -26,6 +42,7 @@ describe('CLI', () => {
         // eslint-disable-next-line prettier/prettier
         (monoweave as jest.MockedFunction<typeof monoweave>).mockClear();
         process.env.MONOWEAVE_DISABLE_LOGS = '1'
+        jest.clearAllMocks()
     })
 
     const setArgs = (command: string) => {
@@ -49,10 +66,60 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            expect(
-                (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0],
-            ).toMatchSnapshot()
+            expect(await waitForMonoweaveRun()).toMatchSnapshot()
+        })
+
+        describe('Dry Run', () => {
+            it.each`
+                ci             | expected
+                ${undefined}   | ${true}
+                ${null}        | ${true}
+                ${'undefined'} | ${true}
+                ${'null'}      | ${true}
+                ${''}          | ${true}
+                ${'0'}         | ${true}
+                ${'false'}     | ${true}
+                ${'FALSE'}     | ${true}
+                ${'1'}         | ${false}
+                ${'true'}      | ${false}
+            `(
+                'defaults dryRun to $expected when the environment variable CI is $ci',
+                async ({ ci, expected }) => {
+                    const oldEnv = { ...process.env }
+                    process.env.CI = ci
+
+                    // using "null" (which is an invalid env value as a placeholder to mean unset
+                    if (ci === null) {
+                        delete process.env.CI
+                    }
+
+                    setArgs('--cwd /tmp')
+                    jest.isolateModules(() => {
+                        require('./index')
+                    })
+
+                    expect(await waitForMonoweaveRun()).toEqual(
+                        expect.objectContaining({ dryRun: expected }),
+                    )
+
+                    process.env = { ...oldEnv }
+                },
+            )
+
+            it('allows disabling dry run outside of CI if --no-dry-run is provided', async () => {
+                const oldEnv = { ...process.env }
+                delete process.env.CI
+
+                setArgs('--cwd /tmp --no-dry-run')
+                jest.isolateModules(() => {
+                    require('./index')
+                })
+                expect(await waitForMonoweaveRun()).toEqual(
+                    expect.objectContaining({ dryRun: false }),
+                )
+
+                process.env = { ...oldEnv }
+            })
         })
 
         it('passes empty config if no cli flags set', async () => {
@@ -60,13 +127,12 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            expect(
-                (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0],
-            ).toMatchSnapshot()
+            expect(await waitForMonoweaveRun()).toMatchSnapshot()
         })
 
         it('sets exit code to error if monoweave throws', async () => {
+            expect.hasAssertions()
+
             delete process.env.MONOWEAVE_DISABLE_LOGS
             const spyError = jest.spyOn(process.stderr, 'write').mockImplementation()
             const error = new Error('Monoweave failed.')
@@ -79,13 +145,16 @@ describe('CLI', () => {
                 require('./index')
             })
 
-            await new Promise((r) => setTimeout(r))
-            expect(spyError).toHaveBeenCalledWith(`${String(error)}\n`)
+            await waitFor(async () => {
+                expect(spyError).toHaveBeenCalledWith(`${String(error)}\n`)
+            })
         })
     })
 
     describe('Config File', () => {
         it('throws an error if unable to read config file', async () => {
+            expect.hasAssertions()
+
             delete process.env.MONOWEAVE_DISABLE_LOGS
             const spyError = jest.spyOn(process.stderr, 'write').mockImplementation()
 
@@ -101,11 +170,15 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            expect(spyError).toHaveBeenCalled()
+
+            await waitFor(async () => {
+                expect(spyError).toHaveBeenCalled()
+            })
         })
 
         it('throws an error if invalid configuration', async () => {
+            expect.hasAssertions()
+
             delete process.env.MONOWEAVE_DISABLE_LOGS
             const spyError = jest.spyOn(process.stderr, 'write').mockImplementation()
 
@@ -120,8 +193,9 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            expect(spyError).toHaveBeenCalled()
+            await waitFor(async () => {
+                expect(spyError).toHaveBeenCalled()
+            })
         })
 
         it('reads from specified config file using absolute path', async () => {
@@ -169,10 +243,7 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            expect(
-                (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0],
-            ).toMatchSnapshot()
+            expect(await waitForMonoweaveRun()).toMatchSnapshot()
         })
 
         it('reads from specified config file using path relative to cwd', async () => {
@@ -213,9 +284,10 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            const config = (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0]
-            expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toMatchSnapshot()
+            expect({
+                ...(await waitForMonoweaveRun()),
+                cwd: '/tmp/cwd',
+            }).toMatchSnapshot()
         })
 
         it('reads from specified config file using relative path', async () => {
@@ -253,55 +325,204 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            const config = (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0]
-            expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toMatchSnapshot()
+            expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toMatchSnapshot()
         })
 
-        it('reads from monoweave.config.js by default if it exists', async () => {
-            const configFileContents = `
-                module.exports = {
-                    access: 'public',
-                    changelogFilename: 'from_file.changelog.md',
-                    changesetFilename: 'from_file.changes.json',
-                    conventionalChangelogConfig: '@my/config-from-file',
-                    autoCommit: true,
-                    autoCommitMessage: 'chore: release',
-                    dryRun: true,
-                    forceWriteChangeFiles: true,
-                    git: {
-                        baseBranch: 'main',
-                        commitSha: 'HEAD',
-                        push: true,
-                        remote: 'origin',
-                        tag: true,
-                    },
-                    jobs: 6,
-                    persistVersions: true,
-                    registryUrl: 'http://example.com',
-                    registryMode: 'npm',
-                    topological: true,
-                    topologicalDev: true,
-                    maxConcurrentReads: 3,
-                    maxConcurrentWrites: 5,
-                    plugins: ['plugin-a', 'plugin-b'],
-                    prerelease: true,
-                    prereleaseId: 'alpha',
-                    prereleaseNPMTag: 'beta',
-                    commitIgnorePatterns: ['skip-ci'],
-                }
-            `
+        describe('Config File Formats', () => {
+            const configContents: MonoweaveConfigFile = {
+                access: 'public',
+                changelogFilename: 'from_file.changelog.md',
+                changesetFilename: 'from_file.changes.json',
+                conventionalChangelogConfig: '@my/config-from-file',
+                dryRun: true,
+                forceWriteChangeFiles: true,
+                changesetIgnorePatterns: ['*.test.js', '*.snap'],
+                git: {
+                    baseBranch: 'main',
+                    commitSha: 'HEAD',
+                    push: true,
+                    remote: 'origin',
+                    tag: false,
+                },
+                jobs: 6,
+                persistVersions: true,
+                registryUrl: 'http://example.com',
+                topological: true,
+                topologicalDev: true,
+                maxConcurrentReads: 2,
+                maxConcurrentWrites: 1,
+                packageGroupManifestField: 'group',
+            }
 
-            await using tmpDir = await createTempDir()
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
-            await fs.writeFile(configFilename, configFileContents, 'utf-8')
-            setArgs(`--cwd ${tmpDir.dir}`)
-            jest.isolateModules(() => {
-                require('./index')
+            async function writeConfigFile({
+                filename,
+                contents,
+            }: {
+                filename: string
+                contents: string
+            }): Promise<RecursivePartial<MonoweaveConfiguration>> {
+                await using tmpDir = await createTempDir()
+                const configFilename = path.resolve(path.join(tmpDir.dir, filename))
+                await fs.writeFile(configFilename, contents, 'utf-8')
+                setArgs(`--config-file ./${filename} --cwd ${tmpDir.dir}`)
+                jest.isolateModules(() => {
+                    require('./index')
+                })
+
+                return await waitFor(async () => {
+                    const arg = jest.mocked(monoweave).mock.calls[0][0]
+                    if (!arg) throw new Error('Missing arg!')
+                    return arg
+                })
+            }
+
+            beforeEach(() => {
+                delete process.env.MONOWEAVE_DISABLE_LOGS
             })
-            await new Promise((r) => setTimeout(r))
-            const config = (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0]
-            expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toMatchSnapshot()
+
+            it('supports .js extensions', async () => {
+                const filename = 'monoweave.config.js'
+                const contents = `module.exports = ${JSON.stringify(configContents)}`
+
+                const config = await writeConfigFile({ filename, contents })
+                expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
+                    expect.objectContaining({
+                        changelogFilename: configContents.changelogFilename,
+                    }),
+                )
+            })
+
+            it.each(['json', 'jsonc', 'json5'])('supports .%s extensions', async (ext: string) => {
+                const filename = `monoweave.config.${ext}`
+                const contents = JSON5.stringify(configContents)
+
+                const config = await writeConfigFile({ filename, contents })
+                expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
+                    expect.objectContaining({
+                        changelogFilename: configContents.changelogFilename,
+                    }),
+                )
+            })
+
+            it.each(['yml', 'yaml'])('supports .%s extensions', async (ext: string) => {
+                const filename = `monoweave.config.${ext}`
+                const contents = YAML.stringify(configContents)
+
+                const config = await writeConfigFile({ filename, contents })
+                expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
+                    expect.objectContaining({
+                        changelogFilename: configContents.changelogFilename,
+                    }),
+                )
+            })
+
+            // TODO: Unable to test this with Jest
+            // eslint-disable-next-line jest/no-disabled-tests
+            it.skip('supports .cjs extensions', async () => {
+                const filename = 'monoweave.config.cjs'
+                const contents = `module.exports = ${JSON.stringify(configContents)}`
+
+                const config = await writeConfigFile({ filename, contents })
+                expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
+                    expect.objectContaining({
+                        changelogFilename: configContents.changelogFilename,
+                    }),
+                )
+            })
+
+            it.todo('supports .cts extensions')
+            it.todo('supports .mjs extensions')
+            it.todo('supports .mts extensions')
+        })
+
+        describe('Default Config File Discovery', () => {
+            const configContents: MonoweaveConfigFile = {
+                access: 'public',
+                changelogFilename: 'from_file.changelog.md',
+                changesetFilename: 'from_file.changes.json',
+                conventionalChangelogConfig: '@my/config-from-file',
+                dryRun: true,
+                forceWriteChangeFiles: true,
+                changesetIgnorePatterns: ['*.test.js', '*.snap'],
+                git: {
+                    baseBranch: 'main',
+                    commitSha: 'HEAD',
+                    push: true,
+                    remote: 'origin',
+                    tag: false,
+                },
+                jobs: 6,
+                persistVersions: true,
+                registryUrl: 'http://example.com',
+                topological: true,
+                topologicalDev: true,
+                maxConcurrentReads: 2,
+                maxConcurrentWrites: 1,
+                packageGroupManifestField: 'group',
+            }
+
+            async function writeConfigFile({
+                filename,
+                contents,
+            }: {
+                filename: string
+                contents: string
+            }): Promise<RecursivePartial<MonoweaveConfiguration>> {
+                await using tmpDir = await createTempDir()
+                const configFilename = path.resolve(path.join(tmpDir.dir, filename))
+                await fs.writeFile(configFilename, contents, 'utf-8')
+                // We're testing "defaults" so do not pass a --config-file
+                setArgs(`--cwd ${tmpDir.dir}`)
+                jest.isolateModules(() => {
+                    require('./index')
+                })
+
+                return await waitFor(async () => {
+                    const arg = jest.mocked(monoweave).mock.calls[0][0]
+                    if (!arg) throw new Error('Missing arg!')
+                    return arg
+                })
+            }
+
+            beforeEach(() => {
+                delete process.env.MONOWEAVE_DISABLE_LOGS
+            })
+
+            it('supports .js extensions', async () => {
+                const filename = 'monoweave.config.js'
+                const contents = `module.exports = ${JSON.stringify(configContents)}`
+
+                const config = await writeConfigFile({ filename, contents })
+                expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
+                    expect.objectContaining({
+                        changelogFilename: configContents.changelogFilename,
+                    }),
+                )
+            })
+
+            it.each(['json', 'jsonc', 'json5'])('supports .%s extensions', async (ext: string) => {
+                const filename = `monoweave.config.${ext}`
+                const contents = JSON5.stringify(configContents)
+
+                const config = await writeConfigFile({ filename, contents })
+                expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
+                    expect.objectContaining({
+                        changelogFilename: configContents.changelogFilename,
+                    }),
+                )
+            })
+
+            it.each(['yml', 'yaml'])('supports .%s extensions', async (ext: string) => {
+                const filename = `monoweave.config.${ext}`
+                const contents = YAML.stringify(configContents)
+
+                const config = await writeConfigFile({ filename, contents })
+                expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
+                    expect.objectContaining({
+                        changelogFilename: configContents.changelogFilename,
+                    }),
+                )
+            })
         })
 
         it('gives precedence to cli flags over config file', async () => {
@@ -346,10 +567,7 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            expect(
-                (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0],
-            ).toMatchSnapshot()
+            expect(await waitForMonoweaveRun()).toMatchSnapshot()
         })
 
         it('gives precedence to cli flags over config file with negated flags', async () => {
@@ -393,15 +611,14 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            expect(
-                (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0],
-            ).toMatchSnapshot()
+            expect(await waitForMonoweaveRun()).toMatchSnapshot()
         })
     })
 
     describe('Presets', () => {
         it('throws an error if unable to read the preset file', async () => {
+            expect.hasAssertions()
+
             delete process.env.MONOWEAVE_DISABLE_LOGS
             const spyError = jest.spyOn(process.stderr, 'write').mockImplementation()
 
@@ -424,11 +641,14 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            expect(spyError).toHaveBeenCalled()
+            await waitFor(async () => {
+                expect(spyError).toHaveBeenCalled()
+            })
         })
 
         it('throws an error if invalid configuration', async () => {
+            expect.hasAssertions()
+
             delete process.env.MONOWEAVE_DISABLE_LOGS
             const spyError = jest.spyOn(process.stderr, 'write').mockImplementation()
 
@@ -450,8 +670,9 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            expect(spyError).toHaveBeenCalled()
+            await waitFor(async () => {
+                expect(spyError).toHaveBeenCalled()
+            })
         })
 
         it('merges preset with overrides, defined in config file', async () => {
@@ -505,9 +726,7 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            const config = (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0]
-            expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toMatchSnapshot()
+            expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toMatchSnapshot()
         })
 
         it('merges preset with overrides, with preset passed as cli arg', async () => {
@@ -562,17 +781,15 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            const config = (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0]
-            expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toMatchSnapshot()
+            expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toMatchSnapshot()
         })
 
-        it('reads built-in presets', async () => {
+        it.each(['recommended', 'legacy'])('reads built-in presets: %s', async (preset) => {
             await using tmpDir = await createTempDir()
 
             const configFileContents = `
                 module.exports = {
-                    preset: 'monoweave/preset-recommended',
+                    preset: 'monoweave/preset-${preset}',
                     access: 'public',
                     changelogFilename: 'from_file.changelog.md',
                     changesetFilename: 'from_file.changes.json',
@@ -605,9 +822,7 @@ describe('CLI', () => {
             jest.isolateModules(() => {
                 require('./index')
             })
-            await new Promise((r) => setTimeout(r))
-            const config = (monoweave as jest.MockedFunction<typeof monoweave>).mock.calls[0][0]
-            expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toMatchSnapshot()
+            expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toMatchSnapshot()
         })
     })
 })

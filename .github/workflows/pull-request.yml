@@ -150,13 +150,13 @@ jobs:
           echo "<!-- MONOWEAVE:BELOW -->" > ${{ env.ARTIFACT_DIR }}/CHANGELOG.md
 
           yarn run-local \
+            --preset monoweave/preset-recommended \
             --dry-run \
             --log-level 0 \
             --git-base-branch origin/${{ github.base_ref }} \
             --conventional-changelog-config @tophat/conventional-changelog-config \
             --changelog-filename ${{ env.ARTIFACT_DIR }}/CHANGELOG.md \
             --force-write-change-files \
-            --changeset-ignore-patterns '**/*.test.ts' \
             --package-group-manifest-field group
 
           {

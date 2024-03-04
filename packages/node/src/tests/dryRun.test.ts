@@ -45,7 +45,7 @@ const setupExampleMonorepo = async (): Promise<YarnContext> => {
         {
             root: {
                 dependencies: {
-                    '@tophat/conventional-changelog-config': '^0.5.0',
+                    'conventional-changelog-angular': '7.0.0',
                 },
             },
         },
@@ -67,7 +67,7 @@ describe('Monoweave (Dry Run)', () => {
             push: true,
             tag: true,
         },
-        conventionalChangelogConfig: '@tophat/conventional-changelog-config',
+        conventionalChangelogConfig: 'conventional-changelog-angular',
         access: 'public',
         persistVersions: false,
         topological: false,

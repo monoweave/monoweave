@@ -1,7 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
 
+html {
+    --primary-font-family: 'Source Sans Pro', sans-serif;
+    --primary-background-colour: rgb(0 121 169);
+    --primary-foreground-colour: #ffffff;
+    --secondary-background-colour: #8BB2C8;
+    --accent-background-colour: #1E1E1E;
+    --alt-accent-background-colour: #383838;
+}
+
 html, body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: var(--primary-font-family);
+}
+
+header.main {
+    background: var(--primary-background-colour);
+    margin-bottom: 1.45rem;
+}
+
+span.strikethrough {
+    text-decoration: line-through;
 }
 
 a.anchor.before {
@@ -9,9 +27,9 @@ a.anchor.before {
 }
 
 table.typedoc-schema {
-    color: #ffffff;
+    color: var(--primary-foreground-colour);
     padding: 20px;
-    background: #803ed7;
+    background: var(--primary-background-colour);
     text-align: left;
     font-size: 1.05em;
     overflow-x: auto;
@@ -42,20 +60,20 @@ table.typedoc-schema tbody .type {
 }
 
 table.typedoc-schema tbody tr {
-    background: #1E1E1E;
+    background: var(--accent-background-colour);
 }
 
 table.typedoc-schema tbody tr:nth-child(2n+1) {
-    background: #383838;
+    background: var(--alt-accent-background-colour);
 }
 
 table.typedoc-schema tbody tr.schema-option.deprecated {
     background: repeating-linear-gradient(
         45deg,
-        #1e1e1e,
-        #383838 10px,
-        #1e1e1e 10px,
-        #383838 20px
+        var(--accent-background-colour),
+        var(--alt-accent-background-colour) 10px,
+        var(--accent-background-colour) 10px,
+        var(--alt-accent-background-colour) 20px
     );
 }
 
@@ -91,10 +109,10 @@ table.typedoc-schema td:first-child {
 nav.header-nav {
     display: block;
     width: 100%;
-    background: #6727bb;
+    background: var(--secondary-background-colour);
 }
 nav.header-nav a {
-    color: #ffffff;
+    color: var(--primary-foreground-colour);
     text-decoration: none;
     font-weight: bold;
 }
@@ -120,4 +138,17 @@ nav.header-nav li {
     text-align: center;
     white-space: nowrap;
     padding: 0.75em 1.5em;
+}
+
+pre.inline-code {
+    font-family: monospace;
+    color: rgb(156, 220, 254);
+    background: rgb(30, 30, 30);
+    display: inline;
+    padding: 0.25em;
+    border-radius: 4px;
+}
+
+pre.prism-code {
+    border-radius: 4px;
 }

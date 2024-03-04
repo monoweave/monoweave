@@ -9,6 +9,7 @@ import { Command, Option } from 'clipanion'
 import * as t from 'typanion'
 
 import readConfigFile from './config/readConfigFile'
+import { detectIsInCI } from './config/utils'
 
 export abstract class BaseCommand extends Command {
     preset = Option.String('--preset', {
@@ -36,8 +37,8 @@ export abstract class BaseCommand extends Command {
         validator: t.isEnum(RegistryMode),
     })
 
-    dryRun = Option.Boolean('--dry-run', {
-        description: 'Dry run mode',
+    dryRun = Option.Boolean('--dry-run', !detectIsInCI(), {
+        description: 'Dry run mode (defaults to true outside of CI)',
     })
 
     logLevel = Option.String('--log-level', {

@@ -7,9 +7,11 @@ import { structUtils } from '@yarnpkg/core'
 import conventionalChangelogWriter from 'conventional-changelog-writer'
 import conventionalCommitsParser, { type Commit } from 'conventional-commits-parser'
 
+import { defaultChangelogWriter } from './defaultChangelogWriter'
 import resolveConventionalConfig from './resolveConventionalConfig'
+import { type TemplateContext } from './types'
 
-const generateChangelogEntry = async ({
+export const generateChangelogEntry = async ({
     config,
     context,
     packageName,
@@ -24,27 +26,14 @@ const generateChangelogEntry = async ({
     newVersion: string
     commits: CommitMessage[]
 }): Promise<string | null> => {
-    if (!config.conventionalChangelogConfig) {
-        return null
-    }
-
     if (!commits.length) {
         return null
     }
 
     const ident = structUtils.parseIdent(packageName)
     const workspace = context.project.getWorkspaceByIdent(ident)
-
-    const conventionalConfig = await resolveConventionalConfig({ config })
-
-    const commitsStream = Readable.from(
-        commits.map((commit) => `${commit.body}\n-hash-\n${commit.sha}`),
-    ).pipe(conventionalCommitsParser(conventionalConfig.parserOpts))
-    const conventionalCommits = await readStream<Commit>(commitsStream)
-
     const { host, owner, repository, repoUrl } = await parseRepositoryProperty(workspace)
-
-    const templateContext = {
+    const templateContext: TemplateContext = {
         version: newVersion,
         title: packageName,
         host: host ?? '',
@@ -55,6 +44,20 @@ const generateChangelogEntry = async ({
         previousTag: previousVersion ? `${packageName}@${previousVersion}` : undefined,
         linkCompare: Boolean(previousVersion),
     }
+
+    if (!config.conventionalChangelogConfig) {
+        return await defaultChangelogWriter({
+            commits,
+            templateContext,
+        })
+    }
+
+    const conventionalConfig = await resolveConventionalConfig({ config })
+
+    const commitsStream = Readable.from(
+        commits.map((commit) => `${commit.body}\n-hash-\n${commit.sha}`),
+    ).pipe(conventionalCommitsParser(conventionalConfig.parserOpts))
+    const conventionalCommits = await readStream<Commit>(commitsStream)
 
     const changelogWriter = conventionalChangelogWriter(
         templateContext,
@@ -78,5 +81,3 @@ const generateChangelogEntry = async ({
 
     return readStreamString(pipeline)
 }
-
-export default generateChangelogEntry

@@ -1,4 +1,4 @@
-import generateChangelogEntry from './changelog'
+import { generateChangelogEntry } from './changelog'
 import prependChangelogFile from './prependChangelogFile'
 import resolveConventionalConfig from './resolveConventionalConfig'
 

@@ -22,7 +22,7 @@ To fine-tune monoweave, create a `monoweave.config.js` file and invoke monoweave
 yarn monoweave --config-file monoweave.config.js
 ```
 
-Note that monoweave will automatically detect your `monoweave.config.js` file if named correctly.
+Monoweave natively supports: `.js`, `.json`, `.jsonc`, `.json5`, `.yml`, and `.yaml` file extensions. If no configuration file is specified, monoweave will look for the files in no particular order so make sure you don't have duplicate configuration files.
 
 You can use a preset configuration as a basis for your monoweave config, and add either additional config options or CLI flags to extend the preset. For example:
 
@@ -39,21 +39,39 @@ The preset should ultimately point to a file which exports a monoweave configura
 #### monoweave/preset-recommended
 
 ```bash
-yarn monoweave --dry-run --preset monoweave/preset-recommended
+yarn monoweave --preset monoweave/preset-recommended
 ```
 
-The "recommended" preset differs from the monoweave default in that it will modify your package.json files, commit the changes, and then automatically push said changes to your remote git repository.
+The "recommended" preset does not currently differ from the defaults much. It may be expanded in the future.
 
 ## Configuration File
 
 If you omit a property, a reasonable default will be used. Note that setting a property to `null` is not always the same as omitting the property (or setting it to `undefined`).
 
 ```js
+/** @type {import('@monoweave/types').MonoweaveConfigFile} */
 module.exports = {
     preset: 'monoweave/preset-recommended',
+
+    // Aggregates changelog entries to a single file instead of the "recommended"
+    // default of per-workspace.
     changelogFilename: 'CHANGELOG.md',
 }
 ```
+
+#### monoweave/preset-legacy
+
+This is the old behaviour if coming from the predecessor of monoeave: monodeploy.
+
+```bash
+yarn monoweave --preset monoweave/preset-legacy
+```
+
+The "legacy" preset differs from the monoweave default in that:
+
+- It will not modify your package.json files.
+- Auto commit and push are disabled.
+- No changelog filename is specified (so changelogs are disabled).
 
 ## Schema
 

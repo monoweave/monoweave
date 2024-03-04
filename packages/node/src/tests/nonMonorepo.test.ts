@@ -51,7 +51,7 @@ const setupExampleMonorepo = async (): Promise<YarnContext> => {
                 version: '0.0.1',
                 private: false,
                 dependencies: {
-                    '@tophat/conventional-changelog-config': '^0.5.0',
+                    'conventional-changelog-angular': '7.0.0',
                 },
             },
         },
@@ -73,7 +73,7 @@ describe('Non-monorepos (single package)', () => {
             push: true,
             tag: true,
         },
-        conventionalChangelogConfig: '@tophat/conventional-changelog-config',
+        conventionalChangelogConfig: 'conventional-changelog-angular',
         access: 'public',
         persistVersions: false,
         topological: false,
