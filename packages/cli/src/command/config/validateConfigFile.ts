@@ -30,7 +30,7 @@ const schema: SchemaObject = {
         },
         dryRun: { type: 'boolean', nullable: true },
         conventionalChangelogConfig: {
-            type: ['string', 'object'],
+            type: ['string', 'object', 'boolean'],
             nullable: true,
             oneOf: [
                 {
@@ -40,6 +40,7 @@ const schema: SchemaObject = {
                     additionalProperties: true,
                 },
                 { type: 'string' },
+                { type: 'boolean', enum: [false] },
             ],
         },
         changesetFilename: { type: 'string', nullable: true },
