@@ -17,13 +17,6 @@ export class MonoweaveVersionCommand extends BaseCommand {
         try {
             const { config } = await this.parseConfiguration()
 
-            if (config.conventionalChangelogConfig !== false) {
-                this.context.stderr.write(
-                    'The version command is only available when conventional changelogs are explicitly disabled.',
-                )
-                return 1
-            }
-
             const { remainingPackages, suggestedPackages, versionFolder } =
                 await getPackageCandidatesForManualRelease(config)
 
