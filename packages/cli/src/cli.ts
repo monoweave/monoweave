@@ -1,6 +1,7 @@
 import { Cli } from 'clipanion'
 
 import { MonoweaveCommand } from './command/default'
+import { MonoweaveVersionCommand } from './command/version'
 
 const cli = new Cli({
     binaryLabel: 'Monoweave',
@@ -11,5 +12,6 @@ const cli = new Cli({
 })
 
 cli.register(MonoweaveCommand)
+cli.register(MonoweaveVersionCommand)
 
 export { cli }

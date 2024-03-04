@@ -46,7 +46,6 @@ describe('Config Merging', () => {
 
     it('uses supplied config', async () => {
         const config: MonoweaveConfiguration = {
-            applyChangeset: true,
             cwd: '/tmp',
             registryUrl: 'https://registry.example/',
             dryRun: true,
@@ -81,6 +80,7 @@ describe('Config Merging', () => {
             packageGroups: { 'pkg-1': { registryMode: RegistryMode.Manifest } },
             versionStrategy: {
                 coerceImplicitPeerDependency: 'minor',
+                versionFolder: '.monoweave',
             },
         }
 

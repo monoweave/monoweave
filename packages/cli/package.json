@@ -21,7 +21,8 @@
     "exports": {
       ".": "./lib/index.js",
       "./preset-recommended": "./lib/presets/recommended.js",
-      "./preset-legacy": "./lib/presets/legacy.js"
+      "./preset-legacy": "./lib/presets/legacy.js",
+      "./preset-manual": "./lib/presets/manual.js"
     }
   },
   "group": "monoweave",
@@ -32,7 +33,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./preset-recommended": "./src/presets/recommended.ts",
-    "./preset-legacy": "./src/presets/legacy.ts"
+    "./preset-legacy": "./src/presets/legacy.ts",
+    "./preset-manual": "./src/presets/manual.ts"
   },
   "files": [
     "lib"
@@ -50,6 +52,7 @@
     "@types/node": "^18.18.6"
   },
   "dependencies": {
+    "@inquirer/prompts": "^4.1.0",
     "@monoweave/logging": "workspace:^0.0.4",
     "@monoweave/node": "workspace:^0.0.5",
     "@monoweave/types": "workspace:^0.0.5",

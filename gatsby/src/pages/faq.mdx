@@ -45,7 +45,17 @@ Note that the top level workspace is a special case. It is neither published, no
 
 ### How can I manually trigger a release (i.e. ignore commits)?
 
-Monoweave is intended to be entirely automated based on semantic commits. As a result we have not prioritized any manual modes. If manual releases are what you prefer, you may be more interested in the official Yarn Version Plugin. Otherwise, feel free to open a GitHub issue to discuss.
+If you do not want to have releases based on commit messages, use the "manual" preset:
+
+```js
+module.exports = { preset: 'monoweave/preset-manual' }
+```
+
+and then commit change files generated via:
+
+```sh
+yarn monoweave version
+```
 
 ### How can I achieve behaviour similar to Lerna's fixed version mode?
 

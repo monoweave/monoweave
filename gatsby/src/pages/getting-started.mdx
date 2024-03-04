@@ -90,6 +90,20 @@ changesetIgnorePatterns:
   - "**/*.test.js"
 ```
 
+For an experience closer to the Yarn version plugin, or Atlassian's Changesets project, use the manual preset:
+
+```js
+module.exports = { preset: 'monoweave/preset-manual' }
+```
+
+and then commit change files generated via:
+
+```sh
+yarn monoweave version
+```
+
+In this mode, you are choosing _not_ to use conventional changelogs.
+
 #### Node API
 
 To use the API:

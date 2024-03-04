@@ -22,7 +22,6 @@ export const mergeDefaultConfig = async (
         },
         conventionalChangelogConfig: baseConfig.conventionalChangelogConfig ?? undefined,
         changesetFilename: baseConfig.changesetFilename ?? undefined,
-        applyChangeset: baseConfig.applyChangeset ?? false,
         changelogFilename: baseConfig.changelogFilename ?? undefined,
         changesetIgnorePatterns: baseConfig.changesetIgnorePatterns ?? [],
         forceWriteChangeFiles: baseConfig.forceWriteChangeFiles ?? false,
@@ -46,6 +45,7 @@ export const mergeDefaultConfig = async (
             coerceImplicitPeerDependency:
                 baseConfig.versionStrategy?.coerceImplicitPeerDependency ?? undefined,
             minimumStrategy: baseConfig.versionStrategy?.minimumStrategy ?? undefined,
+            versionFolder: baseConfig.versionStrategy?.versionFolder || '.monoweave',
         },
     }
 }
