@@ -44,7 +44,7 @@
     "@monoweave/logging": "workspace:*",
     "@monoweave/test-utils": "link:../../testUtils",
     "@monoweave/types": "workspace:*",
-    "@types/conventional-commits-parser": "^3.0.5",
+    "@types/conventional-commits-parser": "^3.0.6",
     "@types/jest": "^29.5.6",
     "@types/micromatch": "^4.0.4",
     "@types/semver": "^7.5.4",
