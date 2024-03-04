@@ -87,6 +87,10 @@ async function loadPresetConfig(presetPath: string | null, cwd: PortablePath) {
             switch (presetPath.split('/')[1]) {
                 case 'preset-recommended':
                     return await loadFile('../../presets/recommended')
+                case 'preset-legacy':
+                    return await loadFile('../../presets/legacy')
+                case 'preset-manual':
+                    return await loadFile('../../presets/manual')
                 default:
                     break
             }

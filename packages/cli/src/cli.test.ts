@@ -784,6 +784,23 @@ describe('CLI', () => {
             expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toMatchSnapshot()
         })
 
+        it('manual preset should disable conventional changelog config', async () => {
+            await using tmpDir = await createTempDir()
+
+            const configFileContents = 'preset: "monoweave/preset-manual"'
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.yaml'))
+            await fs.writeFile(configFilename, configFileContents, 'utf-8')
+            setArgs(`--cwd ${tmpDir.dir}`)
+            jest.isolateModules(() => {
+                require('./index')
+            })
+            expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toEqual(
+                expect.objectContaining({
+                    conventionalChangelogConfig: false,
+                }),
+            )
+        })
+
         it.each(['recommended', 'legacy', 'manual'])(
             'reads built-in presets: %s',
             async (preset) => {
