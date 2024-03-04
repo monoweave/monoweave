@@ -51,6 +51,9 @@ export const createPublishCommit = async ({
             // Push changelog changes
             globs.push(config.changelogFilename.replace('<packageDir>', '**'))
         }
+        if (config.conventionalChangelogConfig === false && config.versionStrategy?.versionFolder) {
+            globs.push(`${config.versionStrategy?.versionFolder}/*.md`)
+        }
 
         const files = globs.length ? await gitGlob(globs, { cwd: config.cwd, context }) : []
         if (files.length) {

@@ -18,8 +18,8 @@ interface ConventionalChangelogConfig {
 }
 
 const coerceConventionalConfig = (
-    config: Exclude<MonoweaveConfiguration['conventionalChangelogConfig'], undefined>,
-): Exclude<MonoweaveConfiguration['conventionalChangelogConfig'], string | undefined> => {
+    config: Exclude<MonoweaveConfiguration['conventionalChangelogConfig'], false | undefined>,
+): Exclude<MonoweaveConfiguration['conventionalChangelogConfig'], false | string | undefined> => {
     if (typeof config === 'string') {
         return {
             name: config,

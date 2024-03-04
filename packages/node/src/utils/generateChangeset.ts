@@ -29,14 +29,17 @@ export const generateChangeset = async ({
     for (const [packageName, newVersion] of nextTags.entries()) {
         const previousVersion = previousTags.get(packageName) ?? null
         const versionStrategy = versionStrategies.get(packageName)
-        const changelog = await generateChangelogEntry({
-            config,
-            context,
-            packageName,
-            previousVersion,
-            newVersion,
-            commits: versionStrategy?.commits ?? [],
-        })
+        const changelog =
+            config.conventionalChangelogConfig === false
+                ? versionStrategy?.changelog ?? null
+                : await generateChangelogEntry({
+                      config,
+                      context,
+                      packageName,
+                      previousVersion,
+                      newVersion,
+                      commits: versionStrategy?.commits ?? [],
+                  })
         changesetData[packageName] = {
             version: newVersion,
             previousVersion: previousVersion,

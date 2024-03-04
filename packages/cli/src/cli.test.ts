@@ -60,8 +60,8 @@ describe('CLI', () => {
                     '--auto-commit --auto-commit-message release --plugins plugin-a --plugins plugin-b ' +
                     '--max-concurrent-reads 3 --max-concurrent-writes 4 --no-git-tag --registry-mode npm ' +
                     '--changeset-ignore-patterns *.test.js --prerelease --prerelease-id rc --prerelease-npm-tag beta ' +
-                    '--commit-ignore-patterns skip-ci --package-group-manifest-field group --apply-changeset ' +
-                    '--minimum-version-strategy minor',
+                    '--commit-ignore-patterns skip-ci --package-group-manifest-field group ' +
+                    '--minimum-version-strategy minor --version-folder .versions',
             )
             jest.isolateModules(() => {
                 require('./index')
@@ -784,10 +784,12 @@ describe('CLI', () => {
             expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toMatchSnapshot()
         })
 
-        it.each(['recommended', 'legacy'])('reads built-in presets: %s', async (preset) => {
-            await using tmpDir = await createTempDir()
+        it.each(['recommended', 'legacy', 'manual'])(
+            'reads built-in presets: %s',
+            async (preset) => {
+                await using tmpDir = await createTempDir()
 
-            const configFileContents = `
+                const configFileContents = `
                 module.exports = {
                     preset: 'monoweave/preset-${preset}',
                     access: 'public',
@@ -816,13 +818,14 @@ describe('CLI', () => {
                 }
             `
 
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
-            await fs.writeFile(configFilename, configFileContents, 'utf-8')
-            setArgs(`--cwd ${tmpDir.dir}`)
-            jest.isolateModules(() => {
-                require('./index')
-            })
-            expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toMatchSnapshot()
-        })
+                const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+                await fs.writeFile(configFilename, configFileContents, 'utf-8')
+                setArgs(`--cwd ${tmpDir.dir}`)
+                jest.isolateModules(() => {
+                    require('./index')
+                })
+                expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toMatchSnapshot()
+            },
+        )
     })
 })

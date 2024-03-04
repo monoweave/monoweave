@@ -137,6 +137,11 @@ export abstract class BaseCommand extends Command {
         validator: t.isEnum(['major', 'minor', 'patch', 'none'] as const),
     })
 
+    versionFolder = Option.String('--version-folder', {
+        description:
+            'Directory to read deferred versions from, if conventional changelogs are disabled.',
+    })
+
     async parseConfiguration(): Promise<{
         config: RecursivePartial<MonoweaveConfiguration>
         configFromFile: MonoweaveConfigFile | undefined
@@ -161,9 +166,11 @@ export abstract class BaseCommand extends Command {
                 tag: this.gitTag === false ? this.gitTag : configFromFile?.git?.tag ?? undefined,
             },
             conventionalChangelogConfig:
-                this.conventionalChangelogConfig ??
-                configFromFile?.conventionalChangelogConfig ??
-                undefined,
+                this.conventionalChangelogConfig === 'false'
+                    ? false
+                    : this.conventionalChangelogConfig ??
+                      configFromFile?.conventionalChangelogConfig ??
+                      undefined,
             changesetIgnorePatterns: this.noChangesetIgnorePatterns
                 ? []
                 : this.changesetIgnorePatterns ??
@@ -198,6 +205,10 @@ export abstract class BaseCommand extends Command {
                         ? undefined
                         : this.minimumVersionStrategy ??
                           configFromFile?.versionStrategy?.minimumStrategy,
+                versionFolder:
+                    this.versionFolder ??
+                    configFromFile?.versionStrategy?.versionFolder ??
+                    undefined,
             },
         }
 

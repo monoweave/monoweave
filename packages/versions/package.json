@@ -33,7 +33,8 @@
     "conventional-commits-parser": "^5.0.0",
     "micromatch": "^4.0.5",
     "p-limit": "^3.1.0",
-    "semver": "^7.5.4"
+    "semver": "^7.5.4",
+    "yaml": "^2.4.0"
   },
   "devDependencies": {
     "@monoweave/changelog": "workspace:*",

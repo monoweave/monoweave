@@ -107,12 +107,16 @@ export interface MonoweaveConfiguration {
     }
 
     /**
-     * A conventional changelog config package name. This is required for changelog generation.
-     * This config determines the changelog format, as well as the version strategy determiner.
+     * A conventional changelog config package name. This config determines the changelog format,
+     * as well as the version strategy determiner.
+     *
+     * Set explicitly to false to disable conventional changelog mode and enter a "manual" mode
+     * that determines versions based on version files.
      *
      * @default _Partial internal implementation (not recommended)_
      */
     conventionalChangelogConfig?:
+        | false
         | string
         | {
               name: string
@@ -124,13 +128,6 @@ export interface MonoweaveConfiguration {
      * run, will contain change history useful for external scripts. Set to '-' to write to stdout.
      */
     changesetFilename?: string
-
-    /**
-     * Whether to resume publishing from a changeset. This option can only be set from the command line,
-     * and cannot be provided via a monoweave.config.js file. This feature is _not_ available yet. If
-     * you're interested in this feature, please leave comments on the [GitHub Issue](https://github.com/monoweave/monoweave/issues/323).
-     */
-    applyChangeset?: boolean
 
     /**
      * The filename to write changelogs to, assuming a conventional changelog config has been set.
@@ -322,6 +319,21 @@ export interface VersionStrategyConfiguration {
      * @default undefined
      */
     minimumStrategy?: 'patch' | 'minor' | 'major' | undefined
+
+    /**
+     * If enabled, version strategy determination will be based on committed version files
+     * instead of conventional changelog commit message parsing. If a conventional changelog
+     * config is provided, it will be used for changelog generation only.
+     */
+    manualMode?: boolean
+
+    /**
+     * If using monoweave in manual mode (which is activated by setting the conventional changelog config
+     * explicitly to false), the version folder can be specified to change the location of deferred version files.
+     *
+     * @default "./.monoweave"
+     */
+    versionFolder?: string
 }
 
 export interface GroupConfiguration {
@@ -364,7 +376,7 @@ export type PackageStrategyType = 'major' | 'minor' | 'patch'
 
 export type PackageStrategyMap = Map<
     string,
-    { type: PackageStrategyType; commits: CommitMessage[] }
+    { type: PackageStrategyType; commits: CommitMessage[]; changelog?: string }
 >
 
 export type StrategyDeterminer = (commits: string[]) => Promise<number>
@@ -386,4 +398,13 @@ export function isNodeError<T = NodeJS.ErrnoException>(error: unknown): error is
 
 export type MonoweaveConfigFile = RecursivePartial<Omit<MonoweaveConfiguration, 'cwd'>> & {
     preset?: string
+}
+
+/**
+ * Represents a deferred version entry, used when conventional changelog
+ * mode is disabled.
+ */
+export interface DeferredVersionRecord {
+    changelog?: string
+    strategies: Record<string, PackageStrategyType | null>
 }

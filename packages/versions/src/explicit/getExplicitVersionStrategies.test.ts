@@ -14,7 +14,7 @@ import { type PortablePath, npath } from '@yarnpkg/fslib'
 // Skipping the git mock as we use a temp repository for these tests.
 jest.mock('@monoweave/git', () => jest.requireActual('@monoweave/git'))
 
-import { getExplicitVersionStrategies } from '.'
+import { getExplicitVersionStrategies } from '..'
 
 describe('getExplicitVersionStrategies', () => {
     let tempRepositoryRoot: PortablePath
@@ -39,7 +39,7 @@ describe('getExplicitVersionStrategies', () => {
                 cwd: npath.toPortablePath(cwd),
             })
         ).stdout.trim()
-        const strategies = await getExplicitVersionStrategies({
+        const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
             config: await getMonoweaveConfig({
                 cwd,
                 commitSha: headSha,
@@ -80,7 +80,7 @@ describe('getExplicitVersionStrategies', () => {
             })
         ).stdout.trim()
 
-        const strategies = await getExplicitVersionStrategies({
+        const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
             config: {
                 ...(await getMonoweaveConfig({
                     cwd,
@@ -123,7 +123,7 @@ describe('getExplicitVersionStrategies', () => {
             })
         ).stdout.trim()
 
-        const strategies = await getExplicitVersionStrategies({
+        const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
             config: {
                 ...(await getMonoweaveConfig({
                     cwd,
@@ -162,7 +162,7 @@ describe('getExplicitVersionStrategies', () => {
                 cwd: npath.toPortablePath(cwd),
             })
         ).stdout.trim()
-        const strategies = await getExplicitVersionStrategies({
+        const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
             config: await getMonoweaveConfig({
                 cwd,
                 commitSha: headSha,

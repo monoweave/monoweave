@@ -12,10 +12,6 @@ export class MonoweaveCommand extends BaseCommand {
         description: 'Changeset output filename',
     })
 
-    applyChangeset = Option.Boolean('--apply-changeset', false, {
-        description: 'Publishes using data from the changeset specified via --changeset-filename',
-    })
-
     changelogFilename = Option.String('--changelog-filename', {
         validator: t.isString(),
         description: 'Changelog file to prepend changelog entries',
@@ -59,7 +55,6 @@ export class MonoweaveCommand extends BaseCommand {
                 },
                 changesetFilename:
                     this.changesetFilename ?? configFromFile?.changesetFilename ?? undefined,
-                applyChangeset: this.applyChangeset ?? undefined,
                 changelogFilename:
                     this.changelogFilename ?? configFromFile?.changelogFilename ?? undefined,
                 forceWriteChangeFiles:

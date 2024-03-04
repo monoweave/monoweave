@@ -1,3 +1,4 @@
+import fs from 'fs'
 import path from 'path'
 import { Writable } from 'stream'
 
@@ -39,7 +40,6 @@ import { generateChangeset } from './utils/generateChangeset'
 import { getCompatiblePluginConfiguration } from './utils/getCompatiblePluginConfiguration'
 import { getGitTagsFromChangeset } from './utils/getGitTagsFromChangeset'
 import { mergeDefaultConfig } from './utils/mergeDefaultConfig'
-// import { readChangesetFile } from './utils/readChangesetFile'
 import { writeChangesetFile } from './utils/writeChangesetFile'
 
 const monoweave = async (
@@ -107,21 +107,14 @@ const monoweave = async (
             report,
         })
 
-        if (config.applyChangeset) {
-            throw new Error(
-                '[Pre-release] Running monoweave from a changeset file is NOT supported yet. Exiting early.',
-            )
-            // changeset = await readChangesetFile({ config })
-        }
-
         // Fetch latest package versions for workspaces
         const registryTags = await getLatestPackageTags({
             config,
             context,
         })
 
-        // Determine version bumps via commit messages
-        const intentionalStrategies = await getExplicitVersionStrategies({
+        // Determine version bumps
+        const { intentionalStrategies, deferredVersionFiles } = await getExplicitVersionStrategies({
             config,
             context,
         })
@@ -281,6 +274,21 @@ const monoweave = async (
                     })
                 },
             )
+
+            if (deferredVersionFiles.length) {
+                await report.startTimerPromise(
+                    'Removing Used Version Files',
+                    { skipIfEmpty: true },
+                    async () => {
+                        for (const versionFile of deferredVersionFiles) {
+                            logging.info(`Removing: ${versionFile}`, { report })
+                            if (!config.dryRun) {
+                                await fs.promises.rm(versionFile, { force: true, maxRetries: 2 })
+                            }
+                        }
+                    },
+                )
+            }
 
             await report.startTimerPromise(
                 'Committing Changes',
