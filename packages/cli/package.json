@@ -52,6 +52,7 @@
     "@types/node": "^18.18.6"
   },
   "dependencies": {
+    "@inquirer/prompts": "^4.1.0",
     "@monoweave/logging": "workspace:^0.0.4",
     "@monoweave/node": "workspace:^0.0.5",
     "@monoweave/types": "workspace:^0.0.5",

@@ -117,12 +117,13 @@ export async function getManualVersionStrategies({
             }
 
             const previousVersionStrategy = versionStrategies.get(pkgName)
+            const previousChangelog = previousVersionStrategy?.changelog
 
             versionStrategies.set(pkgName, {
                 type: maxStrategy(previousVersionStrategy?.type, strategy),
                 commits: [],
-                changelog: (previousVersionStrategy?.changelog
-                    ? `${previousVersionStrategy.changelog}\n\n${changelog}`
+                changelog: (previousChangelog
+                    ? `${previousChangelog}\n\n${changelog}`
                     : changelog
                 ).trim(),
             })

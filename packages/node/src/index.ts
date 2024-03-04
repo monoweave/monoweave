@@ -42,6 +42,8 @@ import { getGitTagsFromChangeset } from './utils/getGitTagsFromChangeset'
 import { mergeDefaultConfig } from './utils/mergeDefaultConfig'
 import { writeChangesetFile } from './utils/writeChangesetFile'
 
+export { getPackageCandidatesForManualRelease } from './version'
+
 const monoweave = async (
     baseConfig: RecursivePartial<MonoweaveConfiguration>,
 ): Promise<ChangesetSchema> => {
