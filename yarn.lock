@@ -3033,7 +3033,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/loader@npm:^2":
+"@mdx-js/loader@npm:^2.3.0":
   version: 2.3.0
   resolution: "@mdx-js/loader@npm:2.3.0"
   dependencies:
@@ -3183,7 +3183,7 @@ __metadata:
   resolution: "@monoweave/gatsby@workspace:gatsby"
   dependencies:
     "@babel/core": "npm:^7.24.0"
-    "@mdx-js/loader": "npm:^2"
+    "@mdx-js/loader": "npm:^2.3.0"
     "@mdx-js/react": "npm:^2.3.0"
     "@types/babel__core": "npm:^7.20.5"
     "@types/loader-utils": "npm:^2.0.6"
