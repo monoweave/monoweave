@@ -12,15 +12,27 @@
   },
   "license": "BSD-3",
   "main": "./src/types.ts",
+  "exports": {
+    ".": "./src/types.ts",
+    "./schema.json": "./schema.json"
+  },
   "publishConfig": {
     "main": "./lib/types.js",
     "types": "./lib/types.d.ts",
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./lib/types.d.ts",
+        "default": "./lib/types.js"
+      },
+      "./schema.json": "./schema.json"
+    }
   },
   "group": "monoweave",
   "files": [
-    "lib"
+    "lib",
+    "schema.json"
   ],
   "scripts": {
     "clean": "run workspace:clean \"$(pwd)\"",
