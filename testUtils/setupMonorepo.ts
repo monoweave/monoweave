@@ -6,9 +6,12 @@ import { type YarnContext } from '@monoweave/types'
 import { Cache, StreamReport, ThrowReport, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
 
+import { packageManager } from '@monoweave/monorepo/package.json'
+
 import { setupContext } from './misc'
 
 const DEBUG = process.env.DEBUG === '1'
+const YARN_VERSION = packageManager.match('^yarn@([^+]+)')?.[1] ?? 'invalid'
 
 async function writeJSON(filename: string, data: Record<string, unknown>): Promise<void> {
     await fs.writeFile(filename, JSON.stringify(data), 'utf-8')
@@ -75,7 +78,7 @@ export default async function setupMonorepo(
             useRelativePath: false,
         }),
         repository: root?.repository,
-        packageManager: 'yarn@4.1.0',
+        packageManager: `yarn@${YARN_VERSION}`,
     })
 
     // Generate children workspaces

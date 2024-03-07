@@ -4,6 +4,7 @@ const independentWorkspaceIdents = new Set([
     '@monoweave/cli',
     '@monoweave/node',
     '@monoweave/plugin-github',
+    '@monoweave/types',
 ])
 
 /**

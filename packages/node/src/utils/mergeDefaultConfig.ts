@@ -1,3 +1,5 @@
+import { availableParallelism } from 'os'
+
 import { gitResolveSha } from '@monoweave/git'
 import { type MonoweaveConfiguration, type RecursivePartial, RegistryMode } from '@monoweave/types'
 import { npath } from '@yarnpkg/fslib'
@@ -32,7 +34,7 @@ export const mergeDefaultConfig = async (
         commitIgnorePatterns: baseConfig.commitIgnorePatterns ?? undefined,
         topological: baseConfig.topological ?? false,
         topologicalDev: baseConfig.topologicalDev ?? false,
-        jobs: baseConfig.jobs ?? 0,
+        jobs: baseConfig.jobs ?? availableParallelism(),
         maxConcurrentReads: baseConfig.maxConcurrentReads ?? 0,
         maxConcurrentWrites: baseConfig.maxConcurrentWrites ?? 0,
         plugins: baseConfig.plugins ?? [],

@@ -4,7 +4,7 @@
 >
 > Although this project is starting as a fork, the plan is to refactor/rewrite most of the code. The core maintainer of monoweave is the original core contributor of Monodeploy. Since the project has been forked, we're resetting the version numbers of all the packages and starting in a pre-v1 state as refactor is underway.
 
-[![Continuous Integration](https://github.com/monoweave/monoweave/workflows/Continuous%20Integration/badge.svg?branch=main)](https://github.com/monoweave/monoweave/actions?query=workflow%3A%22Continuous+Integration%22)
+[![Continuous Integration](https://github.com/monoweave/monoweave/actions/workflows/pull-request.yml/badge.svg)](https://github.com/monoweave/monoweave/actions/workflows/pull-request.yml)
 [![codecov](https://codecov.io/gh/monoweave/monoweave/branch/main/graph/badge.svg)](https://codecov.io/gh/monoweave/monoweave)
 [![GitHub license](https://img.shields.io/github/license/monoweave/monoweave)](https://github.com/monoweave/monoweave/blob/main/LICENSE)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
