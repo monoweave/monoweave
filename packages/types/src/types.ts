@@ -241,7 +241,7 @@ export interface MonoweaveConfiguration {
      * The maximum number of packages whose lifecycle scripts can be run in parallel. Similar to
      * concurrency in Lerna.
      *
-     * @default 0 _(No Limit)_
+     * @default "os.availableParallelism()"
      */
     jobs: number
 
