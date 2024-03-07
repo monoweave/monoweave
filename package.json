@@ -46,7 +46,7 @@
         "run-local": "ts-node --ignore '.yarn/plugins/.*' --ignore '(?:^|/)node_modules/' $(yarn bin monoweave)",
         "docs": "yarn workspace @monoweave/gatsby build",
         "docs:dev": "yarn workspace @monoweave/gatsby develop",
-        "update:yarn": "echo 'Not implemented.'"
+        "update:yarn": "corepack use yarn@^4 && yarn && yarn up \"@yarnpkg/*\" && yarn constraints --fix && yarn dedupe"
     },
     "devDependencies": {
         "@commitlint/cli": "^18.6.1",
@@ -68,7 +68,7 @@
         "@types/node": "^18.18.6",
         "@typescript-eslint/eslint-plugin": "^6.9.0",
         "@typescript-eslint/parser": "^6.9.0",
-        "@yarnpkg/cli": "^4.1.0",
+        "@yarnpkg/cli": "^4.1.1",
         "@yarnpkg/core": "^4.0.3",
         "@yarnpkg/fslib": "^3.0.2",
         "@yarnpkg/plugin-npm": "^3.0.1",
@@ -107,7 +107,7 @@
             "built": false
         }
     },
-    "packageManager": "yarn@4.1.0+sha256.81a00df816059803e6b5148acf03ce313cad36b7f6e5af6efa040a15981a6ffb",
+    "packageManager": "yarn@4.1.1+sha256.f3cc0eda8e5560e529c7147565b30faa43b4e472d90e8634d7134a37c7f59781",
     "resolutions": {
         "istanbul-lib-coverage": "patch:istanbul-lib-coverage@npm%3A3.2.0#./.yarn/patches/istanbul-lib-coverage-npm-3.2.0-93f84b2c8c.patch"
     }
