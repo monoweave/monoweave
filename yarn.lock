@@ -1765,7 +1765,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:^18.6.0":
+"@commitlint/cli@npm:^18.6.1":
   version: 18.6.1
   resolution: "@commitlint/cli@npm:18.6.1"
   dependencies:
@@ -3280,7 +3280,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monoweave/monorepo@workspace:."
   dependencies:
-    "@commitlint/cli": "npm:^18.6.0"
+    "@commitlint/cli": "npm:^18.6.1"
     "@jest/types": "npm:^29.6.3"
     "@monoweave/cli": "workspace:*"
     "@monoweave/git": "workspace:*"
