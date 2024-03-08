@@ -3260,7 +3260,7 @@ __metadata:
     husky: "npm:^9.0.11"
     jest: "npm:^29.7.0"
     jest-junit: "npm:^16.0.0"
-    lint-staged: "npm:^15.0.2"
+    lint-staged: "npm:^15.2.2"
     nyc: "npm:^15.1.0"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.1"
@@ -14881,7 +14881,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^15.0.2":
+"lint-staged@npm:^15.2.2":
   version: 15.2.2
   resolution: "lint-staged@npm:15.2.2"
   dependencies:
