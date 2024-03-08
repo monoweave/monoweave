@@ -20,7 +20,7 @@
     "packageRules": [
         {
             "groupName": "3rd Party Dependencies (Patch/Minor)",
-            "enabledManagers": ["npm"],
+            "matchManagers": ["npm"],
             "excludePackagePrefixes": ["@yarnpkg/"],
             "matchUpdateTypes": ["patch", "minor"],
             "matchCurrentVersion": "!/^0/",
@@ -29,7 +29,7 @@
         },
         {
             "groupName": "GitHub Actions",
-            "enabledManagers": ["github-actions"],
+            "matchManagers": ["github-actions"],
             "matchUpdateTypes": ["patch", "minor"],
             "matchCurrentVersion": "!/^0/",
             "addLabels": ["automerge"],
