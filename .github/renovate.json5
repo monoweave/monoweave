@@ -15,7 +15,7 @@
     addLabels: ["dependencies"],
     automergeType: "pr",
     automergeStrategy: "squash",
-    postUpdateOptions: ["yarnDedupeFewer"],
+    postUpdateOptions: ["yarnDedupeHighest"],
     packageRules: [
         {
             groupName: "3rd Party Dependencies (Patch/Minor)",
