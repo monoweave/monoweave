@@ -1,0 +1,31 @@
+diff --git a/lib/semverUtils.js b/lib/semverUtils.js
+index a3edadc72ac7d99f7be786bff9159dbd1612639c..0d806e7d383133a1b32f13f14394210c58d813f1 100644
+--- a/lib/semverUtils.js
++++ b/lib/semverUtils.js
+@@ -67,16 +67,23 @@ const rangesCache = new Map();
+  * A cached version of `new semver.Range(potentialRange)` that returns `null` on invalid ranges
+  */
+ function validRange(potentialRange) {
+-    if (potentialRange.indexOf(`:`) !== -1)
++    if (potentialRange.indexOf(`:`) !== -1) {
++        console.error('L71', potentialRange);
+         return null;
++    }
+     let range = rangesCache.get(potentialRange);
+-    if (typeof range !== `undefined`)
++    if (typeof range !== `undefined`) {
++        if (range === null) {
++            console.error('L77', potentialRange);
++        }
+         return range;
++    }
+     try {
+         // eslint-disable-next-line no-restricted-properties
+         range = new semver_1.default.Range(potentialRange);
+     }
+-    catch {
++    catch (err) {
++        console.error('L82', potentialRange, err);
+         range = null;
+     }
+     rangesCache.set(potentialRange, range);
