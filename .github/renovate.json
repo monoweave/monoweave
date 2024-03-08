@@ -1,6 +1,6 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "prConcurrentLimit": 5,
+    "prConcurrentLimit": 2,
     "semanticCommits": "enabled",
     "semanticCommitType": "chore",
     "semanticCommitScope": "deps",
@@ -15,14 +15,25 @@
     "addLabels": [
         "dependencies"
     ],
+    "automergeType": "pr",
+    "automergeStrategy": "squash",
     "packageRules": [
         {
+            "groupName": "3rd Party Dependencies (Patch/Minor)",
+            "enabledManagers": ["npm"],
+            "excludePackagePrefixes": ["@yarnpkg/"],
             "matchUpdateTypes": ["patch", "minor"],
             "matchCurrentVersion": "!/^0/",
             "addLabels": ["automerge"],
-            "automerge": true,
-            "automergeType": "pr",
-            "automergeStrategy": "squash"
+            "automerge": true
+        },
+        {
+            "groupName": "GitHub Actions",
+            "enabledManagers": ["github-actions"],
+            "matchUpdateTypes": ["patch", "minor"],
+            "matchCurrentVersion": "!/^0/",
+            "addLabels": ["automerge"],
+            "automerge": true
         }
     ]
 }
