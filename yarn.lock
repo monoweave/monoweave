@@ -3426,7 +3426,7 @@ __metadata:
     "@yarnpkg/core": "npm:^4.0.3"
     tapable: "npm:^2.2.1"
     ts-node: "npm:^10.9.1"
-    typedoc: "npm:^0.25.2"
+    typedoc: "npm:^0.25.8"
     typescript: "npm:5.2.2"
   peerDependencies:
     "@yarnpkg/core": ^4.0.3
@@ -21776,7 +21776,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.25.2, typedoc@npm:^0.25.9":
+"typedoc@npm:^0.25.8":
+  version: 0.25.11
+  resolution: "typedoc@npm:0.25.11"
+  dependencies:
+    lunr: "npm:^2.3.9"
+    marked: "npm:^4.3.0"
+    minimatch: "npm:^9.0.3"
+    shiki: "npm:^0.14.7"
+  peerDependencies:
+    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x
+  bin:
+    typedoc: bin/typedoc
+  checksum: 10/ec1f617c16b5fca455853c329a9958fe41b247d0c1a72dc153654fd5ce323f2ccdfd10ef1f3349d340398e3770a036381d856b90fda4aafe554640b53f5b2a1c
+  languageName: node
+  linkType: hard
+
+"typedoc@npm:^0.25.9":
   version: 0.25.9
   resolution: "typedoc@npm:0.25.9"
   dependencies:
