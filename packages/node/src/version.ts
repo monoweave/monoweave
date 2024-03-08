@@ -6,12 +6,14 @@ import type { MonoweaveConfiguration, RecursivePartial, YarnContext } from '@mon
 import { getLatestPackageTags, getModifiedPackages } from '@monoweave/versions'
 import { Configuration, Project, ThrowReport, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
+import micromatch from 'micromatch'
 
 import { getCompatiblePluginConfiguration } from './utils/getCompatiblePluginConfiguration'
 import { mergeDefaultConfig } from './utils/mergeDefaultConfig'
 
 export const getPackageCandidatesForManualRelease = async (
     baseConfig: RecursivePartial<MonoweaveConfiguration>,
+    { includePatterns }: { includePatterns?: string[] } = {},
 ): Promise<{
     suggestedPackages: Map<string, { currentVersion: string | undefined }>
     remainingPackages: Map<string, { currentVersion: string | undefined }>
@@ -77,6 +79,7 @@ export const getPackageCandidatesForManualRelease = async (
     const remainingPackages = new Map<string, { currentVersion: string | undefined }>()
 
     for (const pkgName of modifiedPackages) {
+        if (includePatterns?.length && !micromatch([pkgName], includePatterns).length) continue
         suggestedPackages.set(pkgName, { currentVersion: registryTags.get(pkgName)?.latest })
     }
 
@@ -84,6 +87,7 @@ export const getPackageCandidatesForManualRelease = async (
         if (workspace.manifest.private || !workspace.manifest.name) continue
         const pkgName = structUtils.stringifyIdent(workspace.manifest.name)
         if (suggestedPackages.has(pkgName)) continue
+        if (includePatterns?.length && !micromatch([pkgName], includePatterns).length) continue
         remainingPackages.set(pkgName, { currentVersion: registryTags.get(pkgName)?.latest })
     }
 

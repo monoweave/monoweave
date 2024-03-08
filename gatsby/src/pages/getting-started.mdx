@@ -102,6 +102,12 @@ and then commit change files generated via:
 yarn monoweave version
 ```
 
+This will suggest packages to release. You can filter the selection by using one or more globs:
+
+```sh
+yarn monoweave version "@my-scope/package-a" "@my-scope/package-*"
+```
+
 In this mode, you are choosing _not_ to use conventional changelogs.
 
 #### Node API

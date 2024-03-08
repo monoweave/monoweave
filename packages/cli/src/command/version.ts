@@ -6,6 +6,7 @@ import { ErrorsReported } from '@monoweave/logging'
 import { getPackageCandidatesForManualRelease } from '@monoweave/node'
 import { type DeferredVersionRecord, type PackageStrategyType } from '@monoweave/types'
 import { hashUtils } from '@yarnpkg/core'
+import { Option } from 'clipanion'
 
 import { BaseCommand } from './base'
 
@@ -13,24 +14,34 @@ import { BaseCommand } from './base'
 export class MonoweaveVersionCommand extends BaseCommand {
     static paths = [['version']]
 
+    includePatterns = Option.Rest()
+
     async execute(): Promise<number | void> {
         try {
             const { config } = await this.parseConfiguration()
 
             const { remainingPackages, suggestedPackages, versionFolder } =
-                await getPackageCandidatesForManualRelease(config)
+                await getPackageCandidatesForManualRelease(config, {
+                    includePatterns: this.includePatterns,
+                })
 
             if (!remainingPackages.size && !suggestedPackages.size) {
-                this.context.stdout.write('No packages detected.')
+                this.context.stdout.write('No packages detected.\n')
                 return 1
             }
 
-            const promptPackage = async (
-                pkgName: string,
-                currentVersion: string | undefined,
-            ): Promise<PackageStrategyType | null> => {
+            const promptPackage = async ({
+                pkgName,
+                currentVersion,
+                defaultValue,
+            }: {
+                pkgName: string
+                currentVersion: string | undefined
+                defaultValue?: string | undefined
+            }): Promise<PackageStrategyType | null> => {
                 const answer = await select({
                     message: `${pkgName} (current: ${currentVersion ?? 'unknown'})`,
+                    default: defaultValue,
                     choices: [
                         {
                             name: 'Skip',
@@ -61,10 +72,12 @@ export class MonoweaveVersionCommand extends BaseCommand {
                     `${suggestedPackages.size} package${suggestedPackages.size === 1 ? '' : 's'} modified. Select the version strategies to apply:\n`,
                 )
 
+                let defaultValue: string | undefined = undefined
                 for (const [pkgName, { currentVersion }] of suggestedPackages.entries()) {
-                    const strategy = await promptPackage(pkgName, currentVersion)
+                    const strategy = await promptPackage({ pkgName, currentVersion, defaultValue })
                     if (strategy) {
                         deferredVersion.strategies[pkgName] = strategy
+                        defaultValue = strategy
                     }
                 }
             }
@@ -76,10 +89,12 @@ export class MonoweaveVersionCommand extends BaseCommand {
                     default: false,
                 }))
             ) {
+                let defaultValue: string | undefined = undefined
                 for (const [pkgName, { currentVersion }] of remainingPackages.entries()) {
-                    const strategy = await promptPackage(pkgName, currentVersion)
+                    const strategy = await promptPackage({ pkgName, currentVersion, defaultValue })
                     if (strategy) {
                         deferredVersion.strategies[pkgName] = strategy
+                        defaultValue = strategy
                     }
                 }
             }
