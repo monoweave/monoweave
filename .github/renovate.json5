@@ -17,6 +17,7 @@
     ],
     "automergeType": "pr",
     "automergeStrategy": "squash",
+    "postUpdateOptions": ["yarnDedupeFewer"],
     "packageRules": [
         {
             "groupName": "3rd Party Dependencies (Patch/Minor)",
