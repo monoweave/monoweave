@@ -47,7 +47,7 @@ const patchPackageJsons = async ({
                 if (!dependencyVersion) continue
 
                 if (dependentSetKey === 'peerDependencies') {
-                    const coerceTo = config.versionStrategy?.coerceImplicitPeerDependency ?? 'patch'
+                    const coerceTo = config.versionStrategy?.coerceImplicitPeerDependency ?? 'minor'
                     if (coerceTo !== 'patch') {
                         const depVersion = semver.parse(dependencyVersion)
                         if (depVersion && !depVersion.prerelease.length) {
