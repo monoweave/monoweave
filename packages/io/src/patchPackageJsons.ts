@@ -51,8 +51,12 @@ const patchPackageJsons = async ({
                     if (coerceTo !== 'patch') {
                         const depVersion = semver.parse(dependencyVersion)
                         if (depVersion && !depVersion.prerelease.length) {
-                            depVersion.patch = 0
-                            if (coerceTo === 'major') depVersion.minor = 0
+                            if (depVersion.minor || depVersion.major) {
+                                depVersion.patch = 0
+                            }
+                            if (coerceTo === 'major' && depVersion.major) {
+                                depVersion.minor = 0
+                            }
                             dependencyVersion = depVersion.format()
                         }
                     }

@@ -298,6 +298,10 @@ describe('Patch Package Manifests', () => {
             ['patch', '2.3.4', '2.3.4'],
             ['minor', '2.3.4', '2.3.0'],
             ['major', '2.3.4', '2.0.0'],
+            ['minor', '0.0.5', '0.0.5'], // can't coerce pre-0.1 down (with minor)
+            ['minor', '0.1.5', '0.1.0'],
+            ['minor', '1.0.5', '1.0.0'],
+            ['major', '0.5.0', '0.5.0'], // can't coerce pre-v1 down (with major)
         ] as const)(
             'rounds down peer dependency to nearest %s',
             async (strategy, fromVersion, expectedVersion) => {
