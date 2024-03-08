@@ -10,6 +10,7 @@ import {
     isNodeError,
 } from '@monoweave/types'
 import { structUtils } from '@yarnpkg/core'
+import { npath } from '@yarnpkg/fslib'
 import pLimit from 'p-limit'
 import YAML from 'yaml'
 
@@ -47,14 +48,19 @@ function isPackageStrategyType(raw: string): raw is PackageStrategyType {
 
 export async function discoverVersionFiles({
     config,
+    context,
 }: {
     config: MonoweaveConfiguration
+    context: YarnContext
 }): Promise<string[]> {
     if (!config.versionStrategy?.versionFolder) {
         return []
     }
 
-    const versionFolder = path.resolve(config.cwd, config.versionStrategy.versionFolder)
+    const versionFolder = path.resolve(
+        npath.fromPortablePath(context.project.cwd),
+        config.versionStrategy.versionFolder,
+    )
 
     try {
         const files = await fs.promises.readdir(versionFolder, {
@@ -82,7 +88,7 @@ export async function getManualVersionStrategies({
     context: YarnContext
 }): Promise<{ intentionalStrategies: PackageStrategyMap; deferredVersionFiles: string[] }> {
     const versionStrategies: PackageStrategyMap = new Map()
-    const deferredVersionFiles = await discoverVersionFiles({ config })
+    const deferredVersionFiles = await discoverVersionFiles({ config, context })
 
     const limitRead = pLimit(5)
 

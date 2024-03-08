@@ -93,7 +93,7 @@ export interface MonoweaveConfiguration {
          * git.tag and autoCommit options, thus allowing you to create the tags
          * and release commit automatically while deferring the actual push.
          *
-         * @default false
+         * @default true
          */
         push: boolean
 
@@ -302,9 +302,7 @@ export interface VersionStrategyConfiguration {
      * "minor" version. If set to "major", the peerDependency version is rounded down
      * to the nearest major.
      *
-     * In a future version of Monoweave, the default will be changed to 'minor'.
-     *
-     * @default "patch"
+     * @default "minor"
      */
     coerceImplicitPeerDependency?: 'patch' | 'minor' | 'major'
 
