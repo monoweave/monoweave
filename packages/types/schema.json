@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/monoweave/monoweave/main/packages/types/schema.json",
     "type": "object",
     "title": "Monoweave Configuration File",
     "description": "Monoweave configuration file schema.",
