@@ -90,6 +90,9 @@ export const getPackageCandidatesForManualRelease = async (
     return {
         suggestedPackages,
         remainingPackages,
-        versionFolder: config.versionStrategy?.versionFolder ?? '.monoweave',
+        versionFolder: path.resolve(
+            npath.fromPortablePath(project.cwd),
+            config.versionStrategy?.versionFolder ?? '.monoweave',
+        ),
     }
 }
