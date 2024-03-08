@@ -3238,7 +3238,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^6.9.0"
     "@typescript-eslint/parser": "npm:^6.21.0"
     "@yarnpkg/cli": "npm:^4.1.1"
-    "@yarnpkg/core": "patch:@yarnpkg/core@npm%3A4.0.3#~/.yarn/patches/@yarnpkg-core-npm-4.0.3-6d77cb8f39.patch"
+    "@yarnpkg/core": "npm:^4.0.3"
     "@yarnpkg/fslib": "npm:^3.0.2"
     "@yarnpkg/plugin-npm": "npm:^3.0.1"
     "@yarnpkg/plugin-pack": "npm:^4.0.0"
@@ -5686,7 +5686,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/core@npm:4.0.3":
+"@yarnpkg/core@npm:^4.0.2, @yarnpkg/core@npm:^4.0.3":
   version: 4.0.3
   resolution: "@yarnpkg/core@npm:4.0.3"
   dependencies:
@@ -5717,40 +5717,6 @@ __metadata:
     tslib: "npm:^2.4.0"
     tunnel: "npm:^0.0.6"
   checksum: 10/bfb72ba28148dc9c8ea82999a031277a0bec65717aa18170a227576bf617cf4f85cf128e7323c86a3fa96653149d0d56edef544226e0c9c01d22df84252b3ac8
-  languageName: node
-  linkType: hard
-
-"@yarnpkg/core@patch:@yarnpkg/core@npm%3A4.0.3#~/.yarn/patches/@yarnpkg-core-npm-4.0.3-6d77cb8f39.patch":
-  version: 4.0.3
-  resolution: "@yarnpkg/core@patch:@yarnpkg/core@npm%3A4.0.3#~/.yarn/patches/@yarnpkg-core-npm-4.0.3-6d77cb8f39.patch::version=4.0.3&hash=9b1c47"
-  dependencies:
-    "@arcanis/slice-ansi": "npm:^1.1.1"
-    "@types/semver": "npm:^7.1.0"
-    "@types/treeify": "npm:^1.0.0"
-    "@yarnpkg/fslib": "npm:^3.0.2"
-    "@yarnpkg/libzip": "npm:^3.0.1"
-    "@yarnpkg/parsers": "npm:^3.0.0"
-    "@yarnpkg/shell": "npm:^4.0.0"
-    camelcase: "npm:^5.3.1"
-    chalk: "npm:^3.0.0"
-    ci-info: "npm:^3.2.0"
-    clipanion: "npm:^4.0.0-rc.2"
-    cross-spawn: "npm:7.0.3"
-    diff: "npm:^5.1.0"
-    dotenv: "npm:^16.3.1"
-    fast-glob: "npm:^3.2.2"
-    got: "npm:^11.7.0"
-    lodash: "npm:^4.17.15"
-    micromatch: "npm:^4.0.2"
-    p-limit: "npm:^2.2.0"
-    semver: "npm:^7.1.2"
-    strip-ansi: "npm:^6.0.0"
-    tar: "npm:^6.0.5"
-    tinylogic: "npm:^2.0.0"
-    treeify: "npm:^1.1.0"
-    tslib: "npm:^2.4.0"
-    tunnel: "npm:^0.0.6"
-  checksum: 10/40d5b05ca4ec603001c28862fdcfa4946485a2cd2110ddb9c6869df5e75df5c26ed5b6b56a3daa778af2d36f02577bf9a392a9dc8eb81057acd1b9464cc68bf8
   languageName: node
   linkType: hard
 
