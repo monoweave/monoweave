@@ -31,7 +31,7 @@
   "devDependencies": {
     "@monoweave/test-utils": "link:../../testUtils",
     "@types/jest": "^29.5.12",
-    "@types/node": "^18.19.17",
+    "@types/node": "^18.19.18",
     "tapable": "^2.2.1"
   },
   "dependencies": {
