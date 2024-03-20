@@ -3426,7 +3426,7 @@ __metadata:
     "@yarnpkg/core": "npm:^4.0.3"
     tapable: "npm:^2.2.1"
     ts-node: "npm:^10.9.2"
-    typedoc: "npm:^0.25.8"
+    typedoc: "npm:^0.25.9"
     typescript: "npm:5.3.3"
   peerDependencies:
     "@yarnpkg/core": ^4.0.3
@@ -21776,7 +21776,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.25.8, typedoc@npm:^0.25.9":
+"typedoc@npm:^0.25.9":
   version: 0.25.11
   resolution: "typedoc@npm:0.25.11"
   dependencies:
