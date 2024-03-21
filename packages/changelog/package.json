@@ -51,7 +51,7 @@
     "@types/conventional-changelog-writer": "^4.0.10",
     "@types/conventional-commits-parser": "^3.0.6",
     "@types/jest": "^29.5.12",
-    "@types/node": "^18.19.18",
+    "@types/node": "^18.19.21",
     "@yarnpkg/core": "^4.0.3",
     "@yarnpkg/fslib": "^3.0.2"
   }
