@@ -49,7 +49,7 @@
   "devDependencies": {
     "@monoweave/test-utils": "link:../../testUtils",
     "@types/jest": "^29.5.12",
-    "@types/node": "^18.19.18"
+    "@types/node": "^18.19.21"
   },
   "dependencies": {
     "@inquirer/prompts": "^4.1.0",

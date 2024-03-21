@@ -65,7 +65,7 @@
         "@tophat/eslint-import-resolver-require": "^1.0.0",
         "@tophat/jest-resolver": "^0.1.0",
         "@types/jest": "^29.5.12",
-        "@types/node": "^18.19.18",
+        "@types/node": "^18.19.21",
         "@typescript-eslint/eslint-plugin": "^6.21.0",
         "@typescript-eslint/parser": "^6.21.0",
         "@yarnpkg/cli": "^4.1.1",

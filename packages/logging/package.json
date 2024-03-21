@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
-    "@types/node": "^18.19.18",
+    "@types/node": "^18.19.21",
     "@yarnpkg/core": "^4.0.3"
   },
   "peerDependencies": {
