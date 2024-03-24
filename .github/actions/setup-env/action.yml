@@ -45,7 +45,9 @@ runs:
       uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 # v4.0.1
       with:
         path: |
+          .yarn/install-state.gz
           .yarn/cache
+          .yarn/unplugged
           .pnp.*
         key: ${{ inputs.cache-prefix }}-${{ steps.detect-node.outputs.version }}-${{ hashFiles('yarn.lock') }}
     - name: Install Yarn Project
