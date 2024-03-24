@@ -34,6 +34,7 @@ module.exports = {
                 ],
             },
         ],
+        'jest/no-standalone-expect': ['error', { additionalTestBlockFunctions: ['itIf'] }],
     },
     ignorePatterns: ['**/.*', 'packages/**/*.js', '**/lib', 'gatsby/public'],
 }

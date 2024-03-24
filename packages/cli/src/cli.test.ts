@@ -2,7 +2,7 @@ import { promises as fs } from 'fs'
 import path from 'path'
 
 import monoweave from '@monoweave/node'
-import { createTempDir, waitFor } from '@monoweave/test-utils'
+import { createTempDir, itIf, waitFor } from '@monoweave/test-utils'
 import {
     type MonoweaveConfigFile,
     type MonoweaveConfiguration,
@@ -416,22 +416,45 @@ describe('CLI', () => {
                 )
             })
 
-            // TODO: Unable to test this with Jest
-            // eslint-disable-next-line jest/no-disabled-tests
-            it.skip('supports .cjs extensions', async () => {
-                const filename = 'monoweave.config.cjs'
-                const contents = `module.exports = ${JSON.stringify(configContents)}`
+            /**
+             * Node lts/hydrogen has a bug (?) which causes jest to crash when using dynamic imports.
+             * https://stackoverflow.com/questions/77962982/testing-commonjs-with-dynamic-imports-of-esm-with-ts-jest#comment137891280_77962982
+             */
+            itIf(() => !process.env.NODE_VERSION?.includes('lts/hydrogen'))(
+                'supports .cjs extensions',
+                async () => {
+                    const filename = 'monoweave.config.cjs'
+                    const contents = `module.exports = ${JSON.stringify(configContents)}`
 
-                const config = await writeConfigFile({ filename, contents })
-                expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
-                    expect.objectContaining({
-                        changelogFilename: configContents.changelogFilename,
-                    }),
-                )
-            })
+                    const config = await writeConfigFile({ filename, contents })
+                    expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
+                        expect.objectContaining({
+                            changelogFilename: configContents.changelogFilename,
+                        }),
+                    )
+                },
+            )
+
+            /**
+             * Node lts/hydrogen has a bug (?) which causes jest to crash when using dynamic imports.
+             * https://stackoverflow.com/questions/77962982/testing-commonjs-with-dynamic-imports-of-esm-with-ts-jest#comment137891280_77962982
+             */
+            itIf(() => !process.env.NODE_VERSION?.includes('lts/hydrogen'))(
+                'supports .mjs extensions',
+                async () => {
+                    const filename = 'monoweave.config.mjs'
+                    const contents = `export default ${JSON.stringify(configContents)}`
+
+                    const config = await writeConfigFile({ filename, contents })
+                    expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
+                        expect.objectContaining({
+                            changelogFilename: configContents.changelogFilename,
+                        }),
+                    )
+                },
+            )
 
             it.todo('supports .cts extensions')
-            it.todo('supports .mjs extensions')
             it.todo('supports .mts extensions')
         })
 
