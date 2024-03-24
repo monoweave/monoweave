@@ -49,7 +49,7 @@
     "@monoweave/test-utils": "link:../../testUtils",
     "@monoweave/types": "workspace:*",
     "@types/conventional-changelog-writer": "^4.0.10",
-    "@types/conventional-commits-parser": "^3.0.6",
+    "@types/conventional-commits-parser": "^5.0.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.24",
     "@yarnpkg/core": "^4.0.3",
