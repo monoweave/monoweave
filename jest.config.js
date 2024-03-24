@@ -16,14 +16,13 @@ const config = {
         '<rootDir>/packages/.*/.*\\.js',
     ],
     transform: {
-        '^.+\\.tsx?$': [require.resolve('@swc/jest'), {}],
+        '^.+\\.tsx?$': [require.resolve('ts-jest')],
     },
     testPathIgnorePatterns: ['/node_modules/', '/.yarn/', '<rootDir>/.*\\.js', '<rootDir>/.*/lib/'],
     haste: {
         throwOnModuleCollision: true,
     },
     modulePathIgnorePatterns: ['<rootDir>/.*/lib'],
-    resolver: require.resolve('@tophat/jest-resolver'),
 }
 
 /** @type {import('@jest/types').Config.InitialOptions} */

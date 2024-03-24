@@ -6,8 +6,7 @@ import {
     type MonoweaveConfiguration,
     type YarnContext,
 } from '@monoweave/types'
-import { Octokit } from '@octokit/core'
-import { throttling } from '@octokit/plugin-throttling'
+import { MessageName, structUtils } from '@yarnpkg/core'
 
 import { request } from './request'
 
@@ -30,25 +29,28 @@ export const createPluginInternals =
         config: MonoweaveConfiguration,
         changeset: ChangesetSchema,
     ): Promise<void> => {
-        const personalAccessToken = process.env.GH_TOKEN
+        const { Octokit } = await import('@octokit/core')
+        const { throttling } = await import('@octokit/plugin-throttling')
+
+        // Try GH_TOKEN first for backwards compatibility with older versions of Monoweave
+        const personalAccessToken = process.env.GH_TOKEN || process.env.GITHUB_TOKEN
         if (!personalAccessToken) {
-            throw new Error('Missing GitHub Personal Access Token')
+            context.report.reportWarning(
+                MessageName.UNNAMED,
+                'Missing GitHub Personal Access Token. Unable to create GitHub release(s).',
+            )
         }
 
         const ThrottledOctokit = Octokit.plugin(throttling)
-        const octokit = new ThrottledOctokit({
-            auth: personalAccessToken,
-            throttle: {
-                onRateLimit: () => true,
-                onSecondaryRateLimit: () => false,
-            },
-        })
-
-        const { owner, repository: repo } = await parseRepositoryProperty(context.workspace)
-
-        if (!owner || !repo) {
-            throw new Error('Cannot determine GitHub owner or repository')
-        }
+        const octokit = personalAccessToken
+            ? new ThrottledOctokit({
+                  auth: personalAccessToken,
+                  throttle: {
+                      onRateLimit: () => true,
+                      onSecondaryRateLimit: () => false,
+                  },
+              })
+            : null
 
         const changesByTag = new Map<string, (ChangesetRecord & { name: string })[]>()
         for (const [pkgName, changeData] of Object.entries(changeset)) {
@@ -93,21 +95,38 @@ export const createPluginInternals =
                 report: context.report,
             })
 
-            if (config.dryRun) continue
+            if (!changes.length) continue
+
+            const pkgName = changes[0].name
+            const workspace = context.project.getWorkspaceByIdent(structUtils.parseIdent(pkgName))
+
+            const { owner, repository: repo } = await parseRepositoryProperty(workspace, {
+                fallbackToTopLevel: true,
+            })
+
+            if (!owner || !repo) {
+                context.report.reportError(
+                    MessageName.UNNAMED,
+                    `Cannot determine GitHub owner or repository for '${pkgName}'`,
+                )
+                continue
+            }
 
             const combinedChangelog = changes
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((change) => change.changelog)
                 .join('\n')
 
-            await request(octokit, 'POST /repos/{owner}/{repo}/releases', {
-                owner,
-                repo,
-                tag_name: tag,
-                name: tag,
-                body: combinedChangelog,
-                draft: false,
-                prerelease: config.prerelease,
-            })
+            if (octokit && !config.dryRun) {
+                await request(octokit, 'POST /repos/{owner}/{repo}/releases', {
+                    owner,
+                    repo,
+                    tag_name: tag,
+                    name: tag,
+                    body: combinedChangelog,
+                    draft: false,
+                    prerelease: config.prerelease,
+                })
+            }
         }
     }

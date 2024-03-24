@@ -18,7 +18,11 @@ const DEFAULT_CONFIG_BASENAME = 'monoweave.config'
 async function loadFile(filename: string): Promise<unknown> {
     const ext = path.extname(filename)
     if (ext === '.mjs' || ext === '.cjs') {
-        return await import(filename)
+        const mod = await import(filename)
+        if ('default' in mod && mod.default) {
+            return mod.default
+        }
+        return mod
     }
     if (!ext || ext === '.js' || ext === '.ts') {
         return require(filename)
@@ -102,7 +106,7 @@ async function loadPresetConfig(presetPath: string | null, cwd: PortablePath) {
 }
 
 async function discoverDefaultConfigFile(cwd: PortablePath): Promise<string | undefined> {
-    const extensions = ['js', 'yaml', 'yml', 'json5', 'jsonc', 'json']
+    const extensions = ['js', 'cjs', 'mjs', 'yaml', 'yml', 'json5', 'jsonc', 'json']
 
     // return the first file we can read
     for (const ext of extensions) {
