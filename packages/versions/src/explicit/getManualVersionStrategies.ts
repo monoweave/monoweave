@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 
+import { gitDiffTree, gitUpstreamBranch } from '@monoweave/git'
+import logging from '@monoweave/logging'
 import {
     type DeferredVersionRecord,
     type MonoweaveConfiguration,
@@ -62,22 +64,54 @@ export async function discoverVersionFiles({
         config.versionStrategy.versionFolder,
     )
 
-    try {
-        const files = await fs.promises.readdir(versionFolder, {
+    // Remove any version files which have already been consumed. i.e. check if there are deletions on the remote
+    // This is only necessary if running in an environment where we haven't pulled the latest changes on the main
+    // publish branch, e.g. GitHub's default behaviour when you don't override actions/checkout "ref" to point to the
+    // branch.
+    const filesDeletedOnUpstream = await gitUpstreamBranch({ cwd: config.cwd, context })
+        .then((upstream) =>
+            gitDiffTree(upstream, {
+                cwd: config.cwd,
+                context,
+                onlyIncludeDeletedFiles: true,
+                paths: [versionFolder],
+                fetch: true,
+            }),
+        )
+        .then((files) => files.split('\n').map((file) => path.resolve(config.cwd, file)))
+        .catch((err): string[] => {
+            logging.warning(
+                'Failed to detect deleted files on upstream. Being unable to detect deleted files ' +
+                    'means there is the possibility that monoweave may process the same version file ' +
+                    'twice, resulting in duplicate publishing.',
+                { report: context.report },
+            )
+            logging.warning(err, { report: context.report })
+            return []
+        })
+
+    const filesDeletedOnUpstreamSet = new Set<string>(filesDeletedOnUpstream)
+
+    const files = await fs.promises
+        .readdir(versionFolder, {
             encoding: 'utf-8',
             recursive: false,
             withFileTypes: true,
         })
+        .then((files) =>
+            files
+                .filter((file) => file.isFile() && file.name.endsWith('.md'))
+                .map((file) => path.resolve(versionFolder, file.path, file.name))
+                .filter((file) => !filesDeletedOnUpstreamSet.has(file)),
+        )
+        .catch((err): string[] => {
+            if (isNodeError(err) && err.code === 'ENOENT') {
+                return []
+            }
+            throw err
+        })
 
-        return files
-            .filter((file) => file.isFile() && file.name.endsWith('.md'))
-            .map((file) => path.resolve(versionFolder, file.path, file.name))
-    } catch (err) {
-        if (isNodeError(err) && err.code === 'ENOENT') {
-            return []
-        }
-        throw err
-    }
+    return files
 }
 
 export async function getManualVersionStrategies({
