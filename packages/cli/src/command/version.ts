@@ -1,11 +1,9 @@
-import fs from 'fs'
 import path from 'path'
 
-import { confirm, editor, select } from '@inquirer/prompts'
 import { ErrorsReported } from '@monoweave/logging'
 import { getPackageCandidatesForManualRelease } from '@monoweave/node'
 import { type DeferredVersionRecord, type PackageStrategyType } from '@monoweave/types'
-import { hashUtils } from '@yarnpkg/core'
+import { writeDeferredVersionFile } from '@monoweave/versions'
 import { Option } from 'clipanion'
 
 import { BaseCommand } from './base'
@@ -17,6 +15,10 @@ export class MonoweaveVersionCommand extends BaseCommand {
     includePatterns = Option.Rest()
 
     async execute(): Promise<number | void> {
+        // inquirer has a transitive dependency on tmp which adds an event listener to process EXIT.
+        // This causes the max event listeners to exceed the limit in test runs.
+        const { confirm, editor, select } = await import('@inquirer/prompts')
+
         try {
             const { config } = await this.parseConfiguration()
 
@@ -110,24 +112,13 @@ export class MonoweaveVersionCommand extends BaseCommand {
                 })
             ).trim()
 
-            const versionFile = path.resolve(
+            const { versionFilePath } = await writeDeferredVersionFile({
+                deferredVersion,
                 versionFolder,
-                `${hashUtils.makeHash(Math.random().toString()).slice(0, 8)}.md`,
-            )
-            const versionFileContents = [
-                '---',
-                ...Object.entries(deferredVersion.strategies)
-                    .sort(([pkgNameA], [pkgNameB]) => pkgNameA.localeCompare(pkgNameB))
-                    .map(([pkgName, strategy]) => `"${pkgName}": ${strategy}`),
-                '---',
-                deferredVersion.changelog || '',
-            ].join('\n')
-
-            await fs.promises.mkdir(path.dirname(versionFile), { recursive: true })
-            await fs.promises.writeFile(versionFile, versionFileContents, { encoding: 'utf-8' })
+            })
 
             this.context.stdout.write(
-                `A version file has been written to: ${path.relative(process.cwd(), versionFile)}. You can modify the version file before committing it.\n`,
+                `A version file has been written to: ${path.relative(process.cwd(), versionFilePath)}. You can modify the version file before committing it.\n`,
             )
 
             return 0

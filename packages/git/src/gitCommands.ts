@@ -13,14 +13,25 @@ const git = async (
     return await exec(command, { cwd, env: { GIT_TERMINAL_PROMPT: '0', ...process.env } })
 }
 
-export const gitCheckout = async (
-    { files }: { files: string[] },
-    { cwd, context }: { cwd: string; context?: YarnContext },
-): Promise<void> => {
+export const gitUpstreamBranch = async ({
+    cwd,
+    context,
+}: {
+    cwd: string
+    context?: YarnContext
+}): Promise<string> => {
     const { stdout: branch } = await git('rev-parse --abbrev-ref --symbolic-full-name @\\{u\\}', {
         cwd,
         context,
     })
+    return branch
+}
+
+export const gitCheckout = async (
+    { files }: { files: string[] },
+    { cwd, context }: { cwd: string; context?: YarnContext },
+): Promise<void> => {
+    const branch = await gitUpstreamBranch({ cwd, context })
     await git(`checkout ${branch.trim()} -- ${files.map((f) => `"${f}"`).join(' ')}`, {
         cwd,
         context,
@@ -40,9 +51,35 @@ export const gitResolveSha = async (
 
 export const gitDiffTree = async (
     ref: string,
-    { cwd, context }: { cwd: string; context?: YarnContext },
+    {
+        cwd,
+        context,
+        onlyIncludeDeletedFiles,
+        paths,
+        fetch = false,
+    }: {
+        cwd: string
+        context?: YarnContext
+        onlyIncludeDeletedFiles?: boolean
+        paths?: string[]
+        fetch?: boolean
+    },
 ): Promise<string> => {
-    const { stdout } = await git(`diff-tree --no-commit-id --name-only -r --root ${ref.trim()}`, {
+    if (fetch) {
+        await git('fetch', { cwd, context })
+    }
+
+    const args: string[] = ['--no-commit-id', '--name-only', '-r', '--root']
+    if (onlyIncludeDeletedFiles) {
+        args.push('--diff-filter=D')
+    }
+
+    let command = `diff-tree ${args.join(' ')} ${ref.trim()}`
+    if (paths?.length) {
+        command += ` -- ${paths.map((p) => `"${p}"`)}`
+    }
+
+    const { stdout } = await git(command, {
         cwd,
         context,
     })

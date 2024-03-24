@@ -44,7 +44,7 @@ export async function getMonoweaveConfig({
     changelogFilename: string
     dryRun: boolean
 }> &
-    RecursivePartial<MonoweaveConfiguration>): Promise<MonoweaveConfiguration> {
+    RecursivePartial<MonoweaveConfiguration> = {}): Promise<MonoweaveConfiguration> {
     return await mergeDefaultConfig({
         ...rest,
         cwd,

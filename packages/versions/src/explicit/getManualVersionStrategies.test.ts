@@ -1,4 +1,16 @@
-import { parseVersionFileContents } from './getManualVersionStrategies'
+import * as git from '@monoweave/git'
+import { createMonorepoContext, getMonoweaveConfig } from '@monoweave/test-utils'
+import { npath, ppath } from '@yarnpkg/fslib'
+
+import {
+    getManualVersionStrategies,
+    parseVersionFileContents,
+    writeDeferredVersionFile,
+} from './getManualVersionStrategies'
+
+jest.mock('@monoweave/git')
+
+const mockGit = jest.mocked(git)
 
 describe('Version File Parsing', () => {
     it('throws an error on invalid files', async () => {
@@ -28,5 +40,207 @@ describe('Version File Parsing', () => {
             },
             changelog: 'This is a multi-line\nchangelog entry.',
         })
+    })
+})
+
+describe('getManualVersionStrategies', () => {
+    it('returns an empty strategy map if no version files found', async () => {
+        await using context = await createMonorepoContext({
+            'pkg-1': {},
+            'pkg-2': {},
+        })
+
+        const { deferredVersionFiles, intentionalStrategies } = await getManualVersionStrategies({
+            context,
+            config: await getMonoweaveConfig(),
+        })
+
+        expect(deferredVersionFiles).toHaveLength(0)
+        expect(intentionalStrategies.size).toBe(0)
+    })
+
+    it('merges version strategies across version files', async () => {
+        await using context = await createMonorepoContext({
+            'pkg-1': {},
+            'pkg-2': {},
+        })
+
+        const versionFolder = npath.fromPortablePath(
+            ppath.resolve(context.project.cwd, '.monoweave'),
+        )
+
+        await writeDeferredVersionFile({
+            versionFolder,
+            deferredVersion: {
+                strategies: {
+                    'pkg-1': 'patch',
+                },
+                changelog: 'changelog-1',
+            },
+        })
+        await writeDeferredVersionFile({
+            versionFolder,
+            deferredVersion: {
+                strategies: {
+                    'pkg-1': 'minor',
+                    'pkg-2': 'patch',
+                },
+                changelog: 'changelog-2',
+            },
+        })
+
+        const { deferredVersionFiles, intentionalStrategies } = await getManualVersionStrategies({
+            context,
+            config: await getMonoweaveConfig(),
+        })
+
+        expect(deferredVersionFiles).toHaveLength(2)
+        expect(intentionalStrategies.get('pkg-1')!.type).toBe('minor')
+        expect(intentionalStrategies.get('pkg-2')!.type).toBe('patch')
+        expect(intentionalStrategies.get('pkg-1')!.changelog).toEqual(
+            expect.stringContaining('changelog-1'),
+        )
+        expect(intentionalStrategies.get('pkg-1')!.changelog).toEqual(
+            expect.stringContaining('changelog-2'),
+        )
+
+        // and assert pkg-2 only has changelog 2
+        expect(intentionalStrategies.get('pkg-2')!.changelog).not.toEqual(
+            expect.stringContaining('changelog-1'),
+        )
+        expect(intentionalStrategies.get('pkg-2')!.changelog).toEqual(
+            expect.stringContaining('changelog-2'),
+        )
+    })
+
+    it('skips version files that have already been consumed on the remote tracking branch', async () => {
+        await using context = await createMonorepoContext({
+            'pkg-1': {},
+            'pkg-2': {},
+        })
+
+        const versionFolder = npath.fromPortablePath(
+            ppath.resolve(context.project.cwd, '.monoweave'),
+        )
+
+        const { versionFilePath: versionFilePath1 } = await writeDeferredVersionFile({
+            versionFolder,
+            deferredVersion: {
+                strategies: {
+                    'pkg-1': 'minor',
+                },
+                changelog: 'changelog-1',
+            },
+        })
+
+        const { versionFilePath: versionFilePath2 } = await writeDeferredVersionFile({
+            versionFolder,
+            deferredVersion: {
+                strategies: {
+                    'pkg-2': 'minor',
+                },
+                changelog: 'changelog-2',
+            },
+        })
+
+        jest.spyOn(mockGit, 'gitUpstreamBranch').mockResolvedValue('some-upstream')
+        jest.spyOn(mockGit, 'gitDiffTree').mockResolvedValue([versionFilePath1].join('\n'))
+
+        const { deferredVersionFiles, intentionalStrategies } = await getManualVersionStrategies({
+            context,
+            config: await getMonoweaveConfig(),
+        })
+
+        expect(deferredVersionFiles).toHaveLength(1) // 2 minus 1 consumed
+        expect(deferredVersionFiles).toContain(versionFilePath2)
+        expect(intentionalStrategies.has('pkg-1')).toBe(false)
+        expect(intentionalStrategies.get('pkg-2')!.type).toBe('minor')
+        expect(intentionalStrategies.get('pkg-2')!.changelog).toEqual(
+            expect.stringContaining('changelog-2'),
+        )
+    })
+
+    it('throws an error if an unknown workspace is referenced in a version file', async () => {
+        await using context = await createMonorepoContext({
+            'pkg-1': {},
+            'pkg-2': {},
+        })
+
+        const versionFolder = npath.fromPortablePath(
+            ppath.resolve(context.project.cwd, '.monoweave'),
+        )
+
+        await writeDeferredVersionFile({
+            versionFolder,
+            deferredVersion: {
+                strategies: {
+                    unknown: 'minor',
+                },
+                changelog: 'changelog-1',
+            },
+        })
+
+        await expect(
+            getManualVersionStrategies({
+                context,
+                config: await getMonoweaveConfig(),
+            }),
+        ).rejects.toThrow(/unknown workspace/)
+    })
+
+    it('throws an error if a private workspace is referenced in a version file', async () => {
+        await using context = await createMonorepoContext({
+            'pkg-1': { private: true },
+        })
+
+        const versionFolder = npath.fromPortablePath(
+            ppath.resolve(context.project.cwd, '.monoweave'),
+        )
+
+        await writeDeferredVersionFile({
+            versionFolder,
+            deferredVersion: {
+                strategies: {
+                    'pkg-1': 'minor',
+                },
+                changelog: 'changelog-1',
+            },
+        })
+
+        await expect(
+            getManualVersionStrategies({
+                context,
+                config: await getMonoweaveConfig(),
+            }),
+        ).rejects.toThrow(/is private/)
+    })
+
+    it('throws an error if an invalid version strategy is specified in a version file', async () => {
+        await using context = await createMonorepoContext({
+            'pkg-1': {},
+            'pkg-2': {},
+        })
+
+        const versionFolder = npath.fromPortablePath(
+            ppath.resolve(context.project.cwd, '.monoweave'),
+        )
+
+        await writeDeferredVersionFile({
+            versionFolder,
+            deferredVersion: {
+                strategies: {
+                    // @ts-expect-error testing error case
+                    'pkg-1': 'ERROR',
+                },
+                changelog: 'changelog-1',
+            },
+        })
+
+        await expect(
+            getManualVersionStrategies({
+                context,
+                config: await getMonoweaveConfig(),
+            }),
+        ).rejects.toThrow(/Invalid version file/)
     })
 })
