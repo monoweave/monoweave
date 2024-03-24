@@ -1,6 +1,6 @@
 {
   "name": "@monoweave/versions",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/monoweave/monoweave.git",
@@ -55,7 +55,7 @@
     "@yarnpkg/plugin-pack": "^4.0.0"
   },
   "peerDependencies": {
-    "@monoweave/changelog": "workspace:^1.1.0",
+    "@monoweave/changelog": "workspace:^1.2.0",
     "@monoweave/dependencies": "workspace:^1.1.0",
     "@monoweave/git": "workspace:^1.1.0",
     "@monoweave/io": "workspace:^1.1.0",
