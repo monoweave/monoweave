@@ -13,6 +13,7 @@ import { type Workspace, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
 import pLimit from 'p-limit'
 
+const LEGACY_MARKER = '<!-- MONODEPLOY:BELOW -->'
 const MARKER = '<!-- MONOWEAVE:BELOW -->'
 const TOKEN_PACKAGE_DIR = '<packageDir>'
 
@@ -44,12 +45,25 @@ const prependEntry = async ({
         }
     }
 
-    const changelogOffset = changelogContents.findIndex((value) => value.trim() === MARKER)
+    const changelogOffset = changelogContents.findIndex((value) =>
+        [MARKER, LEGACY_MARKER].includes(value.trim()),
+    )
     if (changelogOffset === -1) {
         logging.error(`[Changelog] Missing changelog marker: '${MARKER}'`, {
             report: context.report,
         })
         throw new Error('Unable to prepend changelog.')
+    }
+
+    // Legacy marker cleanup
+    if (changelogContents[changelogOffset].includes(LEGACY_MARKER)) {
+        logging.warning(`[Changelog] Upgrading '${LEGACY_MARKER}' to '${MARKER}'`, {
+            report: context.report,
+        })
+        changelogContents[changelogOffset] = changelogContents[changelogOffset].replace(
+            LEGACY_MARKER,
+            MARKER,
+        )
     }
 
     changelogContents.splice(changelogOffset + 1, 0, `\n${entry}\n`)

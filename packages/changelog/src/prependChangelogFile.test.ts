@@ -309,4 +309,54 @@ describe('prependChangelogFile', () => {
 
         expect(contentsBefore).toEqual(contentsAfter)
     })
+
+    it('upgrades legacy markers', async () => {
+        const cwd = workspacePath
+        const mockChangelogFilename = 'changelog'
+        const config = await getMonoweaveConfig({
+            baseBranch: 'main',
+            commitSha: 'sha-1',
+            cwd,
+            changelogFilename: mockChangelogFilename,
+        })
+        const context = await setupContext(cwd)
+        await createFile({
+            filePath: 'changelog',
+            cwd: workspacePath,
+            content: '<!-- MONODEPLOY:BELOW -->',
+        })
+        const changeset: ChangesetSchema = {
+            'pkg-1': {
+                version: '1.0.0',
+                changelog: 'wowchanges\nthisisachangelog',
+                tag: null,
+                group: 'pkg-1',
+            },
+            'pkg-2': {
+                version: '1.1.0',
+                changelog: 'just a version bump',
+                tag: null,
+                group: 'pkg-2',
+            },
+        }
+
+        await prependChangelogFile({
+            config,
+            context,
+            changeset,
+            workspaces: new Set(),
+        })
+
+        const changelogContents = await fs.readFile(path.join(cwd, mockChangelogFilename), {
+            encoding: 'utf8',
+        })
+
+        expect(changelogContents).toEqual(expect.stringContaining(changeset['pkg-1'].changelog!))
+
+        // Assert legacy marker no longer exists
+        expect(changelogContents).not.toContain('<!-- MONODEPLOY:BELOW -->')
+
+        // Assert new marker now exists
+        expect(changelogContents).toContain('<!-- MONOWEAVE:BELOW -->')
+    })
 })
