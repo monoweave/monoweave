@@ -32,7 +32,7 @@
   "dependencies": {
     "conventional-commits-parser": "^5.0.0",
     "micromatch": "^4.0.5",
-    "p-limit": "^3.1.0",
+    "p-limit": "^5.0.0",
     "semver": "^7.6.0",
     "yaml": "^2.4.1"
   },

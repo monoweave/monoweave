@@ -3,7 +3,8 @@ import type { MonoweaveConfiguration, YarnContext } from '@monoweave/types'
 import { type Workspace, miscUtils, structUtils } from '@yarnpkg/core'
 import { npmHttpUtils, npmPublishUtils } from '@yarnpkg/plugin-npm'
 import { packUtils } from '@yarnpkg/plugin-pack'
-import type pLimit from 'p-limit'
+// @ts-expect-error type import, not shipped in transpiled code
+import type { LimitFunction } from 'p-limit'
 
 import { getPublishRegistryUrl } from './getPublishConfig'
 
@@ -16,7 +17,7 @@ export const pack = async ({
     publishCommitSha,
 }: {
     workspace: Workspace
-    limitPublish: pLimit.Limit
+    limitPublish: LimitFunction
     publishTag: string
     config: MonoweaveConfiguration
     context: YarnContext

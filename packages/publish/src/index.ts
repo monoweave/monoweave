@@ -1,7 +1,6 @@
 import { getTopologicalSort } from '@monoweave/dependencies'
 import type { MonoweaveConfiguration, YarnContext } from '@monoweave/types'
 import { type Workspace } from '@yarnpkg/core'
-import pLimit from 'p-limit'
 
 import determineGitTags from './determineGitTags'
 import getWorkspacesToPublish from './getWorkspacesToPublish'
@@ -22,6 +21,8 @@ export const publishPackages = async ({
     workspaces: Set<Workspace>
     publishCommitSha?: string | undefined
 }): Promise<void> => {
+    const { default: pLimit } = await import('p-limit')
+
     const limitPublish = pLimit(config.maxConcurrentWrites || 1)
     const publishTag = config.prerelease ? config.prereleaseNPMTag : 'latest'
 

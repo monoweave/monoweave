@@ -11,7 +11,6 @@ import {
 } from '@monoweave/types'
 import { type Workspace, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
-import pLimit from 'p-limit'
 
 const LEGACY_MARKER = '<!-- MONODEPLOY:BELOW -->'
 const MARKER = '<!-- MONOWEAVE:BELOW -->'
@@ -98,6 +97,8 @@ const prependChangelogFile = async ({
     workspaces: Set<Workspace>
     forceRefreshChangelogs?: boolean
 }): Promise<void> => {
+    const { default: pLimit } = await import('p-limit')
+
     if (!config.changelogFilename) return
 
     // Make sure the changelogs are up to date with the remote
