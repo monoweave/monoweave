@@ -38,6 +38,7 @@ const multiProject = {
             ...config,
             displayName: 'Unit/Integration',
             testMatch: ['<rootDir>/packages/**/*.test.ts'],
+            globalSetup: '<rootDir>/jestGlobalSetup.ts',
         },
     ],
     testTimeout: 30000,

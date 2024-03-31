@@ -1,5 +1,6 @@
 import applyVersionStrategies from './applyVersionStrategies'
 import getExplicitVersionStrategies from './explicit/getExplicitVersionStrategies'
+import { writeDeferredVersionFile } from './explicit/getManualVersionStrategies'
 import { getModifiedPackages } from './explicit/getModifiedPackages'
 import getImplicitVersionStrategies from './getImplicitVersionStrategies'
 import getLatestPackageTags from './getLatestPackageTags'
@@ -12,4 +13,5 @@ export {
     getExplicitVersionStrategies,
     mergeVersionStrategies,
     getModifiedPackages,
+    writeDeferredVersionFile,
 }

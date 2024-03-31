@@ -3068,6 +3068,7 @@ __metadata:
     "@monoweave/node": "workspace:^1.2.0"
     "@monoweave/test-utils": "link:../../testUtils"
     "@monoweave/types": "workspace:^1.1.0"
+    "@monoweave/versions": "workspace:*"
     "@types/jest": "npm:^29.5.12"
     "@types/node": "npm:^20.11.24"
     "@yarnpkg/core": "npm:^4.0.3"
@@ -3436,7 +3437,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/versions@workspace:^1.2.0, @monoweave/versions@workspace:packages/versions":
+"@monoweave/versions@workspace:*, @monoweave/versions@workspace:^1.2.0, @monoweave/versions@workspace:packages/versions":
   version: 0.0.0-use.local
   resolution: "@monoweave/versions@workspace:packages/versions"
   dependencies:

@@ -55,9 +55,31 @@ const gitResolveSha = async (
     return `sha:${ref}`
 }
 
+const gitUpstreamBranch = async ({
+    cwd,
+    context,
+}: {
+    cwd: string
+    context?: YarnContext
+}): Promise<string> => {
+    return 'main'
+}
+
 const gitDiffTree = async (
     ref: string,
-    { cwd, context }: { cwd: string; context: YarnContext },
+    {
+        cwd,
+        context,
+        onlyIncludeDeletedFiles,
+        paths,
+        fetch = false,
+    }: {
+        cwd: string
+        context?: YarnContext
+        onlyIncludeDeletedFiles?: boolean
+        paths?: string[]
+        fetch?: boolean
+    },
 ): Promise<string> => {
     return (registry.filesModified.get(ref) ?? []).join('\n')
 }
@@ -224,4 +246,5 @@ module.exports = {
     gitPushTags,
     gitResolveSha,
     gitTag,
+    gitUpstreamBranch,
 }

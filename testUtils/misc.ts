@@ -44,7 +44,7 @@ export async function getMonoweaveConfig({
     changelogFilename: string
     dryRun: boolean
 }> &
-    RecursivePartial<MonoweaveConfiguration>): Promise<MonoweaveConfiguration> {
+    RecursivePartial<MonoweaveConfiguration> = {}): Promise<MonoweaveConfiguration> {
     return await mergeDefaultConfig({
         ...rest,
         cwd,
@@ -71,7 +71,7 @@ export async function writeConfig({
 
 export async function waitFor<T>(
     predicate: () => Promise<T>,
-    { maxSteps = 100 }: { maxSteps?: number } = {},
+    { maxSteps = 200 }: { maxSteps?: number } = {},
 ): Promise<T> {
     let steps = maxSteps
     while (steps > 0) {

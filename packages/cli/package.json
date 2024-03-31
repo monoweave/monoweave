@@ -56,6 +56,7 @@
     "@monoweave/logging": "workspace:^0.0.4",
     "@monoweave/node": "workspace:^1.2.0",
     "@monoweave/types": "workspace:^1.1.0",
+    "@monoweave/versions": "workspace:*",
     "@yarnpkg/core": "^4.0.3",
     "@yarnpkg/fslib": "^3.0.2",
     "ajv": "^8.12.0",
