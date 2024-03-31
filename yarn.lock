@@ -3048,7 +3048,7 @@ __metadata:
     "@yarnpkg/fslib": "npm:^3.0.2"
     conventional-changelog-writer: "npm:^7.0.1"
     conventional-commits-parser: "npm:^5.0.0"
-    p-limit: "npm:^3.1.0"
+    p-limit: "npm:^5.0.0"
   peerDependencies:
     "@monoweave/git": "workspace:^1.1.0"
     "@monoweave/io": "workspace:^1.1.0"
@@ -3337,7 +3337,7 @@ __metadata:
     "@yarnpkg/fslib": "npm:^3.0.2"
     "@yarnpkg/plugin-npm": "npm:^3.0.1"
     "@yarnpkg/plugin-pack": "npm:^4.0.0"
-    p-limit: "npm:^3.1.0"
+    p-limit: "npm:^5.0.0"
   peerDependencies:
     "@monoweave/dependencies": "workspace:^1.1.0"
     "@monoweave/git": "workspace:^1.1.0"
@@ -3456,7 +3456,7 @@ __metadata:
     "@yarnpkg/plugin-pack": "npm:^4.0.0"
     conventional-commits-parser: "npm:^5.0.0"
     micromatch: "npm:^4.0.5"
-    p-limit: "npm:^3.1.0"
+    p-limit: "npm:^5.0.0"
     semver: "npm:^7.6.0"
     yaml: "npm:^2.4.0"
   peerDependencies:
@@ -17786,6 +17786,15 @@ __metadata:
   dependencies:
     yocto-queue: "npm:^1.0.0"
   checksum: 10/01d9d70695187788f984226e16c903475ec6a947ee7b21948d6f597bed788e3112cc7ec2e171c1d37125057a5f45f3da21d8653e04a3a793589e12e9e80e756b
+  languageName: node
+  linkType: hard
+
+"p-limit@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "p-limit@npm:5.0.0"
+  dependencies:
+    yocto-queue: "npm:^1.0.0"
+  checksum: 10/87bf5837dee6942f0dbeff318436179931d9a97848d1b07dbd86140a477a5d2e6b90d9701b210b4e21fe7beaea2979dfde366e4f576fa644a59bd4d6a6371da7
   languageName: node
   linkType: hard
 

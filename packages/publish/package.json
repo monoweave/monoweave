@@ -30,7 +30,7 @@
     "prepack": "run workspace:build \"$(pwd)\""
   },
   "dependencies": {
-    "p-limit": "^3.1.0"
+    "p-limit": "^5.0.0"
   },
   "devDependencies": {
     "@monoweave/dependencies": "workspace:*",
