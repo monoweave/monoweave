@@ -3153,7 +3153,7 @@ __metadata:
     react-markdown: "npm:^9.0.1"
     remark-external-links: "npm:^9.0.1"
     sanitize.css: "npm:^13.0.0"
-    typedoc: "npm:^0.25.9"
+    typedoc: "npm:^0.25.11"
   languageName: unknown
   linkType: soft
 
@@ -3430,7 +3430,7 @@ __metadata:
     "@yarnpkg/core": "npm:^4.0.3"
     tapable: "npm:^2.2.1"
     ts-node: "npm:^10.9.2"
-    typedoc: "npm:^0.25.9"
+    typedoc: "npm:^0.25.11"
     typescript: "npm:5.3.3"
   peerDependencies:
     "@yarnpkg/core": ^4.0.3
@@ -21775,19 +21775,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.25.9":
-  version: 0.25.11
-  resolution: "typedoc@npm:0.25.11"
+"typedoc@npm:^0.25.11":
+  version: 0.25.12
+  resolution: "typedoc@npm:0.25.12"
   dependencies:
     lunr: "npm:^2.3.9"
     marked: "npm:^4.3.0"
     minimatch: "npm:^9.0.3"
     shiki: "npm:^0.14.7"
   peerDependencies:
-    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x
+    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x
   bin:
     typedoc: bin/typedoc
-  checksum: 10/ec1f617c16b5fca455853c329a9958fe41b247d0c1a72dc153654fd5ce323f2ccdfd10ef1f3349d340398e3770a036381d856b90fda4aafe554640b53f5b2a1c
+  checksum: 10/eb02b35a6fd1f8c3f9bb2b42b379139cce5b72b3797e983e58f61578b23610c1ee770dc442286981ab13d2949bdb746a84c38bcd856f09ac50a7a861cca56fd8
   languageName: node
   linkType: hard
 
