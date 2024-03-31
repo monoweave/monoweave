@@ -1,8 +1,6 @@
 # monoweave
 
-> 📢 This project is a fork of [Monodeploy (licensed under Apache-2.0)](https://github.com/tophat/monodeploy).
->
-> Although this project is starting as a fork, the plan is to refactor/rewrite most of the code. The core maintainer of monoweave is the original core contributor of Monodeploy. Since the project has been forked, we're resetting the version numbers of all the packages and starting in a pre-v1 state as refactor is underway.
+> 📢 This project is a fork of [Monodeploy (licensed under Apache-2.0)](https://github.com/tophat/monodeploy) by the original core contributor of Monodeploy.
 
 [![Continuous Integration](https://github.com/monoweave/monoweave/actions/workflows/pull-request.yml/badge.svg)](https://github.com/monoweave/monoweave/actions/workflows/pull-request.yml)
 [![codecov](https://codecov.io/gh/monoweave/monoweave/branch/main/graph/badge.svg)](https://codecov.io/gh/monoweave/monoweave)
