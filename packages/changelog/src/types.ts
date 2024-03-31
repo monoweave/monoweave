@@ -1,4 +1,4 @@
-export type TemplateContext = {
+export interface TemplateContext {
     version: string
     title: string
     host: string
