@@ -49,23 +49,25 @@ jobs:
           path: ./raw-coverage/jest
 
   tests_e2es:
-    name: Tests - End to End - ${{ matrix.runner }}
+    name: Tests - End to End - ${{ matrix.runner }} / Node ${{ matrix.node-version }}
     runs-on: ${{ matrix.runner}}
     needs: [prepare]
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     strategy:
       matrix:
         runner: ['ubuntu-latest']
+        node-version: ['lts/hydrogen', 'lts/iron']
     steps:
         - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         - uses: ./.github/actions/setup-env
           with:
             cache-prefix: ${{ matrix.runner }}
+            node-version: ${{ matrix.node-version }}
         - name: Run Tests
           run: yarn test:e2e
         - name: Upload Artifacts
           uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
-          if: ${{ matrix.runner }} == 'ubuntu-latest'
+          if: matrix.runner == 'ubuntu-latest' && matrix.node-version == 'lts/iron'
           with:
             name: coverage-e2e-tests
             path: ./raw-coverage/jest-e2es
@@ -109,7 +111,7 @@ jobs:
     strategy:
       matrix:
         runner: ['ubuntu-latest', 'windows-latest', 'macos-latest']
-        node-version: ['lts/hydrogen', 'current']
+        node-version: ['current']
       fail-fast: false
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1

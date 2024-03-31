@@ -1,4 +1,4 @@
-import { createMonorepoContext, describeIf, getMonoweaveConfig } from '@monoweave/test-utils'
+import { createMonorepoContext, getMonoweaveConfig } from '@monoweave/test-utils'
 import { type PluginHooks } from '@monoweave/types'
 import { AsyncSeriesHook } from 'tapable'
 
@@ -11,13 +11,7 @@ jest.mock('./request', () => ({
     request: jest.fn(),
 }))
 
-describeIf(
-    /**
-     * Node lts/hydrogen has a bug (?) which causes jest to crash when using dynamic imports.
-     * https://stackoverflow.com/questions/77962982/testing-commonjs-with-dynamic-imports-of-esm-with-ts-jest#comment137891280_77962982
-     */
-    () => !process.env.NODE_VERSION?.includes('lts/hydrogen'),
-)('GitHub Plugin', () => {
+describe('GitHub Plugin', () => {
     afterEach(() => {
         delete process.env.GITHUB_TOKEN
         delete process.env.GH_TOKEN
