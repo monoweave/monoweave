@@ -13,7 +13,6 @@ import {
 } from '@monoweave/types'
 import { hashUtils, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
-import pLimit from 'p-limit'
 import YAML from 'yaml'
 
 import { maxStrategy } from '../versionStrategy'
@@ -147,6 +146,8 @@ export async function getManualVersionStrategies({
     config: MonoweaveConfiguration
     context: YarnContext
 }): Promise<{ intentionalStrategies: PackageStrategyMap; deferredVersionFiles: string[] }> {
+    const { default: pLimit } = await import('p-limit')
+
     const versionStrategies: PackageStrategyMap = new Map()
     const deferredVersionFiles = await discoverVersionFiles({ config, context })
 

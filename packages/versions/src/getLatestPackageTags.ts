@@ -7,7 +7,6 @@ import {
 } from '@monoweave/types'
 import { MessageName, ReportError, type Workspace, structUtils } from '@yarnpkg/core'
 import * as pluginNPM from '@yarnpkg/plugin-npm'
-import pLimit from 'p-limit'
 
 import { getFetchRegistryUrl } from './getRegistryUrl'
 
@@ -54,6 +53,8 @@ const getLatestPackageTags = async ({
     config: MonoweaveConfiguration
     context: YarnContext
 }): Promise<PackageTagMap> => {
+    const { default: pLimit } = await import('p-limit')
+
     const limitFetch = pLimit(config.maxConcurrentReads || 10)
 
     const workspaces = [
