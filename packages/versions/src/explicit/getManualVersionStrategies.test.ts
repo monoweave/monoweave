@@ -59,6 +59,25 @@ describe('getManualVersionStrategies', () => {
         expect(intentionalStrategies.size).toBe(0)
     })
 
+    it('ignores failures obtaining upstream branch', async () => {
+        await using context = await createMonorepoContext({
+            'pkg-1': {},
+            'pkg-2': {},
+        })
+
+        jest.spyOn(mockGit, 'gitUpstreamBranch').mockImplementationOnce(() => {
+            throw new Error('Failure!')
+        })
+
+        const { deferredVersionFiles, intentionalStrategies } = await getManualVersionStrategies({
+            context,
+            config: await getMonoweaveConfig(),
+        })
+
+        expect(deferredVersionFiles).toHaveLength(0)
+        expect(intentionalStrategies.size).toBe(0)
+    })
+
     it('merges version strategies across version files', async () => {
         await using context = await createMonorepoContext({
             'pkg-1': {},
