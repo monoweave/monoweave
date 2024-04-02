@@ -8,8 +8,6 @@ import {
     writeDeferredVersionFile,
 } from './getManualVersionStrategies'
 
-jest.mock('@monoweave/git')
-
 const mockGit = jest.mocked(git)
 
 describe('Version File Parsing', () => {
@@ -44,6 +42,12 @@ describe('Version File Parsing', () => {
 })
 
 describe('getManualVersionStrategies', () => {
+    beforeEach(() => {
+        delete process.env.GITHUB_REF
+        delete process.env.GITHUB_ACTION
+        delete process.env.GITHUB_EVENT_NAME
+    })
+
     it('returns an empty strategy map if no version files found', async () => {
         await using context = await createMonorepoContext({
             'pkg-1': {},

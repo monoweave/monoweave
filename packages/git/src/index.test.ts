@@ -22,6 +22,7 @@ import {
     gitPushTags,
     gitResolveSha,
     gitTag,
+    gitUpstreamBranch,
 } from '.'
 
 describe('@monoweave/git', () => {
@@ -30,6 +31,11 @@ describe('@monoweave/git', () => {
 
     beforeEach(async () => {
         prevNodeEnv = process.env.NODE_ENV
+
+        delete process.env.GITHUB_ACTION
+        delete process.env.GITHUB_EVENT_NAME
+        delete process.env.GITHUB_REF
+
         context = await setupMonorepo({
             'pkg-1': {},
             'pkg-2': {},
@@ -49,6 +55,18 @@ describe('@monoweave/git', () => {
         process.env.NODE_ENV = prevNodeEnv
         jest.restoreAllMocks()
         await cleanUp([context.project.cwd])
+    })
+
+    describe('gitUpstreamBranch', () => {
+        it('uses GITHUB_REF as the upstream if in github actions and on push event', async () => {
+            process.env.GITHUB_ACTION = 'abc'
+            process.env.GITHUB_EVENT_NAME = 'push'
+            process.env.GITHUB_REF = 'test-ref'
+
+            const upstream = await gitUpstreamBranch({ cwd: context.project.cwd, context })
+
+            expect(upstream).toBe('test-ref')
+        })
     })
 
     describe('gitDiffTree', () => {

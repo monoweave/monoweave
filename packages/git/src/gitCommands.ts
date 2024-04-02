@@ -20,6 +20,15 @@ export const gitUpstreamBranch = async ({
     cwd: string
     context?: YarnContext
 }): Promise<string> => {
+    if (
+        process.env.GITHUB_ACTION &&
+        process.env.GITHUB_REF &&
+        process.env.GITHUB_EVENT_NAME === 'push'
+    ) {
+        // In GitHub actions for push events, we can use GITHUB_REF.
+        return process.env.GITHUB_REF
+    }
+
     const { stdout: branch } = await git('rev-parse --abbrev-ref --symbolic-full-name @\\{u\\}', {
         cwd,
         context,
