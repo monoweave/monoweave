@@ -3031,7 +3031,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monoweave/changelog@workspace:*, @monoweave/changelog@workspace:^1.2.0, @monoweave/changelog@workspace:packages/changelog":
+"@monoweave/changelog@workspace:*, @monoweave/changelog@workspace:^1.2.1, @monoweave/changelog@workspace:packages/changelog":
   version: 0.0.0-use.local
   resolution: "@monoweave/changelog@workspace:packages/changelog"
   dependencies:
@@ -3065,10 +3065,10 @@ __metadata:
   dependencies:
     "@inquirer/prompts": "npm:^4.3.1"
     "@monoweave/logging": "workspace:^0.0.4"
-    "@monoweave/node": "workspace:^1.2.1"
+    "@monoweave/node": "workspace:^1.2.2"
     "@monoweave/test-utils": "link:../../testUtils"
     "@monoweave/types": "workspace:^1.1.0"
-    "@monoweave/versions": "workspace:^1.2.1"
+    "@monoweave/versions": "workspace:^1.2.2"
     "@types/jest": "npm:^29.5.12"
     "@types/node": "npm:^20.12.2"
     "@yarnpkg/core": "npm:^4.0.3"
@@ -3157,7 +3157,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/git@workspace:*, @monoweave/git@workspace:^1.2.0, @monoweave/git@workspace:^1.2.1, @monoweave/git@workspace:packages/git":
+"@monoweave/git@workspace:*, @monoweave/git@workspace:^1.2.1, @monoweave/git@workspace:packages/git":
   version: 0.0.0-use.local
   resolution: "@monoweave/git@workspace:packages/git"
   dependencies:
@@ -3274,19 +3274,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/node@workspace:^1.2.1, @monoweave/node@workspace:packages/node":
+"@monoweave/node@workspace:^1.2.2, @monoweave/node@workspace:packages/node":
   version: 0.0.0-use.local
   resolution: "@monoweave/node@workspace:packages/node"
   dependencies:
-    "@monoweave/changelog": "workspace:^1.2.0"
+    "@monoweave/changelog": "workspace:^1.2.1"
     "@monoweave/dependencies": "workspace:^1.1.0"
-    "@monoweave/git": "workspace:^1.2.0"
+    "@monoweave/git": "workspace:^1.2.1"
     "@monoweave/io": "workspace:^1.1.0"
     "@monoweave/logging": "workspace:^0.0.4"
     "@monoweave/publish": "workspace:^1.2.1"
     "@monoweave/test-utils": "link:../../testUtils"
     "@monoweave/types": "workspace:^1.1.0"
-    "@monoweave/versions": "workspace:^1.2.1"
+    "@monoweave/versions": "workspace:^1.2.2"
     "@types/jest": "npm:^29.5.12"
     "@types/micromatch": "npm:^4.0.6"
     "@types/node": "npm:^20.12.2"
@@ -3434,7 +3434,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/versions@workspace:^1.2.1, @monoweave/versions@workspace:packages/versions":
+"@monoweave/versions@workspace:^1.2.2, @monoweave/versions@workspace:packages/versions":
   version: 0.0.0-use.local
   resolution: "@monoweave/versions@workspace:packages/versions"
   dependencies:
