@@ -3031,7 +3031,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monoweave/changelog@workspace:*, @monoweave/changelog@workspace:^1.2.1, @monoweave/changelog@workspace:packages/changelog":
+"@monoweave/changelog@workspace:*, @monoweave/changelog@workspace:^1.2.0, @monoweave/changelog@workspace:packages/changelog":
   version: 0.0.0-use.local
   resolution: "@monoweave/changelog@workspace:packages/changelog"
   dependencies:
@@ -3157,7 +3157,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/git@workspace:*, @monoweave/git@workspace:^1.2.1, @monoweave/git@workspace:packages/git":
+"@monoweave/git@workspace:*, @monoweave/git@workspace:^1.2.0, @monoweave/git@workspace:^1.2.1, @monoweave/git@workspace:packages/git":
   version: 0.0.0-use.local
   resolution: "@monoweave/git@workspace:packages/git"
   dependencies:
@@ -3278,9 +3278,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monoweave/node@workspace:packages/node"
   dependencies:
-    "@monoweave/changelog": "workspace:^1.2.1"
+    "@monoweave/changelog": "workspace:^1.2.0"
     "@monoweave/dependencies": "workspace:^1.1.0"
-    "@monoweave/git": "workspace:^1.2.1"
+    "@monoweave/git": "workspace:^1.2.0"
     "@monoweave/io": "workspace:^1.1.0"
     "@monoweave/logging": "workspace:^0.0.4"
     "@monoweave/publish": "workspace:^1.2.1"
