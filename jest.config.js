@@ -3,7 +3,7 @@
 const CI = Boolean(process.env.CI)
 const ARTIFACT_DIR = process.env.ARTIFACT_DIR || 'artifacts'
 
-/** @type {import('@jest/types').Config.InitialOptions} */
+/** @type {import('jest').Config} */
 const config = {
     setupFiles: ['<rootDir>/testUtils/setup.ts'],
 
@@ -16,7 +16,7 @@ const config = {
         '<rootDir>/packages/.*/.*\\.js',
     ],
     transform: {
-        '^.+\\.tsx?$': [require.resolve('ts-jest')],
+        '^.+\\.tsx?$': require.resolve('ts-jest'),
     },
     testPathIgnorePatterns: ['/node_modules/', '/.yarn/', '<rootDir>/.*\\.js', '<rootDir>/.*/lib/'],
     haste: {
@@ -25,7 +25,7 @@ const config = {
     modulePathIgnorePatterns: ['<rootDir>/.*/lib'],
 }
 
-/** @type {import('@jest/types').Config.InitialOptions} */
+/** @type {import('jest').Config} */
 const multiProject = {
     projects: [
         {
