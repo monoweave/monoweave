@@ -7,6 +7,7 @@ async function main() {
     delete process.env.GITHUB_ACTION
     delete process.env.GITHUB_REF
     delete process.env.GITHUB_EVENT_NAME
+    delete process.env.GITHUB_BASE_REF
 
     childProcess.execSync('yarn workspace @monoweave/e2e-tests test:registry:build', {
         stdio: 'inherit',

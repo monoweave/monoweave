@@ -61,11 +61,21 @@ describe('@monoweave/git', () => {
         it('uses GITHUB_REF as the upstream if in github actions and on push event', async () => {
             process.env.GITHUB_ACTION = 'abc'
             process.env.GITHUB_EVENT_NAME = 'push'
-            process.env.GITHUB_REF = 'test-ref'
+            process.env.GITHUB_REF = 'test-ref-1'
 
             const upstream = await gitUpstreamBranch({ cwd: context.project.cwd, context })
 
-            expect(upstream).toBe('test-ref')
+            expect(upstream).toBe('test-ref-1')
+        })
+
+        it('uses GITHUB_BASE_REF as the upstream if in github actions and on pull_request event', async () => {
+            process.env.GITHUB_ACTION = 'abc'
+            process.env.GITHUB_EVENT_NAME = 'pull_request'
+            process.env.GITHUB_BASE_REF = 'test-ref-2'
+
+            const upstream = await gitUpstreamBranch({ cwd: context.project.cwd, context })
+
+            expect(upstream).toBe('test-ref-2')
         })
     })
 
