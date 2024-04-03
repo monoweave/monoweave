@@ -42,7 +42,7 @@ const createLogger =
             return
         }
 
-        if (message instanceof Error) {
+        if (message instanceof Error && level >= LOG_LEVELS.ERROR) {
             report.reportExceptionOnce(message)
             return
         }

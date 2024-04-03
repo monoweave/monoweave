@@ -69,7 +69,7 @@ describe('getManualVersionStrategies', () => {
             'pkg-2': {},
         })
 
-        jest.spyOn(mockGit, 'gitUpstreamBranch').mockImplementationOnce(() => {
+        jest.spyOn(mockGit, 'gitUpstreamBranch').mockRejectedValueOnce(() => {
             throw new Error('Failure!')
         })
 

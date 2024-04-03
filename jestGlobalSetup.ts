@@ -9,6 +9,7 @@ async function setup() {
     delete process.env.GITHUB_ACTION
     delete process.env.GITHUB_REF
     delete process.env.GITHUB_EVENT_NAME
+    delete process.env.GITHUB_BASE_REF
 }
 
 export default setup
