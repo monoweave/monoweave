@@ -32,7 +32,7 @@
         "bin:jest": "yarn node --experimental-vm-modules $(yarn bin jest) --config=jest.config.js --runInBand",
         "test:ci": "CI=1 yarn bin:jest --ci --selectProjects \"Unit/Integration\" --",
         "test:watch": "yarn bin:jest --watch --selectProjects \"Unit/Integration\" --",
-        "test": "yarn bin:jest --verbose --no-cache --selectProjects \"Unit/Integration\" --",
+        "test": "yarn bin:jest --verbose --no-cache $@ --selectProjects \"Unit/Integration\" --",
         "test:all": "yarn test:ci && yarn test:e2e && yarn test:coverage:merge && yarn test:coverage:report",
         "test:e2e": "E2E=1 yarn workspace @monoweave/e2e-tests run test",
         "test:coverage:merge": "cp ./raw-coverage/jest-e2es/*.json ./raw-coverage/ && cp ./raw-coverage/jest/*.json ./raw-coverage/ && nyc --nycrc-path nyc.config.js merge ./raw-coverage ${ARTIFACT_DIR:-artifacts}/test-coverage.json",

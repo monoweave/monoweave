@@ -93,33 +93,27 @@ export async function discoverVersionFiles({
     // This is only necessary if running in an environment where we haven't pulled the latest changes on the main
     // publish branch, e.g. GitHub's default behaviour when you don't override actions/checkout "ref" to point to the
     // branch.
-    const filesDeletedOnUpstream = await (async (): Promise<string[]> => {
-        try {
-            return await gitUpstreamBranch({ cwd: config.cwd, context })
-                .then((upstream) =>
-                    gitDiffTree(upstream, {
-                        cwd: config.cwd,
-                        context,
-                        onlyIncludeDeletedFiles: true,
-                        paths: [versionFolder],
-                        fetch: true,
-                    }),
-                )
-                .then((files) => files.split('\n').map((file) => path.resolve(config.cwd, file)))
-                .catch((err): string[] => {
-                    logging.warning(
-                        'Failed to detect deleted files on upstream. Being unable to detect deleted files ' +
-                            'means there is the possibility that monoweave may process the same version file ' +
-                            'twice, resulting in duplicate publishing.',
-                        { report: context.report },
-                    )
-                    logging.warning(err, { report: context.report })
-                    return []
-                })
-        } catch {
+    const filesDeletedOnUpstream = await gitUpstreamBranch({ cwd: config.cwd, context })
+        .then((upstream) =>
+            gitDiffTree(upstream, {
+                cwd: config.cwd,
+                context,
+                onlyIncludeDeletedFiles: true,
+                paths: [versionFolder],
+                fetch: true,
+            }),
+        )
+        .then((files) => files.split('\n').map((file) => path.resolve(config.cwd, file)))
+        .catch((err): string[] => {
+            logging.warning(
+                'Failed to detect deleted files on upstream. Being unable to detect deleted files ' +
+                    'means there is the possibility that monoweave may process the same version file ' +
+                    'twice, resulting in duplicate publishing.',
+                { report: context.report },
+            )
+            logging.warning(err, { report: context.report })
             return []
-        }
-    })()
+        })
 
     const filesDeletedOnUpstreamSet = new Set<string>(filesDeletedOnUpstream)
 
