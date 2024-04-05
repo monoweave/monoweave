@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^4.3.1",
-    "@monoweave/logging": "workspace:^1.2.4",
+    "@monoweave/logging": "workspace:^1.2.0",
     "@monoweave/node": "workspace:^1.2.4",
     "@monoweave/types": "workspace:^1.1.0",
     "@monoweave/versions": "workspace:^1.2.4",

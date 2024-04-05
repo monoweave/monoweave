@@ -106,7 +106,10 @@ const prependChangelogFile = async ({
         const changelogGlob = config.changelogFilename.replace('<packageDir>', '**')
         if (changelogGlob) {
             try {
-                await gitCheckout({ files: [changelogGlob] }, { cwd: config.cwd, context })
+                await gitCheckout(
+                    { files: [changelogGlob] },
+                    { cwd: config.cwd, context, remote: config.git.remote },
+                )
             } catch {
                 logging.debug('Force refreshing changelogs failed. Ignoring.', {
                     report: context.report,

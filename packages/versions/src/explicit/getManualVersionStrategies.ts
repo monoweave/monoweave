@@ -93,7 +93,11 @@ export async function discoverVersionFiles({
     // This is only necessary if running in an environment where we haven't pulled the latest changes on the main
     // publish branch, e.g. GitHub's default behaviour when you don't override actions/checkout "ref" to point to the
     // branch.
-    const filesDeletedOnUpstream = await gitUpstreamBranch({ cwd: config.cwd, context })
+    const filesDeletedOnUpstream = await gitUpstreamBranch({
+        cwd: config.cwd,
+        context,
+        remote: config.git.remote,
+    })
         .then((upstream) =>
             gitDiffTree(upstream, {
                 cwd: config.cwd,
@@ -126,7 +130,7 @@ export async function discoverVersionFiles({
         .then((files) =>
             files
                 .filter((file) => file.isFile() && file.name.endsWith('.md'))
-                .map((file) => path.resolve(versionFolder, file.path, file.name))
+                .map((file) => path.resolve(versionFolder, file.name))
                 .filter((file) => !filesDeletedOnUpstreamSet.has(file)),
         )
         .catch((err): string[] => {

@@ -58,11 +58,13 @@ const gitResolveSha = async (
 const gitUpstreamBranch = async ({
     cwd,
     context,
+    remote,
 }: {
     cwd: string
     context?: YarnContext
+    remote: string
 }): Promise<string> => {
-    return 'main'
+    return `${remote}/main`
 }
 
 const gitDiffTree = async (

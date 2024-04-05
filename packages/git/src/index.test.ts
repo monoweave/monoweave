@@ -61,11 +61,15 @@ describe('@monoweave/git', () => {
         it('uses GITHUB_REF as the upstream if in github actions and on push event', async () => {
             process.env.GITHUB_ACTION = 'abc'
             process.env.GITHUB_EVENT_NAME = 'push'
-            process.env.GITHUB_REF = 'test-ref-1'
+            process.env.GITHUB_REF = 'refs/heads/test-ref-1'
 
-            const upstream = await gitUpstreamBranch({ cwd: context.project.cwd, context })
+            const upstream = await gitUpstreamBranch({
+                cwd: context.project.cwd,
+                context,
+                remote: 'origin',
+            })
 
-            expect(upstream).toBe('test-ref-1')
+            expect(upstream).toBe('refs/heads/test-ref-1')
         })
 
         it('uses GITHUB_BASE_REF as the upstream if in github actions and on pull_request event', async () => {
@@ -73,9 +77,14 @@ describe('@monoweave/git', () => {
             process.env.GITHUB_EVENT_NAME = 'pull_request'
             process.env.GITHUB_BASE_REF = 'test-ref-2'
 
-            const upstream = await gitUpstreamBranch({ cwd: context.project.cwd, context })
+            const upstream = await gitUpstreamBranch({
+                cwd: context.project.cwd,
+                context,
+                remote: 'origin',
+            })
 
-            expect(upstream).toBe('test-ref-2')
+            // The origin must be added for pull requests
+            expect(upstream).toBe('origin/test-ref-2')
         })
     })
 
