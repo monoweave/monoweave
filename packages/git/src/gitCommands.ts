@@ -16,9 +16,11 @@ const git = async (
 export const gitUpstreamBranch = async ({
     cwd,
     context,
+    remote,
 }: {
     cwd: string
     context?: YarnContext
+    remote: string
 }): Promise<string> => {
     if (process.env.GITHUB_ACTION) {
         if (process.env.GITHUB_REF && process.env.GITHUB_EVENT_NAME === 'push') {
@@ -26,7 +28,7 @@ export const gitUpstreamBranch = async ({
             return process.env.GITHUB_REF
         }
         if (process.env.GITHUB_BASE_REF && process.env.GITHUB_EVENT_NAME === 'pull_request') {
-            return process.env.GITHUB_BASE_REF
+            return `${remote}/${process.env.GITHUB_BASE_REF}`
         }
     }
 
@@ -39,9 +41,9 @@ export const gitUpstreamBranch = async ({
 
 export const gitCheckout = async (
     { files }: { files: string[] },
-    { cwd, context }: { cwd: string; context?: YarnContext },
+    { cwd, context, remote }: { cwd: string; context?: YarnContext; remote: string },
 ): Promise<void> => {
-    const branch = await gitUpstreamBranch({ cwd, context })
+    const branch = await gitUpstreamBranch({ cwd, context, remote })
     await git(`checkout ${branch.trim()} -- ${files.map((f) => `"${f}"`).join(' ')}`, {
         cwd,
         context,
