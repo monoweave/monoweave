@@ -2,7 +2,8 @@ import { RegistryMode } from '@monoweave/types'
 
 import setupProject from 'helpers/setupProject'
 
-describe('Issue #601', () => {
+// https://github.com/monoweave/monoweave/issues/95
+describe('Issue #95', () => {
     it(
         'handles merge conflicts',
         setupProject({
