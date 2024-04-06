@@ -23,14 +23,20 @@ Steps to reproduce the behavior:
 
 <!-- A clear and concise description of what you expected to happen. -->
 
+**Monoweave Configuration**
+
+<!-- Please include as much as your configuration as possible, whether it be your config file or the CLI arguments you invoke monoweave with.  -->
+
+- Monoweave Version: <!-- [e.g. 3.0] -->
+
 **Environment (please complete the following information):**
 
 - OS: <!-- [e.g. Ubuntu 20.04, Mac OSX 10.14] -->
-- Monoweave Version: <!-- [e.g. 3.0] -->
 - Yarn Version: <!-- [e.g. 3.2.0] -->
   - Yarn module linker: <!-- [e.g. pnp / pnpm / node-modules] -->
 - Node Version: <!-- [e.g. 12.16.1] -->
 - Git Version: <!-- [e.g. 2.33.0] -->
+- CI Tool: <!-- [e.g. GitHub Actions, Jenkins, Travis, Local ] -->
 
 **Additional context**
 
