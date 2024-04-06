@@ -63,6 +63,17 @@ function enforceMonoweaveSatisfiesPeersDirectly({ Yarn }) {
             const peerDependencies = dependency.resolution?.peerDependencies
             if (!peerDependencies) continue
             for (const [peerName, peerRange] of peerDependencies.entries()) {
+                if (peerName.startsWith('@monoweave/')) {
+                    /** @type {string | undefined} */
+                    const previousRange = workspace.manifest.dependencies?.[peerName]
+                    const previousRangeMatch = previousRange.match(/^(workspace:\^\d+\.\d+)\.\d+$/)
+                    if (previousRangeMatch) {
+                        if (peerRange.startsWith(previousRangeMatch[1])) {
+                            // The range is only a "patch" off and we round peer deps down. So ignore.
+                            continue
+                        }
+                    }
+                }
                 workspace.set(['dependencies', peerName], peerRange)
             }
         }
