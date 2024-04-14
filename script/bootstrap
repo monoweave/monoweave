@@ -1,5 +1,17 @@
-corepack enable
+#!/bin/bash
+
+if ! command -v nvm &>/dev/null; then
+    echo "Missing nvm.";
+    return;
+fi
+
+. "${NVM_DIR:-~/.nvm}"/nvm.sh;
+nvm install &>/dev/null;
+
+if [[ ! "$*" == *"--no-corepack"* ]]; then
+    corepack enable;
+fi
 
 yarn && \
-    yarn husky install && \
-    yarn sdks vscode vim
+    yarn husky && \
+    yarn sdks vscode vim &>/dev/null;
