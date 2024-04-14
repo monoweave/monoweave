@@ -7,74 +7,50 @@ export { Layout as default } from '../components/Layout'
 
 ## Contributing to Monoweave
 
-### Quick Setup (Optional)
+We offer a [devcontainer](https://containers.dev/) which takes care of most environment setup for you.
+If you choose not to use the devcontainer, you will need [Corepack](https://github.com/nodejs/corepack) installed
+and enabled.
 
-Just for initial setup.
+#### If not using a devcontainer...
 
-```bash
-. script/bootstrap
-```
+There is a bootstrap script you can source that will validate your environment for local development. It is recommended
+to have [nvm](https://github.com/nvm-sh/nvm) installed, however it is not required. Running the bootstrap script _will_
+enable corepack for you. If you do not want this behaviour, run `. script/bootstrap --no-corepack`.
 
-### Getting Started
+You can run `. script/bootstrap` whenever dependencies change, it will run `yarn` for you.
 
-Optionally install nvm to ensure you're using the correct version of node. You can find the node version in the `.nvmrc` file.
+#### Technologies
 
-Install dependencies.
+This project uses:
 
-```bash
-yarn
-```
-
-and then install the git hooks:
-
-```bash
-yarn husky install
-```
-
-This project uses [Typescript](https://www.typescriptlang.org/) and [Yarn Modern](https://yarnpkg.com/).
+- Language: [Typescript](https://www.typescriptlang.org/)
+- Package Manager: [Yarn Modern](https://yarnpkg.com/)
+- Git Hooks: [lint-staged](https://github.com/lint-staged/lint-staged) and [husky](https://github.com/typicode/husky)
 
 ### Tests
 
-Start the mock registry:
+#### Unit & Integration Tests
 
-```bash
-yarn test:registry
-```
-
-and then run the tests:
-
-```bash
-yarn test
-```
-
-You can run `yarn test:registry:logs` to see a live stream of the registry logs.
-
-During development, you can usue the watch mode to have tests autorun on file changes:
-
-```bash
+```sh
 yarn test:watch
 ```
+
+#### End-to-end Testing (E2Es)
+
+```sh
+yarn test:e2e
+```
+
+You can run `yarn :e2e test:registry:logs` to see a live stream of the registry logs.
 
 ### Build
 
 You can execute `yarn build` to generate the build assets that ultimately gets uploaded to the NPM registry. It will also leave the intermediate `lib` artifacts, which contain the transpiled code.
 
-You can use `yarn workspaces foreach --worktree -p build:watch` to rebuild the lib directory (minus typescript definitions) on source file change.
-
-To regenerate typescript definition files (and to catch type violations):
+### Running the local version of monoweave against a repository
 
 ```bash
-yarn workspaces foreach --worktree -p types:watch
-```
-
-### Using Example Monorepo
-
-After building the code (via above watch commands), run:
-
-```bash
-yarn node packages/cli/lib/cli.js --cwd <PATH_TO_EXAMPLE_MONOREPO> \
-    --dry-run --log-level 0 \
-    --conventional-changelog-config conventional-changelog-angular
+yarn run-local --cwd <PATH_TO_OTHER_MONOREPO>
 ```
 
 ### Tips
