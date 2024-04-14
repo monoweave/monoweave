@@ -3037,7 +3037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monoweave/changelog@workspace:*, @monoweave/changelog@workspace:^1.2.5, @monoweave/changelog@workspace:packages/changelog":
+"@monoweave/changelog@workspace:*, @monoweave/changelog@workspace:^1.2.0, @monoweave/changelog@workspace:^1.2.5, @monoweave/changelog@workspace:packages/changelog":
   version: 0.0.0-use.local
   resolution: "@monoweave/changelog@workspace:packages/changelog"
   dependencies:
@@ -3070,6 +3070,10 @@ __metadata:
   resolution: "@monoweave/cli@workspace:packages/cli"
   dependencies:
     "@inquirer/prompts": "npm:^5.0.0"
+    "@monoweave/changelog": "workspace:^1.2.0"
+    "@monoweave/dependencies": "workspace:^1.2.0"
+    "@monoweave/git": "workspace:^1.2.0"
+    "@monoweave/io": "workspace:^1.2.0"
     "@monoweave/logging": "workspace:^1.2.4"
     "@monoweave/node": "workspace:^1.2.5"
     "@monoweave/test-utils": "link:../../testUtils"
@@ -3079,6 +3083,7 @@ __metadata:
     "@types/node": "npm:^20.12.7"
     "@yarnpkg/core": "npm:^4.0.3"
     "@yarnpkg/fslib": "npm:^3.0.2"
+    "@yarnpkg/shell": "npm:^4.0.0"
     ajv: "npm:^8.12.0"
     clipanion: "npm:^4.0.0-rc.3"
     json5: "npm:^2.2.3"
@@ -3089,7 +3094,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/dependencies@workspace:*, @monoweave/dependencies@workspace:^1.2.4, @monoweave/dependencies@workspace:packages/dependencies":
+"@monoweave/dependencies@workspace:*, @monoweave/dependencies@workspace:^1.2.0, @monoweave/dependencies@workspace:^1.2.4, @monoweave/dependencies@workspace:packages/dependencies":
   version: 0.0.0-use.local
   resolution: "@monoweave/dependencies@workspace:packages/dependencies"
   dependencies:
@@ -3163,7 +3168,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/git@workspace:*, @monoweave/git@workspace:^1.2.5, @monoweave/git@workspace:packages/git":
+"@monoweave/git@workspace:*, @monoweave/git@workspace:^1.2.0, @monoweave/git@workspace:^1.2.5, @monoweave/git@workspace:packages/git":
   version: 0.0.0-use.local
   resolution: "@monoweave/git@workspace:packages/git"
   dependencies:
@@ -3186,7 +3191,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/io@workspace:*, @monoweave/io@workspace:^1.2.4, @monoweave/io@workspace:packages/io":
+"@monoweave/io@workspace:*, @monoweave/io@workspace:^1.2.0, @monoweave/io@workspace:^1.2.4, @monoweave/io@workspace:packages/io":
   version: 0.0.0-use.local
   resolution: "@monoweave/io@workspace:packages/io"
   dependencies:
