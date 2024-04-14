@@ -108,6 +108,12 @@ This will suggest packages to release. You can filter the selection by using one
 yarn monoweave version "@my-scope/package-a" "@my-scope/package-*"
 ```
 
+A non-interactive version is also supported:
+
+```sh
+yarn monoweave version --no-interactive --strategy=minor --message="Some changelog entry" "@my-scope/package-a"
+```
+
 In this mode, you are choosing _not_ to use conventional changelogs.
 
 #### Node API

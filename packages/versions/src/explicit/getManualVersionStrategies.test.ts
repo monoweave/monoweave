@@ -4,7 +4,7 @@ import { npath, ppath } from '@yarnpkg/fslib'
 
 import {
     getManualVersionStrategies,
-    parseVersionFileContents,
+    parseDeferredVersionFile,
     writeDeferredVersionFile,
 } from './getManualVersionStrategies'
 
@@ -13,14 +13,14 @@ const mockGit = jest.mocked(git)
 describe('Version File Parsing', () => {
     it('throws an error on invalid files', async () => {
         await expect(() =>
-            parseVersionFileContents(
+            parseDeferredVersionFile(
                 ['"@scope/package": minor', '---', 'Changelog entry.'].join('\n'),
             ),
         ).rejects.toThrow(/Invalid version file/)
     })
 
     it('parses a version file', async () => {
-        const contents = await parseVersionFileContents(
+        const contents = await parseDeferredVersionFile(
             [
                 '---',
                 '"@my/package-1": minor',

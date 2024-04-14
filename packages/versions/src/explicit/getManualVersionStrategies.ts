@@ -17,7 +17,7 @@ import YAML from 'yaml'
 
 import { maxStrategy } from '../versionStrategy'
 
-export async function parseVersionFileContents(contents: string): Promise<DeferredVersionRecord> {
+export async function parseDeferredVersionFile(contents: string): Promise<DeferredVersionRecord> {
     const [line1, ...lines] = contents.split('\n')
     if (line1 !== '---') throw new Error('Invalid version file, expected "---".')
 
@@ -161,7 +161,7 @@ export async function getManualVersionStrategies({
         deferredVersionFiles.map((file) =>
             limitRead(async () => {
                 const contents = await fs.promises.readFile(file, { encoding: 'utf-8' })
-                return await parseVersionFileContents(contents)
+                return await parseDeferredVersionFile(contents)
             }),
         ),
     )

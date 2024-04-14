@@ -47,8 +47,8 @@
         "run-local": "ts-node $(yarn bin monoweave)",
         "docs": "run :docs build",
         "docs:dev": "run :docs develop",
-        ":docs": "workspace @monoweave/gatsby",
-        ":e2e": "workspace @monoweave/e2e-tests",
+        ":docs": "yarn workspace @monoweave/gatsby",
+        ":e2e": "yarn workspace @monoweave/e2e-tests",
         "update:yarn": "corepack use yarn@^4 && yarn && yarn up \"@yarnpkg/*\" && yarn constraints --fix && yarn dedupe"
     },
     "devDependencies": {
