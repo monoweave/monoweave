@@ -35,8 +35,8 @@
     "@monoweave/test-utils": "link:../../testUtils",
     "@monoweave/types": "workspace:*",
     "@types/jest": "^29.5.12",
-    "@types/micromatch": "^4.0.6",
-    "@types/node": "^20.12.2",
+    "@types/micromatch": "^4.0.7",
+    "@types/node": "^20.12.7",
     "@yarnpkg/core": "^4.0.3",
     "@yarnpkg/fslib": "^3.0.2"
   },
