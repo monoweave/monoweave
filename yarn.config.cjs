@@ -49,19 +49,26 @@ function enforceYarnLibraryPeerAndDevConsistency({ Yarn }) {
 }
 
 /**
- * Monoweave (CLI + Node + Plugins) should satisfy all dependency's peers.
+ * All workspaces should satisfy their peer dependencies.
  *
  * @param {import('@yarnpkg/types').Yarn.Constraints.Context} context
  */
-function enforceMonoweaveSatisfiesPeersDirectly({ Yarn }) {
-    for (const workspaceIdent of independentWorkspaceIdents) {
-        const workspace = Yarn.workspace({ ident: workspaceIdent })
-        if (!workspace) throw new Error(`Missing ${workspaceIdent}!`)
+function enforceMonoweaveSatisfiesPeers({ Yarn }) {
+    for (const workspace of Yarn.workspaces()) {
         for (const dependency of Yarn.dependencies({ workspace, type: 'dependencies' })) {
-            if (!Yarn.workspace({ ident: dependency.ident })) continue
-            // Get all peers of the dependency and make sure we satisfy them
-            const peerDependencies = dependency.resolution?.peerDependencies
+            const dependencyWorkspace = Yarn.workspace({ ident: dependency.ident })
+            if (!dependencyWorkspace) continue
+            // Get all peers of the dependency and make sure we satisfy them.
+            // Note that resolution.peerDependencies only shows installed peer dependencies, won't show missing,
+            // we have to use the manifest instead
+            const peerDependencies = dependencyWorkspace.pkg.peerDependencies
             if (!peerDependencies) continue
+            // If the workspace is "independent" (i.e. meant to be consumed directly), the peer must be
+            // satisfied as a direct dependency. Otherwise, it should be a peer _if_ it's not directly satisfied.
+            const expectedType = independentWorkspaceIdents.has(workspace.ident)
+                ? 'dependencies'
+                : 'peerDependencies'
+
             for (const [peerName, peerRange] of peerDependencies.entries()) {
                 if (peerName.startsWith('@monoweave/')) {
                     /** @type {string | undefined} */
@@ -74,7 +81,7 @@ function enforceMonoweaveSatisfiesPeersDirectly({ Yarn }) {
                         }
                     }
                 }
-                workspace.set(['dependencies', peerName], peerRange)
+                workspace.set([expectedType, peerName], peerRange)
             }
         }
     }
@@ -141,7 +148,7 @@ function enforceYarnLibrariesPeerAndDev({ Yarn }) {
 
 module.exports = {
     async constraints(ctx) {
-        enforceMonoweaveSatisfiesPeersDirectly(ctx)
+        enforceMonoweaveSatisfiesPeers(ctx)
         enforceWorkspaceDependenciesWhenPossible(ctx)
         enforceYarnLibraryPeerAndDevConsistency(ctx)
         enforceYarnLibrariesPeerAndDev(ctx)
