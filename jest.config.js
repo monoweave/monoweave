@@ -8,7 +8,13 @@ const config = {
     setupFiles: ['<rootDir>/testUtils/setup.ts'],
 
     collectCoverageFrom: ['packages/**/src/**/*.ts', '.yarn/__virtual__/**/packages/**/*.ts'],
-    coveragePathIgnorePatterns: ['/node_modules/', '/__mocks__/', '\\.test.ts$', '\\.mock.ts$'],
+    coveragePathIgnorePatterns: [
+        '/node_modules/',
+        '/__mocks__/',
+        '\\.test.ts$',
+        '\\.mock.ts$',
+        '<rootDir>\\/testUtils',
+    ],
     watchPathIgnorePatterns: [
         '<rootDir>/example-monorepo',
         '<rootDir>/artifacts',
