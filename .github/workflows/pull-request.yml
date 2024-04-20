@@ -99,9 +99,10 @@ jobs:
       - name: Generate Report
         run: yarn test:coverage:report
       - name: Upload Coverage Report
-        run: ./.github/codecov.sh $GITHUB_EVENT_PATH
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@84508663e988701840491b86de86b666e8a86bed # v4.3.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ${{ env.ARTIFACT_DIR }}
 
   tests_compatibility:
     name: Test Compatibility - ${{ matrix.runner }} / Node ${{ matrix.node-version }}
