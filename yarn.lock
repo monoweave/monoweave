@@ -3310,7 +3310,6 @@ __metadata:
     ts-jest: "npm:^29.1.2"
     ts-node: "npm:^10.9.2"
     typescript: "npm:^5.4.5"
-    yaml-validator: "npm:^5.1.0"
   dependenciesMeta:
     core-js:
       built: false
@@ -7932,15 +7931,6 @@ __metadata:
   version: 0.7.0
   resolution: "chardet@npm:0.7.0"
   checksum: 10/b0ec668fba5eeec575ed2559a0917ba41a6481f49063c8445400e476754e0957ee09e44dc032310f526182b8f1bf25e9d4ed371f74050af7be1383e06bc44952
-  languageName: node
-  linkType: hard
-
-"check-type@npm:0.4.11":
-  version: 0.4.11
-  resolution: "check-type@npm:0.4.11"
-  dependencies:
-    underscore: "npm:1.6.0"
-  checksum: 10/a4682ef369353ea456e80c5f59c05a9254982630e371672856b9b85bd277a1a30541fbeff344be7f1878ffa25f07a48f7e67834d7ed17e7e2ccf919e36aeda8e
   languageName: node
   linkType: hard
 
@@ -14717,17 +14707,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:4.1.0, js-yaml@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "js-yaml@npm:4.1.0"
-  dependencies:
-    argparse: "npm:^2.0.1"
-  bin:
-    js-yaml: bin/js-yaml.js
-  checksum: 10/c138a34a3fd0d08ebaf71273ad4465569a483b8a639e0b118ff65698d257c2791d3199e3f303631f2cb98213fa7b5f5d6a4621fd0fff819421b990d30d967140
-  languageName: node
-  linkType: hard
-
 "js-yaml@npm:^3.10.0, js-yaml@npm:^3.13.1":
   version: 3.14.1
   resolution: "js-yaml@npm:3.14.1"
@@ -14737,6 +14716,17 @@ __metadata:
   bin:
     js-yaml: bin/js-yaml.js
   checksum: 10/9e22d80b4d0105b9899135365f746d47466ed53ef4223c529b3c0f7a39907743fdbd3c4379f94f1106f02755b5e90b2faaf84801a891135544e1ea475d1a1379
+  languageName: node
+  linkType: hard
+
+"js-yaml@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "js-yaml@npm:4.1.0"
+  dependencies:
+    argparse: "npm:^2.0.1"
+  bin:
+    js-yaml: bin/js-yaml.js
+  checksum: 10/c138a34a3fd0d08ebaf71273ad4465569a483b8a639e0b118ff65698d257c2791d3199e3f303631f2cb98213fa7b5f5d6a4621fd0fff819421b990d30d967140
   languageName: node
   linkType: hard
 
@@ -17773,7 +17763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"optionator@npm:0.9.3, optionator@npm:^0.9.1, optionator@npm:^0.9.3":
+"optionator@npm:^0.9.1, optionator@npm:^0.9.3":
   version: 0.9.3
   resolution: "optionator@npm:0.9.3"
   dependencies:
@@ -21998,13 +21988,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"underscore@npm:1.6.0":
-  version: 1.6.0
-  resolution: "underscore@npm:1.6.0"
-  checksum: 10/c16047138c4a8ccfd6ae497f456b124f713ad0a236fe11f1e327053d1858003a3238fb6b59d58ee245d4e1b74ce3cd95c340a2dddac9fcb142f0dc5fcc552e19
-  languageName: node
-  linkType: hard
-
 "undici-types@npm:~5.26.4":
   version: 5.26.5
   resolution: "undici-types@npm:5.26.5"
@@ -23300,19 +23283,6 @@ __metadata:
     loader-utils: "npm:^2.0.0"
     yaml: "npm:^2.0.0"
   checksum: 10/2969eb7d6083a95a8d95369906bbc73d124125be5f61556506d230a57b7acc872abe836bf631f89aa97d9e8198bee8d100fa68d5a6524be84cd8eb5062cf76d3
-  languageName: node
-  linkType: hard
-
-"yaml-validator@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "yaml-validator@npm:5.1.0"
-  dependencies:
-    check-type: "npm:0.4.11"
-    js-yaml: "npm:4.1.0"
-    optionator: "npm:0.9.3"
-  bin:
-    yaml-validator: bin/yaml-validator.js
-  checksum: 10/b87a08a92690e6b59b4670a7f3908b3c62801108241b5a2247183f8e0c64569c6107c2119184275a184e1c3741fcfc63289c1a0fd1d65f25baddf236f5761627
   languageName: node
   linkType: hard
 
