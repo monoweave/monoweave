@@ -65,15 +65,16 @@ function enforceMonoweaveSatisfiesPeers({ Yarn }) {
             if (!peerDependencies) continue
             // If the workspace is "independent" (i.e. meant to be consumed directly), the peer must be
             // satisfied as a direct dependency. Otherwise, it should be a peer _if_ it's not directly satisfied.
-            const expectedType = independentWorkspaceIdents.has(workspace.ident)
-                ? 'dependencies'
-                : 'peerDependencies'
+            const expectedType =
+                workspace.ident && independentWorkspaceIdents.has(workspace.ident)
+                    ? 'dependencies'
+                    : 'peerDependencies'
 
             for (const [peerName, peerRange] of peerDependencies.entries()) {
                 if (peerName.startsWith('@monoweave/')) {
                     /** @type {string | undefined} */
                     const previousRange = workspace.manifest.dependencies?.[peerName]
-                    const previousRangeMatch = previousRange.match(/^(workspace:\^\d+\.\d+)\.\d+$/)
+                    const previousRangeMatch = previousRange?.match(/^(workspace:\^\d+\.\d+)\.\d+$/)
                     if (previousRangeMatch) {
                         if (peerRange.startsWith(previousRangeMatch[1])) {
                             // The range is only a "patch" off and we round peer deps down. So ignore.

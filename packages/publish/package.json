@@ -40,8 +40,8 @@
     "@monoweave/test-utils": "link:../../testUtils",
     "@monoweave/types": "workspace:*",
     "@types/jest": "^29.5.12",
-    "@yarnpkg/cli": "^4.1.1",
-    "@yarnpkg/core": "^4.0.3",
+    "@yarnpkg/cli": "^4.2.1",
+    "@yarnpkg/core": "^4.0.5",
     "@yarnpkg/fslib": "^3.0.2",
     "@yarnpkg/plugin-npm": "^3.0.1",
     "@yarnpkg/plugin-pack": "^4.0.0"
@@ -52,8 +52,8 @@
     "@monoweave/io": "workspace:^1.2.0",
     "@monoweave/logging": "workspace:^1.2.0",
     "@monoweave/types": "workspace:^1.1.0",
-    "@yarnpkg/cli": "^4.1.1",
-    "@yarnpkg/core": "^4.0.3",
+    "@yarnpkg/cli": "^4.2.1",
+    "@yarnpkg/core": "^4.0.5",
     "@yarnpkg/fslib": "^3.0.2",
     "@yarnpkg/plugin-npm": "^3.0.1",
     "@yarnpkg/plugin-pack": "^4.0.0"
