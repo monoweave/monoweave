@@ -1,6 +1,6 @@
 {
 	"name": "Monoweave DevContainer",
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:0-18-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye",
 	"postCreateCommand": "sudo corepack enable && yarn install",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
