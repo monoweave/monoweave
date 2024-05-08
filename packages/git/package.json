@@ -38,7 +38,7 @@
     "@types/micromatch": "^4.0.7",
     "@types/node": "^20.12.7",
     "@yarnpkg/core": "^4.0.5",
-    "@yarnpkg/fslib": "^3.0.2"
+    "@yarnpkg/fslib": "^3.1.0"
   },
   "dependencies": {
     "micromatch": "^4.0.5"
@@ -48,6 +48,6 @@
     "@monoweave/logging": "workspace:^1.4.0",
     "@monoweave/types": "workspace:^1.4.0",
     "@yarnpkg/core": "^4.0.5",
-    "@yarnpkg/fslib": "^3.0.2"
+    "@yarnpkg/fslib": "^3.1.0"
   }
 }

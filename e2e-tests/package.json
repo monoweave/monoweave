@@ -20,7 +20,7 @@
         "@tophat/conventional-changelog-config": "^1.0.1",
         "@types/node": "^20.12.7",
         "@yarnpkg/core": "^4.0.5",
-        "@yarnpkg/fslib": "^3.0.2",
+        "@yarnpkg/fslib": "^3.1.0",
         "helpers": "link:./helpers"
     },
     "author": {
