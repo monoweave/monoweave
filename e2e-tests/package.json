@@ -18,7 +18,7 @@
         "@monoweave/test-utils": "link:../testUtils",
         "@monoweave/types": "workspace:*",
         "@tophat/conventional-changelog-config": "^1.0.1",
-        "@types/node": "^20.12.7",
+        "@types/node": "^20.12.11",
         "@yarnpkg/core": "^4.0.5",
         "@yarnpkg/fslib": "^3.1.0",
         "helpers": "link:./helpers"
