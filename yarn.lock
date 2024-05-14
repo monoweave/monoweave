@@ -3356,7 +3356,7 @@ __metadata:
     "@monoweave/test-utils": "link:../../testUtils"
     "@monoweave/types": "workspace:^1.4.1"
     "@octokit/core": "npm:^6.1.2"
-    "@octokit/plugin-throttling": "npm:^9.2.0"
+    "@octokit/plugin-throttling": "npm:^9.2.1"
     "@types/jest": "npm:^29.5.12"
     "@types/node": "npm:^20.12.11"
     "@yarnpkg/core": "npm:^4.0.5"
@@ -3709,15 +3709,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-throttling@npm:^9.2.0":
-  version: 9.2.0
-  resolution: "@octokit/plugin-throttling@npm:9.2.0"
+"@octokit/plugin-throttling@npm:^9.2.1":
+  version: 9.3.0
+  resolution: "@octokit/plugin-throttling@npm:9.3.0"
   dependencies:
     "@octokit/types": "npm:^13.0.0"
     bottleneck: "npm:^2.15.3"
   peerDependencies:
     "@octokit/core": ^6.0.0
-  checksum: 10/1d8ff938f2f9d5cb13943adc301aadfc5295dd009c6fc5f81f5b12f805a56be732fdc6e6e76ac6c7111477318b0458ba3b70c244a079d02c435c8c18fc932a31
+  checksum: 10/8faee4225e71d687238bfe4324734139c87cce00315cc4d6a4943415dafc2519086d2f3fbacca860d2897f04af6c16e0685dd80a7ee78536dc0fd98c546a632c
   languageName: node
   linkType: hard
 
