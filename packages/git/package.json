@@ -36,12 +36,12 @@
     "@monoweave/types": "workspace:*",
     "@types/jest": "^29.5.12",
     "@types/micromatch": "^4.0.7",
-    "@types/node": "^20.12.11",
+    "@types/node": "^20.12.12",
     "@yarnpkg/core": "^4.0.5",
     "@yarnpkg/fslib": "^3.1.0"
   },
   "dependencies": {
-    "micromatch": "^4.0.5"
+    "micromatch": "^4.0.7"
   },
   "peerDependencies": {
     "@monoweave/io": "workspace:^1.4.0",

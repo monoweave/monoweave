@@ -30,14 +30,14 @@
     "prepack": "run workspace:build \"$(pwd)\""
   },
   "dependencies": {
-    "semver": "^7.6.0"
+    "semver": "^7.6.2"
   },
   "devDependencies": {
     "@monoweave/logging": "workspace:*",
     "@monoweave/test-utils": "link:../../testUtils",
     "@monoweave/types": "workspace:*",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.12.11",
+    "@types/node": "^20.12.12",
     "@types/semver": "^7.5.8",
     "@yarnpkg/core": "^4.0.5",
     "@yarnpkg/fslib": "^3.1.0",
