@@ -49,10 +49,10 @@
   "devDependencies": {
     "@monoweave/test-utils": "link:../../testUtils",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.12.11"
+    "@types/node": "^20.12.12"
   },
   "dependencies": {
-    "@inquirer/prompts": "^5.0.2",
+    "@inquirer/prompts": "^5.0.4",
     "@monoweave/changelog": "workspace:^1.4.1",
     "@monoweave/dependencies": "workspace:^1.4.1",
     "@monoweave/git": "workspace:^1.4.1",
