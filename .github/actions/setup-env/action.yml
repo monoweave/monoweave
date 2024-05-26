@@ -23,6 +23,7 @@ runs:
       shell: bash
       run: |
         echo "COREPACK_ENABLE_DOWNLOAD_PROMPT=0" >> "$GITHUB_ENV"
+        echo "YARN_ENABLE_GLOBAL_CACHE=0" >> "$GITHUB_ENV"
     - name: Detect Node Version
       id: detect-node
       run: |
@@ -50,11 +51,9 @@ runs:
           .yarn/unplugged
           .pnp.*
         key: ${{ inputs.cache-prefix }}-${{ hashFiles('yarn.lock') }}-${{ steps.detect-node.outputs.version }}
-        restore-keys: ${{ inputs.cache-prefix }}-
-    - name: Disable Yarn global cache
-      shell: bash
-      run: |
-        echo "YARN_ENABLE_GLOBAL_CACHE=0" >> "$GITHUB_ENV"
+        restore-keys: |
+          ${{ inputs.cache-prefix }}-${{ hashFiles('yarn.lock') }}-
+          ${{ inputs.cache-prefix }}-
     - name: Install Yarn Project
       run: yarn install --immutable
       shell: bash
