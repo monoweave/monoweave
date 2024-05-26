@@ -49,7 +49,12 @@ runs:
           .yarn/cache
           .yarn/unplugged
           .pnp.*
-        key: ${{ inputs.cache-prefix }}-${{ steps.detect-node.outputs.version }}-${{ hashFiles('yarn.lock') }}
+        key: ${{ inputs.cache-prefix }}-${{ hashFiles('yarn.lock') }}-${{ steps.detect-node.outputs.version }}
+        restore-keys: ${{ inputs.cache-prefix }}-
+    - name: Disable Yarn global cache
+      shell: bash
+      run: |
+        echo "YARN_ENABLE_GLOBAL_CACHE=0" >> "$GITHUB_ENV"
     - name: Install Yarn Project
       run: yarn install --immutable
       shell: bash
