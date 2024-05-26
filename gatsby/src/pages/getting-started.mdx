@@ -17,15 +17,15 @@ Install `@monoweave/cli`:
 
 ```bash
 yarn add -D @monoweave/cli
-yarn monoweave --dry-run
+yarn monoweave
 ```
 
 1. Edit your project's root `package.json` and set "workspaces": ["packages/*"] (you can use a different glob to match your monorepo layout).
-2. Create a `monoweave.config.js` file and set it to:
+2. Create a `monoweave.config.yaml` file and set it to:
 
-  ```js
-  module.exports = { preset: 'monoweave/preset-recommended' }
-  ```
+   ```yaml
+   preset: monoweave/preset-recommended # or preset-manual for changeset files
+   ```
 
   You'll be extending this file as you make changes to your project's publish configuration.
 
@@ -43,6 +43,8 @@ yarn monoweave --dry-run
   yarn monoweave --no-push
   git push --tags
   ```
+
+5. If using GitHub Actions, check out If using GitHub Actions, also check out our release preview reusable action: [monoweave/github-action-preview@main](https://github.com/monoweave/github-action-preview) to generate release previews on open pull requests.
 
 ### API
 
@@ -143,7 +145,7 @@ Note that configuration presets are not supported when using the Node API.
 
 ### Changelog
 
-The recommend preset will create changelog entries within each individual package folder. It is equivalent to adding the `--changelog-filename "<packageDir>/CHANGELOG.md"` flag to the CLI. To aggregate changelog entries in a single changelog file, omit the `<packageDir>/` variable.
+The recommended preset will create changelog entries within each individual package folder. It is equivalent to adding the `--changelog-filename "<packageDir>/CHANGELOG.md"` flag to the CLI. To aggregate changelog entries in a single changelog file, omit the `<packageDir>/` variable.
 
 If adding monoweave to a project with existing changelogs, you'll need to add the a special marker to each changelog file to let monoweave know where to insert the changelog entries. For example:
 
