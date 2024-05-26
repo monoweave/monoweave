@@ -1,7 +1,7 @@
 #!/bin/bash
 
 tmp_registry_log=`mktemp`
-DEBUG=1 yarn dlx verdaccio@5.30.2 --listen http://0.0.0.0:4873 --config ~/config.yaml 2>&1 | tee $tmp_registry_log &
+DEBUG=1 yarn dlx verdaccio@5.32.1 --listen http://0.0.0.0:4873 --config ~/config.yaml 2>&1 | tee $tmp_registry_log &
 
 grep -q 'http address' <(tail -f $tmp_registry_log);
 

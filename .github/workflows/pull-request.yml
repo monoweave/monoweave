@@ -67,7 +67,8 @@ jobs:
     strategy:
       matrix:
         runner: ['ubuntu-latest']
-        node-version: ['lts/hydrogen', 'lts/iron']
+        node-version: ['lts/hydrogen', 'lts/iron', 'current']
+    continue-on-error: ${{ matrix.node-version == 'current' }}
     steps:
         - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         - uses: ./.github/actions/setup-env
