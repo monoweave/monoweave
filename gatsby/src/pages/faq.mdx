@@ -27,6 +27,8 @@ yarn monoweave --dry-run --changeset-filename=-
 
 to implicitly disable logs and only output the changeset data. This is useful for previewing changes or determining which packages will be modified from a Pull Request.
 
+If using GitHub Actions, also check out our release preview reusable action: [monoweave/github-action-preview@main](https://github.com/monoweave/github-action-preview).
+
 ### Packages I haven't modified are being published with a patch version bump, what's going on?
 
 In addition to the version strategies associated with packages explicitly modified via your commits, what we call the _explicit version strategies_, Monoweave will also perform a patch version strategy bump to all dependent packages, what we call _implicit version strategies_. The idea behind this is that when you run tests and do development in your monorepo, you are always working with the _latest_ packages. Therefore if Package-A depends on Package-B and Package-B has been modified, we also want to release a version of Package-A where Package-A's version range for Package-B has been increased. This Package-A that a downstream project consumes will then be guaranteed to be using the same version of Package-B that is used in the monorepo itself.
@@ -57,20 +59,151 @@ and then commit change files generated via:
 yarn monoweave version
 ```
 
+If using automatic mode, there is currently no way to force a manual release.
+
 ### How can I achieve behaviour similar to Lerna's fixed version mode?
 
 Fixed version mode can be achieved by setting the `packageGroupManifestField` in your monoweave configuration, or via the CLI argument. This config option should be set to some field in each workspace's manifest file to indicate fixed version grouping. For example, you can add a "group" field set to "components" for some workspaces and "utils" for other workspaces. Monoweave will then ensure all workspaces with changes (or dependent changes) in the "components" group have the same version bump. To achieve fixed versioning of all workspaces, you need to specify a field that all workspaces have in common. You can also enforce this with the use of the Yarn Constraints plugin.
 
-### How does Monoweave differ from:
+### How does Monoweave differ from ...?
 
-#### Lerna
+Monoweave only supports [Yarn-modern](https://yarnpkg.com) projects with minimum Node version >=18.19.
 
-Unlike Lerna, Monoweave was designed with Yarn Modern support from the ground up and is optimized for Yarn monorepos. In terms of raw functionality, Monoweave supports a workflow where versions are _not_ committed back to the git repository. This is useful when it is not feasible to commit back to a repository in CI (for example when using a tool such as Jenkins with many concurrent developers working in a project).
+<div class="scroll">
+<table class="plain">
+    <thead>
+        <tr>
+            <th>Tool</th>
+            <th>Package Managers</th>
+            <th>Monorepo Support</th>
+            <th>Conventional Commits</th>
+            <th>Changeset Files</th>
+            <th>Changelogs</th>
+            <th>publishConfig overrides</th>
+            <th>workspace:^ protocol</th>
+            <th>Version Groups</th>
+            <th>Pull Request Previews</th>
+            <th>GitHub Releases</th>
+            <th>Plugin Support</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>[Monoweave](https://github.com/monoweave/monoweave)</th>
+            <td>yarn</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <th>[Lerna](https://github.com/lerna/lerna)</th>
+            <td>yarn, npm, pnpm</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>🟨</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <th>[Lerna Lite](https://github.com/lerna-lite/lerna-lite)</th>
+            <td>yarn, npm, pnpm</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>🟨</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <th>[Yarn Version Plugin](https://yarnpkg.com/cli/version)</th>
+            <td>yarn</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <th>[Atlassian Changesets](https://github.com/changesets/changesets)</th>
+            <td>[yarn*](https://github.com/changesets/changesets/pull/674), npm, pnpm</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <th>[Microsoft Beachball](https://github.com/microsoft/beachball)</th>
+            <td>yarn, npm, pnpm</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>❌[*](https://github.com/microsoft/beachball/issues/885)</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <th>[Semantic Release](https://github.com/semantic-release/semantic-release)</th>
+            <td>yarn, npm, pnpm</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+        </tr>
+    </tbody>
+</table>
+</div>
 
-#### Yarn's Version Plugin
+> Legend: ✅ supported, 🟨 partial support, ❌ not supported
 
-Monoweave started out as a Lerna replacement to solve some issues we were having internally with Lerna, and so Lerna's features were the ones we were striving to attain parity with. Read through the Yarn Version Plugin documentation and decide which workflow you prefer, there will be pros and cons to either. At the time of writing, Monoweave goes beyond Yarn's version plugin in a few notable ways: monoweave does not just determine the version to publish, but also generates git tags, GitHub releases, and changelogs. Monoweave supports an entirely automated release process, where versions are determined via commit messages, whereas Yarn's version plugin requires manual specification of the version strategy per workspace.
+_If you notice an error or inaccuracy in the above comparison table, please open a GitHub issue. It's not possible to remove bias, however this should still be an accurate representation of how monoweave compares to other tooling._
 
-#### Changesets
+**Feature definitions/notes:**
 
-Both changesets and monoweave are comprehensive tools. Changesets has a larger community around it than monoweave. Monoweave however has better integration with Yarn Modern. Notably, monoweave uses Yarn's built-in packing logic, i.e. the same logic that controls how `publishConfig` is treated.
+1. Package Managers: Monoweave only supports Yarn modern. Changesets partially supports Yarn modern since they don't use Yarn internally to publish so don't natively support Yarn workspace protocols (e.g. `workspace:^`).
+2. Monorepo Support: Only semantic release in the above list doesn't support monorepos. All other tools, including monoweave, also support publishing a single non-monorepo package.
+3. Conventional Commits: Monoweave, Lerna, and Semantic Release all support reading git commit messages according to [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) to determine the version strategy to apply. This behaviour can be disabled in monoweave, but is required for semantic release (Lerna does have a way to version from the command line to bypass commit messages).
+4. Changeset Files: This is called "manual mode" in monoweave, and is a more explicit versioning approach compared to the conventional commits parsing above. Monoweave's changeset files are called "version files" and follow a format very similar to Changesets.
+5. Changelogs: When using the conventional commits mode with Monoweave, changelogs are generated using [conventional changelogs](https://github.com/conventional-changelog/conventional-changelog), otherwise there's a default writer that pulls changelogs from manual version files.
+6. publishConfig overrides: Monoweave uses Yarn publishing internally which will copy some fields from your package.json's publishConfig property. This enables a pattern of having "main" point to source code and "publishConfig.main" point to build artifacts.
+7. workspace:^ protocol: Yarn supports listing workspace dependencies using `workspace:^` and `workspace:*`. This instructs Yarn to resolve the dependency to a local version instead of remote. Monoweave removes the workspace protocol during publish and respects the version range specifier (`^` and `*`).
+8. Version Groups: Lerna offers a "fixed/locked" mode that ties all versions in a project together, however it's marked as "partial" in the table above since it doesn't offer granularity within a monorepo. Beachball calls this version groups.
+9. Pull Request Previews: Monoweave has a [GitHub Action](https://github.com/monoweave/github-action-preview) for pull request previews. It can be adapted for other CI systems if there's demand.
+10. GitHub Releases: Monoweave implements GitHub releases using the monoweave plugin system. We have some open issues tracking additional functionality for the plugin.
+11. Plugin Support: Monoweave exposes [tappable](https://github.com/webpack/tapable) hooks, this is how the GitHub releases functionality is added. Since Monoweave uses Yarn internally, Yarn plugins can also be used to extend monoweave.

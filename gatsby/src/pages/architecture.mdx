@@ -9,31 +9,30 @@ export { Layout as default } from '../components/Layout'
 
 ### Code Organization
 
-The Monoweave codebase is organized as a monorepo, and ultimately uses monoweave to publish itself.
+The Monoweave codebase is a Yarn-monorepo built using Monoweave.
 
-The `packages/cli` directory contains the root `monoweave` package, which is a loose wrapper around `@monoweave/node`. The `@monoweave/node` package houses the pipeline logic and acts similar to the `@private/core` package of other popular monorepo based projects.
+The `packages/cli` directory contains the root `@monoweave/cli` package, which provides a CLI around the programmatic API that is housed in `@monoweave/node`.
 
-### Publish Pipeline
+### Pipeline
 
 ![Architecture Diagram](../images/architecture.png)
 
-The high-level of the pipeline aims to be simple, with most complexities abstracted away.
+When monoweave is run outside of dry run mode (the default in CI), it executes a number of "pipeline" stages in sequence.
 
-In the first stage of the pipeline, after initialization, we use the loaded conventional changelog config to determine the packages which have been explicitly bumped via commit messages. An explicitly bumped package is always directly included in the commits ranging from the base commit to the publish commit. The conventional changelog configuration is ultimately responsible for correct parsing of the commit messages, and for the correctness of the version strategy determiner algorithm.
+1. Project Initialization: The project is "parsed" using the Yarn Modern APIs. A Yarn-incompatible project will fail at this stage. All configuration is fully resolved and plugins instantiated.
+2. Gathering Project State: In this stage we need to determine the "current state" of all workspaces. This ultimately depends on the `RegistryMode` in the monoweave configuration. Note that RegistryMode is evaluated per workspace, so it's possible to have some workspaces pull version information from NPM while others pull from the manifest.
+    a. Default / NPM: The latest and/or pre-release tags are fetched for all workspaces from the appropriate NPM registry.
+    b. Manifest: The latest tag is read from the workspace's package.json file.
+3. Resolving Explicit Version Strategies: In this stage monoweave needs to determine what types of changes to apply to each workspace, starting with "explicit" changes. Version strategy determination (whether a workspace should receive a "patch/minor/major" bump, a "prerelease" bump, or none at all) depends on whether monoweave is running in "automatic" (default/recommended) or "manual" mode. The determination of the version strategies by package is the beginning of the creation of Monoweave's "changeset". This changeset is enhanced a few times throughout the pipeline before ultimately being written out to the changeset file.
+    a. Manual: Committed version files are consumed. In manual mode, commit messages are completely ignored.
+    b. Automatic: If a conventional changelog configuration is provided, it will be used directly for version determination, otherwise a reasonable default is built-in to monoweave. Commit messages are parsed for information that will determine what type of strategy to apply to each workspace.
+4. Resolving Implicit Version Strategies: Once monoweave has a set of workspaces with associated version strategies, it needs to determine implicit strategies. This is accomplished by traversing the dependencies graph and finding all dependents of the explicitly bumped packages, excluding dependents which themselves are explicitly bumped. These dependent packages are automatically given a patch version strategy. This is to ensure downstream consumers of the explicitly bumped packages receive updates. If using package groups (similar to Lerna's fixed mode), the greatest strategy is assumed for each group. Note that if no groups are specified, monoweave defaults to treat each package as its own independent group.
+5. Resolving Versions From Strategies: The collection of version strategies associated with the individual workspaces are now read to apply the version strategy (e.g. "minor") to the latest version of each package. Each package group resolves to use the largest version number among the group for each of its members.
+6. Update package.json Files: Package manifests (`package.json` files) are updated so the `version` of the manifest, and the versions listed in the `dependencies`, `peerDependencies`, and `devDependencies` fields reflect the latest versions we are about to publish. If `persistVersions` is set to false, the changes to the package.json files will be reverted post-publish. Once the package.json files are updated, Yarn will trigger an install to update the Yarn lockfiles as well as any other install state files.
+7. Writing Changelogs: The changeset data assembled in the earlier pipeline stages is formatted and piped through to the loaded conventional changelog config if in automatic mode, or through a built-in changelog writer if using manual mode.
+8. Publishing & Lifecycle Script Execution: Depending on configuration options, the changelog files, and the modified package manifests are committed. Once a publish commit has been created, each workspace is published to the appropriate registry according to the workspace's configuration. It's possible to have a project where some workspaces publish to a private registry, some to a public one, and some that aren't published at all (e.g. manifest registry mode). Before and after publishing each package, the appropriate npm lifecycle hooks are executed. These hooks are guaranteed to be executed in topological order, if the topological configuration option is enabled. Post-NPM publish, if all is successful, the git commit and tags are pushed to the remote git registry.
 
-The determination of the version strategies by package is the beginning of the creation of Monoweave's "changeset". This changeset is enhanced a few times throughout the pipeline before ultimately being written out to the changeset file.
-
-Once we have the explicit version strategies, we determine the implicit strategies. This is accomplished by traversing the dependencies graph and finding all dependents of the explicitly bumped packages, excluding dependents which themselves are explicitly bumped. These dependent packages are automatically given a patch version strategy. This is to ensure downstream consumers of the explicitly bumped packages receive updates. If using package groups (similar to Lerna's fixed mode), the greatest strategy is assumed for each group. Note that if no groups are specified, monoweave defaults to treat each package as its own independent group.
-
-The collection of version strategies associated with the individual packages are now read to apply the version strategy (e.g. "minor") to the latest version of each package. Each package group resolves to use the largest version number among the group for each of its members. Package manifests (`package.json` files) are updated so the `version` of the manifest, and the versions listed in the `dependencies`, `peerDependencies`, and `devDependencies` fields reflect the latest versions we are about to publish.
-
-After manifest files are updated, Yarn triggers an install to update the Yarn lockfile, as well as any other install state files.
-
-Once the manifests of all packages we will be publishing are updated, we trigger a publish to the specified NPM-like registry. Before and after publishing each package, the appropriate npm lifecycle hooks are executed. These hooks are guaranteed to be executed in topological order, if the topological configuration option is enabled.
-
-At this point, the changeset information for each published package is piped through the loaded conventional changelog config, and changelog files are written. Depending on configuration options, the changelog files, and the modified package manifests are committed. If enabled, release git tags are created then created, and the tagged commit is pushed to the remote git repository.
-
-At various steps throughout the pipepline, Monoweave plugin hooks will be triggered.
+At various steps throughout the pipepline, Monoweave plugin hooks will be triggered. Note that most of Monoweave's behaviour can be modified either through simple configuration or plugins.
 
 ### Lifecycle Scripts
 
@@ -55,7 +54,7 @@ The exact order of lifecycle scripts executed is as follows (this may differ fro
     - This is not directly supported by Yarn Modern, however was introduced by NPM as a replacement for the deprecated 'prepublish' script.
 4. prepack
     - This is the lifecycle hook that you should be using for any compilation, such as compiling TypeScript to JavaScript. Errors thrown here, or in any early pre lifecycle script, will abort the publish process.
-5. ~~publish~~
+5. <delete>publish</delete>
     - At this "stage" we pack and publish each package. We do not call any 'publish' lifecycle scripts here.
 6. postpack
     - This is guaranteed to execute after packing the archive, regardless of failure. This is useful script for build directory cleanup.

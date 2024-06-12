@@ -32,11 +32,11 @@ plugins: [
 
 You can then "tap" into the hooks.
 
-## Available Plugins
+## Available Built-in Plugins
 
 ### GitHub
 
-Plugin: `@monoweave/plugin-github`.
+Plugin: [`@monoweave/plugin-github`](https://github.com/monoweave/monoweave/tree/main/packages/plugin-github).
 
 The GitHub plugin creates GitHub releases. It requires a `GITHUB_TOKEN` environment variable which should be set to a Personal Access Token with write access to GitHub releases.
 
@@ -57,5 +57,4 @@ We use [tapable](https://github.com/webpack/tapable) for an experimental plugin 
 #### onReleaseAvailable
 
 This hook is triggered once a release is available, after publishing to npm, and after pushing any artifacts such as git tags to the repository (assuming running with autoCommit and push mode).
-
 
