@@ -51,9 +51,9 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.1",
+    "@types/node": "^20.14.11",
     "ts-node": "^10.9.2",
     "typedoc": "^0.26.4",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.3"
   }
 }
