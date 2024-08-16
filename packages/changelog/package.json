@@ -34,14 +34,14 @@
     "@monoweave/io": "workspace:^1.6.0",
     "@monoweave/logging": "workspace:^1.6.0",
     "@monoweave/types": "workspace:^1.6.0",
-    "@yarnpkg/core": "^4.1.1",
+    "@yarnpkg/core": "^4.1.2",
     "@yarnpkg/fslib": "^3.1.0",
     "@yarnpkg/shell": "^4.0.2"
   },
   "dependencies": {
     "conventional-changelog-writer": "^7.0.1",
     "conventional-commits-parser": "^5.0.0",
-    "p-limit": "^5.0.0"
+    "p-limit": "^6.1.0"
   },
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
@@ -53,7 +53,7 @@
     "@types/conventional-changelog-writer": "^4.0.10",
     "@types/conventional-commits-parser": "^5.0.0",
     "@types/node": "^20.15.0",
-    "@yarnpkg/core": "^4.1.1",
+    "@yarnpkg/core": "^4.1.2",
     "@yarnpkg/fslib": "^3.1.0",
     "@yarnpkg/shell": "^4.0.2"
   }
