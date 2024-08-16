@@ -1,6 +1,16 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
+import {
+    afterAll,
+    afterEach,
+    beforeAll,
+    beforeEach,
+    describe,
+    expect,
+    it,
+    jest,
+} from '@jest/globals'
 import * as git from '@monoweave/git'
 import { backupPackageJsons, clearBackupCache, restorePackageJsons } from '@monoweave/io'
 import { LOG_LEVELS } from '@monoweave/logging'
@@ -442,7 +452,7 @@ describe('Monoweave', () => {
 
         const changesetFilename = await path.join(tmp.dir, 'changeset.json')
 
-        const spyStdout = jest.spyOn(process.stdout, 'write').mockImplementation()
+        const spyStdout = jest.spyOn(process.stdout, 'write').mockImplementation(() => true)
 
         const result = await monoweave({
             ...monoweaveConfig,

@@ -37,6 +37,7 @@
     "yaml": "^2.4.3"
   },
   "devDependencies": {
+    "@jest/globals": "^30.0.0-alpha.6",
     "@monoweave/changelog": "workspace:*",
     "@monoweave/dependencies": "workspace:*",
     "@monoweave/git": "workspace:*",
@@ -45,7 +46,6 @@
     "@monoweave/test-utils": "link:../../testUtils",
     "@monoweave/types": "workspace:*",
     "@types/conventional-commits-parser": "^5.0.0",
-    "@types/jest": "^29.5.12",
     "@types/micromatch": "^4.0.7",
     "@types/semver": "^7.5.8",
     "@yarnpkg/cli": "^4.3.1",

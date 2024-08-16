@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 const scriptPath = path.join(__dirname, 'index.ts')
+import { afterAll, afterEach, beforeAll, describe, expect, it, jest } from '@jest/globals'
 import * as monoweave from '@monoweave/node'
 import { createTempDir, waitFor } from '@monoweave/test-utils'
 import { parseDeferredVersionFile } from '@monoweave/versions'
@@ -30,7 +31,7 @@ describe('CLI - Version', () => {
     }
 
     it('exits with a warning if no packages detected', async () => {
-        const spyLog = jest.spyOn(process.stdout, 'write').mockImplementation()
+        const spyLog = jest.spyOn(process.stdout, 'write').mockImplementation(() => true)
 
         await using temp = await createTempDir()
 
@@ -55,7 +56,7 @@ describe('CLI - Version', () => {
 
     describe('Non-Interactive Mode', () => {
         it('defaults to patch and empty changelog', async () => {
-            const spyLog = jest.spyOn(process.stdout, 'write').mockImplementation()
+            const spyLog = jest.spyOn(process.stdout, 'write').mockImplementation(() => true)
 
             await using temp = await createTempDir()
 
@@ -92,7 +93,7 @@ describe('CLI - Version', () => {
         })
 
         it('writes a version file', async () => {
-            const spyLog = jest.spyOn(process.stdout, 'write').mockImplementation()
+            const spyLog = jest.spyOn(process.stdout, 'write').mockImplementation(() => true)
 
             await using temp = await createTempDir()
 

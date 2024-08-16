@@ -1,6 +1,16 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
+import {
+    afterAll,
+    afterEach,
+    beforeAll,
+    beforeEach,
+    describe,
+    expect,
+    it,
+    jest,
+} from '@jest/globals'
 import monoweave from '@monoweave/node'
 import { createTempDir, itIf, waitFor } from '@monoweave/test-utils'
 import {
@@ -86,7 +96,9 @@ describe('CLI', () => {
                 'defaults dryRun to $expected when the environment variable CI is $ci',
                 async ({ ci, expected }) => {
                     const oldEnv = { ...process.env }
-                    process.env.CI = ci
+                    if (typeof ci === 'string') {
+                        process.env.CI = ci
+                    }
 
                     // using "null" (which is an invalid env value as a placeholder to mean unset
                     if (ci === null) {
@@ -134,7 +146,7 @@ describe('CLI', () => {
             expect.hasAssertions()
 
             delete process.env.MONOWEAVE_DISABLE_LOGS
-            const spyError = jest.spyOn(process.stderr, 'write').mockImplementation()
+            const spyError = jest.spyOn(process.stderr, 'write').mockImplementation(() => true)
             const error = new Error('Monoweave failed.')
             ;(monoweave as jest.MockedFunction<typeof monoweave>).mockImplementation(() => {
                 throw error
@@ -156,7 +168,7 @@ describe('CLI', () => {
             expect.hasAssertions()
 
             delete process.env.MONOWEAVE_DISABLE_LOGS
-            const spyError = jest.spyOn(process.stderr, 'write').mockImplementation()
+            const spyError = jest.spyOn(process.stderr, 'write').mockImplementation(() => true)
 
             const configFileContents = `
                 invalid_javascript{} = {
@@ -180,7 +192,7 @@ describe('CLI', () => {
             expect.hasAssertions()
 
             delete process.env.MONOWEAVE_DISABLE_LOGS
-            const spyError = jest.spyOn(process.stderr, 'write').mockImplementation()
+            const spyError = jest.spyOn(process.stderr, 'write').mockImplementation(() => true)
 
             const configFileContents = `
                 module.exports = { git: { baseBranch: true } }
@@ -643,7 +655,7 @@ describe('CLI', () => {
             expect.hasAssertions()
 
             delete process.env.MONOWEAVE_DISABLE_LOGS
-            const spyError = jest.spyOn(process.stderr, 'write').mockImplementation()
+            const spyError = jest.spyOn(process.stderr, 'write').mockImplementation(() => true)
 
             const configFileContents = `
                 module.exports = { preset: './preset.js', git: { baseBranch: 'main' } }
@@ -673,7 +685,7 @@ describe('CLI', () => {
             expect.hasAssertions()
 
             delete process.env.MONOWEAVE_DISABLE_LOGS
-            const spyError = jest.spyOn(process.stderr, 'write').mockImplementation()
+            const spyError = jest.spyOn(process.stderr, 'write').mockImplementation(() => true)
 
             const configFileContents = `
                 module.exports = { preset: './preset.js', git: { baseBranch: true } }

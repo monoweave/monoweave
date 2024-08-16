@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { jest } from '@jest/globals'
 import {
     type Configuration,
     type Ident,
@@ -7,7 +8,8 @@ import {
     structUtils,
 } from '@yarnpkg/core'
 
-const actualModule = jest.requireActual('@yarnpkg/plugin-npm')
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+const actualModule = jest.requireActual<typeof import('@yarnpkg/plugin-npm')>('@yarnpkg/plugin-npm')
 
 const _registry: { tags: Record<string, Record<string, string | string[]>> } = {
     tags: {},

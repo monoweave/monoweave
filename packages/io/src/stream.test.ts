@@ -1,5 +1,7 @@
 import { Readable } from 'stream'
 
+import { describe, expect, it } from '@jest/globals'
+
 import { readStream, readStreamString } from './stream'
 
 describe('Stream to Chunks', () => {

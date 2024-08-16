@@ -33,10 +33,10 @@
     "semver": "^7.6.2"
   },
   "devDependencies": {
+    "@jest/globals": "^30.0.0-alpha.6",
     "@monoweave/logging": "workspace:*",
     "@monoweave/test-utils": "link:../../testUtils",
     "@monoweave/types": "workspace:*",
-    "@types/jest": "^29.5.12",
     "@types/node": "^20.14.1",
     "@types/semver": "^7.5.8",
     "@yarnpkg/core": "^4.1.1",

@@ -1,5 +1,6 @@
 import path from 'path'
 
+import { describe, expect, it } from '@jest/globals'
 import type { MonoweaveConfiguration } from '@monoweave/types'
 
 import { resolveConventionalConfig } from '.'

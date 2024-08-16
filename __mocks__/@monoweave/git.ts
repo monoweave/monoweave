@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { jest } from '@jest/globals'
 import type { CommitMessage, MonoweaveConfiguration, YarnContext } from '@monoweave/types'
 
-const actualMonoweaveGit = jest.requireActual('@monoweave/git')
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+const actualMonoweaveGit = jest.requireActual<typeof import('@monoweave/git')>('@monoweave/git')
 
 const registry: {
     commits: CommitMessage[]
