@@ -52,7 +52,7 @@
     "@monoweave/types": "workspace:*",
     "@types/conventional-changelog-writer": "^4.0.10",
     "@types/conventional-commits-parser": "^5.0.0",
-    "@types/node": "^20.14.1",
+    "@types/node": "^20.14.12",
     "@yarnpkg/core": "^4.1.1",
     "@yarnpkg/fslib": "^3.1.0",
     "@yarnpkg/shell": "^4.0.2"

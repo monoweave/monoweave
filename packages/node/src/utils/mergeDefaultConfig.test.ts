@@ -1,4 +1,12 @@
-import { afterAll, afterEach, beforeAll, describe, expect, it, jest } from '@jest/globals'
+import {
+    afterAll,
+    afterEach,
+    beforeAll,
+    describe,
+    expect,
+    it,
+    type jest as jestImport,
+} from '@jest/globals'
 import * as git from '@monoweave/git'
 import { LOG_LEVELS } from '@monoweave/logging'
 import { type MonoweaveConfiguration, RegistryMode } from '@monoweave/types'
@@ -6,16 +14,17 @@ import * as npm from '@yarnpkg/plugin-npm'
 
 import { mergeDefaultConfig } from './mergeDefaultConfig'
 
-jest.mock('@yarnpkg/plugin-npm')
-jest.mock('@monoweave/git')
+// @ts-expect-error https://github.com/swc-project/plugins/issues/310
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports, import-x/newline-after-import
+;(jest as typeof import('@jest/globals').jest).mock('@yarnpkg/plugin-npm').mock('@monoweave/git')
 
-const mockNPM = npm as jest.Mocked<
+const mockNPM = npm as jestImport.Mocked<
     typeof npm & {
         _reset_: () => void
         _setTag_: (pkgName: string, tagValue: string, tagKey?: string) => void
     }
 >
-const mockGit = git as jest.Mocked<
+const mockGit = git as jestImport.Mocked<
     typeof git & {
         _reset_: () => void
         _commitFiles_: (sha: string, commit: string, files: string[]) => void

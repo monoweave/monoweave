@@ -15,6 +15,7 @@ node_modules
 *.log
 .nyc_cache
 .tmp
+.swc
 
 # build artifacts
 .nyc_output

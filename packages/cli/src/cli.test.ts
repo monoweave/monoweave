@@ -11,7 +11,6 @@ import {
     it,
     jest,
 } from '@jest/globals'
-import monoweave from '@monoweave/node'
 import { createTempDir, itIf, waitFor } from '@monoweave/test-utils'
 import {
     type MonoweaveConfigFile,
@@ -23,18 +22,10 @@ import YAML from 'yaml'
 
 const scriptPath = path.join(__dirname, 'index.ts')
 
-jest.mock('@monoweave/node', () => ({
-    __esModule: true,
-    default: jest.fn(),
-}))
+jest.mock('@monoweave/node')
 
-async function waitForMonoweaveRun(): Promise<RecursivePartial<MonoweaveConfiguration>> {
-    return await waitFor(async () => {
-        const arg = jest.mocked(monoweave).mock.calls[0][0]
-        if (!arg) throw new Error('Missing arg!')
-        return arg
-    })
-}
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+const { default: monoweave }: typeof import('@monoweave/node') = jest.requireMock('@monoweave/node')
 
 describe('CLI', () => {
     const origArgs = process.argv
@@ -48,9 +39,16 @@ describe('CLI', () => {
         process.argv = origArgs
     })
 
+    async function waitForMonoweaveRun(): Promise<RecursivePartial<MonoweaveConfiguration>> {
+        return await waitFor(async () => {
+            const arg = jest.mocked(monoweave).mock.calls[0][0]
+            if (!arg) throw new Error('Missing arg!')
+            return arg
+        })
+    }
+
     afterEach(() => {
-        // eslint-disable-next-line prettier/prettier
-        (monoweave as jest.MockedFunction<typeof monoweave>).mockClear();
+        jest.mocked(monoweave).mockClear()
         process.env.MONOWEAVE_DISABLE_LOGS = '1'
         jest.clearAllMocks()
     })

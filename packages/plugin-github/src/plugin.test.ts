@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, jest } from '@jest/globals'
+import { afterEach, describe, expect, it, jest as jestImport } from '@jest/globals'
 import { createMonorepoContext, getMonoweaveConfig } from '@monoweave/test-utils'
 import { type PluginHooks } from '@monoweave/types'
 import { AsyncSeriesHook } from 'tapable'
@@ -8,15 +8,19 @@ import * as requestModule from './request'
 
 import GitHubPlugin, { PluginName } from '.'
 
-jest.mock('./request', () => ({
-    request: jest.fn(),
+// @ts-expect-error https://github.com/swc-project/plugins/issues/310
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports, import-x/newline-after-import
+;(jest as typeof import('@jest/globals').jest).mock('./request', () => ({
+    // @ts-expect-error https://github.com/swc-project/plugins/issues/310
+    // eslint-disable-next-line @typescript-eslint/consistent-type-imports
+    request: (jest as typeof import('@jest/globals').jest).fn(),
 }))
 
 describe('GitHub Plugin', () => {
     afterEach(() => {
         delete process.env.GITHUB_TOKEN
         delete process.env.GH_TOKEN
-        jest.resetAllMocks()
+        jestImport.resetAllMocks()
     })
 
     it('registers on the onReleaseAvailable hook', async () => {
@@ -44,7 +48,7 @@ describe('GitHub Plugin', () => {
             'pkg-1': {},
         })
 
-        const spyWarning = jest.spyOn(context.report, 'reportWarning')
+        const spyWarning = jestImport.spyOn(context.report, 'reportWarning')
 
         const config = {
             ...(await getMonoweaveConfig({
@@ -54,7 +58,7 @@ describe('GitHub Plugin', () => {
             })),
         }
 
-        const spyRequest = jest.spyOn(requestModule, 'request')
+        const spyRequest = jestImport.spyOn(requestModule, 'request')
         await createPluginInternals({})(context, config, {
             'pkg-1': {
                 version: '1.0.0',
@@ -79,7 +83,7 @@ describe('GitHub Plugin', () => {
             { root: { repository: 'corrupted repository' } },
         )
 
-        const spyError = jest.spyOn(context.report, 'reportError')
+        const spyError = jestImport.spyOn(context.report, 'reportError')
 
         const config = {
             ...(await getMonoweaveConfig({
@@ -118,7 +122,7 @@ describe('GitHub Plugin', () => {
             { root: { repository: 'https://github.com/other/other.git' } },
         )
 
-        const spyError = jest.spyOn(context.report, 'reportError')
+        const spyError = jestImport.spyOn(context.report, 'reportError')
 
         const config = {
             ...(await getMonoweaveConfig({
@@ -130,7 +134,7 @@ describe('GitHub Plugin', () => {
 
         process.env.GITHUB_TOKEN = 'abc'
 
-        const spyRequest = jest.spyOn(requestModule, 'request')
+        const spyRequest = jestImport.spyOn(requestModule, 'request')
         await createPluginInternals({})(context, config, {
             'pkg-1': {
                 version: '1.0.0',
@@ -168,7 +172,7 @@ describe('GitHub Plugin', () => {
 
         process.env.GITHUB_TOKEN = 'abc'
 
-        const spyRequest = jest.spyOn(requestModule, 'request')
+        const spyRequest = jestImport.spyOn(requestModule, 'request')
         await createPluginInternals({ includeImplicitUpdates: false })(context, config, {
             'pkg-1': {
                 version: '1.0.0',
@@ -197,7 +201,7 @@ describe('GitHub Plugin', () => {
 
         process.env.GITHUB_TOKEN = 'abc'
 
-        const spyRequest = jest.spyOn(requestModule, 'request')
+        const spyRequest = jestImport.spyOn(requestModule, 'request')
         await createPluginInternals({ includeImplicitUpdates: true })(context, config, {
             'pkg-1': {
                 version: '1.0.0',
@@ -236,7 +240,7 @@ describe('GitHub Plugin', () => {
         }
         process.env.GITHUB_TOKEN = 'abc'
 
-        const spyRequest = jest.spyOn(requestModule, 'request')
+        const spyRequest = jestImport.spyOn(requestModule, 'request')
         await createPluginInternals({})(context, config, {
             'pkg-1': {
                 version: '1.0.0',
@@ -266,9 +270,9 @@ describe('GitHub Plugin', () => {
         // standard recommended env var
         process.env.GITHUB_TOKEN = 'abc'
 
-        const spyRequest = jest.spyOn(requestModule, 'request')
-        const spyWarning = jest.spyOn(context.report, 'reportWarning')
-        const spyError = jest.spyOn(context.report, 'reportError')
+        const spyRequest = jestImport.spyOn(requestModule, 'request')
+        const spyWarning = jestImport.spyOn(context.report, 'reportWarning')
+        const spyError = jestImport.spyOn(context.report, 'reportError')
         await createPluginInternals({})(context, config, {
             'pkg-1': {
                 version: '1.0.0',
@@ -311,9 +315,9 @@ describe('GitHub Plugin', () => {
 
         process.env.GH_TOKEN = 'abc'
 
-        const spyRequest = jest.spyOn(requestModule, 'request')
-        const spyWarning = jest.spyOn(context.report, 'reportWarning')
-        const spyError = jest.spyOn(context.report, 'reportError')
+        const spyRequest = jestImport.spyOn(requestModule, 'request')
+        const spyWarning = jestImport.spyOn(context.report, 'reportWarning')
+        const spyError = jestImport.spyOn(context.report, 'reportError')
         await createPluginInternals({})(context, config, {
             'pkg-1': {
                 version: '1.0.0',
