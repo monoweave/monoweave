@@ -3316,7 +3316,7 @@ __metadata:
     "@yarnpkg/shell": "npm:^4.0.2"
     conventional-changelog-writer: "npm:^7.0.1"
     conventional-commits-parser: "npm:^5.0.0"
-    p-limit: "npm:^5.0.0"
+    p-limit: "npm:^6.1.0"
   peerDependencies:
     "@monoweave/git": "workspace:^1.6.0"
     "@monoweave/io": "workspace:^1.6.0"
@@ -3620,7 +3620,7 @@ __metadata:
     "@yarnpkg/plugin-npm": "npm:^3.0.1"
     "@yarnpkg/plugin-pack": "npm:^4.0.0"
     "@yarnpkg/shell": "npm:^4.0.2"
-    p-limit: "npm:^5.0.0"
+    p-limit: "npm:^6.1.0"
   peerDependencies:
     "@monoweave/dependencies": "workspace:^1.6.0"
     "@monoweave/git": "workspace:^1.6.0"
@@ -3741,7 +3741,7 @@ __metadata:
     "@yarnpkg/shell": "npm:^4.0.2"
     conventional-commits-parser: "npm:^5.0.0"
     micromatch: "npm:^4.0.7"
-    p-limit: "npm:^5.0.0"
+    p-limit: "npm:^6.1.0"
     semver: "npm:^7.6.3"
     yaml: "npm:^2.5.0"
   peerDependencies:
@@ -18504,12 +18504,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-limit@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "p-limit@npm:5.0.0"
+"p-limit@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "p-limit@npm:6.1.0"
   dependencies:
-    yocto-queue: "npm:^1.0.0"
-  checksum: 10/87bf5837dee6942f0dbeff318436179931d9a97848d1b07dbd86140a477a5d2e6b90d9701b210b4e21fe7beaea2979dfde366e4f576fa644a59bd4d6a6371da7
+    yocto-queue: "npm:^1.1.1"
+  checksum: 10/9670cb4426d77c20a477cad0e44e8207248381135650f5b9bfe039c9d93566cd4b05cfc557fe60f2db88c799991c7edc6be436255d287a87a605ee604a71cd91
   languageName: node
   linkType: hard
 
@@ -24016,10 +24016,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yocto-queue@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "yocto-queue@npm:1.0.0"
-  checksum: 10/2cac84540f65c64ccc1683c267edce396b26b1e931aa429660aefac8fbe0188167b7aee815a3c22fa59a28a58d898d1a2b1825048f834d8d629f4c2a5d443801
+"yocto-queue@npm:^1.0.0, yocto-queue@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "yocto-queue@npm:1.1.1"
+  checksum: 10/f2e05b767ed3141e6372a80af9caa4715d60969227f38b1a4370d60bffe153c9c5b33a862905609afc9b375ec57cd40999810d20e5e10229a204e8bde7ef255c
   languageName: node
   linkType: hard
 
