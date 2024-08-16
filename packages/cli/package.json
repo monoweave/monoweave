@@ -47,8 +47,8 @@
     "prepack": "run workspace:build \"$(pwd)\""
   },
   "devDependencies": {
+    "@jest/globals": "^30.0.0-alpha.6",
     "@monoweave/test-utils": "link:../../testUtils",
-    "@types/jest": "^29.5.12",
     "@types/node": "^20.14.1"
   },
   "dependencies": {
@@ -67,11 +67,11 @@
     "@yarnpkg/plugin-npm": "^3.0.1",
     "@yarnpkg/plugin-pack": "^4.0.0",
     "@yarnpkg/shell": "^4.0.2",
-    "ajv": "^8.15.0",
+    "ajv": "^8.17.1",
     "clipanion": "^4.0.0-rc.3",
     "json5": "^2.2.3",
     "typanion": "^3.14.0",
-    "yaml": "^2.4.3"
+    "yaml": "^2.5.0"
   },
   "engines": {
     "node": ">=v18"

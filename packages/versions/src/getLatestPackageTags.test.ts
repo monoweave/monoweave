@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
+import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals'
 import { getMonoweaveConfig, setupMonorepo } from '@monoweave/test-utils'
 import { type YarnContext } from '@monoweave/types'
 import { npath, ppath } from '@yarnpkg/fslib'
@@ -142,7 +143,8 @@ describe('getLatestPackageTags', () => {
     it('bubbles up error if not 404', async () => {
         const mockError = new NetworkError(500)
         const mockGet = mockNPM.npmHttpUtils.get
-        mockNPM.npmHttpUtils.get = jest.fn().mockImplementation(() => {
+
+        jest.spyOn(mockNPM.npmHttpUtils, 'get').mockImplementation(() => {
             throw mockError
         })
 
@@ -167,7 +169,7 @@ describe('getLatestPackageTags', () => {
         // See: https://www.jfrog.com/jira/browse/RTFACT-16518
 
         const mockGet = mockNPM.npmHttpUtils.get
-        mockNPM.npmHttpUtils.get = jest.fn().mockImplementation(() => {
+        jest.spyOn(mockNPM.npmHttpUtils, 'get').mockImplementation(() => {
             throw new NetworkError(500)
         })
 

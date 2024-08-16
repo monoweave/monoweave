@@ -1,5 +1,6 @@
 /* eslint jest/expect-expect: ["error", { "assertFunctionNames": ["expect", "expectOrdering"] }] */
 
+import { describe, expect, it } from '@jest/globals'
 import { createMonorepoContext } from '@monoweave/test-utils'
 import { type YarnContext } from '@monoweave/types'
 import { type Workspace, structUtils } from '@yarnpkg/core'

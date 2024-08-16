@@ -165,8 +165,8 @@ const applyVersionStrategies = async ({
 
             if (!next || !previous || previous === next) {
                 const version = config.prerelease
-                    ? maxVersion(currentLatestVersion, currentPrereleaseVersion) ??
-                      currentLatestVersion
+                    ? (maxVersion(currentLatestVersion, currentPrereleaseVersion) ??
+                      currentLatestVersion)
                     : currentLatestVersion
                 nonupdatedRegistryTags.set(packageName, {
                     previous: version,
@@ -181,7 +181,7 @@ const applyVersionStrategies = async ({
                 // This way, the changeset will correctly include the previous version as the version
                 // in npm prior to running monoweave.
                 previous: fromPrerelease
-                    ? currentPrereleaseVersion ?? currentLatestVersion
+                    ? (currentPrereleaseVersion ?? currentLatestVersion)
                     : currentLatestVersion,
                 next,
             })

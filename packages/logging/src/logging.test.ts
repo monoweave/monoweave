@@ -1,3 +1,4 @@
+import { afterEach, beforeAll, beforeEach, describe, expect, it, jest } from '@jest/globals'
 import { type MessageName, ThrowReport } from '@yarnpkg/core'
 
 import logging, { LOG_LEVELS } from '.'
@@ -26,9 +27,9 @@ describe('Logging', () => {
     let report: CollectReport
 
     beforeAll(() => {
-        jest.spyOn(console, 'log').mockImplementation()
-        jest.spyOn(console, 'warn').mockImplementation()
-        jest.spyOn(console, 'error').mockImplementation()
+        jest.spyOn(console, 'log').mockImplementation(() => void 0)
+        jest.spyOn(console, 'warn').mockImplementation(() => void 0)
+        jest.spyOn(console, 'error').mockImplementation(() => void 0)
     })
 
     beforeEach(() => {

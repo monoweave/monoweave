@@ -12,6 +12,7 @@
         "test:watch": "run bin:test --watch --selectProjects E2E --"
     },
     "devDependencies": {
+        "@jest/globals": "^30.0.0-alpha.6",
         "@monoweave/cli": "workspace:*",
         "@monoweave/io": "workspace:*",
         "@monoweave/logging": "workspace:*",

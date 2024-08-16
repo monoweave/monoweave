@@ -50,7 +50,7 @@
     "@yarnpkg/core": "^4.1.1"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
+    "@jest/globals": "^30.0.0-alpha.6",
     "@types/node": "^20.14.1",
     "tsx": "^4.17.0",
     "typedoc": "^0.26.5",

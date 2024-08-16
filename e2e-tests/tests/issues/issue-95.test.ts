@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals'
 import { RegistryMode } from '@monoweave/types'
 
 import setupProject from 'helpers/setupProject'

@@ -33,10 +33,11 @@
     "conventional-commits-parser": "^5.0.0",
     "micromatch": "^4.0.7",
     "p-limit": "^5.0.0",
-    "semver": "^7.6.2",
-    "yaml": "^2.4.3"
+    "semver": "^7.6.3",
+    "yaml": "^2.5.0"
   },
   "devDependencies": {
+    "@jest/globals": "^30.0.0-alpha.6",
     "@monoweave/changelog": "workspace:*",
     "@monoweave/dependencies": "workspace:*",
     "@monoweave/git": "workspace:*",
@@ -45,8 +46,7 @@
     "@monoweave/test-utils": "link:../../testUtils",
     "@monoweave/types": "workspace:*",
     "@types/conventional-commits-parser": "^5.0.0",
-    "@types/jest": "^29.5.12",
-    "@types/micromatch": "^4.0.7",
+    "@types/micromatch": "^4.0.9",
     "@types/semver": "^7.5.8",
     "@yarnpkg/cli": "^4.3.1",
     "@yarnpkg/core": "^4.1.1",
