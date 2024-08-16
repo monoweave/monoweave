@@ -32,7 +32,7 @@
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
     "@monoweave/test-utils": "link:../../testUtils",
-    "@types/micromatch": "^4.0.7",
+    "@types/micromatch": "^4.0.9",
     "@types/node": "^20.14.1"
   },
   "dependencies": {

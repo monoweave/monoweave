@@ -163,19 +163,19 @@ export abstract class BaseCommand extends Command {
                 baseBranch: this.gitBaseBranch ?? configFromFile?.git?.baseBranch ?? undefined,
                 commitSha: this.gitCommitSha ?? configFromFile?.git?.commitSha ?? undefined,
                 remote: this.gitRemote ?? configFromFile?.git?.remote ?? undefined,
-                tag: this.gitTag === false ? this.gitTag : configFromFile?.git?.tag ?? undefined,
+                tag: this.gitTag === false ? this.gitTag : (configFromFile?.git?.tag ?? undefined),
             },
             conventionalChangelogConfig:
                 this.conventionalChangelogConfig === 'false'
                     ? false
-                    : this.conventionalChangelogConfig ??
+                    : (this.conventionalChangelogConfig ??
                       configFromFile?.conventionalChangelogConfig ??
-                      undefined,
+                      undefined),
             changesetIgnorePatterns: this.noChangesetIgnorePatterns
                 ? []
-                : this.changesetIgnorePatterns ??
+                : (this.changesetIgnorePatterns ??
                   configFromFile?.changesetIgnorePatterns ??
-                  undefined,
+                  undefined),
             commitIgnorePatterns:
                 this.commitIgnorePatterns ?? configFromFile?.commitIgnorePatterns ?? undefined,
             topological: this.topological ?? configFromFile?.topological,
@@ -203,8 +203,8 @@ export abstract class BaseCommand extends Command {
                 minimumStrategy:
                     this.minimumVersionStrategy === 'none'
                         ? undefined
-                        : this.minimumVersionStrategy ??
-                          configFromFile?.versionStrategy?.minimumStrategy,
+                        : (this.minimumVersionStrategy ??
+                          configFromFile?.versionStrategy?.minimumStrategy),
                 versionFolder:
                     this.versionFolder ??
                     configFromFile?.versionStrategy?.versionFolder ??

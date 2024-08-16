@@ -68,7 +68,7 @@ export default async function setupMonorepo(
 
     // Generate root package.json
     await writeJSON(path.join(workingDir, 'package.json'), {
-        name: root?.name === null ? undefined : root?.name ?? 'monorepo',
+        name: root?.name === null ? undefined : (root?.name ?? 'monorepo'),
         private: root?.private ?? true,
         version: root?.version ?? '1.0.0',
         workspaces: Object.keys(monorepo).length ? ['packages/*'] : undefined,
