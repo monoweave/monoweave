@@ -24,9 +24,5 @@
         "outDir": ".tmp/tsc/root",
     },
     "exclude": ["**/lib", "./.pnp.*"],
-    "include": ["./__mocks__", "./e2e-tests", "./packages", "./testUtils", "./*.js", "./*.ts", "./**/.eslintrc.js"],
-    "ts-node": {
-        "transpileOnly": true,
-        "ignore": ["(?:^|/)node_modules/", ".yarn/plugins/.*"],
-    }
+    "include": ["./__mocks__", "./e2e-tests", "./packages", "./testUtils", "./*.js", "./*.ts", "./**/.eslintrc.js"]
 }

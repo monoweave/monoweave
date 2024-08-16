@@ -17,17 +17,20 @@ export default async function run({ cwd, args = '' }: { cwd: string; args: strin
     const nycConfig = require.resolve('./nyc.config.js', {
         paths: [process.cwd()],
     })
+    const tsx = require.resolve('tsx', {
+        paths: [process.cwd()],
+    })
 
     const tsconfig = path.join(process.cwd(), 'tsconfig.json')
 
     try {
         const { stdout, stderr } = await exec(
-            `node ${nycBin} --nycrc-path ${nycConfig} --cwd ${process.cwd()} node ${scriptPath} ${args}`,
+            `node ${nycBin} --nycrc-path ${nycConfig} --cwd ${process.cwd()} node --import ${tsx} ${scriptPath} ${args}`,
             {
                 cwd,
                 env: {
                     ...process.env,
-                    TS_NODE_PROJECT: tsconfig,
+                    TSX_TSCONFIG_PATH: tsconfig,
                     NODE_ENV: 'production',
                 },
             },
