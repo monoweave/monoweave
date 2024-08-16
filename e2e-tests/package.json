@@ -7,7 +7,7 @@
         "test:registry:start": "docker run -itd -p 4873:4873 --name monoweave-registry monoweave-test-registry",
         "test:registry:stop": "docker stop monoweave-registry && docker container rm monoweave-registry",
         "test:registry": "run test:registry:build && run test:registry:start",
-        "bin:test": "run workspace:test --maxConcurrency=1 --verbose --testTimeout=300000",
+        "bin:test": "run workspace:test --runInBand --maxConcurrency=1 --verbose --testTimeout=300000",
         "test": "run bin:test --selectProjects E2E -- $(pwd)",
         "test:watch": "run bin:test --watch --selectProjects E2E --"
     },
@@ -19,7 +19,7 @@
         "@monoweave/test-utils": "link:../testUtils",
         "@monoweave/types": "workspace:*",
         "@tophat/conventional-changelog-config": "^1.0.1",
-        "@types/node": "^20.14.1",
+        "@types/node": "^20.14.12",
         "@yarnpkg/core": "^4.1.1",
         "@yarnpkg/fslib": "^3.1.0",
         "@yarnpkg/shell": "^4.0.2",

@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
-import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals'
+import { afterEach, beforeEach, describe, expect, it, jest as jestImport } from '@jest/globals'
 import { getMonoweaveConfig, setupMonorepo } from '@monoweave/test-utils'
 import { type YarnContext } from '@monoweave/types'
 import { npath, ppath } from '@yarnpkg/fslib'
@@ -9,9 +9,11 @@ import * as npm from '@yarnpkg/plugin-npm'
 
 import { getLatestPackageTags } from '.'
 
-jest.mock('@yarnpkg/plugin-npm')
+// @ts-expect-error https://github.com/swc-project/plugins/issues/310
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports, import-x/newline-after-import
+;(jest as typeof import('@jest/globals').jest).mock('@yarnpkg/plugin-npm')
 
-const mockNPM = npm as jest.Mocked<
+const mockNPM = npm as jestImport.Mocked<
     typeof npm & {
         _reset_: () => void
         _setTag_: (pkgName: string, tagValue: string | string[], tagKey?: string) => void
@@ -44,7 +46,7 @@ describe('getLatestPackageTags', () => {
     })
 
     afterEach(async () => {
-        jest.restoreAllMocks()
+        jestImport.restoreAllMocks()
         mockNPM._reset_()
         try {
             await fs.rm(context.project.cwd, { recursive: true, force: true })
@@ -144,7 +146,7 @@ describe('getLatestPackageTags', () => {
         const mockError = new NetworkError(500)
         const mockGet = mockNPM.npmHttpUtils.get
 
-        jest.spyOn(mockNPM.npmHttpUtils, 'get').mockImplementation(() => {
+        jestImport.spyOn(mockNPM.npmHttpUtils, 'get').mockImplementation(() => {
             throw mockError
         })
 
@@ -169,7 +171,7 @@ describe('getLatestPackageTags', () => {
         // See: https://www.jfrog.com/jira/browse/RTFACT-16518
 
         const mockGet = mockNPM.npmHttpUtils.get
-        jest.spyOn(mockNPM.npmHttpUtils, 'get').mockImplementation(() => {
+        jestImport.spyOn(mockNPM.npmHttpUtils, 'get').mockImplementation(() => {
             throw new NetworkError(500)
         })
 

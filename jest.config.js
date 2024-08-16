@@ -3,6 +3,12 @@
 const CI = Boolean(process.env.CI)
 const ARTIFACT_DIR = process.env.ARTIFACT_DIR || 'artifacts'
 
+/** @type {import('@swc/core').Options} */
+const swcOptions = {
+    sourceMaps: 'inline',
+    module: { ignoreDynamic: true, type: 'nodenext' },
+}
+
 /** @type {import('jest').Config} */
 const config = {
     setupFiles: ['<rootDir>/testUtils/setup.ts'],
@@ -22,7 +28,7 @@ const config = {
         '<rootDir>/packages/.*/.*\\.js',
     ],
     transform: {
-        '^.+\\.tsx?$': require.resolve('ts-jest'),
+        '^.+\\.[mc]?tsx?$': [require.resolve('@swc/jest'), swcOptions],
     },
     testPathIgnorePatterns: ['/node_modules/', '/.yarn/', '<rootDir>/.*\\.js', '<rootDir>/.*/lib/'],
     haste: {

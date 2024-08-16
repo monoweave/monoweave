@@ -1,6 +1,6 @@
 import path from 'path'
 
-import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals'
+import { afterEach, beforeEach, describe, expect, it } from '@jest/globals'
 import { exec } from '@monoweave/io'
 import {
     cleanUp,
@@ -11,8 +11,15 @@ import {
     setupTestRepository,
 } from '@monoweave/test-utils'
 import { type PortablePath, npath } from '@yarnpkg/fslib'
+
 // Skipping the git mock as we use a temp repository for these tests.
-jest.mock('@monoweave/git', () => jest.requireActual('@monoweave/git'))
+// @ts-expect-error https://github.com/swc-project/plugins/issues/310
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports, import-x/newline-after-import
+;(jest as typeof import('@jest/globals').jest).mock('@monoweave/git', () =>
+    // @ts-expect-error https://github.com/swc-project/plugins/issues/310
+    // eslint-disable-next-line @typescript-eslint/consistent-type-imports
+    (jest as typeof import('@jest/globals').jest).requireActual('@monoweave/git'),
+)
 
 import { getExplicitVersionStrategies } from '..'
 

@@ -1,11 +1,13 @@
-import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals'
+import { afterEach, beforeEach, describe, expect, it, jest as jestImport } from '@jest/globals'
 import { exec } from '@monoweave/io'
 import { cleanUp, initGitRepository, setupMonorepo } from '@monoweave/test-utils'
 import { type YarnContext } from '@monoweave/types'
 
 import { gitLastTaggedCommit, gitPushTags, gitTag } from '.'
 
-jest.mock('@monoweave/logging')
+// @ts-expect-error https://github.com/swc-project/plugins/issues/310
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports, import-x/newline-after-import
+;(jest as typeof import('@jest/globals').jest).mock('@monoweave/logging')
 
 const setupRepo = async () => {
     const context: YarnContext = await setupMonorepo({
@@ -31,7 +33,7 @@ describe('@monoweave/git (mocked invariants)', () => {
     })
 
     afterEach(async () => {
-        jest.restoreAllMocks()
+        jestImport.clearAllMocks()
         await cleanUp([context.project.cwd])
     })
 

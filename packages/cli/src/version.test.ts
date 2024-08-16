@@ -1,13 +1,24 @@
 import fs from 'fs'
 import path from 'path'
 
-const scriptPath = path.join(__dirname, 'index.ts')
-import { afterAll, afterEach, beforeAll, describe, expect, it, jest } from '@jest/globals'
-import * as monoweave from '@monoweave/node'
+import {
+    afterAll,
+    afterEach,
+    beforeAll,
+    describe,
+    expect,
+    it,
+    jest as jestImport,
+} from '@jest/globals'
 import { createTempDir, waitFor } from '@monoweave/test-utils'
 import { parseDeferredVersionFile } from '@monoweave/versions'
 
-jest.mock('@monoweave/node')
+const scriptPath = path.join(__dirname, 'index.ts')
+
+// Skipping the git mock as we use a temp repository for these tests.
+// @ts-expect-error https://github.com/swc-project/plugins/issues/310
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports, import-x/newline-after-import
+;(jest as typeof import('@jest/globals').jest).mock('@monoweave/node')
 
 describe('CLI - Version', () => {
     const origArgs = process.argv
@@ -23,7 +34,7 @@ describe('CLI - Version', () => {
     })
 
     afterEach(() => {
-        jest.restoreAllMocks()
+        jestImport.restoreAllMocks()
     })
 
     const setArgs = (command: string) => {
@@ -31,18 +42,20 @@ describe('CLI - Version', () => {
     }
 
     it('exits with a warning if no packages detected', async () => {
-        const spyLog = jest.spyOn(process.stdout, 'write').mockImplementation(() => true)
+        const { default: monoweave } = await import('@monoweave/node')
+
+        const spyLog = jestImport.spyOn(process.stdout, 'write').mockImplementation(() => true)
 
         await using temp = await createTempDir()
 
-        jest.spyOn(monoweave, 'getPackageCandidatesForManualRelease').mockResolvedValue({
+        jestImport.spyOn(monoweave, 'getPackageCandidatesForManualRelease').mockResolvedValue({
             remainingPackages: new Map([]),
             suggestedPackages: new Map([]),
             versionFolder: temp.dir,
         })
 
         setArgs('version')
-        jest.isolateModules(() => {
+        await jestImport.isolateModulesAsync(async () => {
             require('./index')
         })
 
@@ -56,11 +69,13 @@ describe('CLI - Version', () => {
 
     describe('Non-Interactive Mode', () => {
         it('defaults to patch and empty changelog', async () => {
-            const spyLog = jest.spyOn(process.stdout, 'write').mockImplementation(() => true)
+            const { default: monoweave } = await import('@monoweave/node')
+
+            const spyLog = jestImport.spyOn(process.stdout, 'write').mockImplementation(() => true)
 
             await using temp = await createTempDir()
 
-            jest.spyOn(monoweave, 'getPackageCandidatesForManualRelease').mockResolvedValue({
+            jestImport.spyOn(monoweave, 'getPackageCandidatesForManualRelease').mockResolvedValue({
                 remainingPackages: new Map([]),
                 suggestedPackages: new Map([
                     ['pkg-1', { currentVersion: '1.0.0' }],
@@ -70,7 +85,7 @@ describe('CLI - Version', () => {
             })
 
             setArgs('version --no-interactive')
-            jest.isolateModules(() => {
+            jestImport.isolateModules(() => {
                 require('./index')
             })
 
@@ -93,11 +108,13 @@ describe('CLI - Version', () => {
         })
 
         it('writes a version file', async () => {
-            const spyLog = jest.spyOn(process.stdout, 'write').mockImplementation(() => true)
+            const { default: monoweave } = await import('@monoweave/node')
+
+            const spyLog = jestImport.spyOn(process.stdout, 'write').mockImplementation(() => true)
 
             await using temp = await createTempDir()
 
-            jest.spyOn(monoweave, 'getPackageCandidatesForManualRelease').mockResolvedValue({
+            jestImport.spyOn(monoweave, 'getPackageCandidatesForManualRelease').mockResolvedValue({
                 remainingPackages: new Map([]),
                 suggestedPackages: new Map([
                     ['pkg-1', { currentVersion: '1.0.0' }],
@@ -107,7 +124,7 @@ describe('CLI - Version', () => {
             })
 
             setArgs('version --no-interactive --strategy=minor --message=changelog-entry')
-            jest.isolateModules(() => {
+            jestImport.isolateModules(() => {
                 require('./index')
             })
 
