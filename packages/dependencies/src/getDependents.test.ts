@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals
 import { getMonoweaveConfig, setupMonorepo } from '@monoweave/test-utils'
 import { type YarnContext } from '@monoweave/types'
 
-import { getDependents } from '.'
+import { getDependents } from './index.js'
 
 describe('@monoweave/dependencies', () => {
     let context: YarnContext

@@ -3,7 +3,7 @@ import util from 'util'
 
 import { MessageName, type Report, miscUtils } from '@yarnpkg/core'
 
-export * from './invariants'
+export * from './invariants.js'
 
 export const LOG_LEVELS = {
     DEBUG: 0,

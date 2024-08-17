@@ -1,7 +1,7 @@
 import { Cli } from 'clipanion'
 
-import { MonoweaveCommand } from './command/default'
-import { MonoweaveVersionCommand } from './command/version'
+import { MonoweaveCommand } from './command/default.js'
+import { MonoweaveVersionCommand } from './command/version.js'
 
 const cli = new Cli({
     binaryLabel: 'Monoweave',

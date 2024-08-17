@@ -10,4 +10,4 @@ const ConfigRecommended: MonoweaveConfigFile = {
     changesetIgnorePatterns: ['**/__tests__', '**/*.test.*'],
 }
 
-export = ConfigRecommended
+export default ConfigRecommended

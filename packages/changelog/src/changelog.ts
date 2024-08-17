@@ -7,9 +7,9 @@ import { structUtils } from '@yarnpkg/core'
 import conventionalChangelogWriter from 'conventional-changelog-writer'
 import conventionalCommitsParser, { type Commit } from 'conventional-commits-parser'
 
-import { defaultChangelogWriter } from './defaultChangelogWriter'
-import resolveConventionalConfig from './resolveConventionalConfig'
-import { type TemplateContext } from './types'
+import { defaultChangelogWriter } from './defaultChangelogWriter.js'
+import resolveConventionalConfig from './resolveConventionalConfig.js'
+import { type TemplateContext } from './types.js'
 
 export const generateChangelogEntry = async ({
     config,

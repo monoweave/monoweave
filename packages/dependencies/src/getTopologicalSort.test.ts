@@ -5,7 +5,7 @@ import { createMonorepoContext } from '@monoweave/test-utils'
 import { type YarnContext } from '@monoweave/types'
 import { type Workspace, structUtils } from '@yarnpkg/core'
 
-import getTopologicalSort from './getTopologicalSort'
+import getTopologicalSort from './getTopologicalSort.js'
 
 const identToWorkspace = (context: YarnContext, name: string): Workspace =>
     context.project.getWorkspaceByIdent(structUtils.parseIdent(name))

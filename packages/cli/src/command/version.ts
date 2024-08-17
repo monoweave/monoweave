@@ -7,8 +7,8 @@ import { writeDeferredVersionFile } from '@monoweave/versions'
 import { Option } from 'clipanion'
 import * as t from 'typanion'
 
-import { BaseCommand } from './base'
-import { detectIsInCI } from './config/utils'
+import { BaseCommand } from './base.js'
+import { detectIsInCI } from './config/utils.js'
 
 const promptPackage = async ({
     pkgName,

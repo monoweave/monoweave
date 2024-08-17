@@ -5,7 +5,7 @@ import { exec } from '@monoweave/io'
 import { type YarnContext } from '@monoweave/types'
 import { type PortablePath, npath } from '@yarnpkg/fslib'
 
-import setupMonorepo from './setupMonorepo'
+import setupMonorepo from './setupMonorepo.js'
 
 export async function initGitRepository(
     cwd: PortablePath,

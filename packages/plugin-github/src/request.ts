@@ -1,4 +1,3 @@
-// @ts-expect-error ESM imported in CJ
 import type { Octokit } from '@octokit/core'
 
 export async function request(

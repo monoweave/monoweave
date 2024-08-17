@@ -1,6 +1,6 @@
 import type { CommitMessage } from '@monoweave/types'
 
-import { type TemplateContext } from './types'
+import { type TemplateContext } from './types.js'
 
 /**
  * Simple changelog entry writer if no conventional changelog config is provided.

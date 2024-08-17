@@ -13,7 +13,7 @@ import { type ChangesetSchema, type YarnContext } from '@monoweave/types'
 import { type Workspace, structUtils } from '@yarnpkg/core'
 import { type PortablePath } from '@yarnpkg/fslib'
 
-import { prependChangelogFile } from '.'
+import { prependChangelogFile } from './index.js'
 
 const getWorkspace = (context: YarnContext, name: string): Workspace =>
     context.project.getWorkspaceByIdent(structUtils.parseIdent(name))

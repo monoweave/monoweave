@@ -1,3 +1,3 @@
-export * from './gitCommands'
-export * from './getCommitMessages'
-export * from './parseRepositoryProperty'
+export * from './gitCommands.js'
+export * from './getCommitMessages.js'
+export * from './parseRepositoryProperty.js'

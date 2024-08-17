@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
 import { RegistryMode } from '@monoweave/types'
 
-import setupProject from 'helpers/setupProject'
+import setupProject from '../helpers/setupProject.js'
 
 describe('General Usage', () => {
     it.each(['pnp', 'node-modules'] as const)(

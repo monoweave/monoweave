@@ -2,7 +2,7 @@ import { describe, expect, it } from '@jest/globals'
 import { createMonorepoContext, getMonoweaveConfig } from '@monoweave/test-utils'
 import { RegistryMode } from '@monoweave/types'
 
-import { getPublishRegistryUrl } from './getPublishConfig'
+import { getPublishRegistryUrl } from './getPublishConfig.js'
 
 describe('getPublishRegistryUrl', () => {
     it('returns null if registry mode set to manifest', async () => {

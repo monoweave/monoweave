@@ -16,19 +16,19 @@
         "@monoweave/cli": "workspace:*",
         "@monoweave/io": "workspace:*",
         "@monoweave/logging": "workspace:*",
-        "@monoweave/test-utils": "link:../testUtils",
+        "@monoweave/test-utils": "workspace:*",
         "@monoweave/types": "workspace:*",
         "@tophat/conventional-changelog-config": "^1.0.1",
         "@types/node": "^20.15.0",
         "@yarnpkg/core": "^4.1.2",
         "@yarnpkg/fslib": "^3.1.0",
         "@yarnpkg/shell": "^4.0.2",
-        "helpers": "link:./helpers",
         "tsx": "^4.17.0"
     },
     "author": {
         "name": "noahnu",
         "url": "https://monoweave.github.io/monoweave/"
     },
-    "license": "BSD-3"
+    "license": "BSD-3",
+    "type": "module"
 }

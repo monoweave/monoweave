@@ -12,10 +12,10 @@ import {
     createGetConventionalRecommendedStrategy,
     getDefaultRecommendedStrategy,
     maxStrategy,
-} from '../versionStrategy'
+} from '../versionStrategy.js'
 
-import { getManualVersionStrategies } from './getManualVersionStrategies'
-import { getModifiedPackages } from './getModifiedPackages'
+import { getManualVersionStrategies } from './getManualVersionStrategies.js'
+import { getModifiedPackages } from './getModifiedPackages.js'
 
 const strategyLevelToType = (level: number): PackageStrategyType | null => {
     const name = Object.entries(STRATEGY)

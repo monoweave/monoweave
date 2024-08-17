@@ -1,6 +1,6 @@
 import { Writable } from 'stream'
 
-import { cli } from './cli'
+import { cli } from './cli.js'
 
 // MONOWEAVE_DISABLE_LOGS is used to simplify monoweave tests
 const enableLogs = !process.env.MONOWEAVE_DISABLE_LOGS

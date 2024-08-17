@@ -7,7 +7,7 @@ import {
     getManualVersionStrategies,
     parseDeferredVersionFile,
     writeDeferredVersionFile,
-} from './getManualVersionStrategies'
+} from './getManualVersionStrategies.js'
 
 const mockGit = jest.mocked(git)
 

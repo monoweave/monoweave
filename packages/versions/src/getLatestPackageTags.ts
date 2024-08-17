@@ -8,7 +8,7 @@ import {
 import { MessageName, ReportError, type Workspace, structUtils } from '@yarnpkg/core'
 import * as pluginNPM from '@yarnpkg/plugin-npm'
 
-import { getFetchRegistryUrl } from './getRegistryUrl'
+import { getFetchRegistryUrl } from './getRegistryUrl.js'
 
 interface NetworkError extends Error {
     readonly response?: Record<string, unknown> & { statusCode: number }

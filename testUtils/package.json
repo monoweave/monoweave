@@ -1,0 +1,18 @@
+{
+    "name": "@monoweave/test-utils",
+    "private": true,
+    "main": "./src/index.ts",
+    "scripts": {
+
+    },
+    "devDependencies": {
+        "@jest/globals": "^30.0.0-alpha.6",
+        "@types/node": "^20.15.0"
+    },
+    "author": {
+        "name": "noahnu",
+        "url": "https://monoweave.github.io/monoweave/"
+    },
+    "license": "BSD-3",
+    "type": "module"
+}

@@ -7,11 +7,12 @@ export { Layout as default } from '../components/Layout'
 
 ## Getting Started
 
-Monoweave supports projects with the following minimum requirements:
+Prerequisites & Environment Supported:
 
-- Node v18.19.0+
-- Yarn Modern (v4.0.0+)
-- Git 2.13+
+- Node >=v20.11.0: For Node 18 support, you can continue to use Monoweave v1. Critical bugs may be backported upon request, however v1 has been stable for a while.
+- Yarn Modern >=v4.4.0: We release a new minor version of Monoweave for any patch/minor update of Yarn. For optimal experience with monoweave, ensure you are on the latest version of Yarn at all times.
+- Git >=2.13
+- Ubuntu, macOS, and Windows are all supported and tested against.
 
 Install `@monoweave/cli`:
 
@@ -62,7 +63,7 @@ The CLI provides a few sensible defaults, however if using the Node API, you wil
 
 You can also pass a `--config-file` flag to load options from a configuration file. The file should export an object matching the MonoweaveConfigFile interface. CLI flags take precedence over the configuration file.
 
-Example config file (`monoweave.config.js`):
+Example config file (`monoweave.config.cjs`):
 
 ```js
 module.exports = {

@@ -2,16 +2,15 @@ import { promises as fs } from 'fs'
 import os from 'os'
 import path from 'path'
 
+import packageJSON from '@monoweave/monorepo/package.json'
 import { type YarnContext } from '@monoweave/types'
 import { Cache, StreamReport, ThrowReport, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
 
-import { packageManager } from '@monoweave/monorepo/package.json'
-
-import { setupContext } from './misc'
+import { setupContext } from './misc.js'
 
 const DEBUG = process.env.DEBUG === '1'
-const YARN_VERSION = packageManager.match('^yarn@([^+]+)')?.[1] ?? 'invalid'
+const YARN_VERSION = packageJSON.packageManager.match('^yarn@([^+]+)')?.[1] ?? 'invalid'
 
 async function writeJSON(filename: string, data: Record<string, unknown>): Promise<void> {
     await fs.writeFile(filename, JSON.stringify(data), 'utf-8')

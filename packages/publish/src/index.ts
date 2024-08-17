@@ -2,12 +2,12 @@ import { getTopologicalSort } from '@monoweave/dependencies'
 import type { MonoweaveConfiguration, YarnContext } from '@monoweave/types'
 import { type Workspace } from '@yarnpkg/core'
 
-import determineGitTags from './determineGitTags'
-import getWorkspacesToPublish from './getWorkspacesToPublish'
-import { createWorkspaceLifecycleExecutor } from './lifecycleExecutor'
-import { pack } from './pack'
+import determineGitTags from './determineGitTags.js'
+import getWorkspacesToPublish from './getWorkspacesToPublish.js'
+import { createWorkspaceLifecycleExecutor } from './lifecycleExecutor.js'
+import { pack } from './pack.js'
 
-export { pushPublishCommit, createPublishCommit } from './commitPublishChanges'
+export { pushPublishCommit, createPublishCommit } from './commitPublishChanges.js'
 export { determineGitTags, getWorkspacesToPublish }
 
 export const publishPackages = async ({

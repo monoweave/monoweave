@@ -12,7 +12,7 @@ import { LOG_LEVELS } from '@monoweave/logging'
 import { type MonoweaveConfiguration, RegistryMode } from '@monoweave/types'
 import * as npm from '@yarnpkg/plugin-npm'
 
-import { mergeDefaultConfig } from './mergeDefaultConfig'
+import { mergeDefaultConfig } from './mergeDefaultConfig.js'
 
 // @ts-expect-error https://github.com/swc-project/plugins/issues/310
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports, import-x/newline-after-import

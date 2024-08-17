@@ -1,7 +1,6 @@
 import { maybeExecuteWorkspaceLifecycleScript } from '@monoweave/io'
 import type { MonoweaveConfiguration, YarnContext } from '@monoweave/types'
 import { type Workspace } from '@yarnpkg/core'
-// @ts-expect-error type import, not shipped in transpiled code
 import type { LimitFunction } from 'p-limit'
 
 export function createWorkspaceLifecycleExecutor({

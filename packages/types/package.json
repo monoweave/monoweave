@@ -55,5 +55,6 @@
     "tsx": "^4.17.0",
     "typedoc": "^0.26.5",
     "typescript": "^5.5.4"
-  }
+  },
+  "type": "module"
 }

@@ -1,9 +1,9 @@
-export * from './stream'
-export * from './executeLifecycleScript'
-export * from './backupPackage'
-export * from './exec'
-export { resolveGroupName } from './resolveGroupName'
+export * from './stream.js'
+export * from './executeLifecycleScript.js'
+export * from './backupPackage.js'
+export * from './exec.js'
+export { resolveGroupName } from './resolveGroupName.js'
 
-import patchPackageJsons from './patchPackageJsons'
+import patchPackageJsons from './patchPackageJsons.js'
 
 export { patchPackageJsons }

@@ -98,6 +98,7 @@ function enforceRequiredWorkspaceFields({ Yarn }) {
         workspace.set(['author', 'name'], 'noahnu')
         workspace.set(['author', 'url'], 'https://monoweave.github.io/monoweave/')
         workspace.set(['license'], 'BSD-3')
+        workspace.set(['type'], 'module')
 
         if (workspace.manifest.private) continue
 

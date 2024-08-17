@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
-    "@monoweave/test-utils": "link:../../testUtils",
+    "@monoweave/test-utils": "workspace:*",
     "@types/node": "^20.15.0"
   },
   "dependencies": {
@@ -75,5 +75,6 @@
   },
   "engines": {
     "node": ">=v18"
-  }
+  },
+  "type": "module"
 }

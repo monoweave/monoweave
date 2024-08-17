@@ -1,6 +1,6 @@
 import type { CommitMessage, MonoweaveConfiguration, YarnContext } from '@monoweave/types'
 
-import { gitLastTaggedCommit, gitLog } from './gitCommands'
+import { gitLastTaggedCommit, gitLog } from './gitCommands.js'
 
 const DELIMITER = '-----------------monoweave-----------------'
 

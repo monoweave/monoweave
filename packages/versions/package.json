@@ -43,7 +43,7 @@
     "@monoweave/git": "workspace:*",
     "@monoweave/io": "workspace:*",
     "@monoweave/logging": "workspace:*",
-    "@monoweave/test-utils": "link:../../testUtils",
+    "@monoweave/test-utils": "workspace:*",
     "@monoweave/types": "workspace:*",
     "@types/conventional-commits-parser": "^5.0.0",
     "@types/micromatch": "^4.0.9",
@@ -68,5 +68,6 @@
     "@yarnpkg/plugin-npm": "^3.0.1",
     "@yarnpkg/plugin-pack": "^4.0.0",
     "@yarnpkg/shell": "^4.0.2"
-  }
+  },
+  "type": "module"
 }

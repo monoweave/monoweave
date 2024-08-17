@@ -22,7 +22,7 @@ import {
 import { npath } from '@yarnpkg/fslib'
 import * as npm from '@yarnpkg/plugin-npm'
 
-import { getPackageCandidatesForManualRelease } from '../version'
+import { getPackageCandidatesForManualRelease } from '../version.js'
 
 jest.mock('@yarnpkg/plugin-npm')
 jest.mock('@monoweave/git')

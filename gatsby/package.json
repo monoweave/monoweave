@@ -51,5 +51,6 @@
     "name": "noahnu",
     "url": "https://monoweave.github.io/monoweave/"
   },
-  "license": "BSD-3"
+  "license": "BSD-3",
+  "type": "module"
 }

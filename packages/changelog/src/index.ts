@@ -1,5 +1,5 @@
-import { generateChangelogEntry } from './changelog'
-import prependChangelogFile from './prependChangelogFile'
-import resolveConventionalConfig from './resolveConventionalConfig'
+import { generateChangelogEntry } from './changelog.js'
+import prependChangelogFile from './prependChangelogFile.js'
+import resolveConventionalConfig from './resolveConventionalConfig.js'
 
 export { prependChangelogFile, resolveConventionalConfig, generateChangelogEntry }

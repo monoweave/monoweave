@@ -14,8 +14,8 @@ import {
 import { type MonoweaveConfiguration, type RecursivePartial } from '@monoweave/types'
 import { npath } from '@yarnpkg/fslib'
 
-import { startRegistry, stopRegistry, waitForRegistry } from './docker'
-import run from './runner'
+import { startRegistry, stopRegistry, waitForRegistry } from './docker.js'
+import run from './runner.js'
 
 const registryUrl = 'http://localhost:4873'
 

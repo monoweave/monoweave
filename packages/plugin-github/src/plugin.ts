@@ -8,7 +8,7 @@ import {
 } from '@monoweave/types'
 import { MessageName, structUtils } from '@yarnpkg/core'
 
-import { request } from './request'
+import { request } from './request.js'
 
 export const PluginName = 'GitHub Plugin'
 

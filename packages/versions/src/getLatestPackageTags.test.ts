@@ -7,7 +7,7 @@ import { type YarnContext } from '@monoweave/types'
 import { npath, ppath } from '@yarnpkg/fslib'
 import * as npm from '@yarnpkg/plugin-npm'
 
-import { getLatestPackageTags } from '.'
+import { getLatestPackageTags } from './index.js'
 
 // @ts-expect-error https://github.com/swc-project/plugins/issues/310
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports, import-x/newline-after-import
