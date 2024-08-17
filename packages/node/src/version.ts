@@ -15,8 +15,7 @@ export const getPackageCandidatesForManualRelease = async (
     baseConfig: RecursivePartial<MonoweaveConfiguration>,
     { includePatterns }: { includePatterns?: string[] } = {},
 ): Promise<{
-    suggestedPackages: Map<string, { currentVersion: string | undefined }>
-    remainingPackages: Map<string, { currentVersion: string | undefined }>
+    packages: Map<string, { currentVersion: string | undefined; modified: boolean }>
     versionFolder: string
 }> => {
     if (baseConfig.logLevel !== undefined && baseConfig.logLevel !== null) {
@@ -75,25 +74,26 @@ export const getPackageCandidatesForManualRelease = async (
         }
     }
 
-    const suggestedPackages = new Map<string, { currentVersion: string | undefined }>()
-    const remainingPackages = new Map<string, { currentVersion: string | undefined }>()
+    const packages = new Map<string, { currentVersion: string | undefined; modified: boolean }>()
 
     for (const pkgName of modifiedPackages) {
         if (includePatterns?.length && !micromatch([pkgName], includePatterns).length) continue
-        suggestedPackages.set(pkgName, { currentVersion: registryTags.get(pkgName)?.latest })
+        packages.set(pkgName, { currentVersion: registryTags.get(pkgName)?.latest, modified: true })
     }
 
     for (const workspace of project.workspaces) {
         if (workspace.manifest.private || !workspace.manifest.name) continue
         const pkgName = structUtils.stringifyIdent(workspace.manifest.name)
-        if (suggestedPackages.has(pkgName)) continue
+        if (packages.has(pkgName)) continue
         if (includePatterns?.length && !micromatch([pkgName], includePatterns).length) continue
-        remainingPackages.set(pkgName, { currentVersion: registryTags.get(pkgName)?.latest })
+        packages.set(pkgName, {
+            currentVersion: registryTags.get(pkgName)?.latest,
+            modified: false,
+        })
     }
 
     return {
-        suggestedPackages,
-        remainingPackages,
+        packages,
         versionFolder: path.resolve(
             npath.fromPortablePath(project.cwd),
             config.versionStrategy?.versionFolder ?? '.monoweave',

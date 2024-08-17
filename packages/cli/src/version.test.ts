@@ -49,8 +49,7 @@ describe('CLI - Version', () => {
         await using temp = await createTempDir()
 
         jestImport.spyOn(monoweave, 'getPackageCandidatesForManualRelease').mockResolvedValue({
-            remainingPackages: new Map([]),
-            suggestedPackages: new Map([]),
+            packages: new Map([]),
             versionFolder: temp.dir,
         })
 
@@ -76,10 +75,9 @@ describe('CLI - Version', () => {
             await using temp = await createTempDir()
 
             jestImport.spyOn(monoweave, 'getPackageCandidatesForManualRelease').mockResolvedValue({
-                remainingPackages: new Map([]),
-                suggestedPackages: new Map([
-                    ['pkg-1', { currentVersion: '1.0.0' }],
-                    ['pkg-2', { currentVersion: '1.0.0' }],
+                packages: new Map([
+                    ['pkg-1', { currentVersion: '1.0.0', modified: true }],
+                    ['pkg-2', { currentVersion: '1.0.0', modified: true }],
                 ]),
                 versionFolder: temp.dir,
             })
@@ -115,10 +113,9 @@ describe('CLI - Version', () => {
             await using temp = await createTempDir()
 
             jestImport.spyOn(monoweave, 'getPackageCandidatesForManualRelease').mockResolvedValue({
-                remainingPackages: new Map([]),
-                suggestedPackages: new Map([
-                    ['pkg-1', { currentVersion: '1.0.0' }],
-                    ['pkg-2', { currentVersion: '1.0.0' }],
+                packages: new Map([
+                    ['pkg-1', { currentVersion: '1.0.0', modified: true }],
+                    ['pkg-2', { currentVersion: '1.0.0', modified: true }],
                 ]),
                 versionFolder: temp.dir,
             })
