@@ -3,7 +3,7 @@ import path from 'path'
 import { describe, expect, it } from '@jest/globals'
 import { createMonorepoContext, getMonoweaveConfig } from '@monoweave/test-utils'
 
-import { generateChangelogEntry } from './changelog'
+import { generateChangelogEntry } from './changelog.js'
 
 function filterOutDate(text: string): string {
     return text.replaceAll(/\(\d+[-/]\d+[-/]\d+\)/g, '<DATE>')
@@ -145,7 +145,7 @@ describe('Generate Changelog Entry', () => {
             const config = await getMonoweaveConfig({
                 cwd: context.project.cwd,
                 conventionalChangelogConfig: path.resolve(
-                    path.join(__dirname, '..', 'mocks', 'conventional-config-writer.mock.ts'),
+                    path.join(import.meta.dirname, '..', 'mocks', 'conventional-config-writer.mock.ts'),
                 ),
             })
 

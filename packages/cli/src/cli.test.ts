@@ -20,7 +20,7 @@ import {
 import JSON5 from 'json5'
 import YAML from 'yaml'
 
-const scriptPath = path.join(__dirname, 'index.ts')
+const scriptPath = path.join(import.meta.dirname, 'index.ts')
 
 jest.mock('@monoweave/node')
 

@@ -8,8 +8,8 @@ import { npath, ppath } from '@yarnpkg/fslib'
 import { Command, Option } from 'clipanion'
 import * as t from 'typanion'
 
-import readConfigFile from './config/readConfigFile'
-import { detectIsInCI } from './config/utils'
+import readConfigFile from './config/readConfigFile.js'
+import { detectIsInCI } from './config/utils.js'
 
 export abstract class BaseCommand extends Command {
     preset = Option.String('--preset', {

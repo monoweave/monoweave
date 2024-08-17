@@ -15,7 +15,7 @@ import { hashUtils, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
 import YAML from 'yaml'
 
-import { maxStrategy } from '../versionStrategy'
+import { maxStrategy } from '../versionStrategy.js'
 
 export async function parseDeferredVersionFile(contents: string): Promise<DeferredVersionRecord> {
     const [line1, ...lines] = contents.split('\n')

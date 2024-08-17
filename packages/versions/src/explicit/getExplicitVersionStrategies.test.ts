@@ -21,7 +21,7 @@ import { type PortablePath, npath } from '@yarnpkg/fslib'
     (jest as typeof import('@jest/globals').jest).requireActual('@monoweave/git'),
 )
 
-import { getExplicitVersionStrategies } from '..'
+import { getExplicitVersionStrategies } from '../index.js'
 
 describe('getExplicitVersionStrategies', () => {
     let tempRepositoryRoot: PortablePath

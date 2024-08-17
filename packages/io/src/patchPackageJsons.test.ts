@@ -6,7 +6,7 @@ import { type YarnContext } from '@monoweave/types'
 import { Manifest, type Workspace, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
 
-import { patchPackageJsons } from '.'
+import { patchPackageJsons } from './index.js'
 
 const identToWorkspace = (context: YarnContext, name: string): Workspace =>
     context.project.getWorkspaceByIdent(structUtils.parseIdent(name))

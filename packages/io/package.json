@@ -35,7 +35,7 @@
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
     "@monoweave/logging": "workspace:*",
-    "@monoweave/test-utils": "link:../../testUtils",
+    "@monoweave/test-utils": "workspace:*",
     "@monoweave/types": "workspace:*",
     "@types/node": "^20.15.0",
     "@types/semver": "^7.5.8",
@@ -49,5 +49,6 @@
     "@yarnpkg/core": "^4.1.2",
     "@yarnpkg/fslib": "^3.1.0",
     "@yarnpkg/shell": "^4.0.2"
-  }
+  },
+  "type": "module"
 }

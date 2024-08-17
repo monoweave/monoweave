@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
-    "@monoweave/test-utils": "link:../../testUtils",
+    "@monoweave/test-utils": "workspace:*",
     "@types/micromatch": "^4.0.9",
     "@types/node": "^20.15.0"
   },
@@ -52,5 +52,6 @@
     "@yarnpkg/shell": "^4.0.2",
     "micromatch": "^4.0.7",
     "tapable": "^2.2.1"
-  }
+  },
+  "type": "module"
 }

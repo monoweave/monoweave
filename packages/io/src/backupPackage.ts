@@ -6,7 +6,7 @@ import logging from '@monoweave/logging'
 import type { MonoweaveConfiguration, YarnContext } from '@monoweave/types'
 import { Report } from '@yarnpkg/core'
 
-import getPackageJsonPaths from './getPackageJsonPaths'
+import getPackageJsonPaths from './getPackageJsonPaths.js'
 
 export const backupPackageJsons = async ({
     config,

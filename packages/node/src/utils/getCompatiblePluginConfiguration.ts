@@ -5,13 +5,19 @@ import { getDynamicLibs } from '@yarnpkg/cli'
 import packageJson from '@yarnpkg/cli/package.json'
 import { type PluginConfiguration } from '@yarnpkg/core'
 
-const requireForCLI = createRequire(require.resolve('@yarnpkg/cli'))
-
 /**
  * We cannot use getPluginConfiguration since it's possible some plugins are
  * incompatible with the version of yarnpkg/core we use in monoweave.
  */
-export const getCompatiblePluginConfiguration = (): PluginConfiguration => {
+export const getCompatiblePluginConfiguration = async (): Promise<PluginConfiguration> => {
+    const requireForCLI = async (specifier: string) => {
+        const mod = await import(new URL(specifier, import.meta.resolve('@yarnpkg/cli')).toString())
+        if ('default' in mod) {
+            return mod.default
+        }
+        return mod
+    }
+
     const plugins = new Set<string>()
     for (const dependencyName of packageJson['@yarnpkg/builder'].bundles.standard) {
         plugins.add(dependencyName)
@@ -21,8 +27,7 @@ export const getCompatiblePluginConfiguration = (): PluginConfiguration => {
     let incompatibility = false
     for (const plugin of plugins) {
         try {
-            // eslint-disable-next-line @typescript-eslint/no-var-requires
-            modules.set(plugin, requireForCLI(plugin).default)
+            modules.set(plugin, await requireForCLI(plugin))
         } catch {
             incompatibility = true
             logging.warning(`[Configuration] Unable to configure '${plugin}', skipping.`, {

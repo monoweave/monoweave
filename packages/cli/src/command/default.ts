@@ -4,7 +4,7 @@ import { type MonoweaveConfiguration, type RecursivePartial } from '@monoweave/t
 import { Option } from 'clipanion'
 import * as t from 'typanion'
 
-import { BaseCommand } from './base'
+import { BaseCommand } from './base.js'
 
 export class MonoweaveCommand extends BaseCommand {
     changesetFilename = Option.String('--changeset-filename', {

@@ -3,7 +3,7 @@ import { exec } from '@monoweave/io'
 import { cleanUp, initGitRepository, setupMonorepo } from '@monoweave/test-utils'
 import { type YarnContext } from '@monoweave/types'
 
-import { gitLastTaggedCommit, gitPushTags, gitTag } from '.'
+import { gitLastTaggedCommit, gitPushTags, gitTag } from './index.js'
 
 // @ts-expect-error https://github.com/swc-project/plugins/issues/310
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports, import-x/newline-after-import

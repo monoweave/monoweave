@@ -7,7 +7,7 @@ import {
     STRATEGY,
     createGetConventionalRecommendedStrategy,
     getDefaultRecommendedStrategy,
-} from './versionStrategy'
+} from './versionStrategy.js'
 
 const monoweaveConfig: MonoweaveConfiguration = {
     cwd: process.cwd(),
@@ -20,7 +20,7 @@ const monoweaveConfig: MonoweaveConfiguration = {
         tag: false,
     },
     conventionalChangelogConfig: path.resolve(
-        path.join(__dirname, '..', 'mocks', 'conventional-config.mock.ts'),
+        path.join(import.meta.dirname, '..', 'mocks', 'conventional-config.mock.ts'),
     ),
     access: 'public',
     registryMode: RegistryMode.NPM,
@@ -141,7 +141,7 @@ describe('Custom Conventional Recommended Strategy (Function Format)', () => {
         const strategyDeterminer = createGetConventionalRecommendedStrategy({
             ...monoweaveConfig,
             conventionalChangelogConfig: path.resolve(
-                path.join(__dirname, '..', 'mocks', 'conventional-config-fn.mock.ts'),
+                path.join(import.meta.dirname, '..', 'mocks', 'conventional-config-fn.mock.ts'),
             ),
         })
 

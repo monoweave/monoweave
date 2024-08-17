@@ -3,10 +3,10 @@ import { createMonorepoContext, getMonoweaveConfig } from '@monoweave/test-utils
 import { type PluginHooks } from '@monoweave/types'
 import { AsyncSeriesHook } from 'tapable'
 
-import { createPluginInternals } from './plugin'
-import * as requestModule from './request'
+import { createPluginInternals } from './plugin.js'
+import * as requestModule from './request.js'
 
-import GitHubPlugin, { PluginName } from '.'
+import GitHubPlugin, { PluginName } from './index.js'
 
 // @ts-expect-error https://github.com/swc-project/plugins/issues/310
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports, import-x/newline-after-import

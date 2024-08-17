@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from '@jest/globals'
 
-import { assertProduction, assertProductionOrTest } from './invariants'
+import { assertProduction, assertProductionOrTest } from './invariants.js'
 
 describe('Invariants', () => {
     const origNodeEnv = process.env.NODE_ENV

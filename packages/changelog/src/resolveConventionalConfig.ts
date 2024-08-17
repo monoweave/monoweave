@@ -1,3 +1,5 @@
+import { createRequire } from 'module'
+
 import type { MonoweaveConfiguration } from '@monoweave/types'
 import type { Options as ConventionalCommitsWriterOptions } from 'conventional-changelog-writer'
 import type {
@@ -41,13 +43,14 @@ const resolveConventionalConfig = async ({
 
     const conventionalConfig = coerceConventionalConfig(conventionalChangelogConfig)
 
-    // ghost-imports-ignore-next-line
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const conventionalConfigModule = require(
-        require.resolve(conventionalConfig.name, {
-            paths: [config.cwd],
-        }),
-    )
+    const require = createRequire(config.cwd)
+
+    let conventionalConfigModule = await import(require.resolve(conventionalConfig.name))
+
+    conventionalConfigModule =
+        typeof conventionalConfigModule === 'object' && 'default' in conventionalConfigModule
+            ? conventionalConfigModule.default
+            : conventionalConfigModule
 
     return await (typeof conventionalConfigModule === 'function'
         ? conventionalConfigModule(conventionalConfig)

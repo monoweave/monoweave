@@ -36,13 +36,13 @@ import { Cache, Configuration, Project, StreamReport, type Workspace } from '@ya
 import { npath } from '@yarnpkg/fslib'
 import { AsyncSeriesHook } from 'tapable'
 
-import { generateChangeset } from './utils/generateChangeset'
-import { getCompatiblePluginConfiguration } from './utils/getCompatiblePluginConfiguration'
-import { getGitTagsFromChangeset } from './utils/getGitTagsFromChangeset'
-import { mergeDefaultConfig } from './utils/mergeDefaultConfig'
-import { writeChangesetFile } from './utils/writeChangesetFile'
+import { generateChangeset } from './utils/generateChangeset.js'
+import { getCompatiblePluginConfiguration } from './utils/getCompatiblePluginConfiguration.js'
+import { getGitTagsFromChangeset } from './utils/getGitTagsFromChangeset.js'
+import { mergeDefaultConfig } from './utils/mergeDefaultConfig.js'
+import { writeChangesetFile } from './utils/writeChangesetFile.js'
 
-export { getPackageCandidatesForManualRelease } from './version'
+export { getPackageCandidatesForManualRelease } from './version.js'
 
 const monoweave = async (
     baseConfig: RecursivePartial<MonoweaveConfiguration>,
@@ -63,7 +63,7 @@ const monoweave = async (
     const plumbingMode = config.changesetFilename === '-'
 
     const cwd = npath.toPortablePath(path.resolve(process.cwd(), config.cwd))
-    const configuration = await Configuration.find(cwd, getCompatiblePluginConfiguration())
+    const configuration = await Configuration.find(cwd, await getCompatiblePluginConfiguration())
     const foundProject = await Project.find(configuration, cwd)
     let { project } = foundProject
     const cache = await Cache.find(configuration)

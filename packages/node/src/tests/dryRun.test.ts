@@ -18,7 +18,7 @@ import { type MonoweaveConfiguration, RegistryMode, type YarnContext } from '@mo
 import { npath } from '@yarnpkg/fslib'
 import * as npm from '@yarnpkg/plugin-npm'
 
-import monoweave from '..'
+import monoweave from '../index.js'
 
 jest.mock('@yarnpkg/plugin-npm')
 jest.mock('@monoweave/git')

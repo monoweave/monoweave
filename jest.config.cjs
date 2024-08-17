@@ -30,11 +30,15 @@ const config = {
     transform: {
         '^.+\\.[mc]?tsx?$': [require.resolve('@swc/jest'), swcOptions],
     },
+    moduleNameMapper: {
+        '^((\\.{1,2}/?)+.*)\\.js$': '$1',
+    },
     testPathIgnorePatterns: ['/node_modules/', '/.yarn/', '<rootDir>/.*\\.js', '<rootDir>/.*/lib/'],
     haste: {
         throwOnModuleCollision: true,
     },
     modulePathIgnorePatterns: ['<rootDir>/.*/lib'],
+    extensionsToTreatAsEsm: ['.ts', '.mts'],
 }
 
 /** @type {import('jest').Config} */

@@ -13,7 +13,7 @@ import {
 import { createTempDir, waitFor } from '@monoweave/test-utils'
 import { parseDeferredVersionFile } from '@monoweave/versions'
 
-const scriptPath = path.join(__dirname, 'index.ts')
+const scriptPath = path.join(import.meta.dirname, 'index.ts')
 
 // Skipping the git mock as we use a temp repository for these tests.
 // @ts-expect-error https://github.com/swc-project/plugins/issues/310

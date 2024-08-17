@@ -10,7 +10,7 @@ import { getPluginConfiguration } from '@yarnpkg/cli'
 import { Configuration, Project, ThrowReport } from '@yarnpkg/core'
 import { type PortablePath } from '@yarnpkg/fslib'
 
-import { mergeDefaultConfig } from '../packages/node/src/utils/mergeDefaultConfig'
+import { mergeDefaultConfig } from '../../packages/node/src/utils/mergeDefaultConfig.js'
 
 export async function setupContext(cwd: PortablePath): Promise<YarnContext> {
     const configuration = await Configuration.find(cwd, getPluginConfiguration())

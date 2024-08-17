@@ -24,7 +24,7 @@ import {
     gitResolveSha,
     gitTag,
     gitUpstreamBranch,
-} from '.'
+} from './index.js'
 
 describe('@monoweave/git', () => {
     let context: YarnContext
