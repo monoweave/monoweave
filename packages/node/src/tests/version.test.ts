@@ -112,31 +112,34 @@ describe('Monoweave - Manual Mode', () => {
     it('suggests modified packages since last tag', async () => {
         mockGit._commitFiles_('sha1', 'feat: some new feature!', ['./packages/pkg-1/README.md'])
 
-        const { remainingPackages, suggestedPackages } =
-            await getPackageCandidatesForManualRelease(monoweaveConfig)
-        expect(Array.from(suggestedPackages.keys())).toEqual(['pkg-1'])
-        expect(Array.from(remainingPackages.keys())).toEqual(['pkg-2', 'pkg-3'])
+        const { packages } = await getPackageCandidatesForManualRelease(monoweaveConfig)
+
+        expect(packages.size).toBe(3)
+        expect(packages.get('pkg-1')).toEqual(expect.objectContaining({ modified: true }))
+        expect(packages.get('pkg-2')).toEqual(expect.objectContaining({ modified: false }))
+        expect(packages.get('pkg-3')).toEqual(expect.objectContaining({ modified: false }))
     })
 
     it('filters packages using glob patterns', async () => {
         mockGit._commitFiles_('sha1', 'feat: some new feature!', ['./packages/pkg-1/README.md'])
 
-        const { remainingPackages, suggestedPackages } = await getPackageCandidatesForManualRelease(
-            monoweaveConfig,
-            { includePatterns: ['*-2', 'package-*'] },
-        )
-        expect(Array.from(suggestedPackages.keys())).toEqual([])
-        expect(Array.from(remainingPackages.keys())).toEqual(['pkg-2'])
+        const { packages } = await getPackageCandidatesForManualRelease(monoweaveConfig, {
+            includePatterns: ['*-2', 'package-*'],
+        })
+        expect(packages.size).toBe(1)
+        expect(packages.get('pkg-2')).toEqual(expect.objectContaining({ modified: false }))
     })
 
     it('does not filter if includePatterns is empty', async () => {
         mockGit._commitFiles_('sha1', 'feat: some new feature!', ['./packages/pkg-1/README.md'])
 
-        const { remainingPackages, suggestedPackages } = await getPackageCandidatesForManualRelease(
-            monoweaveConfig,
-            { includePatterns: [] },
-        )
-        expect(Array.from(suggestedPackages.keys())).toEqual(['pkg-1'])
-        expect(Array.from(remainingPackages.keys())).toEqual(['pkg-2', 'pkg-3'])
+        const { packages } = await getPackageCandidatesForManualRelease(monoweaveConfig, {
+            includePatterns: [],
+        })
+
+        expect(packages.size).toBe(3)
+        expect(packages.get('pkg-1')).toEqual(expect.objectContaining({ modified: true }))
+        expect(packages.get('pkg-2')).toEqual(expect.objectContaining({ modified: false }))
+        expect(packages.get('pkg-3')).toEqual(expect.objectContaining({ modified: false }))
     })
 })
