@@ -3339,7 +3339,7 @@ __metadata:
     "@monoweave/git": "workspace:^1.7.0"
     "@monoweave/io": "workspace:^1.7.0"
     "@monoweave/logging": "workspace:^1.7.0"
-    "@monoweave/node": "workspace:^1.7.0"
+    "@monoweave/node": "workspace:^1.7.1"
     "@monoweave/test-utils": "link:../../testUtils"
     "@monoweave/types": "workspace:^1.7.0"
     "@monoweave/versions": "workspace:^1.7.0"
@@ -3556,7 +3556,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/node@workspace:^1.7.0, @monoweave/node@workspace:packages/node":
+"@monoweave/node@workspace:^1.7.1, @monoweave/node@workspace:packages/node":
   version: 0.0.0-use.local
   resolution: "@monoweave/node@workspace:packages/node"
   dependencies:
