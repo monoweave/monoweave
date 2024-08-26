@@ -3339,10 +3339,10 @@ __metadata:
     "@monoweave/git": "workspace:^1.7.0"
     "@monoweave/io": "workspace:^1.7.0"
     "@monoweave/logging": "workspace:^1.7.0"
-    "@monoweave/node": "workspace:^1.7.1"
+    "@monoweave/node": "workspace:^1.8.0"
     "@monoweave/test-utils": "link:../../testUtils"
     "@monoweave/types": "workspace:^1.7.0"
-    "@monoweave/versions": "workspace:^1.7.0"
+    "@monoweave/versions": "workspace:^1.8.0"
     "@types/node": "npm:^20.15.0"
     "@yarnpkg/cli": "npm:^4.4.1"
     "@yarnpkg/core": "npm:^4.1.2"
@@ -3556,7 +3556,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/node@workspace:^1.7.1, @monoweave/node@workspace:packages/node":
+"@monoweave/node@workspace:^1.8.0, @monoweave/node@workspace:packages/node":
   version: 0.0.0-use.local
   resolution: "@monoweave/node@workspace:packages/node"
   dependencies:
@@ -3566,10 +3566,10 @@ __metadata:
     "@monoweave/git": "workspace:^1.7.0"
     "@monoweave/io": "workspace:^1.7.0"
     "@monoweave/logging": "workspace:^1.7.0"
-    "@monoweave/publish": "workspace:^1.7.0"
+    "@monoweave/publish": "workspace:^1.8.0"
     "@monoweave/test-utils": "link:../../testUtils"
     "@monoweave/types": "workspace:^1.7.0"
-    "@monoweave/versions": "workspace:^1.7.0"
+    "@monoweave/versions": "workspace:^1.8.0"
     "@types/micromatch": "npm:^4.0.9"
     "@types/node": "npm:^20.15.0"
     "@yarnpkg/cli": "npm:^4.4.1"
@@ -3603,7 +3603,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/publish@workspace:^1.7.0, @monoweave/publish@workspace:packages/publish":
+"@monoweave/publish@workspace:^1.8.0, @monoweave/publish@workspace:packages/publish":
   version: 0.0.0-use.local
   resolution: "@monoweave/publish@workspace:packages/publish"
   dependencies:
@@ -3718,7 +3718,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/versions@workspace:^1.7.0, @monoweave/versions@workspace:packages/versions":
+"@monoweave/versions@workspace:^1.8.0, @monoweave/versions@workspace:packages/versions":
   version: 0.0.0-use.local
   resolution: "@monoweave/versions@workspace:packages/versions"
   dependencies:
