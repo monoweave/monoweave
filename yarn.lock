@@ -3288,7 +3288,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monoweave/changelog@workspace:*, @monoweave/changelog@workspace:^1.7.0, @monoweave/changelog@workspace:packages/changelog":
+"@monoweave/changelog@workspace:*, @monoweave/changelog@workspace:^1.8.1, @monoweave/changelog@workspace:packages/changelog":
   version: 0.0.0-use.local
   resolution: "@monoweave/changelog@workspace:packages/changelog"
   dependencies:
@@ -3308,7 +3308,7 @@ __metadata:
     conventional-commits-parser: "npm:^5.0.0"
     p-limit: "npm:^6.1.0"
   peerDependencies:
-    "@monoweave/git": "workspace:^1.7.0"
+    "@monoweave/git": "workspace:^1.8.0"
     "@monoweave/io": "workspace:^1.7.0"
     "@monoweave/logging": "workspace:^1.7.0"
     "@monoweave/types": "workspace:^1.7.0"
@@ -3324,15 +3324,15 @@ __metadata:
   dependencies:
     "@inquirer/prompts": "npm:^5.3.8"
     "@jest/globals": "npm:^30.0.0-alpha.6"
-    "@monoweave/changelog": "workspace:^1.7.0"
+    "@monoweave/changelog": "workspace:^1.8.1"
     "@monoweave/dependencies": "workspace:^1.7.0"
-    "@monoweave/git": "workspace:^1.7.0"
+    "@monoweave/git": "workspace:^1.8.1"
     "@monoweave/io": "workspace:^1.7.0"
     "@monoweave/logging": "workspace:^1.7.0"
-    "@monoweave/node": "workspace:^1.8.0"
+    "@monoweave/node": "workspace:^1.8.1"
     "@monoweave/test-utils": "link:../../testUtils"
     "@monoweave/types": "workspace:^1.7.0"
-    "@monoweave/versions": "workspace:^1.8.0"
+    "@monoweave/versions": "workspace:^1.8.1"
     "@types/node": "npm:^20.15.0"
     "@yarnpkg/cli": "npm:^4.4.1"
     "@yarnpkg/core": "npm:^4.1.2"
@@ -3428,7 +3428,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/git@workspace:*, @monoweave/git@workspace:^1.7.0, @monoweave/git@workspace:packages/git":
+"@monoweave/git@workspace:*, @monoweave/git@workspace:^1.8.1, @monoweave/git@workspace:packages/git":
   version: 0.0.0-use.local
   resolution: "@monoweave/git@workspace:packages/git"
   dependencies:
@@ -3546,20 +3546,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/node@workspace:^1.8.0, @monoweave/node@workspace:packages/node":
+"@monoweave/node@workspace:^1.8.1, @monoweave/node@workspace:packages/node":
   version: 0.0.0-use.local
   resolution: "@monoweave/node@workspace:packages/node"
   dependencies:
     "@jest/globals": "npm:^30.0.0-alpha.6"
-    "@monoweave/changelog": "workspace:^1.7.0"
+    "@monoweave/changelog": "workspace:^1.8.1"
     "@monoweave/dependencies": "workspace:^1.7.0"
-    "@monoweave/git": "workspace:^1.7.0"
+    "@monoweave/git": "workspace:^1.8.1"
     "@monoweave/io": "workspace:^1.7.0"
     "@monoweave/logging": "workspace:^1.7.0"
-    "@monoweave/publish": "workspace:^1.8.0"
+    "@monoweave/publish": "workspace:^1.8.1"
     "@monoweave/test-utils": "link:../../testUtils"
     "@monoweave/types": "workspace:^1.7.0"
-    "@monoweave/versions": "workspace:^1.8.0"
+    "@monoweave/versions": "workspace:^1.8.1"
     "@types/micromatch": "npm:^4.0.9"
     "@types/node": "npm:^20.15.0"
     "@yarnpkg/cli": "npm:^4.4.1"
@@ -3578,7 +3578,7 @@ __metadata:
   resolution: "@monoweave/plugin-github@workspace:packages/plugin-github"
   dependencies:
     "@jest/globals": "npm:^30.0.0-alpha.6"
-    "@monoweave/git": "workspace:^1.7.0"
+    "@monoweave/git": "workspace:^1.8.1"
     "@monoweave/io": "workspace:^1.7.0"
     "@monoweave/logging": "workspace:^1.7.0"
     "@monoweave/test-utils": "link:../../testUtils"
@@ -3593,7 +3593,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/publish@workspace:^1.8.0, @monoweave/publish@workspace:packages/publish":
+"@monoweave/publish@workspace:^1.8.1, @monoweave/publish@workspace:packages/publish":
   version: 0.0.0-use.local
   resolution: "@monoweave/publish@workspace:packages/publish"
   dependencies:
@@ -3613,7 +3613,7 @@ __metadata:
     p-limit: "npm:^6.1.0"
   peerDependencies:
     "@monoweave/dependencies": "workspace:^1.7.0"
-    "@monoweave/git": "workspace:^1.7.0"
+    "@monoweave/git": "workspace:^1.8.0"
     "@monoweave/io": "workspace:^1.7.0"
     "@monoweave/logging": "workspace:^1.7.0"
     "@monoweave/types": "workspace:^1.7.0"
@@ -3708,7 +3708,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monoweave/versions@workspace:^1.8.0, @monoweave/versions@workspace:packages/versions":
+"@monoweave/versions@workspace:^1.8.1, @monoweave/versions@workspace:packages/versions":
   version: 0.0.0-use.local
   resolution: "@monoweave/versions@workspace:packages/versions"
   dependencies:
@@ -3735,9 +3735,9 @@ __metadata:
     semver: "npm:^7.6.3"
     yaml: "npm:^2.5.0"
   peerDependencies:
-    "@monoweave/changelog": "workspace:^1.7.0"
+    "@monoweave/changelog": "workspace:^1.8.0"
     "@monoweave/dependencies": "workspace:^1.7.0"
-    "@monoweave/git": "workspace:^1.7.0"
+    "@monoweave/git": "workspace:^1.8.0"
     "@monoweave/io": "workspace:^1.7.0"
     "@monoweave/logging": "workspace:^1.7.0"
     "@monoweave/types": "workspace:^1.7.0"
