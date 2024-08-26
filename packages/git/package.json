@@ -42,7 +42,7 @@
     "@yarnpkg/shell": "^4.0.2"
   },
   "dependencies": {
-    "micromatch": "^4.0.7"
+    "micromatch": "^4.0.8"
   },
   "peerDependencies": {
     "@monoweave/io": "workspace:^1.7.0",
