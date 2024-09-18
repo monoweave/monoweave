@@ -20,9 +20,9 @@
         "@monoweave/types": "workspace:*",
         "@tophat/conventional-changelog-config": "^1.0.1",
         "@types/node": "^20.15.0",
-        "@yarnpkg/core": "^4.1.2",
+        "@yarnpkg/core": "^4.1.3",
         "@yarnpkg/fslib": "^3.1.0",
-        "@yarnpkg/shell": "^4.0.2",
+        "@yarnpkg/shell": "^4.1.0",
         "helpers": "link:./helpers",
         "tsx": "^4.17.0"
     },
