@@ -1,6 +1,6 @@
 {
   "name": "@monoweave/plugin-github",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/monoweave/monoweave.git",
@@ -35,10 +35,10 @@
     "tapable": "^2.2.1"
   },
   "dependencies": {
-    "@monoweave/git": "workspace:^1.8.1",
-    "@monoweave/io": "workspace:^1.7.0",
-    "@monoweave/logging": "workspace:^1.7.0",
-    "@monoweave/types": "workspace:^1.7.0",
+    "@monoweave/git": "workspace:^1.9.0",
+    "@monoweave/io": "workspace:^1.9.0",
+    "@monoweave/logging": "workspace:^1.9.0",
+    "@monoweave/types": "workspace:^1.9.0",
     "@octokit/core": "^6.1.2",
     "@octokit/plugin-throttling": "^9.3.1",
     "@yarnpkg/core": "^4.1.3",
