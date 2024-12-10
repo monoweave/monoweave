@@ -49,10 +49,10 @@
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
     "@monoweave/test-utils": "link:../../testUtils",
-    "@types/node": "^20.15.0"
+    "@types/node": "^20.17.6"
   },
   "dependencies": {
-    "@inquirer/prompts": "^5.3.8",
+    "@inquirer/prompts": "^5.5.0",
     "@monoweave/changelog": "workspace:^1.11.0",
     "@monoweave/dependencies": "workspace:^1.11.0",
     "@monoweave/git": "workspace:^1.11.0",
@@ -68,10 +68,10 @@
     "@yarnpkg/plugin-pack": "^4.0.0",
     "@yarnpkg/shell": "^4.1.0",
     "ajv": "^8.17.1",
-    "clipanion": "^4.0.0-rc.3",
+    "clipanion": "^4.0.0-rc.4",
     "json5": "^2.2.3",
     "typanion": "^3.14.0",
-    "yaml": "^2.5.0"
+    "yaml": "^2.6.1"
   },
   "engines": {
     "node": ">=v18"
