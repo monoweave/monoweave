@@ -29,6 +29,7 @@
         "lint:ci": "eslint . --format junit --output-file ${ARTIFACT_DIR:-artifacts}/test_results/eslint/eslint.junit.xml",
         "lint:fix": "eslint . --fix",
         "lint": "eslint .",
+        "bin:jest:debug": "yarn node --inspect-brk --experimental-vm-modules $(yarn bin jest) --config=jest.config.js",
         "bin:jest": "yarn node --experimental-vm-modules $(yarn bin jest) --config=jest.config.js",
         "test:ci": "CI=1 yarn bin:jest --ci --runInBand --selectProjects \"Unit/Integration\" --",
         "test:watch": "yarn bin:jest --watch --selectProjects \"Unit/Integration\" --",

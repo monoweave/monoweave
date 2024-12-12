@@ -14,6 +14,7 @@ const DEBUG = process.env.DEBUG === '1'
 const YARN_VERSION = packageManager.match('^yarn@([^+]+)')?.[1] ?? 'invalid'
 
 async function writeJSON(filename: string, data: Record<string, unknown>): Promise<void> {
+    await fs.mkdir(path.dirname(filename), { recursive: true })
     await fs.writeFile(filename, JSON.stringify(data), 'utf-8')
 }
 
@@ -59,12 +60,14 @@ export default async function setupMonorepo(
     {
         root,
         nodeLinker = 'pnp',
+        cwd,
     }: {
         root?: ProjectRootInitConfiguration
         nodeLinker?: 'pnp' | 'pnpm' | 'node-modules'
+        cwd?: string
     } = {},
 ): Promise<YarnContext> {
-    const workingDir = await fs.mkdtemp(path.join(os.tmpdir(), 'monorepo-'))
+    const workingDir = cwd ?? (await fs.mkdtemp(path.join(os.tmpdir(), 'monorepo-')))
 
     // Generate root package.json
     await writeJSON(path.join(workingDir, 'package.json'), {
@@ -135,19 +138,22 @@ export default async function setupMonorepo(
 
 export async function createMonorepoContext(
     monorepo: Record<string, PackageInitConfiguration>,
-    { root, debug }: { root?: ProjectRootInitConfiguration; debug?: boolean } = {},
+    {
+        root,
+        debug,
+        cwd,
+    }: { root?: ProjectRootInitConfiguration; cwd?: string; debug?: boolean } = {},
 ): Promise<AsyncDisposable & YarnContext> {
-    const context = await setupMonorepo(monorepo, { root })
-    const cwd = context.project.cwd
+    const context = await setupMonorepo(monorepo, { root, cwd })
 
     return {
         ...context,
         async [Symbol.asyncDispose]() {
             if (debug) {
-                console.log(`Working Directory: ${cwd}`)
+                console.log(`Working Directory: ${context.project.cwd}`)
             } else {
                 try {
-                    await fs.rm(cwd, { recursive: true, force: true })
+                    await fs.rm(context.project.cwd, { recursive: true, force: true })
                 } catch {}
             }
         },

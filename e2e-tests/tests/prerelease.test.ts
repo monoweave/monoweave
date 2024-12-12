@@ -4,9 +4,8 @@ import { RegistryMode } from '@monoweave/types'
 import setupProject from 'helpers/setupProject'
 
 describe('Prerelease', () => {
-    it(
-        'runs the full monoweave pipeline',
-        setupProject({
+    it('runs the full monoweave pipeline', async () => {
+        await using testContext = await setupProject({
             repository: [
                 {
                     'pkg-1': {},
@@ -44,158 +43,159 @@ describe('Prerelease', () => {
                 prereleaseId: 'alpha',
                 prereleaseNPMTag: 'next',
             },
-            testCase: async ({ run, readFile, exec, writeFile }) => {
-                // First semantic commit
-                await writeFile('packages/pkg-1/README.md', 'Modification.')
-                await exec('git add . && git commit -n -m "feat: some fancy addition" && git push')
+        })
 
-                const { error } = await run()
+        const { run, readFile, exec, writeFile } = testContext
 
-                if (error) console.error(error)
-                expect(error).toBeUndefined()
+        // First semantic commit
+        await writeFile('packages/pkg-1/README.md', 'Modification.')
+        await exec('git add . && git commit -n -m "feat: some fancy addition" && git push')
 
-                // On Remote:
-                // Assert tags pushed
-                await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-1@0.1.0')
-                await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-2@0.0.1')
-                await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-3@0.0.1')
+        const { error } = await run()
 
-                // Assert changelog updated on remote
-                expect((await exec('git cat-file blob origin/main:changelog.md')).stdout).toEqual(
-                    expect.stringContaining('fancy'),
-                )
+        if (error) console.error(error)
+        expect(error).toBeUndefined()
 
-                // -----
+        // On Remote:
+        // Assert tags pushed
+        await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-1@0.1.0')
+        await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-2@0.0.1')
+        await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-3@0.0.1')
 
-                // Create & switch to "next" branch
-                await exec('git checkout -b next')
-                await exec('git push --set-upstream origin next')
+        // Assert changelog updated on remote
+        expect((await exec('git cat-file blob origin/main:changelog.md')).stdout).toEqual(
+            expect.stringContaining('fancy'),
+        )
 
-                // -----
+        // -----
 
-                // Make another semantic change
-                await writeFile('packages/pkg-1/README.md', 'Modification.')
-                await exec('git add . && git commit -n -m "feat: some exciting addition"')
+        // Create & switch to "next" branch
+        await exec('git checkout -b next')
+        await exec('git push --set-upstream origin next')
 
-                const { error: error2 } = await run(['--prerelease'])
+        // -----
 
-                if (error2) console.error(error2)
-                expect(error2).toBeUndefined()
+        // Make another semantic change
+        await writeFile('packages/pkg-1/README.md', 'Modification.')
+        await exec('git add . && git commit -n -m "feat: some exciting addition"')
 
-                // ---
+        const { error: error2 } = await run(['--prerelease'])
 
-                let localChangeset = JSON.parse(await readFile('changes.json.tmp'))
-                expect(localChangeset).toEqual({
-                    'pkg-1': expect.objectContaining({
-                        changelog: expect.stringContaining('some exciting addition'),
-                        tag: 'pkg-1@0.2.0-alpha.0',
-                        version: '0.2.0-alpha.0',
-                        strategy: 'minor',
-                    }),
-                    'pkg-2': expect.objectContaining({
-                        changelog: null,
-                        tag: 'pkg-2@0.0.2-alpha.0',
-                        version: '0.0.2-alpha.0',
-                        strategy: 'patch',
-                    }),
-                    'pkg-3': expect.objectContaining({
-                        changelog: null,
-                        tag: 'pkg-3@0.0.2-alpha.0',
-                        version: '0.0.2-alpha.0',
-                        strategy: 'patch',
-                    }),
-                    'pkg-4': expect.objectContaining({
-                        changelog: null,
-                        tag: 'pkg-4@0.0.2-alpha.0',
-                        version: '0.0.2-alpha.0',
-                        strategy: 'patch',
-                    }),
-                })
+        if (error2) console.error(error2)
+        expect(error2).toBeUndefined()
 
-                const localChangelog = await readFile('changelog.md')
-                expect(localChangelog).toEqual(
-                    expect.stringContaining('fancy'), // should have old entry
-                )
-                expect(localChangelog).toEqual(
-                    expect.stringContaining('exciting'), // should have new entry
-                )
+        // ---
 
-                // On Remote:
-                // Assert tags pushed
-                await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-1@0.2.0-alpha.0')
+        let localChangeset = JSON.parse(await readFile('changes.json.tmp'))
+        expect(localChangeset).toEqual({
+            'pkg-1': expect.objectContaining({
+                changelog: expect.stringContaining('some exciting addition'),
+                tag: 'pkg-1@0.2.0-alpha.0',
+                version: '0.2.0-alpha.0',
+                strategy: 'minor',
+            }),
+            'pkg-2': expect.objectContaining({
+                changelog: null,
+                tag: 'pkg-2@0.0.2-alpha.0',
+                version: '0.0.2-alpha.0',
+                strategy: 'patch',
+            }),
+            'pkg-3': expect.objectContaining({
+                changelog: null,
+                tag: 'pkg-3@0.0.2-alpha.0',
+                version: '0.0.2-alpha.0',
+                strategy: 'patch',
+            }),
+            'pkg-4': expect.objectContaining({
+                changelog: null,
+                tag: 'pkg-4@0.0.2-alpha.0',
+                version: '0.0.2-alpha.0',
+                strategy: 'patch',
+            }),
+        })
 
-                // Assert changelog updated on remote
-                expect((await exec('git cat-file blob origin/next:changelog.md')).stdout).toEqual(
-                    expect.stringContaining('exciting'),
-                )
+        const localChangelog = await readFile('changelog.md')
+        expect(localChangelog).toEqual(
+            expect.stringContaining('fancy'), // should have old entry
+        )
+        expect(localChangelog).toEqual(
+            expect.stringContaining('exciting'), // should have new entry
+        )
 
-                // Another pre-release
-                // Make another semantic change
-                await writeFile('packages/pkg-1/README.md', 'Modification.')
-                await exec('git add . && git commit -n -m "fix: bugfix"')
-                const { error: error3 } = await run(['--prerelease'])
+        // On Remote:
+        // Assert tags pushed
+        await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-1@0.2.0-alpha.0')
 
-                if (error3) console.error(error3)
-                expect(error3).toBeUndefined()
+        // Assert changelog updated on remote
+        expect((await exec('git cat-file blob origin/next:changelog.md')).stdout).toEqual(
+            expect.stringContaining('exciting'),
+        )
 
-                // On Remote:
-                // Assert tags pushed
-                await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-1@0.2.0-alpha.1')
+        // Another pre-release
+        // Make another semantic change
+        await writeFile('packages/pkg-1/README.md', 'Modification.')
+        await exec('git add . && git commit -n -m "fix: bugfix"')
+        const { error: error3 } = await run(['--prerelease'])
 
-                // ----
+        if (error3) console.error(error3)
+        expect(error3).toBeUndefined()
 
-                // Now we'll test merging "next" into "main"
+        // On Remote:
+        // Assert tags pushed
+        await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-1@0.2.0-alpha.1')
 
-                await exec('git checkout main')
-                await exec('git merge next --no-verify --no-edit')
+        // ----
 
-                // Run non-prerelease. We expect all the pre-release versions to be squashed.
-                // No additional file modifications required, as the previous pre-release tags
-                // are ignored.
-                const { error: error4 } = await run()
+        // Now we'll test merging "next" into "main"
 
-                if (error4) console.error(error4)
-                expect(error4).toBeUndefined()
+        await exec('git checkout main')
+        await exec('git merge next --no-verify --no-edit')
 
-                localChangeset = JSON.parse(await readFile('changes.json.tmp'))
-                expect(localChangeset).toEqual({
-                    'pkg-1': expect.objectContaining({
-                        changelog: expect.stringContaining('some exciting addition'),
-                        tag: 'pkg-1@0.2.0',
-                        version: '0.2.0',
-                        previousVersion: '0.1.0',
-                        strategy: 'minor',
-                    }),
-                    'pkg-2': expect.objectContaining({
-                        changelog: null,
-                        tag: 'pkg-2@0.0.2',
-                        version: '0.0.2',
-                        previousVersion: '0.0.1',
-                        strategy: 'patch',
-                    }),
-                    'pkg-3': expect.objectContaining({
-                        changelog: null,
-                        tag: 'pkg-3@0.0.2',
-                        version: '0.0.2',
-                        previousVersion: '0.0.1',
-                        strategy: 'patch',
-                    }),
-                    'pkg-4': expect.objectContaining({
-                        changelog: null,
-                        tag: 'pkg-4@0.0.2',
-                        version: '0.0.2',
-                        previousVersion: '0.0.1',
-                        strategy: 'patch',
-                    }),
-                })
+        // Run non-prerelease. We expect all the pre-release versions to be squashed.
+        // No additional file modifications required, as the previous pre-release tags
+        // are ignored.
+        const { error: error4 } = await run()
 
-                // On Remote:
-                // Assert tags pushed
-                await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-1@0.2.0')
-                await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-2@0.0.2')
-                await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-3@0.0.2')
-                await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-4@0.0.2')
-            },
-        }),
-    )
+        if (error4) console.error(error4)
+        expect(error4).toBeUndefined()
+
+        localChangeset = JSON.parse(await readFile('changes.json.tmp'))
+        expect(localChangeset).toEqual({
+            'pkg-1': expect.objectContaining({
+                changelog: expect.stringContaining('some exciting addition'),
+                tag: 'pkg-1@0.2.0',
+                version: '0.2.0',
+                previousVersion: '0.1.0',
+                strategy: 'minor',
+            }),
+            'pkg-2': expect.objectContaining({
+                changelog: null,
+                tag: 'pkg-2@0.0.2',
+                version: '0.0.2',
+                previousVersion: '0.0.1',
+                strategy: 'patch',
+            }),
+            'pkg-3': expect.objectContaining({
+                changelog: null,
+                tag: 'pkg-3@0.0.2',
+                version: '0.0.2',
+                previousVersion: '0.0.1',
+                strategy: 'patch',
+            }),
+            'pkg-4': expect.objectContaining({
+                changelog: null,
+                tag: 'pkg-4@0.0.2',
+                version: '0.0.2',
+                previousVersion: '0.0.1',
+                strategy: 'patch',
+            }),
+        })
+
+        // On Remote:
+        // Assert tags pushed
+        await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-1@0.2.0')
+        await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-2@0.0.2')
+        await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-3@0.0.2')
+        await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-4@0.0.2')
+    })
 })

@@ -21,7 +21,7 @@ const isUp = (): Promise<void> =>
         }
     })
 
-export async function waitForRegistry(timeout = 20000): Promise<boolean> {
+async function waitForRegistry(timeout = 20000): Promise<boolean> {
     console.log('Waiting for registry to start up...')
 
     const DELAY = 1000
@@ -42,7 +42,21 @@ export async function stopRegistry(): Promise<void> {
     if (stderr) console.error(stderr)
 }
 
-export async function startRegistry(): Promise<void> {
+export async function startRegistry(): Promise<AsyncDisposable> {
+    try {
+        await stopRegistry()
+    } catch {}
+
     const { stderr } = await exec('yarn workspace @monoweave/e2e-tests test:registry:start')
     if (stderr) console.error(stderr)
+
+    await waitForRegistry(25000)
+
+    return {
+        async [Symbol.asyncDispose]() {
+            try {
+                await stopRegistry()
+            } catch {}
+        },
+    }
 }

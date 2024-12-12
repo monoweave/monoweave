@@ -6,8 +6,8 @@ import setupProject from 'helpers/setupProject'
 describe('General Usage', () => {
     it.each(['pnp', 'node-modules'] as const)(
         'runs the full monoweave pipeline for %s linker',
-        async (nodeLinker) =>
-            setupProject({
+        async (nodeLinker) => {
+            await using testContext = await setupProject({
                 repository: [
                     {
                         'pkg-1': {},
@@ -45,135 +45,134 @@ describe('General Usage', () => {
                     maxConcurrentReads: 1,
                     maxConcurrentWrites: 1,
                 },
-                testCase: async ({ run, readFile, exec, writeFile }) => {
-                    // First semantic commit
-                    await writeFile('packages/pkg-1/README.md', 'Modification.')
-                    await exec(
-                        'git add . && git commit -n -m "feat: some fancy addition" && git push',
-                    )
+            })
 
-                    const { error } = await run()
+            const { run, readFile, exec, writeFile } = testContext
+            // First semantic commit
+            await writeFile('packages/pkg-1/README.md', 'Modification.')
+            await exec('git add . && git commit -n -m "feat: some fancy addition" && git push')
 
-                    if (error) console.error(error)
-                    expect(error).toBeUndefined()
+            const { error } = await run()
 
-                    // verify yarn.lock is not staged with modifications
-                    await exec('yarn && git diff --quiet --exit-code yarn.lock')
+            if (error) console.error(error)
+            expect(error).toBeUndefined()
 
-                    // Locally
-                    let localChangeset = JSON.parse(await readFile('changes.json.tmp'))
-                    expect(localChangeset).toEqual({
-                        'pkg-1': expect.objectContaining({
-                            changelog: expect.stringContaining('some fancy addition'),
-                            tag: 'pkg-1@0.1.0',
-                            version: '0.1.0',
-                            strategy: 'minor',
-                        }),
-                        'pkg-2': expect.objectContaining({
-                            changelog: null,
-                            tag: 'pkg-2@0.0.1',
-                            version: '0.0.1',
-                            strategy: 'patch',
-                        }),
-                        'pkg-3': expect.objectContaining({
-                            changelog: null,
-                            tag: 'pkg-3@0.0.1',
-                            version: '0.0.1',
-                            strategy: 'patch',
-                        }),
-                        'pkg-4': expect.objectContaining({
-                            changelog: null,
-                            tag: 'pkg-4@0.0.1',
-                            version: '0.0.1',
-                            strategy: 'patch',
-                        }),
-                    })
+            // verify yarn.lock is not staged with modifications
+            await exec('yarn && git diff --quiet --exit-code yarn.lock')
 
-                    let localChangelog = await readFile('changelog.md')
-                    expect(localChangelog).toEqual(expect.stringContaining('some fancy addition'))
+            // Locally
+            let localChangeset = JSON.parse(await readFile('changes.json.tmp'))
+            expect(localChangeset).toEqual({
+                'pkg-1': expect.objectContaining({
+                    changelog: expect.stringContaining('some fancy addition'),
+                    tag: 'pkg-1@0.1.0',
+                    version: '0.1.0',
+                    strategy: 'minor',
+                }),
+                'pkg-2': expect.objectContaining({
+                    changelog: null,
+                    tag: 'pkg-2@0.0.1',
+                    version: '0.0.1',
+                    strategy: 'patch',
+                }),
+                'pkg-3': expect.objectContaining({
+                    changelog: null,
+                    tag: 'pkg-3@0.0.1',
+                    version: '0.0.1',
+                    strategy: 'patch',
+                }),
+                'pkg-4': expect.objectContaining({
+                    changelog: null,
+                    tag: 'pkg-4@0.0.1',
+                    version: '0.0.1',
+                    strategy: 'patch',
+                }),
+            })
 
-                    // On Remote:
-                    // Assert tags pushed
-                    await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-1@0.1.0')
-                    await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-2@0.0.1')
-                    await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-3@0.0.1')
+            let localChangelog = await readFile('changelog.md')
+            expect(localChangelog).toEqual(expect.stringContaining('some fancy addition'))
 
-                    // Assert changelog updated on remote
-                    expect(
-                        (await exec('git cat-file blob origin/main:changelog.md')).stdout,
-                    ).toEqual(expect.stringContaining('fancy'))
+            // On Remote:
+            // Assert tags pushed
+            await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-1@0.1.0')
+            await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-2@0.0.1')
+            await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-3@0.0.1')
 
-                    // -----
+            // Assert changelog updated on remote
+            expect((await exec('git cat-file blob origin/main:changelog.md')).stdout).toEqual(
+                expect.stringContaining('fancy'),
+            )
 
-                    // Make another semantic change
-                    await writeFile('packages/pkg-2/README.md', 'Modification.')
-                    await exec(
-                        'git add . && git commit -n -m "feat: some breaking feat addition" ' +
-                            '-m "BREAKING CHANGE: This is a breaking change" && git push',
-                    )
+            // -----
 
-                    const { error: error2 } = await run()
+            // Make another semantic change
+            await writeFile('packages/pkg-2/README.md', 'Modification.')
+            await exec(
+                'git add . && git commit -n -m "feat: some breaking feat addition" ' +
+                    '-m "BREAKING CHANGE: This is a breaking change" && git push',
+            )
 
-                    if (error2) console.error(error2)
-                    expect(error2).toBeUndefined()
+            const { error: error2 } = await run()
 
-                    // ---
+            if (error2) console.error(error2)
+            expect(error2).toBeUndefined()
 
-                    // verify yarn.lock is not staged with modifications
-                    await exec('yarn && git diff --quiet --exit-code yarn.lock')
+            // ---
 
-                    localChangeset = JSON.parse(await readFile('changes.json.tmp'))
-                    expect(localChangeset).toEqual({
-                        'pkg-2': expect.objectContaining({
-                            changelog: expect.stringContaining('breaking'),
-                            tag: 'pkg-2@1.0.0',
-                            version: '1.0.0',
-                            strategy: 'major',
-                        }),
-                        'pkg-3': expect.objectContaining({
-                            changelog: null,
-                            tag: 'pkg-3@0.0.2',
-                            version: '0.0.2',
-                            strategy: 'patch',
-                        }),
-                        'pkg-4': expect.objectContaining({
-                            changelog: null,
-                            tag: 'pkg-4@0.0.2',
-                            version: '0.0.2',
-                            strategy: 'patch',
-                        }),
-                    })
+            // verify yarn.lock is not staged with modifications
+            await exec('yarn && git diff --quiet --exit-code yarn.lock')
 
-                    localChangelog = await readFile('changelog.md')
-                    expect(localChangelog).toEqual(
-                        expect.stringContaining('fancy'), // should have old entry
-                    )
-                    expect(localChangelog).toEqual(
-                        expect.stringContaining('breaking'), // should have new entry
-                    )
+            localChangeset = JSON.parse(await readFile('changes.json.tmp'))
+            expect(localChangeset).toEqual({
+                'pkg-2': expect.objectContaining({
+                    changelog: expect.stringContaining('breaking'),
+                    tag: 'pkg-2@1.0.0',
+                    version: '1.0.0',
+                    strategy: 'major',
+                }),
+                'pkg-3': expect.objectContaining({
+                    changelog: null,
+                    tag: 'pkg-3@0.0.2',
+                    version: '0.0.2',
+                    strategy: 'patch',
+                }),
+                'pkg-4': expect.objectContaining({
+                    changelog: null,
+                    tag: 'pkg-4@0.0.2',
+                    version: '0.0.2',
+                    strategy: 'patch',
+                }),
+            })
 
-                    // On Remote:
-                    // Assert tags pushed
-                    await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-2@1.0.0')
-                    await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-3@0.0.2')
+            localChangelog = await readFile('changelog.md')
+            expect(localChangelog).toEqual(
+                expect.stringContaining('fancy'), // should have old entry
+            )
+            expect(localChangelog).toEqual(
+                expect.stringContaining('breaking'), // should have new entry
+            )
 
-                    // Assert changelog updated on remote
-                    expect(
-                        (await exec('git cat-file blob origin/main:changelog.md')).stdout,
-                    ).toEqual(expect.stringContaining('breaking'))
+            // On Remote:
+            // Assert tags pushed
+            await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-2@1.0.0')
+            await exec('git ls-remote --exit-code --tags origin refs/tags/pkg-3@0.0.2')
 
-                    // assert modified manifests are correct
-                    const pkg3Manifest = JSON.parse(
-                        (
-                            await exec('git cat-file blob origin/main:packages/pkg-3/package.json')
-                        ).stdout.toString(),
-                    )
-                    expect(pkg3Manifest.dependencies).toEqual(
-                        expect.objectContaining({
-                            'pkg-2': 'workspace:^1.0.0',
-                        }),
-                    )
-                },
-            })(),
+            // Assert changelog updated on remote
+            expect((await exec('git cat-file blob origin/main:changelog.md')).stdout).toEqual(
+                expect.stringContaining('breaking'),
+            )
+
+            // assert modified manifests are correct
+            const pkg3Manifest = JSON.parse(
+                (
+                    await exec('git cat-file blob origin/main:packages/pkg-3/package.json')
+                ).stdout.toString(),
+            )
+            expect(pkg3Manifest.dependencies).toEqual(
+                expect.objectContaining({
+                    'pkg-2': 'workspace:^1.0.0',
+                }),
+            )
+        },
     )
 })
