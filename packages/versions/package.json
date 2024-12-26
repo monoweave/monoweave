@@ -48,12 +48,12 @@
     "@types/conventional-commits-parser": "^5.0.0",
     "@types/micromatch": "^4.0.9",
     "@types/semver": "^7.5.8",
-    "@yarnpkg/cli": "^4.5.2",
-    "@yarnpkg/core": "^4.1.5",
+    "@yarnpkg/cli": "^4.5.3",
+    "@yarnpkg/core": "^4.1.6",
     "@yarnpkg/fslib": "^3.1.1",
     "@yarnpkg/plugin-npm": "^3.0.1",
     "@yarnpkg/plugin-pack": "^4.0.0",
-    "@yarnpkg/shell": "^4.1.0"
+    "@yarnpkg/shell": "^4.1.1"
   },
   "peerDependencies": {
     "@monoweave/changelog": "workspace:^1.11.0",
@@ -62,11 +62,11 @@
     "@monoweave/io": "workspace:^1.11.0",
     "@monoweave/logging": "workspace:^1.11.0",
     "@monoweave/types": "workspace:^1.11.0",
-    "@yarnpkg/cli": "^4.5.2",
-    "@yarnpkg/core": "^4.1.5",
+    "@yarnpkg/cli": "^4.5.3",
+    "@yarnpkg/core": "^4.1.6",
     "@yarnpkg/fslib": "^3.1.1",
     "@yarnpkg/plugin-npm": "^3.0.1",
     "@yarnpkg/plugin-pack": "^4.0.0",
-    "@yarnpkg/shell": "^4.1.0"
+    "@yarnpkg/shell": "^4.1.1"
   }
 }
