@@ -23,9 +23,13 @@ export interface MonoweaveConfiguration {
      * Log levels. Control verbosity of output.
      *
      * DEBUG: 0
+     *
      * INFO: 1
+     *
      * WARNING: 2
+     *
      * ERROR: 3
+     *
      *
      * @default 1
      */

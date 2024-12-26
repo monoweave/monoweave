@@ -17,7 +17,7 @@ const scriptPath = path.join(__dirname, 'index.ts')
 
 // Skipping the git mock as we use a temp repository for these tests.
 // @ts-expect-error https://github.com/swc-project/plugins/issues/310
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports, import-x/newline-after-import
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 ;(jest as typeof import('@jest/globals').jest).mock('@monoweave/node')
 
 describe('CLI - Version', () => {

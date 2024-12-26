@@ -21,9 +21,9 @@ const stringifyType = (data: SomeType | undefined): string => {
         for (const child of data.declaration?.children ?? []) {
             obj[child.name] = stringifyType(child.type)
         }
-        if (data.declaration?.indexSignature?.parameters) {
-            obj[data.declaration?.indexSignature.parameters[0].name] = stringifyType(
-                data.declaration?.indexSignature.parameters[0].type,
+        if (data.declaration?.indexSignatures?.[0]?.parameters) {
+            obj[data.declaration?.indexSignatures?.[0]?.parameters[0].name] = stringifyType(
+                data.declaration?.indexSignatures?.[0]?.parameters[0].type,
             )
         }
         return JSON.stringify(obj, null, 2)
@@ -98,7 +98,12 @@ const InterfaceChildRow: React.FC<{ data: DeclarationReflection }> = ({ data }) 
             </td>
             <td>
                 <div className="description">
-                    <ReactMarkdown remarkPlugins={[RemarkExternalLinks]}>
+                    <ReactMarkdown
+                        remarkPlugins={[
+                            // @ts-expect-error dependency mismatch causing type error
+                            RemarkExternalLinks,
+                        ]}
+                    >
                         {data.comment ? stringifyComment(data.comment, tags) : 'No description.'}
                     </ReactMarkdown>
                 </div>

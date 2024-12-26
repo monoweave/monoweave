@@ -1,6 +1,6 @@
-import * as TypeDoc from 'typedoc'
-
 async function main() {
+    const TypeDoc = await import('typedoc')
+
     const app = await TypeDoc.Application.bootstrapWithPlugins(
         {
             // typedoc options here

@@ -209,7 +209,7 @@ export const gitLastTaggedCommit = async ({
 
     try {
         tag = (await git(command, { cwd, context })).stdout.trim()
-    } catch (err) {
+    } catch {
         logging.warning('[Exec] Fetching most recent tag failed, falling back to HEAD', {
             report: context?.report,
         })

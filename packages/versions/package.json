@@ -32,9 +32,9 @@
   "dependencies": {
     "conventional-commits-parser": "^5.0.0",
     "micromatch": "^4.0.8",
-    "p-limit": "^6.1.0",
+    "p-limit": "^6.2.0",
     "semver": "^7.6.3",
-    "yaml": "^2.5.0"
+    "yaml": "^2.6.1"
   },
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
@@ -45,7 +45,7 @@
     "@monoweave/logging": "workspace:*",
     "@monoweave/test-utils": "link:../../testUtils",
     "@monoweave/types": "workspace:*",
-    "@types/conventional-commits-parser": "^5.0.0",
+    "@types/conventional-commits-parser": "^5.0.1",
     "@types/micromatch": "^4.0.9",
     "@types/semver": "^7.5.8",
     "@yarnpkg/cli": "^4.5.3",

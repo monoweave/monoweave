@@ -42,7 +42,6 @@ const resolveConventionalConfig = async ({
     const conventionalConfig = coerceConventionalConfig(conventionalChangelogConfig)
 
     // ghost-imports-ignore-next-line
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const conventionalConfigModule = require(
         require.resolve(conventionalConfig.name, {
             paths: [config.cwd],

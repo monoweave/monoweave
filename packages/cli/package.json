@@ -68,10 +68,10 @@
     "@yarnpkg/plugin-pack": "^4.0.0",
     "@yarnpkg/shell": "^4.1.1",
     "ajv": "^8.17.1",
-    "clipanion": "^4.0.0-rc.3",
+    "clipanion": "^4.0.0-rc.4",
     "json5": "^2.2.3",
     "typanion": "^3.14.0",
-    "yaml": "^2.5.0"
+    "yaml": "^2.6.1"
   },
   "engines": {
     "node": ">=v18"

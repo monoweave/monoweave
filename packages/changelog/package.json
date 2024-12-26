@@ -41,7 +41,7 @@
   "dependencies": {
     "conventional-changelog-writer": "^7.0.1",
     "conventional-commits-parser": "^5.0.0",
-    "p-limit": "^6.1.0"
+    "p-limit": "^6.2.0"
   },
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
@@ -51,7 +51,7 @@
     "@monoweave/test-utils": "link:../../testUtils",
     "@monoweave/types": "workspace:*",
     "@types/conventional-changelog-writer": "^4.0.10",
-    "@types/conventional-commits-parser": "^5.0.0",
+    "@types/conventional-commits-parser": "^5.0.1",
     "@types/node": "^20.15.0",
     "@yarnpkg/core": "^4.1.6",
     "@yarnpkg/fslib": "^3.1.1",

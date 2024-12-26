@@ -35,7 +35,6 @@ const npmHttpUtilsGet = (
     return tags
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const npmHttpUtilsPut = (
     identUrl: string,
     body: Record<string, string>,
