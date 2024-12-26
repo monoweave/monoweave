@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 import fs from 'node:fs'
 import path from 'node:path'
 

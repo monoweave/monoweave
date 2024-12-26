@@ -79,7 +79,6 @@ const monoweave = async (
             const [plugin, pluginOptions] =
                 typeof pluginEntry === 'string' ? [pluginEntry] : pluginEntry
 
-            // eslint-disable-next-line @typescript-eslint/no-var-requires
             const pluginModule = require(
                 require.resolve(plugin, {
                     paths: [npath.fromPortablePath(cwd)],

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import path from 'path'
 
 import { type ExecException, exec } from '@monoweave/io'

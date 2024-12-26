@@ -37,9 +37,9 @@
     "@monoweave/types": "workspace:*",
     "@types/micromatch": "^4.0.9",
     "@types/node": "^20.15.0",
-    "@yarnpkg/core": "^4.1.5",
+    "@yarnpkg/core": "^4.1.6",
     "@yarnpkg/fslib": "^3.1.1",
-    "@yarnpkg/shell": "^4.1.0"
+    "@yarnpkg/shell": "^4.1.1"
   },
   "dependencies": {
     "micromatch": "^4.0.8"
@@ -48,8 +48,8 @@
     "@monoweave/io": "workspace:^1.11.0",
     "@monoweave/logging": "workspace:^1.11.0",
     "@monoweave/types": "workspace:^1.11.0",
-    "@yarnpkg/core": "^4.1.5",
+    "@yarnpkg/core": "^4.1.6",
     "@yarnpkg/fslib": "^3.1.1",
-    "@yarnpkg/shell": "^4.1.0"
+    "@yarnpkg/shell": "^4.1.1"
   }
 }

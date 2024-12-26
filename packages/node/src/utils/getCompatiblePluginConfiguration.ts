@@ -21,7 +21,6 @@ export const getCompatiblePluginConfiguration = (): PluginConfiguration => {
     let incompatibility = false
     for (const plugin of plugins) {
         try {
-            // eslint-disable-next-line @typescript-eslint/no-var-requires
             modules.set(plugin, requireForCLI(plugin).default)
         } catch {
             incompatibility = true

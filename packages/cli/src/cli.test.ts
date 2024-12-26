@@ -437,6 +437,7 @@ describe('CLI', () => {
                     const contents = `module.exports = ${JSON.stringify(configContents)}`
 
                     const config = await writeConfigFile({ filename, contents })
+                    // eslint-disable-next-line jest/no-standalone-expect
                     expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
                         expect.objectContaining({
                             changelogFilename: configContents.changelogFilename,
@@ -456,6 +457,7 @@ describe('CLI', () => {
                     const contents = `export default ${JSON.stringify(configContents)}`
 
                     const config = await writeConfigFile({ filename, contents })
+                    // eslint-disable-next-line jest/no-standalone-expect
                     expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
                         expect.objectContaining({
                             changelogFilename: configContents.changelogFilename,

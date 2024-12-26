@@ -21,11 +21,11 @@
         "@monoweave/types": "workspace:*",
         "@tophat/conventional-changelog-config": "^1.0.1",
         "@types/node": "^20.15.0",
-        "@yarnpkg/core": "^4.1.5",
+        "@yarnpkg/core": "^4.1.6",
         "@yarnpkg/fslib": "^3.1.1",
-        "@yarnpkg/shell": "^4.1.0",
+        "@yarnpkg/shell": "^4.1.1",
         "helpers": "link:./helpers",
-        "tsx": "^4.17.0"
+        "tsx": "^4.19.2"
     },
     "author": {
         "name": "noahnu",
