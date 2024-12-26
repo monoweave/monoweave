@@ -81,7 +81,7 @@ export const gitDiffTree = async (
         await git('fetch', { cwd, context })
     }
 
-    const args: string[] = ['--no-commit-id', '--name-only', '-r', '--root']
+    const args: string[] = ['--no-commit-id', '--name-only', '-r', '--root', '--relative']
     if (onlyIncludeDeletedFiles) {
         args.push('--diff-filter=D')
     }

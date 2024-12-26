@@ -7,9 +7,10 @@
         "test:registry:start": "docker run -itd -p 4873:4873 --name monoweave-registry monoweave-test-registry",
         "test:registry:stop": "docker stop monoweave-registry && docker container rm monoweave-registry",
         "test:registry": "run test:registry:build && run test:registry:start",
-        "bin:test": "run workspace:test --runInBand --maxConcurrency=1 --verbose --testTimeout=300000",
-        "test": "run bin:test --selectProjects E2E -- $(pwd)",
-        "test:watch": "run bin:test --watch --selectProjects E2E --"
+        "bin:test": "E2E=1 run workspace:test --runInBand --maxConcurrency=1 --verbose --testTimeout=300000",
+        "bin:test:debug": "E2E=1 run bin:jest:debug --runInBand --maxConcurrency=1 --verbose --testTimeout=60000000",
+        "test": "E2E=1 run bin:test --selectProjects E2E -- $(pwd)",
+        "test:watch": "E2E=1 run bin:test --watch --selectProjects E2E --"
     },
     "devDependencies": {
         "@jest/globals": "^30.0.0-alpha.6",

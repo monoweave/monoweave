@@ -10,11 +10,12 @@ export async function createFile({
     filePath: string
     content?: string
     cwd: string
-}): Promise<void> {
-    const parent = path.dirname(filePath)
+}): Promise<string> {
     const fileContent = content ?? 'some content'
-    await fs.mkdir(`${cwd}/${parent}`, { recursive: true })
-    await fs.writeFile(`${cwd}/${filePath}`, fileContent)
+    const fullpath = path.join(cwd, filePath)
+    await fs.mkdir(path.dirname(fullpath), { recursive: true })
+    await fs.writeFile(fullpath, fileContent)
+    return fullpath
 }
 
 export async function createTempDir(): Promise<{ dir: string } & AsyncDisposable> {

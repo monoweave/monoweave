@@ -36,12 +36,16 @@ export default async function run({ cwd, args = '' }: { cwd: string; args: strin
             },
         )
         if (process.env.DEBUG?.includes('test:e2e')) {
-            if (stdout) console.log(stdout)
+            if (stdout) console.error(stdout)
             if (stderr) console.error(stderr)
         }
         return { stdout, stderr }
     } catch (err) {
         if (isNodeError<ExecException>(err)) {
+            if (process.env.DEBUG?.includes('test:e2e')) {
+                if (err.stdout) console.error(err.stdout)
+                if (err.stderr) console.error(err.stderr)
+            }
             return { error: err, stdout: err?.stdout, stderr: err?.stderr }
         }
         throw new Error('Unexpected error')
