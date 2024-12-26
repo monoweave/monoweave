@@ -1,6 +1,6 @@
 {
   "name": "@monoweave/plugin-github",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/monoweave/monoweave.git",
@@ -35,7 +35,7 @@
     "tapable": "^2.2.1"
   },
   "dependencies": {
-    "@monoweave/git": "workspace:^1.11.0",
+    "@monoweave/git": "workspace:^1.11.1",
     "@monoweave/io": "workspace:^1.11.0",
     "@monoweave/logging": "workspace:^1.11.0",
     "@monoweave/types": "workspace:^1.11.0",
