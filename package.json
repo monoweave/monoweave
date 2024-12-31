@@ -70,7 +70,7 @@
         "@tophat/commitizen-adapter": "^1.0.2",
         "@tophat/commitlint-config": "^1.0.2",
         "@tophat/conventional-changelog-config": "^1.0.1",
-        "@types/node": "^20.17.9",
+        "@types/node": "^22.10.1",
         "@typescript-eslint/eslint-plugin": "^8.18.2",
         "@typescript-eslint/parser": "^8.18.2",
         "@typescript-eslint/utils": "^8.18.2",
