@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "conventional-changelog-writer": "^7.0.1",
-    "conventional-commits-parser": "^5.0.0",
+    "conventional-commits-parser": "^6.0.0",
     "p-limit": "^6.2.0"
   },
   "devDependencies": {
