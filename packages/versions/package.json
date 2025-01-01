@@ -30,7 +30,7 @@
     "prepack": "run workspace:build \"$(pwd)\""
   },
   "dependencies": {
-    "conventional-commits-parser": "^5.0.0",
+    "conventional-commits-parser": "^6.0.0",
     "micromatch": "^4.0.8",
     "p-limit": "^6.2.0",
     "semver": "^7.6.3",
