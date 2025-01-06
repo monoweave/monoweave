@@ -39,14 +39,14 @@
     "@monoweave/types": "workspace:*",
     "@types/node": "^22.10.1",
     "@types/semver": "^7.5.8",
-    "@yarnpkg/core": "^4.1.6",
+    "@yarnpkg/core": "^4.2.0",
     "@yarnpkg/fslib": "^3.1.1",
     "@yarnpkg/shell": "^4.1.1"
   },
   "peerDependencies": {
     "@monoweave/logging": "workspace:^1.12.0",
     "@monoweave/types": "workspace:^1.12.0",
-    "@yarnpkg/core": "^4.1.6",
+    "@yarnpkg/core": "^4.2.0",
     "@yarnpkg/fslib": "^3.1.1",
     "@yarnpkg/shell": "^4.1.1"
   }
