@@ -74,8 +74,8 @@
         "@typescript-eslint/eslint-plugin": "^8.18.2",
         "@typescript-eslint/parser": "^8.18.2",
         "@typescript-eslint/utils": "^8.18.2",
-        "@yarnpkg/cli": "^4.5.3",
-        "@yarnpkg/core": "^4.1.6",
+        "@yarnpkg/cli": "^4.6.0",
+        "@yarnpkg/core": "^4.2.0",
         "@yarnpkg/fslib": "^3.1.1",
         "@yarnpkg/plugin-npm": "^3.0.1",
         "@yarnpkg/plugin-pack": "^4.0.0",
@@ -115,7 +115,7 @@
             "built": false
         }
     },
-    "packageManager": "yarn@4.5.3+sha512.3003a14012e2987072d244c720506549c1aab73ee728208f1b2580a9fd67b92d61ba6b08fe93f6dce68fd771e3af1e59a0afa28dd242dd0940d73b95fedd4e90",
+    "packageManager": "yarn@4.6.0+sha512.5383cc12567a95f1d668fbe762dfe0075c595b4bfff433be478dbbe24e05251a8e8c3eb992a986667c1d53b6c3a9c85b8398c35a960587fbd9fa3a0915406728",
     "resolutions": {
         "istanbul-lib-coverage": "patch:istanbul-lib-coverage@npm%3A3.2.0#./.yarn/patches/istanbul-lib-coverage-npm-3.2.0-93f84b2c8c.patch"
     }
