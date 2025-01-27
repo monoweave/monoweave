@@ -6,9 +6,9 @@ import { type YarnContext } from '@monoweave/types'
 import { Cache, StreamReport, ThrowReport, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
 
-import { packageManager } from '@monoweave/monorepo/package.json'
-
 import { setupContext } from './misc'
+
+const { packageManager } = require('../../package.json')
 
 const DEBUG = process.env.DEBUG === '1'
 const YARN_VERSION = packageManager.match('^yarn@([^+]+)')?.[1] ?? 'invalid'
