@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
+import { mergeDefaultConfig } from '@monoweave/node/testUtils'
 import {
     type MonoweaveConfiguration,
     type RecursivePartial,
@@ -9,8 +10,6 @@ import {
 import { getPluginConfiguration } from '@yarnpkg/cli'
 import { Configuration, Project, ThrowReport } from '@yarnpkg/core'
 import { type PortablePath } from '@yarnpkg/fslib'
-
-import { mergeDefaultConfig } from '../packages/node/src/utils/mergeDefaultConfig'
 
 export async function setupContext(cwd: PortablePath): Promise<YarnContext> {
     const configuration = await Configuration.find(cwd, getPluginConfiguration())

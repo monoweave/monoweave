@@ -15,10 +15,24 @@
     "main": "./lib/index.js",
     "registry": "https://registry.npmjs.org/",
     "types": "./lib/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./lib/index.d.ts",
+        "default": "./lib/index.js"
+      },
+      "./testUtils": {
+        "types": "./lib/testUtils.d.ts",
+        "default": "./lib/testUtils.js"
+      }
+    },
     "access": "public"
   },
   "group": "monoweave",
   "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./testUtils": "./src/testUtils.ts"
+  },
   "files": [
     "lib"
   ],
@@ -31,7 +45,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
-    "@monoweave/test-utils": "link:../../testUtils",
+    "@monoweave/test-utils": "workspace:*",
     "@types/micromatch": "^4.0.9",
     "@types/node": "^22.10.5"
   },
