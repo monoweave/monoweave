@@ -49,10 +49,10 @@
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
     "@monoweave/test-utils": "link:../../testUtils",
-    "@types/node": "^22.10.1"
+    "@types/node": "^22.10.5"
   },
   "dependencies": {
-    "@inquirer/prompts": "^7.2.0",
+    "@inquirer/prompts": "^7.2.1",
     "@monoweave/changelog": "workspace:^1.13.0",
     "@monoweave/dependencies": "workspace:^1.13.0",
     "@monoweave/git": "workspace:^1.13.0",
@@ -71,7 +71,7 @@
     "clipanion": "^4.0.0-rc.4",
     "json5": "^2.2.3",
     "typanion": "^3.14.0",
-    "yaml": "^2.6.1"
+    "yaml": "^2.7.0"
   },
   "engines": {
     "node": ">=v18"

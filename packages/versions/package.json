@@ -34,7 +34,7 @@
     "micromatch": "^4.0.8",
     "p-limit": "^6.2.0",
     "semver": "^7.6.3",
-    "yaml": "^2.6.1"
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
