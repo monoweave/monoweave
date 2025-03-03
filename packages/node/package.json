@@ -44,12 +44,12 @@
     "@monoweave/publish": "workspace:^1.13.0",
     "@monoweave/types": "workspace:^1.13.0",
     "@monoweave/versions": "workspace:^1.13.0",
-    "@yarnpkg/cli": "^4.6.0",
-    "@yarnpkg/core": "^4.2.0",
-    "@yarnpkg/fslib": "^3.1.1",
-    "@yarnpkg/plugin-npm": "^3.0.1",
-    "@yarnpkg/plugin-pack": "^4.0.0",
-    "@yarnpkg/shell": "^4.1.1",
+    "@yarnpkg/cli": "^4.7.0",
+    "@yarnpkg/core": "^4.2.1",
+    "@yarnpkg/fslib": "^3.1.2",
+    "@yarnpkg/plugin-npm": "^3.0.2",
+    "@yarnpkg/plugin-pack": "^4.0.1",
+    "@yarnpkg/shell": "^4.1.2",
     "micromatch": "^4.0.8",
     "tapable": "^2.2.1"
   }
