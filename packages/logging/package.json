@@ -32,9 +32,9 @@
   "devDependencies": {
     "@jest/globals": "^30.0.0-alpha.6",
     "@types/node": "^22.10.5",
-    "@yarnpkg/core": "^4.3.0"
+    "@yarnpkg/core": "^4.3.1"
   },
   "peerDependencies": {
-    "@yarnpkg/core": "^4.3.0"
+    "@yarnpkg/core": "^4.3.1"
   }
 }
