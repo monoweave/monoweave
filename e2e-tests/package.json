@@ -21,7 +21,7 @@
         "@monoweave/types": "workspace:*",
         "@tophat/conventional-changelog-config": "^1.0.1",
         "@types/node": "^22.10.5",
-        "@yarnpkg/core": "^4.4.0",
+        "@yarnpkg/core": "^4.4.1",
         "@yarnpkg/fslib": "^3.1.2",
         "@yarnpkg/shell": "^4.1.2",
         "helpers": "link:./helpers",

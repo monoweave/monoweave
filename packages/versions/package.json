@@ -48,10 +48,10 @@
     "@types/conventional-commits-parser": "^5.0.1",
     "@types/micromatch": "^4.0.9",
     "@types/semver": "^7.5.8",
-    "@yarnpkg/cli": "^4.9.0",
-    "@yarnpkg/core": "^4.4.0",
+    "@yarnpkg/cli": "^4.9.1",
+    "@yarnpkg/core": "^4.4.1",
     "@yarnpkg/fslib": "^3.1.2",
-    "@yarnpkg/plugin-npm": "^3.1.0",
+    "@yarnpkg/plugin-npm": "^3.1.1",
     "@yarnpkg/plugin-pack": "^4.0.1",
     "@yarnpkg/shell": "^4.1.2"
   },
@@ -62,10 +62,10 @@
     "@monoweave/io": "workspace:^1.17.0",
     "@monoweave/logging": "workspace:^1.17.0",
     "@monoweave/types": "workspace:^1.17.0",
-    "@yarnpkg/cli": "^4.9.0",
-    "@yarnpkg/core": "^4.4.0",
+    "@yarnpkg/cli": "^4.9.1",
+    "@yarnpkg/core": "^4.4.1",
     "@yarnpkg/fslib": "^3.1.2",
-    "@yarnpkg/plugin-npm": "^3.1.0",
+    "@yarnpkg/plugin-npm": "^3.1.1",
     "@yarnpkg/plugin-pack": "^4.0.1",
     "@yarnpkg/shell": "^4.1.2"
   }
