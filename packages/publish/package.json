@@ -1,6 +1,6 @@
 {
   "name": "@monoweave/publish",
-  "version": "1.17.1",
+  "version": "1.18.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/monoweave/monoweave.git",
@@ -48,11 +48,11 @@
     "@yarnpkg/shell": "^4.1.3"
   },
   "peerDependencies": {
-    "@monoweave/dependencies": "workspace:^1.17.0",
-    "@monoweave/git": "workspace:^1.17.0",
-    "@monoweave/io": "workspace:^1.17.0",
-    "@monoweave/logging": "workspace:^1.17.0",
-    "@monoweave/types": "workspace:^1.17.0",
+    "@monoweave/dependencies": "workspace:^1.18.0",
+    "@monoweave/git": "workspace:^1.18.0",
+    "@monoweave/io": "workspace:^1.18.0",
+    "@monoweave/logging": "workspace:^1.18.0",
+    "@monoweave/types": "workspace:^1.18.0",
     "@yarnpkg/cli": "^4.9.2",
     "@yarnpkg/core": "^4.4.2",
     "@yarnpkg/fslib": "^3.1.2",
