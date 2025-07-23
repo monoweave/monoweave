@@ -5,4 +5,4 @@ Symbol.dispose ??= Symbol.for('Symbol.dispose')
 // @ts-ignore dispose polyfill
 Symbol.asyncDispose ??= Symbol.for('Symbol.asyncDispose')
 
-process.env.MONOWEAVE_DISABLE_LOGS = '1'
+// process.env.MONOWEAVE_DISABLE_LOGS = '1'
