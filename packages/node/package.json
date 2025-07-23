@@ -30,7 +30,7 @@
     "prepack": "run workspace:build \"$(pwd)\""
   },
   "devDependencies": {
-    "@jest/globals": "^30.0.0-alpha.6",
+    "@jest/globals": "^30.0.5",
     "@monoweave/test-utils": "link:../../testUtils",
     "@types/micromatch": "^4.0.9",
     "@types/node": "^22.10.5"

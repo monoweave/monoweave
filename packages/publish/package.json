@@ -33,7 +33,7 @@
     "p-limit": "^6.2.0"
   },
   "devDependencies": {
-    "@jest/globals": "^30.0.0-alpha.6",
+    "@jest/globals": "^30.0.5",
     "@monoweave/dependencies": "workspace:*",
     "@monoweave/git": "workspace:*",
     "@monoweave/io": "workspace:*",
