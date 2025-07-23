@@ -3,7 +3,6 @@ import type { MonoweaveConfiguration, YarnContext } from '@monoweave/types'
 import { type Workspace, miscUtils, structUtils } from '@yarnpkg/core'
 import { npmHttpUtils, npmPublishUtils } from '@yarnpkg/plugin-npm'
 import { packUtils } from '@yarnpkg/plugin-pack'
-// @ts-expect-error type import, not shipped in transpiled code
 import type { LimitFunction } from 'p-limit'
 
 import { getPublishRegistryUrl } from './getPublishConfig'
