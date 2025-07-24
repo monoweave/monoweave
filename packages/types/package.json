@@ -44,15 +44,15 @@
   },
   "dependencies": {
     "@yarnpkg/core": "^4.4.2",
-    "tapable": "^2.2.1"
+    "tapable": "^2.2.2"
   },
   "peerDependencies": {
     "@yarnpkg/core": "^4.4.2"
   },
   "devDependencies": {
-    "@jest/globals": "^30.0.0-alpha.6",
-    "@types/node": "^22.10.5",
-    "tsx": "^4.19.2",
+    "@jest/globals": "^30.0.4",
+    "@types/node": "^22.16.0",
+    "tsx": "^4.20.3",
     "typedoc": "^0.28.7",
     "typescript": "^5.8.3"
   }
