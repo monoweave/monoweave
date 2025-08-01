@@ -13,14 +13,14 @@
         "test:watch": "E2E=1 run bin:test --watch --selectProjects E2E --"
     },
     "devDependencies": {
-        "@jest/globals": "^30.0.0-alpha.6",
+        "@jest/globals": "^30.0.4",
         "@monoweave/cli": "workspace:*",
         "@monoweave/io": "workspace:*",
         "@monoweave/logging": "workspace:*",
         "@monoweave/test-utils": "link:../testUtils",
         "@monoweave/types": "workspace:*",
         "@tophat/conventional-changelog-config": "^1.0.1",
-        "@types/node": "^22.10.5",
+        "@types/node": "^22.16.3",
         "@yarnpkg/core": "^4.4.2",
         "@yarnpkg/fslib": "^3.1.2",
         "@yarnpkg/shell": "^4.1.3",
