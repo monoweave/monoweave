@@ -30,8 +30,8 @@
     "prepack": "run workspace:build \"$(pwd)\""
   },
   "devDependencies": {
-    "@jest/globals": "^30.0.0-alpha.6",
-    "@types/node": "^22.10.5",
+    "@jest/globals": "^30.0.5",
+    "@types/node": "^22.16.5",
     "@yarnpkg/core": "^4.4.2"
   },
   "peerDependencies": {

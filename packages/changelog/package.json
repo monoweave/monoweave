@@ -44,7 +44,7 @@
     "p-limit": "^6.2.0"
   },
   "devDependencies": {
-    "@jest/globals": "^30.0.0-alpha.6",
+    "@jest/globals": "^30.0.5",
     "@monoweave/git": "workspace:*",
     "@monoweave/io": "workspace:*",
     "@monoweave/logging": "workspace:*",
@@ -52,7 +52,7 @@
     "@monoweave/types": "workspace:*",
     "@types/conventional-changelog-writer": "^4.0.10",
     "@types/conventional-commits-parser": "^5.0.1",
-    "@types/node": "^22.10.5",
+    "@types/node": "^22.16.5",
     "@yarnpkg/core": "^4.4.2",
     "@yarnpkg/fslib": "^3.1.2",
     "@yarnpkg/shell": "^4.1.3"
