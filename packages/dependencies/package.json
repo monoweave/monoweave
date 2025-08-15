@@ -35,7 +35,7 @@
     "@yarnpkg/core": "^4.4.2"
   },
   "devDependencies": {
-    "@jest/globals": "^30.0.0-alpha.6",
+    "@jest/globals": "^30.0.5",
     "@monoweave/logging": "workspace:*",
     "@monoweave/test-utils": "link:../../testUtils",
     "@monoweave/types": "workspace:*",
