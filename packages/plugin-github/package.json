@@ -41,7 +41,7 @@
     "@monoweave/types": "workspace:^1.18.0",
     "@octokit/core": "^6.1.4",
     "@octokit/plugin-throttling": "^9.4.0",
-    "@yarnpkg/core": "^4.4.2",
+    "@yarnpkg/core": "^4.4.3",
     "@yarnpkg/fslib": "^3.1.2",
     "@yarnpkg/shell": "^4.1.3"
   }
