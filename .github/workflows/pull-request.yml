@@ -67,8 +67,9 @@ jobs:
     strategy:
       matrix:
         runner: ['ubuntu-latest']
-        node-version: ['lts/hydrogen', 'lts/iron', 'current']
-    continue-on-error: ${{ matrix.node-version == 'current' }}
+        # There's a bug in 24.6.0. Should be fixed in https://github.com/nodejs/node/pull/59629 (24.7.0)
+        node-version: ['lts/hydrogen', 'lts/iron', '24.5.0']
+    continue-on-error: ${{ matrix.node-version == '24.5.0' }}
     steps:
         - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         - uses: ./.github/actions/setup-env
@@ -124,7 +125,7 @@ jobs:
     strategy:
       matrix:
         runner: ['ubuntu-latest', 'windows-latest', 'macos-latest']
-        node-version: ['current']
+        node-version: ['24.5.0']
       fail-fast: false
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
