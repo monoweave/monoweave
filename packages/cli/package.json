@@ -52,7 +52,7 @@
     "@types/node": "^22.10.5"
   },
   "dependencies": {
-    "@inquirer/prompts": "^7.2.1",
+    "@inquirer/prompts": "^7.8.4",
     "@monoweave/changelog": "workspace:^1.18.0",
     "@monoweave/dependencies": "workspace:^1.18.0",
     "@monoweave/git": "workspace:^1.18.0",
