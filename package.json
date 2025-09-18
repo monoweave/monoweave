@@ -73,11 +73,11 @@
         "@typescript-eslint/eslint-plugin": "^8.38.0",
         "@typescript-eslint/parser": "^8.38.0",
         "@typescript-eslint/utils": "^8.38.0",
-        "@yarnpkg/cli": "^4.9.4",
-        "@yarnpkg/core": "^4.4.3",
-        "@yarnpkg/fslib": "^3.1.2",
-        "@yarnpkg/plugin-npm": "^3.2.0",
-        "@yarnpkg/plugin-pack": "^4.0.2",
+        "@yarnpkg/cli": "^4.10.0",
+        "@yarnpkg/core": "^4.4.4",
+        "@yarnpkg/fslib": "^3.1.3",
+        "@yarnpkg/plugin-npm": "^3.3.0",
+        "@yarnpkg/plugin-pack": "^4.0.3",
         "@yarnpkg/sdks": "^3.2.3",
         "@yarnpkg/shell": "^4.1.3",
         "@yarnpkg/types": "^4.0.1",
@@ -113,7 +113,7 @@
             "built": false
         }
     },
-    "packageManager": "yarn@4.9.4+sha512.7b1cb0b62abba6a537b3a2ce00811a843bea02bcf53138581a6ae5b1bf563f734872bd47de49ce32a9ca9dcaff995aa789577ffb16811da7c603dcf69e73750b",
+    "packageManager": "yarn@4.10.2+sha512.0b0e54ad5381f0a35184957bd3ea44e37f5a4fb1960b903b0fb9a3c7c2c009190455c41ef2a1977b1dbd3b72c5f152da696e9c52e2bc78a011b6adea8ee73ba3",
     "resolutions": {
         "istanbul-lib-coverage": "patch:istanbul-lib-coverage@npm%3A3.2.0#./.yarn/patches/istanbul-lib-coverage-npm-3.2.0-93f84b2c8c.patch"
     }
