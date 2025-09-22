@@ -91,10 +91,6 @@ export const createPluginInternals =
             },
         )
         for (const [tag, changes] of sortedEntries) {
-            logging.info(`[${PluginName}] Creating release for ${tag}`, {
-                report: context.report,
-            })
-
             if (!changes.length) continue
 
             const pkgName = changes[0].name
@@ -111,6 +107,10 @@ export const createPluginInternals =
                 )
                 continue
             }
+
+            logging.info(`[${PluginName}] Creating release for '${tag}' in ${owner}/${repo}`, {
+                report: context.report,
+            })
 
             const combinedChangelog = changes
                 .sort((a, b) => a.name.localeCompare(b.name))
