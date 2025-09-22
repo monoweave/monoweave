@@ -9,6 +9,15 @@ export interface RepositoryInfo {
 
 const REPOSITORY_PATTERNS: [RegExp, (m: RegExpMatchArray) => Partial<RepositoryInfo>][] = [
     [
+        /((?:git\+)?(ssh:\/\/git@github.com)\/([^.]+)\/([^/.]+))(?:\.git)?/,
+        (m) => ({
+            repoUrl: `https://github.com/${m[3]}/${m[4]}`,
+            host: 'https://github.com',
+            owner: m[3],
+            repository: m[4],
+        }),
+    ],
+    [
         /((?:git\+)?(https?:\/\/[^/]+)\/([^.]+)\/([^/.]+))(?:\.git)?/,
         (m) => ({ repoUrl: m[1], host: m[2], owner: m[3], repository: m[4] }),
     ],

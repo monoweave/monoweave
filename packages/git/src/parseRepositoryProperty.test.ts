@@ -43,6 +43,24 @@ describe('parseRepositoryProperty', () => {
         )
     })
 
+    it('parses ssh url', async () => {
+        await using context = await createMonorepoContext({ 'pkg-1': {} })
+        const workspace = context.project.getWorkspaceByIdent(structUtils.parseIdent('pkg-1'))
+
+        workspace.manifest.setRawField(
+            'repository',
+            'git+ssh://git@github.com/some-owner/some-repo.git',
+        )
+        expect(await parseRepositoryProperty(workspace)).toEqual(
+            expect.objectContaining({
+                host: 'https://github.com',
+                owner: 'some-owner',
+                repository: 'some-repo',
+                repoUrl: 'https://github.com/some-owner/some-repo',
+            }),
+        )
+    })
+
     it('parses arbitrary repository from manifest url as string', async () => {
         await using context = await createMonorepoContext({ 'pkg-1': {} })
         const workspace = context.project.getWorkspaceByIdent(structUtils.parseIdent('pkg-1'))
