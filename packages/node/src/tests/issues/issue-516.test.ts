@@ -1,21 +1,12 @@
 import { promises as fs } from 'fs'
 
-import {
-    afterAll,
-    afterEach,
-    beforeAll,
-    beforeEach,
-    describe,
-    expect,
-    it,
-    jest,
-} from '@jest/globals'
 import * as git from '@monoweave/git'
 import { LOG_LEVELS } from '@monoweave/logging'
 import { setupMonorepo } from '@monoweave/test-utils'
 import { type MonoweaveConfiguration, RegistryMode, type YarnContext } from '@monoweave/types'
 import { npath } from '@yarnpkg/fslib'
 import * as npm from '@yarnpkg/plugin-npm'
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, jest } from 'vitest'
 
 import monoweave from '../..'
 

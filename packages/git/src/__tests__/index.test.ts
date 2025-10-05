@@ -1,0 +1,593 @@
+import fs from 'fs'
+import path from 'path'
+
+import { exec } from '@monoweave/io'
+import {
+    cleanUp,
+    createFile,
+    getMonoweaveConfig,
+    initGitRepository,
+    setupMonorepo,
+} from '@monoweave/test-utils'
+import { type YarnContext } from '@monoweave/types'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+
+import {
+    getCommitMessages,
+    gitAdd,
+    gitCommit,
+    gitDiffTree,
+    gitGlob,
+    gitLastTaggedCommit,
+    gitLog,
+    gitPushTags,
+    gitResolveSha,
+    gitTag,
+    gitUpstreamBranch,
+} from '..'
+
+describe('@monoweave/git', () => {
+    let context: YarnContext
+    let prevNodeEnv: string | undefined
+
+    beforeEach(async () => {
+        prevNodeEnv = process.env.NODE_ENV
+
+        delete process.env.GITHUB_ACTION
+        delete process.env.GITHUB_EVENT_NAME
+        delete process.env.GITHUB_REF
+
+        context = await setupMonorepo({
+            'pkg-1': {},
+            'pkg-2': {},
+            'pkg-3': { dependencies: ['pkg-2'] },
+            'pkg-4': {},
+            'pkg-5': { private: true, dependencies: ['pkg-4'] },
+            'pkg-6': {
+                dependencies: ['pkg-3', 'pkg-7'],
+            },
+            'pkg-7': {},
+        })
+        const rootPath = context.project.cwd
+        await initGitRepository(rootPath, { allowScaffoldingCommits: false })
+    })
+
+    afterEach(async () => {
+        process.env.NODE_ENV = prevNodeEnv
+        vi.clearAllMocks()
+        await cleanUp([context.project.cwd])
+    })
+
+    describe('gitUpstreamBranch', () => {
+        it('uses GITHUB_REF as the upstream if in github actions and on push event', async () => {
+            process.env.GITHUB_ACTION = 'abc'
+            process.env.GITHUB_EVENT_NAME = 'push'
+            process.env.GITHUB_REF = 'refs/heads/test-ref-1'
+
+            const upstream = await gitUpstreamBranch({
+                cwd: context.project.cwd,
+                context,
+                remote: 'origin',
+            })
+
+            expect(upstream).toBe('refs/heads/test-ref-1')
+        })
+
+        it('uses GITHUB_BASE_REF as the upstream if in github actions and on pull_request event', async () => {
+            process.env.GITHUB_ACTION = 'abc'
+            process.env.GITHUB_EVENT_NAME = 'pull_request'
+            process.env.GITHUB_BASE_REF = 'test-ref-2'
+
+            const upstream = await gitUpstreamBranch({
+                cwd: context.project.cwd,
+                context,
+                remote: 'origin',
+            })
+
+            // The origin must be added for pull requests
+            expect(upstream).toBe('origin/test-ref-2')
+        })
+    })
+
+    describe('gitDiffTree', () => {
+        it('returns list of modified files', async () => {
+            const cwd = context.project.cwd
+
+            await createFile({ filePath: 'test.txt', cwd })
+            await createFile({ filePath: path.join('testDir', 'test.txt'), cwd })
+
+            await exec('git add . && git commit -m "test: test file" -n', {
+                cwd,
+            })
+            const { stdout: headSha } = await exec('git rev-parse HEAD', {
+                cwd,
+            })
+
+            const diffTreeOutput = await gitDiffTree(headSha, { cwd, context })
+
+            expect(diffTreeOutput.trim()).toEqual(
+                expect.stringContaining(['test.txt', 'testDir/test.txt'].join('\n')),
+            )
+        })
+    })
+
+    describe('gitResolveSha', () => {
+        it('resolves HEAD properly', async () => {
+            const cwd = context.project.cwd
+
+            await createFile({ filePath: 'test.txt', cwd })
+            await exec('git add . && git commit -m "test: test file" -n', {
+                cwd,
+            })
+            const { stdout: headSha } = await exec('git rev-parse HEAD', {
+                cwd,
+            })
+
+            const resolvedHead = await gitResolveSha('HEAD', { cwd, context })
+
+            expect(resolvedHead).toEqual(headSha.trim())
+        })
+    })
+
+    describe('gitCommitMessages', () => {
+        it('does not return any messages if target commit is tagged (no-op)', async () => {
+            process.env.NODE_ENV = 'production'
+            const cwd = context.project.cwd
+
+            // Create some files and commit them to have a diff.
+            await createFile({ filePath: 'test.txt', cwd })
+            await exec('git commit -m "test: base" --allow-empty -n', {
+                cwd,
+            })
+            await exec('git checkout -b test-branch', { cwd })
+            const commitMessage = 'test: test file'
+            await exec(`git add . && git commit -m "${commitMessage}" -n`, {
+                cwd,
+            })
+            await gitTag('pkg@1.0.0', { cwd, context })
+
+            const headSha = (
+                await exec('git rev-parse HEAD', {
+                    cwd,
+                })
+            ).stdout.trim()
+
+            const messages = await getCommitMessages(
+                await getMonoweaveConfig({
+                    cwd,
+                    commitSha: headSha,
+                }),
+                context,
+            )
+
+            expect(messages).toEqual([])
+        })
+
+        it('returns a singular commit if missing baseBranch and no tags', async () => {
+            process.env.NODE_ENV = 'production'
+            const cwd = context.project.cwd
+
+            // Create some files and commit them to have a diff.
+            await createFile({ filePath: 'test.txt', cwd })
+            await exec('git commit -m "test: base" --allow-empty -n', {
+                cwd,
+            })
+            await exec('git checkout -b test-branch', { cwd })
+            const commitMessage = 'test: test file'
+            await exec(`git add . && git commit -m "${commitMessage}" -n`, {
+                cwd,
+            })
+
+            const headSha = (
+                await exec('git rev-parse HEAD', {
+                    cwd,
+                })
+            ).stdout.trim()
+
+            const messages = await getCommitMessages(
+                await getMonoweaveConfig({
+                    cwd,
+                    commitSha: headSha,
+                }),
+                context,
+            )
+
+            expect(messages).toEqual([{ sha: headSha, body: `${commitMessage}\n\n` }])
+        })
+
+        it('gets commit messages', async () => {
+            const cwd = context.project.cwd
+
+            // Create some files and commit them to have a diff.
+            await createFile({ filePath: 'test.txt', cwd })
+            await exec('git commit -m "test: base" --allow-empty -n', {
+                cwd,
+            })
+            await exec('git checkout -b test-branch', { cwd })
+            const commitMessage = 'test: test file'
+            await exec(`git add . && git commit -m "${commitMessage}" -n`, {
+                cwd,
+            })
+            const headSha = (
+                await exec('git rev-parse HEAD', {
+                    cwd,
+                })
+            ).stdout.trim()
+
+            const messages = await getCommitMessages(
+                await getMonoweaveConfig({
+                    cwd,
+                    baseBranch: 'main',
+                    commitSha: headSha,
+                }),
+                context,
+            )
+
+            expect(messages).toEqual([{ sha: headSha, body: `${commitMessage}\n\n` }])
+        })
+
+        it('includes all commits from parents of merge', async () => {
+            const cwd = context.project.cwd
+
+            const commit = (msg: string) => exec(`git commit -m "${msg}" --allow-empty -n`, { cwd })
+
+            // add some commits to "main"
+            await commit('initial')
+            await commit('1')
+            await commit('2')
+
+            // branch off to "feature", and add some commits to new branch
+            await exec('git checkout -b feature', { cwd })
+
+            // switch back to main, cause it to diverge immediately
+            await exec('git checkout main', { cwd })
+            await commit('3')
+
+            // add our first feature commit
+            await exec('git checkout feature', { cwd })
+            await commit('4')
+
+            // At this point, the common ancestor of feature and main is "commit 2"
+
+            // back to "main", and cause it to diverge
+            await exec('git checkout main', { cwd })
+            await commit('5')
+
+            // add another commit to "feature"
+            await exec('git checkout feature', { cwd })
+            const fromSha = (
+                await exec('git rev-parse HEAD', {
+                    cwd,
+                })
+            ).stdout.trim()
+            await commit('6')
+
+            // merge main into feature
+            await exec('git merge main --no-edit', { cwd })
+            await commit('7')
+
+            const messages = await getCommitMessages(
+                await getMonoweaveConfig({
+                    cwd,
+                    baseBranch: fromSha,
+                    commitSha: 'HEAD',
+                }),
+                context,
+            )
+
+            // We expect "6" and "7" that are on "feature", but also any commits
+            // from "main" that were only introduced to feature after the merge. This
+            // includes "3" (from right when we branched feature off main, and "5" from later on).
+            expect(
+                messages
+                    .filter((m) => !m.body.includes('Merge branch'))
+                    .map((c) => Number(c.body.trim()))
+                    .sort(),
+            ).toEqual([3, 5, 6, 7])
+        })
+    })
+
+    describe('gitTag', () => {
+        it('fails if invariant not respected', async () => {
+            const cwd = context.project.cwd
+            await exec('git commit -m "test: base" --allow-empty', {
+                cwd,
+            })
+            await expect(async () =>
+                gitTag('pkg@1.0.0', { cwd, context }),
+            ).rejects.toMatchInlineSnapshot(
+                '[Error: Invariant Violation: Invalid environment test !== production.]',
+            )
+        })
+
+        it('creates an annotated tag', async () => {
+            process.env.NODE_ENV = 'production'
+
+            const { cwd } = context.project
+
+            await exec('git commit -m "test: base" --allow-empty', {
+                cwd,
+            })
+
+            await gitTag('pkg@1.0.0', { cwd, context })
+
+            const { stdout } = await exec('git describe --abbrev=0', { cwd })
+            expect(stdout).toEqual(expect.stringContaining('1.0.0'))
+        })
+    })
+
+    describe('gitPushTags', () => {
+        it('fails if invariant not respected', async () => {
+            const cwd = context.project.cwd
+            await exec('git commit -m "test: base" --allow-empty', {
+                cwd,
+            })
+            await expect(async () =>
+                gitPushTags({ cwd, context, remote: 'origin' }),
+            ).rejects.toMatchInlineSnapshot(
+                '[Error: Invariant Violation: Invalid environment test !== production.]',
+            )
+        })
+    })
+
+    describe('gitLastTaggedCommit', () => {
+        it('defaults to HEAD if no tag exists', async () => {
+            const cwd = context.project.cwd
+            await createFile({ filePath: 'test.txt', cwd })
+            await exec('git add . && git commit -m "chore: initial commit" -n', {
+                cwd,
+            })
+
+            await createFile({ filePath: 'test1.txt', cwd })
+            await exec('git add . && git commit -m "chore: second commit" -n', {
+                cwd,
+            })
+
+            const headSha = await gitResolveSha('HEAD', { cwd, context })
+            const commit = await gitLastTaggedCommit({ cwd, context })
+            expect(commit.sha).toEqual(headSha)
+            expect(commit.tag).toBeNull()
+        })
+
+        it('defaults to HEAD if on initial commit', async () => {
+            const cwd = context.project.cwd
+            await createFile({ filePath: 'test.txt', cwd })
+            await exec('git add . && git commit -m "chore: initial commit" -n', {
+                cwd,
+            })
+            const headSha = await gitResolveSha('HEAD', { cwd, context })
+            const commit = await gitLastTaggedCommit({ cwd, context })
+            expect(commit.sha).toEqual(headSha)
+            expect(commit.tag).toBeNull()
+        })
+
+        it('gets the last tagged commit', async () => {
+            process.env.NODE_ENV = 'production'
+
+            const cwd = context.project.cwd
+            await createFile({ filePath: 'test.txt', cwd })
+            await exec('git add . && git commit -m "chore: initial commit" -n', {
+                cwd,
+            })
+            const taggedSha = await gitResolveSha('HEAD', { cwd, context })
+            await gitTag('test-tag@0.0.1', { cwd, context })
+
+            await createFile({ filePath: 'test2.txt', cwd })
+            await exec('git add . && git commit -m "chore: non-tagged" -n', {
+                cwd,
+            })
+
+            const commit = await gitLastTaggedCommit({ cwd, context })
+            expect(commit.sha).toEqual(taggedSha)
+            expect(commit.tag).toBe('test-tag@0.0.1')
+        })
+
+        it('skips prerelease tags if not in prerelease mode', async () => {
+            process.env.NODE_ENV = 'production'
+            const cwd = context.project.cwd
+
+            await createFile({ filePath: 'test.txt', cwd })
+            await exec('git add . && git commit -m "chore: initial commit" -n', {
+                cwd,
+            })
+            const releaseTagSha = await gitResolveSha('HEAD', { cwd, context })
+
+            const nonPrereleaseTags = [
+                'test-tag@0.0.1',
+                'test-tag@v0.0.1',
+                'test-tag@pkg-name-dash.1', // only support semantic versions
+                '@scope-with-hyphen/name.with.dot-and-hyphen',
+            ]
+            for (const tag of nonPrereleaseTags) {
+                await gitTag(tag, { cwd, context })
+            }
+
+            await createFile({ filePath: 'test1.txt', cwd })
+            await exec('git add . && git commit -m "chore: second commit" -n', {
+                cwd,
+            })
+            const prereleaseTagSha = await gitResolveSha('HEAD', {
+                cwd,
+                context,
+            })
+            await gitTag('test-tag@0.0.2-rc.1', { cwd, context })
+
+            await createFile({ filePath: 'test2.txt', cwd })
+            await exec('git add . && git commit -m "chore: non-tagged" -n', {
+                cwd,
+            })
+
+            const detectedCommit = await gitLastTaggedCommit({
+                cwd,
+                context,
+                prerelease: false,
+            })
+
+            expect(detectedCommit.sha).not.toEqual(prereleaseTagSha)
+            expect(detectedCommit.sha).toEqual(releaseTagSha)
+        })
+
+        it('includes prerelease tags when in prerelease mode', async () => {
+            process.env.NODE_ENV = 'production'
+            const cwd = context.project.cwd
+
+            await createFile({ filePath: 'test.txt', cwd })
+            await exec('git add . && git commit -m "chore: initial commit" -n', {
+                cwd,
+            })
+            const releaseTagSha = await gitResolveSha('HEAD', { cwd, context })
+            await gitTag('test-tag@0.0.1', { cwd, context })
+
+            await createFile({ filePath: 'test1.txt', cwd })
+            await exec('git add . && git commit -m "chore: second commit" -n', {
+                cwd,
+            })
+            const prereleaseTagSha = await gitResolveSha('HEAD', {
+                cwd,
+                context,
+            })
+            await gitTag('test-tag@0.0.2-rc.1', { cwd, context })
+
+            await createFile({ filePath: 'test2.txt', cwd })
+            await exec('git add . && git commit -m "chore: non-tagged" -n', {
+                cwd,
+            })
+
+            const detectedCommit = await gitLastTaggedCommit({
+                cwd,
+                context,
+                prerelease: true,
+            })
+
+            expect(detectedCommit.sha).toEqual(prereleaseTagSha)
+            expect(detectedCommit.tag).toBe('test-tag@0.0.2-rc.1')
+            expect(detectedCommit.sha).not.toEqual(releaseTagSha)
+        })
+    })
+
+    describe('gitLog', () => {
+        it('returns an entry for commit between from and to refs', async () => {
+            process.env.NODE_ENV = 'production'
+
+            const DELIMITER = '===='
+
+            const cwd = context.project.cwd
+
+            await createFile({ filePath: 'other.txt', cwd })
+            await exec('git add . && git commit -m "chore: initial commit" -n', {
+                cwd,
+            })
+            const fromSha = await gitResolveSha('HEAD', { cwd, context })
+
+            await createFile({ filePath: 'test.txt', cwd })
+            await exec('git add . && git commit -m "chore: second commit" -n', {
+                cwd,
+            })
+
+            await createFile({ filePath: 'test1.txt', cwd })
+            await exec('git add . && git commit -m "chore: third commit" -n', {
+                cwd,
+            })
+            const toSha = await gitResolveSha('HEAD', { cwd, context })
+
+            // Note that gitLog excludes the "from" commit itself
+            const logEntries = (await gitLog(fromSha, toSha, { cwd, DELIMITER }))
+                .split(DELIMITER)
+                .filter((v) => Boolean(v.trim()))
+
+            expect(logEntries).toHaveLength(2)
+            expect(logEntries).toEqual(
+                expect.arrayContaining([
+                    expect.stringContaining('chore: third commit'),
+                    expect.stringContaining('chore: second commit'),
+                ]),
+            )
+        })
+
+        it('returns a single commit entry if "from" ref is the same as "to" ref', async () => {
+            process.env.NODE_ENV = 'production'
+
+            const DELIMITER = '===='
+
+            const cwd = context.project.cwd
+
+            await createFile({ filePath: 'other.txt', cwd })
+            await exec('git add . && git commit -m "chore: initial commit" -n', {
+                cwd,
+            })
+
+            await createFile({ filePath: 'test.txt', cwd })
+            await exec('git add . && git commit -m "chore: second commit" -n', {
+                cwd,
+            })
+            const sha = await gitResolveSha('HEAD', { cwd, context })
+
+            const logEntries = (await gitLog(sha, sha, { cwd, DELIMITER }))
+                .split(DELIMITER)
+                .filter((v) => Boolean(v.trim()))
+
+            expect(logEntries).toHaveLength(1)
+            expect(logEntries[0]).toEqual(expect.stringContaining('chore: second commit'))
+        })
+    })
+
+    describe('gitAdd, gitCommit', () => {
+        it('adds files, commits changes', async () => {
+            process.env.NODE_ENV = 'production'
+
+            const cwd = context.project.cwd
+            await createFile({ filePath: 'test.txt', cwd })
+            await gitAdd(['test.txt'], { cwd, context })
+
+            // assert added
+            expect(
+                (
+                    await exec('git ls-files --error-unmatch test.txt', {
+                        cwd,
+                    })
+                ).stdout.toString(),
+            ).toEqual(expect.stringContaining('test.txt'))
+
+            await gitCommit('chore: initial commit', { cwd, context })
+
+            // assert committed
+            expect(
+                (
+                    await exec('git log -1 --format="%B"', {
+                        cwd,
+                    })
+                ).stdout.toString(),
+            ).toEqual(expect.stringContaining('chore: initial commit'))
+        })
+    })
+
+    describe('gitGlob', () => {
+        it('correctly lists globbed files', async () => {
+            const cwd = context.project.cwd
+            await createFile({ filePath: 'test.txt', cwd })
+
+            expect(await gitGlob(['test.txt'], { cwd, context })).toEqual(['test.txt'])
+
+            // .pnp.cjs is defined as ignored in the gitignore from testUtils
+            expect(await fs.promises.stat('.pnp.cjs')).toBeDefined()
+            expect(await gitGlob(['.pnp.cjs'], { cwd, context })).toEqual([])
+
+            await createFile({ filePath: path.join('child', 'test1.txt'), cwd })
+            await createFile({ filePath: path.join('child', 'test2.txt'), cwd })
+            await createFile({ filePath: 'other.txt', cwd })
+
+            expect(await gitGlob(['test*.txt'], { cwd, context })).toEqual(['test.txt'])
+            expect(await gitGlob(['**/test*.txt'], { cwd, context })).toEqual(
+                expect.arrayContaining(['test.txt', 'child/test1.txt', 'child/test2.txt']),
+            )
+            expect(await gitGlob(['other.txt', '**/test*.txt'], { cwd, context })).toEqual(
+                expect.arrayContaining([
+                    'other.txt',
+                    'test.txt',
+                    'child/test1.txt',
+                    'child/test2.txt',
+                ]),
+            )
+        })
+    })
+})
