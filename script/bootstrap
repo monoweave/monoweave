@@ -9,7 +9,7 @@ fi
 nvm install &>/dev/null;
 
 if [[ ! "$*" == *"--no-corepack"* ]]; then
-    corepack enable;
+    npm install -g corepack;
 fi
 
 yarn && \

@@ -34,7 +34,7 @@ If using GitHub Actions, also check out our release preview reusable action: [mo
 
 ## Monoweave vs. other popular tooling
 
-Monoweave only supports [Yarn-modern](https://yarnpkg.com) projects with minimum Node version >=18.19.
+Monoweave only supports [Yarn-modern](https://yarnpkg.com) projects with minimum Node version >=22 (lts/jod). Monoweave may work with older versions of Node, however these older versions are not tested.
 
 | Tool | Package Managers | Monorepo Support | Conventional Commits | Changeset Files | Changelogs | publishConfig overrides | workspace:^ protocol | Version Groups | Pull Request Previews | GitHub Releases | Plugin Support |
 | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |

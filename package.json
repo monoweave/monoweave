@@ -17,9 +17,13 @@
     },
     "workspaces": [
         "packages/*",
+        "testUtils",
         "e2e-tests",
         "gatsby"
     ],
+    "exports": {
+        "./package.json": "./package.json"
+    },
     "scripts": {
         "clean": "rm -rf ${ARTIFACT_DIR:-artifacts} && yarn workspaces foreach -vpi --worktree run clean",
         "build": "yarn workspaces foreach -vpi --worktree --topological-dev run prepack",
@@ -29,8 +33,8 @@
         "lint:ci": "eslint . --format junit --output-file ${ARTIFACT_DIR:-artifacts}/test_results/eslint/eslint.junit.xml",
         "lint:fix": "eslint . --fix",
         "lint": "eslint .",
-        "bin:jest:debug": "yarn node --inspect-brk --experimental-vm-modules $(yarn bin jest) --config=jest.config.js",
-        "bin:jest": "yarn node --experimental-vm-modules $(yarn bin jest) --config=jest.config.js",
+        "bin:jest:debug": "yarn node --inspect-brk --experimental-vm-modules $(yarn bin jest) --config=jest.config.cjs",
+        "bin:jest": "yarn node --experimental-vm-modules $(yarn bin jest) --config=jest.config.cjs",
         "test:ci": "CI=1 yarn bin:jest --ci --runInBand --selectProjects \"Unit/Integration\" --",
         "test:watch": "yarn bin:jest --watch --selectProjects \"Unit/Integration\" --",
         "test": "yarn bin:jest --verbose --no-cache --selectProjects \"Unit/Integration\" --",
@@ -61,7 +65,7 @@
         "@monoweave/io": "workspace:*",
         "@monoweave/logging": "workspace:*",
         "@monoweave/plugin-github": "workspace:*",
-        "@monoweave/test-utils": "link:./testUtils",
+        "@monoweave/test-utils": "workspace:*",
         "@monoweave/types": "workspace:*",
         "@noahnu/eslint-config": "^3.0.0",
         "@noahnu/eslint-import-resolver-require": "^1.0.0",
@@ -101,9 +105,6 @@
         "tsx": "^4.20.3",
         "typescript": "^5.9.2",
         "yaml-validator": "^5.1.0"
-    },
-    "engines": {
-        "node": ">=v18"
     },
     "dependenciesMeta": {
         "core-js": {

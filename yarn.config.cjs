@@ -148,6 +148,7 @@ function enforceYarnLibrariesPeerAndDev({ Yarn }) {
 }
 
 module.exports = {
+    /** @type {(ctx: import('@yarnpkg/types').Yarn.Constraints.Context) => Promise<void>} */
     async constraints(ctx) {
         enforceMonoweaveSatisfiesPeers(ctx)
         enforceWorkspaceDependenciesWhenPossible(ctx)

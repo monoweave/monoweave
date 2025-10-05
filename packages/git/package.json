@@ -33,7 +33,7 @@
     "@jest/globals": "^30.0.0-alpha.6",
     "@monoweave/io": "workspace:*",
     "@monoweave/logging": "workspace:*",
-    "@monoweave/test-utils": "link:../../testUtils",
+    "@monoweave/test-utils": "workspace:*",
     "@monoweave/types": "workspace:*",
     "@types/micromatch": "^4.0.9",
     "@types/node": "^22.10.5",
