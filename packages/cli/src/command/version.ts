@@ -4,11 +4,13 @@ import { ErrorsReported } from '@monoweave/logging'
 import { getPackageCandidatesForManualRelease } from '@monoweave/node'
 import { type DeferredVersionRecord, type PackageStrategyType } from '@monoweave/types'
 import { writeDeferredVersionFile } from '@monoweave/versions'
-import { Option } from 'clipanion'
+import clipanion = require('clipanion')
 import * as t from 'typanion'
 
 import { BaseCommand } from './base'
 import { detectIsInCI } from './config/utils'
+
+const { Option } = clipanion
 
 const promptPackage = async ({
     pkgName,

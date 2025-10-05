@@ -7,25 +7,28 @@
         "test:registry:start": "docker run -itd -p 4873:4873 --name monoweave-registry monoweave-test-registry",
         "test:registry:stop": "docker stop monoweave-registry && docker container rm monoweave-registry",
         "test:registry": "run test:registry:build && run test:registry:start",
-        "bin:test": "E2E=1 run workspace:test --runInBand --maxConcurrency=1 --verbose --testTimeout=300000",
-        "bin:test:debug": "E2E=1 run bin:jest:debug --runInBand --maxConcurrency=1 --verbose --testTimeout=60000000",
-        "test": "E2E=1 run bin:test --selectProjects E2E -- $(pwd)",
-        "test:watch": "E2E=1 run bin:test --watch --selectProjects E2E --"
+        "bin:test": "E2E=1 run workspace:test --pool=forks --poolOptions.forks.singleThread=true --no-file-parallelism",
+        "bin:test:debug": "E2E=1 run bin:vitest:debug --pool=forks --poolOptions.forks.singleThread=true --no-file-parallelism --testTimeout=60000000",
+        "test": "E2E=1 run bin:test --project=E2E -- $(pwd)",
+        "test:watch": "E2E=1 run bin:test --watch --project=E2E --"
+    },
+    "imports": {
+        "#helpers/*": "./helpers/*.ts"
     },
     "devDependencies": {
-        "@jest/globals": "^30.0.0-alpha.6",
         "@monoweave/cli": "workspace:*",
         "@monoweave/io": "workspace:*",
         "@monoweave/logging": "workspace:*",
         "@monoweave/test-utils": "workspace:*",
         "@monoweave/types": "workspace:*",
         "@tophat/conventional-changelog-config": "^1.0.1",
-        "@types/node": "^22.10.5",
+        "@types/node": "^22.0.0",
         "@yarnpkg/core": "^4.4.4",
         "@yarnpkg/fslib": "^3.1.3",
         "@yarnpkg/shell": "^4.1.3",
         "helpers": "link:./helpers",
-        "tsx": "^4.20.3"
+        "tsx": "^4.20.3",
+        "vitest": "^3.2.4"
     },
     "author": {
         "name": "noahnu",

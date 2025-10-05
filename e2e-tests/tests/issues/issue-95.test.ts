@@ -1,7 +1,7 @@
-import { describe, expect, it } from '@jest/globals'
 import { RegistryMode } from '@monoweave/types'
+import { describe, expect, it } from 'vitest'
 
-import setupProject from 'helpers/setupProject'
+import setupProject from '#helpers/setupProject'
 
 // https://github.com/monoweave/monoweave/issues/95
 describe('Issue #95', () => {

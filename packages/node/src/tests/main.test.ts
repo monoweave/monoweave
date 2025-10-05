@@ -1,16 +1,6 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
-import {
-    afterAll,
-    afterEach,
-    beforeAll,
-    beforeEach,
-    describe,
-    expect,
-    it,
-    jest,
-} from '@jest/globals'
 import * as git from '@monoweave/git'
 import { backupPackageJsons, clearBackupCache, restorePackageJsons } from '@monoweave/io'
 import { LOG_LEVELS } from '@monoweave/logging'
@@ -25,13 +15,23 @@ import { getPluginConfiguration } from '@yarnpkg/cli'
 import { Configuration, Project, StreamReport, type Workspace } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
 import * as npm from '@yarnpkg/plugin-npm'
+import {
+    type Mocked,
+    afterAll,
+    afterEach,
+    beforeAll,
+    beforeEach,
+    describe,
+    expect,
+    it,
+    vi,
+} from 'vitest'
 
 import monoweave from '..'
 
-jest.mock('@yarnpkg/plugin-npm')
-jest.mock('@monoweave/git')
+vi.mock('@monoweave/git', async () => vi.importActual('@monoweave/git/test-mocks'))
 
-const mockGit = git as jest.Mocked<
+const mockGit = git as Mocked<
     typeof git & {
         _reset_: () => void
         _commitFiles_: (sha: string, commit: string, files: string[]) => void
@@ -48,7 +48,7 @@ const mockGit = git as jest.Mocked<
         }
     }
 >
-const mockNPM = npm as jest.Mocked<
+const mockNPM = npm as Mocked<
     typeof npm & {
         _reset_: () => void
         _setTag_: (pkgName: string, tagValue: string, tagKey?: string) => void
@@ -130,7 +130,7 @@ describe('Monoweave', () => {
     })
 
     it('passes correct access when publishing by default', async () => {
-        const spyPublish = jest.spyOn(npm.npmPublishUtils, 'makePublishBody')
+        const spyPublish = vi.spyOn(npm.npmPublishUtils, 'makePublishBody')
 
         mockNPM._setTag_('pkg-1', '0.0.1')
         mockGit._commitFiles_('sha1', 'feat: some new feature!', ['./packages/pkg-1/README.md'])
@@ -173,7 +173,7 @@ describe('Monoweave', () => {
     })
 
     it('logs an error if publishing fails', async () => {
-        const spyPublish = jest
+        const spyPublish = vi
             .spyOn(npm.npmHttpUtils, 'put')
             .mockRejectedValue(
                 new Error(
@@ -198,7 +198,7 @@ describe('Monoweave', () => {
     })
 
     it('does not push tags if no changes detected', async () => {
-        const spyPush = jest.spyOn(mockGit, 'gitPushTags')
+        const spyPush = vi.spyOn(mockGit, 'gitPushTags')
         const result = await monoweave(monoweaveConfig)
         expect(result).toEqual({})
         expect(spyPush).not.toHaveBeenCalled()
@@ -452,7 +452,7 @@ describe('Monoweave', () => {
 
         const changesetFilename = await path.join(tmp.dir, 'changeset.json')
 
-        const spyStdout = jest.spyOn(process.stdout, 'write').mockImplementation(() => true)
+        const spyStdout = vi.spyOn(process.stdout, 'write').mockImplementation(() => true)
 
         const result = await monoweave({
             ...monoweaveConfig,

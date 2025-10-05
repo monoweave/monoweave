@@ -1,10 +1,12 @@
 import { ErrorsReported } from '@monoweave/logging'
 import monoweave from '@monoweave/node'
 import { type MonoweaveConfiguration, type RecursivePartial } from '@monoweave/types'
-import { Option } from 'clipanion'
+import clipanion = require('clipanion')
 import * as t from 'typanion'
 
 import { BaseCommand } from './base'
+
+const { Option } = clipanion
 
 export class MonoweaveCommand extends BaseCommand {
     changesetFilename = Option.String('--changeset-filename', {
@@ -69,6 +71,7 @@ export class MonoweaveCommand extends BaseCommand {
             await monoweave(config)
             return 0
         } catch (err) {
+            console.error(err) // TODO: REMOVE THIS
             if (err instanceof ErrorsReported) {
                 // We've already reported the error, return.
                 return 1
