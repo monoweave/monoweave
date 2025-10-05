@@ -1,16 +1,6 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
-import {
-    afterAll,
-    afterEach,
-    beforeAll,
-    beforeEach,
-    describe,
-    expect,
-    it,
-    jest,
-} from '@jest/globals'
 import * as git from '@monoweave/git'
 import { backupPackageJsons, clearBackupCache, restorePackageJsons } from '@monoweave/io'
 import { LOG_LEVELS } from '@monoweave/logging'
@@ -25,6 +15,7 @@ import { getPluginConfiguration } from '@yarnpkg/cli'
 import { Configuration, Project, StreamReport, type Workspace } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
 import * as npm from '@yarnpkg/plugin-npm'
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, jest } from 'vitest'
 
 import monoweave from '..'
 

@@ -14,10 +14,8 @@
             "args": [
                 "run",
                 "--inspect",
-                "jest",
-                "--config=${workspaceFolder}/jest.config.js",
-                "--no-cache",
-                "--runInBand",
+                "vitest",
+                "--config=${workspaceFolder}/vitest.config.ts",
                 "--testTimeout=600000",
                 "${relativeFile}"
             ]

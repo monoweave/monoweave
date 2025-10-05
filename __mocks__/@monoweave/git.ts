@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { jest } from '@jest/globals'
 import type { CommitMessage, MonoweaveConfiguration, YarnContext } from '@monoweave/types'
-
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
-const actualMonoweaveGit = jest.requireActual<typeof import('@monoweave/git')>('@monoweave/git')
 
 const registry: {
     commits: CommitMessage[]
@@ -148,14 +144,14 @@ const gitPush = async ({
     }
 }
 
-export const gitAdd = async (
+const gitAdd = async (
     paths: string[],
     { cwd, context }: { cwd: string; context?: YarnContext },
 ): Promise<void> => {
     registry.stagedFiles.push(...paths)
 }
 
-export const gitCommit = async (
+const gitCommit = async (
     message: string,
     { cwd, context }: { cwd: string; context?: YarnContext },
 ): Promise<void> => {
@@ -179,7 +175,7 @@ const gitLastTaggedCommit = async ({
     return { sha: registry.lastTaggedCommit, tag: registry.tags[registry.tags.length - 1] ?? null }
 }
 
-export const getCommitMessages = async (
+const getCommitMessages = async (
     config: MonoweaveConfiguration,
     context: YarnContext,
 ): Promise<CommitMessage[]> => {
@@ -216,28 +212,30 @@ export const getCommitMessages = async (
         .filter((msg) => msg.body)
 }
 
-export const gitGlob = async (
+const gitGlob = async (
     globs: string[],
     { cwd, context }: { cwd: string; context?: YarnContext },
 ): Promise<string[]> => {
     return globs // TODO: not entirely accurate
 }
 
-export const gitCheckout = async (
+const gitCheckout = async (
     { files }: { files: string[] },
     { cwd, context }: { cwd: string; context?: YarnContext },
 ): Promise<void> => {
     //
 }
 
-module.exports = {
-    __esModule: true,
+const actualMonoweaveGit = require('@monoweave/git')
+
+const { parseRepositoryProperty } = actualMonoweaveGit
+
+export {
     _commitFiles_,
     _getPushedTags_,
     _getTags_,
     _reset_,
     _getRegistry_,
-    ...actualMonoweaveGit,
     getCommitMessages,
     gitAdd,
     gitCommit,
@@ -251,4 +249,6 @@ module.exports = {
     gitResolveSha,
     gitTag,
     gitUpstreamBranch,
+    gitCheckout,
+    parseRepositoryProperty,
 }

@@ -1,6 +1,5 @@
 import path from 'node:path'
 
-import { describe, expect, it } from '@jest/globals'
 import { exec } from '@monoweave/io'
 import {
     addGitRemote,
@@ -11,6 +10,7 @@ import {
 } from '@monoweave/test-utils'
 import { RegistryMode } from '@monoweave/types'
 import { npath } from '@yarnpkg/fslib'
+import { describe, expect, it } from 'vitest'
 
 import { startRegistry } from 'helpers/docker'
 import { createSetupProjectContext, writeConfigWithLocalRegistry } from 'helpers/setupProject'

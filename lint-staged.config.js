@@ -8,7 +8,7 @@ module.exports = {
         const files = filenames.join(' ')
         return [
             `yarn eslint --ext .ts ${files}`,
-            `yarn bin:jest --bail --findRelatedTests --selectProjects "Unit/Integration" -- ${files}`,
+            `yarn bin:vitest --bail --findRelatedTests --project="Unit/Integration" -- ${files}`,
         ]
     },
 }
