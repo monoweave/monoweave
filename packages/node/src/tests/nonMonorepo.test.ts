@@ -1,17 +1,6 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
-import {
-    afterAll,
-    afterEach,
-    beforeAll,
-    beforeEach,
-    describe,
-    expect,
-    it,
-    jest,
-} from '@jest/globals'
-import * as git from '@monoweave/git'
 import { LOG_LEVELS } from '@monoweave/logging'
 import { createTempDir, setupMonorepo } from '@monoweave/test-utils'
 import {
@@ -21,36 +10,44 @@ import {
     type YarnContext,
 } from '@monoweave/types'
 import { npath } from '@yarnpkg/fslib'
-import * as npm from '@yarnpkg/plugin-npm'
+import {
+    type Mocked,
+    afterAll,
+    afterEach,
+    beforeAll,
+    beforeEach,
+    describe,
+    expect,
+    it,
+    vi,
+} from 'vitest'
 
 import monoweave from '..'
 
-jest.mock('@yarnpkg/plugin-npm')
-jest.mock('@monoweave/git')
+vi.mock('@monoweave/git', async () => vi.importActual('@monoweave/git/test-mocks'))
 
-const mockGit = git as jest.Mocked<
-    typeof git & {
-        _reset_: () => void
-        _commitFiles_: (sha: string, commit: string, files: string[]) => void
-        _getPushedTags_: () => string[]
-        _getTags_: () => string[]
-        _getRegistry_: () => {
-            commits: CommitMessage[]
-            filesModified: Map<string, string[]>
-            tags: string[]
-            pushedTags: string[]
-            lastTaggedCommit?: string
-            pushedCommits: string[]
-            stagedFiles: string[]
-        }
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+type MockedGit = typeof import('@monoweave/git') & {
+    _reset_: () => void
+    _commitFiles_: (sha: string, commit: string, files: string[]) => void
+    _getPushedTags_: () => string[]
+    _getTags_: () => string[]
+    _getRegistry_: () => {
+        commits: CommitMessage[]
+        filesModified: Map<string, string[]>
+        tags: string[]
+        pushedTags: string[]
+        lastTaggedCommit?: string
+        pushedCommits: string[]
+        stagedFiles: string[]
     }
->
-const mockNPM = npm as jest.Mocked<
-    typeof npm & {
-        _reset_: () => void
-        _setTag_: (pkgName: string, tagValue: string, tagKey?: string) => void
-    }
->
+}
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+type MockedNPM = typeof import('@yarnpkg/plugin-npm') & {
+    _reset_: () => void
+    _setTag_: (pkgName: string, tagValue: string, tagKey?: string) => void
+}
 
 const setupExampleMonorepo = async (): Promise<YarnContext> => {
     const context = await setupMonorepo(
@@ -69,7 +66,13 @@ const setupExampleMonorepo = async (): Promise<YarnContext> => {
     return context
 }
 
-describe('Non-monorepos (single package)', () => {
+describe('Non-monorepos (single package)', async () => {
+    const monoweaveGit = await import('@monoweave/git')
+    const pluginNPM = await import('@yarnpkg/plugin-npm')
+
+    const mockedGit = monoweaveGit as unknown as Mocked<MockedGit>
+    const mockedNPM = pluginNPM as unknown as Mocked<MockedNPM>
+
     const monoweaveConfig: MonoweaveConfiguration = {
         cwd: '/tmp/to-be-overwritten-by-before-each',
         dryRun: false,
@@ -107,8 +110,8 @@ describe('Non-monorepos (single package)', () => {
     })
 
     afterEach(async () => {
-        mockGit._reset_()
-        mockNPM._reset_()
+        mockedGit._reset_()
+        mockedNPM._reset_()
         try {
             await fs.rm(monoweaveConfig.cwd, { recursive: true, force: true })
         } catch {}
@@ -119,8 +122,8 @@ describe('Non-monorepos (single package)', () => {
     })
 
     it('publishes changed workspaces with distinct version stategies and commits', async () => {
-        mockNPM._setTag_('pkg-1', '0.0.1')
-        mockGit._commitFiles_('sha1', 'feat: some new feature!', ['./README.md'])
+        mockedNPM._setTag_('pkg-1', '0.0.1')
+        mockedGit._commitFiles_('sha1', 'feat: some new feature!', ['./README.md'])
 
         const result = await monoweave(monoweaveConfig)
 
@@ -128,12 +131,14 @@ describe('Non-monorepos (single package)', () => {
         expect(result['pkg-1'].version).toBe('0.1.0')
         expect(result['pkg-1'].changelog).toEqual(expect.stringContaining('some new feature'))
 
-        expect(mockGit._getPushedTags_()).toEqual(['pkg-1@0.1.0'])
+        expect(
+            ((await import('@monoweave/git')) as unknown as MockedGit)._getPushedTags_(),
+        ).toEqual(['pkg-1@0.1.0'])
     })
 
     it('updates changelog and changeset', async () => {
-        mockNPM._setTag_('pkg-1', '0.0.1')
-        mockGit._commitFiles_('sha1', 'feat: some new feature!', ['./README.md'])
+        mockedNPM._setTag_('pkg-1', '0.0.1')
+        mockedGit._commitFiles_('sha1', 'feat: some new feature!', ['./README.md'])
 
         await using tmp = await createTempDir()
         const changelogFilename = await path.join(tmp.dir, 'changelog.md')

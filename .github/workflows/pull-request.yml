@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: coverage-unit-tests
-          path: ./raw-coverage/jest
+          path: ./raw-coverage/vitest
 
   tests_e2es:
     name: Tests - End to End - ${{ matrix.runner }} / Node ${{ matrix.node-version }}
@@ -82,7 +82,7 @@ jobs:
           if: matrix.runner == 'ubuntu-latest' && matrix.node-version == 'lts/iron'
           with:
             name: coverage-e2e-tests
-            path: ./raw-coverage/jest-e2es
+            path: ./raw-coverage/vitest-e2es
 
   test_report:
     name: Test Report
@@ -96,16 +96,16 @@ jobs:
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: coverage-unit-tests
-          path: ./raw-coverage/jest
+          path: ./raw-coverage/vitest
       - name: Download E2E Coverage
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: coverage-e2e-tests
-          path: ./raw-coverage/jest-e2es
-      - name: Log Coverage Files (Jest Unit)
-        run: ls -la ./raw-coverage/jest
-      - name: Log Coverage Files (Jest E2Es)
-        run: ls -la ./raw-coverage/jest-e2es
+          path: ./raw-coverage/vitest-e2es
+      - name: Log Coverage Files (Vitest Unit)
+        run: ls -la ./raw-coverage/vitest
+      - name: Log Coverage Files (Vitest E2Es)
+        run: ls -la ./raw-coverage/vitest-e2es
       - name: Merge Coverage
         run: yarn test:coverage:merge
       - name: Generate Report

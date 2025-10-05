@@ -6,7 +6,7 @@ const ConfigRecommended: MonoweaveConfigFile = {
         // Common conventions for test files
         '**/__tests__',
         '**/*.test.*',
-        // Jest snapshots
+        // vitest snapshots
         '**/*.snap',
     ],
     changelogFilename: '<packageDir>/CHANGELOG.md',
