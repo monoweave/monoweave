@@ -61,7 +61,7 @@ jobs:
 
   tests_e2es:
     name: Tests - End to End - ${{ matrix.runner }} / Node ${{ matrix.node-version }}
-    runs-on: ${{ matrix.runner}}
+    runs-on: ${{ matrix.runner }}
     needs: [prepare]
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     strategy:
@@ -79,7 +79,7 @@ jobs:
           run: yarn test:e2e
         - name: Upload Artifacts
           uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-          if: matrix.runner == 'ubuntu-latest' && matrix.node-version == 'lts/iron'
+          if: matrix.runner == 'ubuntu-latest' && matrix.node-version == 'lts/jod'
           with:
             name: coverage-e2e-tests
             path: ./raw-coverage/vitest-e2es
