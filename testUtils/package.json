@@ -3,14 +3,14 @@
     "private": true,
     "main": "./src/index.ts",
     "devDependencies": {
-        "@jest/globals": "^30.0.0-alpha.6",
         "@monoweave/io": "workspace:*",
         "@monoweave/node": "workspace:*",
         "@monoweave/types": "workspace:*",
-        "@types/node": "^20.15.0",
+        "@types/node": "^22.0.0",
         "@yarnpkg/cli": "^4.6.0",
         "@yarnpkg/core": "^4.2.0",
-        "@yarnpkg/fslib": "^3.1.1"
+        "@yarnpkg/fslib": "^3.1.1",
+        "vitest": "^3.2.4"
     },
     "author": {
         "name": "noahnu",

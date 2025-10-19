@@ -1,7 +1,14 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
+import * as git from '@monoweave/git'
+import { LOG_LEVELS } from '@monoweave/logging'
+import { setupMonorepo } from '@monoweave/test-utils'
+import { type MonoweaveConfiguration, RegistryMode } from '@monoweave/types'
+import { npath } from '@yarnpkg/fslib'
+import * as npm from '@yarnpkg/plugin-npm'
 import {
+    type Mocked,
     afterAll,
     afterEach,
     beforeAll,
@@ -9,21 +16,14 @@ import {
     describe,
     expect,
     it,
-    jest,
-} from '@jest/globals'
-import * as git from '@monoweave/git'
-import { LOG_LEVELS } from '@monoweave/logging'
-import { setupMonorepo } from '@monoweave/test-utils'
-import { type MonoweaveConfiguration, RegistryMode } from '@monoweave/types'
-import { npath } from '@yarnpkg/fslib'
-import * as npm from '@yarnpkg/plugin-npm'
+    vi,
+} from 'vitest'
 
 import monoweave from '..'
 
-jest.mock('@yarnpkg/plugin-npm')
-jest.mock('@monoweave/git')
+vi.mock('@monoweave/git', async () => vi.importActual('@monoweave/git/test-mocks'))
 
-const mockGit = git as jest.Mocked<
+const mockGit = git as Mocked<
     typeof git & {
         _reset_: () => void
         _commitFiles_: (sha: string, commit: string, files: string[]) => void
@@ -31,7 +31,7 @@ const mockGit = git as jest.Mocked<
         _getTags_: () => string[]
     }
 >
-const mockNPM = npm as jest.Mocked<
+const mockNPM = npm as Mocked<
     typeof npm & {
         _reset_: () => void
         _setTag_: (pkgName: string, tagValue: string, tagKey?: string) => void

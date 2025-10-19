@@ -5,11 +5,13 @@ import {
     RegistryMode,
 } from '@monoweave/types'
 import { npath, ppath } from '@yarnpkg/fslib'
-import { Command, Option } from 'clipanion'
+import clipanion = require('clipanion')
 import * as t from 'typanion'
 
 import readConfigFile from './config/readConfigFile'
 import { detectIsInCI } from './config/utils'
+
+const { Command, Option } = clipanion
 
 export abstract class BaseCommand extends Command {
     preset = Option.String('--preset', {

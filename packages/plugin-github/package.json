@@ -29,10 +29,10 @@
     "prepack": "run workspace:build \"$(pwd)\""
   },
   "devDependencies": {
-    "@jest/globals": "^30.0.0-alpha.6",
     "@monoweave/test-utils": "workspace:*",
-    "@types/node": "^22.10.5",
-    "tapable": "^2.2.1"
+    "@types/node": "^22.0.0",
+    "tapable": "^2.2.1",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@monoweave/git": "workspace:^1.20.1",
