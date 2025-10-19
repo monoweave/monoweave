@@ -7,7 +7,7 @@ import { type PortablePath, npath, ppath } from '@yarnpkg/fslib'
 import JSON5 from 'json5'
 import YAML from 'yaml'
 
-import validateConfigFile from './validateConfigFile'
+import validateConfigFile from './validateConfigFile.js'
 
 class ResolveFailure extends Error {}
 

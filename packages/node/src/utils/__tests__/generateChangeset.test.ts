@@ -9,7 +9,7 @@ import {
 import { type PortablePath } from '@yarnpkg/fslib'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { generateChangeset } from '../generateChangeset'
+import { generateChangeset } from '../generateChangeset.js'
 
 describe('generateChangeset', () => {
     let workspacePath: PortablePath
@@ -33,7 +33,7 @@ describe('generateChangeset', () => {
             })),
             changesetFilename: undefined,
             conventionalChangelogConfig: path.resolve(
-                path.join(__dirname, '..', '..', '..', 'mocks', 'conventional-config-fn.mock.ts'),
+                path.join(__dirname, '..', '..', '..', 'mocks', 'conventional-config-fn.mock.cts'),
             ),
         }
         const context = await setupContext(cwd)

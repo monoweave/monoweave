@@ -1,7 +1,11 @@
+import { createRequire } from 'module'
+
 import { RegistryMode } from '@monoweave/types'
 import { describe, expect, it } from 'vitest'
 
 import setupProject from '#helpers/setupProject'
+
+const require = createRequire(import.meta.url)
 
 // https://github.com/monoweave/monoweave/issues/95
 describe('Issue #95', () => {

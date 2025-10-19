@@ -3,7 +3,7 @@ import path from 'path'
 import type { MonoweaveConfiguration } from '@monoweave/types'
 import { describe, expect, it } from 'vitest'
 
-import { resolveConventionalConfig } from '..'
+import { resolveConventionalConfig } from '../index.js'
 
 describe('resolveConventionalConfig', () => {
     it('throw when no conventional changelog config provided', async () => {
@@ -19,7 +19,7 @@ describe('resolveConventionalConfig', () => {
             {
                 cwd: process.cwd(),
                 conventionalChangelogConfig: path.resolve(
-                    path.join(__dirname, '..', '..', 'mocks', 'conventional-config-fn.mock.ts'),
+                    path.join(__dirname, '..', '..', 'mocks', 'conventional-config-fn.mock.cts'),
                 ),
             }
 
@@ -44,7 +44,13 @@ describe('resolveConventionalConfig', () => {
                 cwd: process.cwd(),
                 conventionalChangelogConfig: {
                     name: path.resolve(
-                        path.join(__dirname, '..', '..', 'mocks', 'conventional-config-fn.mock.ts'),
+                        path.join(
+                            __dirname,
+                            '..',
+                            '..',
+                            'mocks',
+                            'conventional-config-fn.mock.cts',
+                        ),
                     ),
                     commentChar: COMMENT_CHAR,
                 },

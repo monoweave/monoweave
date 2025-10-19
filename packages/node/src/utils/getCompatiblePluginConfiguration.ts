@@ -2,9 +2,10 @@ import { createRequire } from 'module'
 
 import logging from '@monoweave/logging'
 import { getDynamicLibs } from '@yarnpkg/cli'
-import packageJson from '@yarnpkg/cli/package.json'
+import packageJson from '@yarnpkg/cli/package.json' with { type: 'json' }
 import { type PluginConfiguration } from '@yarnpkg/core'
 
+const require = createRequire(import.meta.url)
 const requireForCLI = createRequire(require.resolve('@yarnpkg/cli'))
 
 /**

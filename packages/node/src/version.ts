@@ -8,8 +8,8 @@ import { Configuration, Project, ThrowReport, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
 import micromatch from 'micromatch'
 
-import { getCompatiblePluginConfiguration } from './utils/getCompatiblePluginConfiguration'
-import { mergeDefaultConfig } from './utils/mergeDefaultConfig'
+import { getCompatiblePluginConfiguration } from './utils/getCompatiblePluginConfiguration.js'
+import { mergeDefaultConfig } from './utils/mergeDefaultConfig.js'
 
 export const getPackageCandidatesForManualRelease = async (
     baseConfig: RecursivePartial<MonoweaveConfiguration>,

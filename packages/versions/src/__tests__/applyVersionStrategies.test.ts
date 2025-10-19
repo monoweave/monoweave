@@ -2,7 +2,7 @@ import { createMonorepoContext, getMonoweaveConfig } from '@monoweave/test-utils
 import { type MonoweaveConfiguration, type PackageStrategyType } from '@monoweave/types'
 import { describe, expect, it } from 'vitest'
 
-import applyVersionStrategies, { incrementVersion } from '../applyVersionStrategies'
+import applyVersionStrategies, { incrementVersion } from '../applyVersionStrategies.js'
 
 describe('applyVersionStrategies', () => {
     it("includes dependencies we're not updating in previous tags", async () => {

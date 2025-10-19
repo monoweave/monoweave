@@ -12,7 +12,7 @@ import {
 import { type PortablePath, npath } from '@yarnpkg/fslib'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
-import { getExplicitVersionStrategies } from '../..'
+import { getExplicitVersionStrategies } from '../../index.js'
 
 describe('getExplicitVersionStrategies', () => {
     let tempRepositoryRoot: PortablePath

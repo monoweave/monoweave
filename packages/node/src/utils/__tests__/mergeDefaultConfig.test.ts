@@ -4,7 +4,7 @@ import { type MonoweaveConfiguration, RegistryMode } from '@monoweave/types'
 import * as npm from '@yarnpkg/plugin-npm'
 import { type Mocked, afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
 
-import { mergeDefaultConfig } from '../mergeDefaultConfig'
+import { mergeDefaultConfig } from '../mergeDefaultConfig.js'
 
 vi.mock('@monoweave/git', async () => vi.importActual('@monoweave/git/test-mocks'))
 

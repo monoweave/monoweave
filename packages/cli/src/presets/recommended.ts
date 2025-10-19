@@ -12,4 +12,4 @@ const ConfigRecommended: MonoweaveConfigFile = {
     changelogFilename: '<packageDir>/CHANGELOG.md',
 }
 
-export = ConfigRecommended
+export default ConfigRecommended

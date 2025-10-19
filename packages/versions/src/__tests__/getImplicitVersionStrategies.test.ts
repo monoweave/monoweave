@@ -4,7 +4,7 @@ import { getMonoweaveConfig, setupMonorepo } from '@monoweave/test-utils'
 import { type YarnContext } from '@monoweave/types'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
-import { getImplicitVersionStrategies } from '..'
+import { getImplicitVersionStrategies } from '../index.js'
 
 describe('getImplicitVersionStrategies', () => {
     let context: YarnContext

@@ -1,1 +1,1 @@
-export { mergeDefaultConfig } from './utils/mergeDefaultConfig'
+export { mergeDefaultConfig } from './utils/mergeDefaultConfig.js'

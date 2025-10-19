@@ -6,7 +6,7 @@ import { Manifest, type Workspace, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
 import { describe, expect, it } from 'vitest'
 
-import { patchPackageJsons } from '..'
+import { patchPackageJsons } from '../index.js'
 
 const identToWorkspace = (context: YarnContext, name: string): Workspace =>
     context.project.getWorkspaceByIdent(structUtils.parseIdent(name))

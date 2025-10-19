@@ -2,7 +2,7 @@ import { promises as fs } from 'fs'
 import path from 'path'
 
 import monoweave from '@monoweave/node'
-import { createTempDir, itIf, waitFor } from '@monoweave/test-utils'
+import { createTempDir, waitFor } from '@monoweave/test-utils'
 import {
     type MonoweaveConfigFile,
     type MonoweaveConfiguration,
@@ -153,7 +153,7 @@ describe('CLI', () => {
             `
 
             await using tmpDir = await createTempDir()
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
             await fs.writeFile(configFilename, configFileContents, 'utf-8')
             setArgs(`--config-file ${configFilename}`)
             await vi.importActual('../index')
@@ -174,7 +174,7 @@ describe('CLI', () => {
             `
 
             await using tmpDir = await createTempDir()
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
             await fs.writeFile(configFilename, configFileContents, 'utf-8')
             setArgs(`--config-file ${configFilename}`)
             await vi.importActual('../index')
@@ -222,7 +222,7 @@ describe('CLI', () => {
             `
 
             await using tmpDir = await createTempDir()
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
             await fs.writeFile(configFilename, configFileContents, 'utf-8')
             setArgs(`--config-file ${configFilename}`)
             await vi.importActual('../index')
@@ -261,9 +261,9 @@ describe('CLI', () => {
             `
 
             await using tmpDir = await createTempDir()
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
             await fs.writeFile(configFilename, configFileContents, 'utf-8')
-            setArgs(`--config-file monoweave.config.js --cwd ${tmpDir.dir}`)
+            setArgs(`--config-file monoweave.config.cjs --cwd ${tmpDir.dir}`)
             await vi.importActual('../index')
             expect({
                 ...(await waitForMonoweaveRun()),
@@ -300,9 +300,9 @@ describe('CLI', () => {
             `
 
             await using tmpDir = await createTempDir()
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
             await fs.writeFile(configFilename, configFileContents, 'utf-8')
-            setArgs(`--config-file ./monoweave.config.js --cwd ${tmpDir.dir}`)
+            setArgs(`--config-file ./monoweave.config.cjs --cwd ${tmpDir.dir}`)
             await vi.importActual('../index')
             expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toMatchSnapshot()
         })
@@ -358,7 +358,7 @@ describe('CLI', () => {
             })
 
             it('supports .js extensions', async () => {
-                const filename = 'monoweave.config.js'
+                const filename = 'monoweave.config.cjs'
                 const contents = `module.exports = ${JSON.stringify(configContents)}`
 
                 const config = await writeConfigFile({ filename, contents })
@@ -393,43 +393,29 @@ describe('CLI', () => {
                 )
             })
 
-            /**
-             * Node lts/hydrogen has a bug (?) which causes jest to crash when using dynamic imports.
-             * https://stackoverflow.com/questions/77962982/testing-commonjs-with-dynamic-imports-of-esm-with-ts-jest#comment137891280_77962982
-             */
-            itIf(() => !process.env.NODE_VERSION?.includes('lts/hydrogen'))(
-                'supports .cjs extensions',
-                async () => {
-                    const filename = 'monoweave.config.cjs'
-                    const contents = `module.exports = ${JSON.stringify(configContents)}`
+            it('supports .cjs extensions', async () => {
+                const filename = 'monoweave.config.cjs'
+                const contents = `module.exports = ${JSON.stringify(configContents)}`
 
-                    const config = await writeConfigFile({ filename, contents })
-                    expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
-                        expect.objectContaining({
-                            changelogFilename: configContents.changelogFilename,
-                        }),
-                    )
-                },
-            )
+                const config = await writeConfigFile({ filename, contents })
+                expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
+                    expect.objectContaining({
+                        changelogFilename: configContents.changelogFilename,
+                    }),
+                )
+            })
 
-            /**
-             * Node lts/hydrogen has a bug (?) which causes jest to crash when using dynamic imports.
-             * https://stackoverflow.com/questions/77962982/testing-commonjs-with-dynamic-imports-of-esm-with-ts-jest#comment137891280_77962982
-             */
-            itIf(() => !process.env.NODE_VERSION?.includes('lts/hydrogen'))(
-                'supports .mjs extensions',
-                async () => {
-                    const filename = 'monoweave.config.mjs'
-                    const contents = `export default ${JSON.stringify(configContents)}`
+            it('supports .mjs extensions', async () => {
+                const filename = 'monoweave.config.mjs'
+                const contents = `export default ${JSON.stringify(configContents)}`
 
-                    const config = await writeConfigFile({ filename, contents })
-                    expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
-                        expect.objectContaining({
-                            changelogFilename: configContents.changelogFilename,
-                        }),
-                    )
-                },
-            )
+                const config = await writeConfigFile({ filename, contents })
+                expect({ ...config, cwd: config.cwd ? '/tmp/cwd' : null }).toEqual(
+                    expect.objectContaining({
+                        changelogFilename: configContents.changelogFilename,
+                    }),
+                )
+            })
 
             it.todo('supports .cts extensions')
             it.todo('supports .mts extensions')
@@ -557,7 +543,7 @@ describe('CLI', () => {
         `
 
             await using tmpDir = await createTempDir()
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
             await fs.writeFile(configFilename, configFileContents, 'utf-8')
             setArgs(
                 `--config-file ${configFilename} --git-base-branch next --jobs 3 --commit-ignore-patterns ignore-me --plugins plugin-a`,
@@ -598,7 +584,7 @@ describe('CLI', () => {
         `
 
             await using tmpDir = await createTempDir()
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
             await fs.writeFile(configFilename, configFileContents, 'utf-8')
             setArgs(
                 `--config-file ${configFilename} --git-base-branch next --jobs 3 --no-prerelease ` +
@@ -629,7 +615,7 @@ describe('CLI', () => {
             const presetFilename = path.resolve(path.join(tmpDir.dir, 'preset.js'))
             await fs.writeFile(presetFilename, presetFileContents, 'utf-8')
 
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
             await fs.writeFile(configFilename, configFileContents, 'utf-8')
             setArgs(`--config-file ${configFilename}`)
             await vi.importActual('../index')
@@ -656,7 +642,7 @@ describe('CLI', () => {
             const presetFilename = path.resolve(path.join(tmpDir.dir, 'preset.js'))
             await fs.writeFile(presetFilename, presetFileContents, 'utf-8')
 
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
             await fs.writeFile(configFilename, configFileContents, 'utf-8')
             setArgs(`--config-file ${configFilename}`)
             await vi.importActual('../index')
@@ -710,9 +696,9 @@ describe('CLI', () => {
             await using tmpDir = await createTempDir()
             const presetFilename = path.resolve(path.join(tmpDir.dir, 'some-preset.js'))
             await fs.writeFile(presetFilename, presetFileContents, 'utf-8')
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
             await fs.writeFile(configFilename, configFileContents, 'utf-8')
-            setArgs(`--config-file ./monoweave.config.js --cwd ${tmpDir.dir}`)
+            setArgs(`--config-file ./monoweave.config.cjs --cwd ${tmpDir.dir}`)
             await vi.importActual('../index')
             expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toMatchSnapshot()
         })
@@ -761,10 +747,10 @@ describe('CLI', () => {
             await using tmpDir = await createTempDir()
             const presetFilename = path.resolve(path.join(tmpDir.dir, 'some-preset.js'))
             await fs.writeFile(presetFilename, presetFileContents, 'utf-8')
-            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+            const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
             await fs.writeFile(configFilename, configFileContents, 'utf-8')
             setArgs(
-                `--config-file ./monoweave.config.js --preset ./some-preset.js --cwd ${tmpDir.dir}`,
+                `--config-file ./monoweave.config.cjs --preset ./some-preset.js --cwd ${tmpDir.dir}`,
             )
             await vi.importActual('../index')
             expect({ ...(await waitForMonoweaveRun()), cwd: '/tmp/cwd' }).toMatchSnapshot()
@@ -819,7 +805,7 @@ describe('CLI', () => {
                 }
             `
 
-                const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.js'))
+                const configFilename = path.resolve(path.join(tmpDir.dir, 'monoweave.config.cjs'))
                 await fs.writeFile(configFilename, configFileContents, 'utf-8')
                 setArgs(`--cwd ${tmpDir.dir}`)
                 await vi.importActual('../index')

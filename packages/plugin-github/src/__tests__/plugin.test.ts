@@ -3,9 +3,9 @@ import { type PluginHooks } from '@monoweave/types'
 import { AsyncSeriesHook } from 'tapable'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import GitHubPlugin, { PluginName } from '..'
-import { createPluginInternals } from '../plugin'
-import * as requestModule from '../request'
+import GitHubPlugin, { PluginName } from '../index.js'
+import { createPluginInternals } from '../plugin.js'
+import * as requestModule from '../request.js'
 
 vi.mock('../request', async () => ({
     ...(await vi.importActual('../request')),

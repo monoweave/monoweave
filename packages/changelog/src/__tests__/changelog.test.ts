@@ -4,7 +4,7 @@ import { createMonorepoContext, getMonoweaveConfig } from '@monoweave/test-utils
 import { type CommitMessage } from '@monoweave/types'
 import { type Mocked, afterEach, describe, expect, it, vi } from 'vitest'
 
-import { generateChangelogEntry } from '../changelog'
+import { generateChangelogEntry } from '../changelog.js'
 
 vi.mock('@monoweave/git', async () => vi.importActual('@monoweave/git/test-mocks'))
 
@@ -173,7 +173,13 @@ describe('Generate Changelog Entry', async () => {
             const config = await getMonoweaveConfig({
                 cwd: context.project.cwd,
                 conventionalChangelogConfig: path.resolve(
-                    path.join(__dirname, '..', '..', 'mocks', 'conventional-config-writer.mock.ts'),
+                    path.join(
+                        __dirname,
+                        '..',
+                        '..',
+                        'mocks',
+                        'conventional-config-writer.mock.mts',
+                    ),
                 ),
             })
 

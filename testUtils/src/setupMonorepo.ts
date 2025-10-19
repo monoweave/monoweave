@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs'
+import { createRequire } from 'node:module'
 import os from 'os'
 import path from 'path'
 
@@ -6,7 +7,9 @@ import { type YarnContext } from '@monoweave/types'
 import { Cache, StreamReport, ThrowReport, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
 
-import { setupContext } from './misc'
+import { setupContext } from './misc.js'
+
+const require = createRequire(import.meta.url)
 
 const { packageManager } = require('../../package.json')
 
@@ -83,6 +86,7 @@ export default async function setupMonorepo(
         }),
         repository: root?.repository,
         packageManager: `yarn@${YARN_VERSION}`,
+        ...(root?.raw?.type && { type: root.raw.type }),
     })
 
     // Generate children workspaces

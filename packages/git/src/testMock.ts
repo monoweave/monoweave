@@ -5,7 +5,7 @@
 
 import type { CommitMessage, MonoweaveConfiguration, YarnContext } from '@monoweave/types'
 
-import { parseRepositoryProperty } from './parseRepositoryProperty'
+import { parseRepositoryProperty } from './parseRepositoryProperty.js'
 
 const registry: {
     commits: CommitMessage[]

@@ -53,15 +53,30 @@ export async function getMonoweaveConfig({
     })
 }
 
-export async function writeConfig({
+export async function writeConfigCJS({
     cwd,
     config,
 }: {
     cwd: string
     config: RecursivePartial<MonoweaveConfiguration>
 }): Promise<string> {
-    const monoweaveConfigFilename = path.resolve(cwd, 'monoweave.config.js')
+    const monoweaveConfigFilename = path.resolve(cwd, 'monoweave.config.cjs')
     const configFile = `module.exports = ${JSON.stringify(config)}`
+    await fs.writeFile(monoweaveConfigFilename, configFile, {
+        encoding: 'utf8',
+    })
+    return monoweaveConfigFilename
+}
+
+export async function writeConfigESM({
+    cwd,
+    config,
+}: {
+    cwd: string
+    config: RecursivePartial<MonoweaveConfiguration>
+}): Promise<string> {
+    const monoweaveConfigFilename = path.resolve(cwd, 'monoweave.config.mjs')
+    const configFile = `export default ${JSON.stringify(config)}`
     await fs.writeFile(monoweaveConfigFilename, configFile, {
         encoding: 'utf8',
     })

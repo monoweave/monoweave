@@ -1,6 +1,7 @@
 {
     "name": "@monoweave/test-utils",
     "private": true,
+    "type": "module",
     "main": "./src/index.ts",
     "devDependencies": {
         "@monoweave/io": "workspace:*",

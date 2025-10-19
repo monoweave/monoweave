@@ -5,7 +5,7 @@ import { npmHttpUtils, npmPublishUtils } from '@yarnpkg/plugin-npm'
 import { packUtils } from '@yarnpkg/plugin-pack'
 import type { LimitFunction } from 'p-limit'
 
-import { getPublishRegistryUrl } from './getPublishConfig'
+import { getPublishRegistryUrl } from './getPublishConfig.js'
 
 export const pack = async ({
     workspace,
