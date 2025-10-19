@@ -19,7 +19,7 @@ export async function createFile({
 }
 
 export async function createTempDir(): Promise<{ dir: string } & AsyncDisposable> {
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'monorepo-'))
+    const dir = await fs.mkdtemp(path.join(await fs.realpath(os.tmpdir()), 'monorepo-'))
     return {
         dir,
         async [Symbol.asyncDispose]() {
