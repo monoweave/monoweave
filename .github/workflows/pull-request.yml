@@ -106,15 +106,11 @@ jobs:
         run: ls -la ./raw-coverage/vitest
       - name: Log Coverage Files (Vitest E2Es)
         run: ls -la ./raw-coverage/vitest-e2es
-      - name: Merge Coverage
-        run: yarn test:coverage:merge
-      - name: Generate Report
-        run: yarn test:coverage:report
       - name: Upload Coverage Report
         uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ${{ env.ARTIFACT_DIR }}
+          directory: ./raw-coverage
 
   tests_compatibility:
     name: Test Compatibility - ${{ matrix.runner }} / Node ${{ matrix.node-version }}

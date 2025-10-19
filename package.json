@@ -41,8 +41,6 @@
         "test": "yarn bin:vitest --project=\"Unit/Integration\" --",
         "test:all": "yarn test:ci && yarn test:e2e && yarn test:coverage:merge && yarn test:coverage:report",
         "test:e2e": "E2E=1 yarn workspace @monoweave/e2e-tests run test",
-        "test:coverage:merge": "cp ./raw-coverage/vitest-e2es/*.json ./raw-coverage/ && cp ./raw-coverage/vitest/*.json ./raw-coverage/ && nyc --nycrc-path nyc.config.js merge ./raw-coverage ${ARTIFACT_DIR:-artifacts}/test-coverage.json",
-        "test:coverage:report": "nyc --nycrc-path nyc.config.js report -t ${ARTIFACT_DIR:-artifacts}/",
         "typecheck": "tsc --noEmit --emitDeclarationOnly false",
         "typecheck:watch": "run typecheck --pretty --watch",
         "workspace:build:watch": "tsc -p $0/tsconfig.build.json --watch",
@@ -98,7 +96,6 @@
         "globals": "^15.14.0",
         "husky": "^9.1.7",
         "lint-staged": "^16.1.2",
-        "nyc": "^17.1.0",
         "prettier": "^3.6.2",
         "tsx": "^4.20.3",
         "typescript": "^5.9.2",
@@ -113,8 +110,5 @@
             "built": false
         }
     },
-    "packageManager": "yarn@4.10.3+sha512.c38cafb5c7bb273f3926d04e55e1d8c9dfa7d9c3ea1f36a4868fa028b9e5f72298f0b7f401ad5eb921749eb012eb1c3bb74bf7503df3ee43fd600d14a018266f",
-    "resolutions": {
-        "istanbul-lib-coverage": "patch:istanbul-lib-coverage@npm%3A3.2.0#./.yarn/patches/istanbul-lib-coverage-npm-3.2.0-93f84b2c8c.patch"
-    }
+    "packageManager": "yarn@4.10.3+sha512.c38cafb5c7bb273f3926d04e55e1d8c9dfa7d9c3ea1f36a4868fa028b9e5f72298f0b7f401ad5eb921749eb012eb1c3bb74bf7503df3ee43fd600d14a018266f"
 }
