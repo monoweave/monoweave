@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { createRequire } from 'node:module'
+
 import {
     type Configuration,
     type Ident,
@@ -6,6 +8,8 @@ import {
     ReportError,
     structUtils,
 } from '@yarnpkg/core'
+
+const require = createRequire(import.meta.url)
 
 const _registry: { tags: Record<string, Record<string, string | string[]>> } = {
     tags: {},

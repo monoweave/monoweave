@@ -1,3 +1,5 @@
+import { createRequire } from 'module'
+
 import {
     type MonoweaveConfigFile,
     type MonoweaveConfiguration,
@@ -5,11 +7,17 @@ import {
     RegistryMode,
 } from '@monoweave/types'
 import { npath, ppath } from '@yarnpkg/fslib'
-import clipanion = require('clipanion')
 import * as t from 'typanion'
 
-import readConfigFile from './config/readConfigFile'
-import { detectIsInCI } from './config/utils'
+import readConfigFile from './config/readConfigFile.js'
+import { detectIsInCI } from './config/utils.js'
+
+const require = createRequire(import.meta.url)
+
+// https://github.com/arcanis/clipanion/issues/178
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+const clipanion = require('clipanion') as typeof import('clipanion')
 
 const { Command, Option } = clipanion
 

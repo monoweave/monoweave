@@ -22,7 +22,7 @@ import {
     vi,
 } from 'vitest'
 
-import monoweave from '..'
+import monoweave from '../index.js'
 
 vi.mock('@monoweave/git', async () => vi.importActual('@monoweave/git/test-mocks'))
 

@@ -1,2 +1,2 @@
-export { default as getDependents } from './getDependents'
-export { default as getTopologicalSort } from './getTopologicalSort'
+export { default as getDependents } from './getDependents.js'
+export { default as getTopologicalSort } from './getTopologicalSort.js'

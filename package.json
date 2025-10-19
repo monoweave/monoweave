@@ -1,6 +1,7 @@
 {
     "name": "@monoweave/monorepo",
     "version": "1.0.0",
+    "type": "module",
     "description": "A small wrapper around yarn berry that makes it easier to use in CI",
     "repository": {
         "type": "git",
@@ -25,7 +26,7 @@
         "./package.json": "./package.json"
     },
     "scripts": {
-        "clean": "rm -rf ${ARTIFACT_DIR:-artifacts} && yarn workspaces foreach -vpi --worktree run clean",
+        "clean": "rm -rf ${ARTIFACT_DIR:-artifacts} .tmp .swc && yarn workspaces foreach -vpi --worktree run clean",
         "build": "yarn workspaces foreach -vpi --worktree --topological-dev run prepack",
         "contrib:add": "all-contributors add",
         "contrib:check": "all-contributors check",

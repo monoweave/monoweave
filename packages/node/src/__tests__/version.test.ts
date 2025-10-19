@@ -23,7 +23,7 @@ import {
     vi,
 } from 'vitest'
 
-import { getPackageCandidatesForManualRelease } from '../version'
+import { getPackageCandidatesForManualRelease } from '../version.js'
 
 vi.mock('@monoweave/git', async () => vi.importActual('@monoweave/git/test-mocks'))
 

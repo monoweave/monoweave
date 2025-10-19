@@ -13,7 +13,7 @@ import { type Workspace, structUtils } from '@yarnpkg/core'
 import { type PortablePath } from '@yarnpkg/fslib'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { prependChangelogFile } from '..'
+import { prependChangelogFile } from '../index.js'
 
 const getWorkspace = (context: YarnContext, name: string): Workspace =>
     context.project.getWorkspaceByIdent(structUtils.parseIdent(name))

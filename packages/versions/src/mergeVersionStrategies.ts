@@ -7,7 +7,7 @@ import {
 } from '@monoweave/types'
 import { structUtils } from '@yarnpkg/core'
 
-import { maxStrategy } from './versionStrategy'
+import { maxStrategy } from './versionStrategy.js'
 
 const mergeVersionStrategies = async ({
     config,

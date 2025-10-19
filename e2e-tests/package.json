@@ -1,5 +1,6 @@
 {
     "name": "@monoweave/e2e-tests",
+    "type": "module",
     "private": true,
     "scripts": {
         "test:registry:build": "docker build -t monoweave-test-registry .",

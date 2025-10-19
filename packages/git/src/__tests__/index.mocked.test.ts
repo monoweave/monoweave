@@ -3,7 +3,7 @@ import { cleanUp, initGitRepository, setupMonorepo } from '@monoweave/test-utils
 import { type YarnContext } from '@monoweave/types'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { gitLastTaggedCommit, gitPushTags, gitTag } from '..'
+import { gitLastTaggedCommit, gitPushTags, gitTag } from '../index.js'
 
 vi.mock('@monoweave/logging')
 

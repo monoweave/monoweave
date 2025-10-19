@@ -1,10 +1,17 @@
+import { createRequire } from 'module'
+
 import { ErrorsReported } from '@monoweave/logging'
 import monoweave from '@monoweave/node'
 import { type MonoweaveConfiguration, type RecursivePartial } from '@monoweave/types'
-import clipanion = require('clipanion')
 import * as t from 'typanion'
 
-import { BaseCommand } from './base'
+import { BaseCommand } from './base.js'
+
+const require = createRequire(import.meta.url)
+
+// https://github.com/arcanis/clipanion/issues/178
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+const clipanion = require('clipanion') as typeof import('clipanion')
 
 const { Option } = clipanion
 

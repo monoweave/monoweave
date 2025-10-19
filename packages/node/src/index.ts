@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { createRequire } from 'module'
 import path from 'path'
 import { Writable } from 'stream'
 
@@ -36,13 +37,13 @@ import { Cache, Configuration, Project, StreamReport, type Workspace } from '@ya
 import { npath } from '@yarnpkg/fslib'
 import { AsyncSeriesHook } from 'tapable'
 
-import { generateChangeset } from './utils/generateChangeset'
-import { getCompatiblePluginConfiguration } from './utils/getCompatiblePluginConfiguration'
-import { getGitTagsFromChangeset } from './utils/getGitTagsFromChangeset'
-import { mergeDefaultConfig } from './utils/mergeDefaultConfig'
-import { writeChangesetFile } from './utils/writeChangesetFile'
+import { generateChangeset } from './utils/generateChangeset.js'
+import { getCompatiblePluginConfiguration } from './utils/getCompatiblePluginConfiguration.js'
+import { getGitTagsFromChangeset } from './utils/getGitTagsFromChangeset.js'
+import { mergeDefaultConfig } from './utils/mergeDefaultConfig.js'
+import { writeChangesetFile } from './utils/writeChangesetFile.js'
 
-export { getPackageCandidatesForManualRelease } from './version'
+export { getPackageCandidatesForManualRelease } from './version.js'
 
 const monoweave = async (
     baseConfig: RecursivePartial<MonoweaveConfiguration>,
@@ -75,15 +76,15 @@ const monoweave = async (
     }
 
     if (config.plugins?.length) {
+        const requireFromCwd = createRequire(
+            npath.join(npath.fromPortablePath(cwd), 'package.json'),
+        )
+
         for (const pluginEntry of config.plugins) {
             const [plugin, pluginOptions] =
                 typeof pluginEntry === 'string' ? [pluginEntry] : pluginEntry
 
-            const pluginModule = require(
-                require.resolve(plugin, {
-                    paths: [npath.fromPortablePath(cwd)],
-                }),
-            )
+            const pluginModule = requireFromCwd(plugin)
             const pluginConstructor = pluginModule?.default ?? pluginModule
             pluginConstructor(hooks, pluginOptions)
         }

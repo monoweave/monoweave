@@ -7,11 +7,12 @@ import setupProject from '#helpers/setupProject'
 
 const require = createRequire(import.meta.url)
 
-describe('General Usage', () => {
-    it.each(['pnp', 'node-modules'] as const)(
-        'runs the full monoweave pipeline for %s linker',
-        async (nodeLinker) => {
+describe('ESM', () => {
+    it.each(['commonjs', 'module'])(
+        'runs the full monoweave pipeline for pnp linker with ESM config in %s project',
+        async (projectType) => {
             await using testContext = await setupProject({
+                esm: true,
                 repository: [
                     {
                         'pkg-1': {},
@@ -23,7 +24,12 @@ describe('General Usage', () => {
                         'pkg-isolated': {},
                     },
                     {
-                        nodeLinker,
+                        nodeLinker: 'pnp',
+                        root: {
+                            raw: {
+                                type: projectType,
+                            },
+                        },
                     },
                 ],
                 config: {
@@ -52,6 +58,10 @@ describe('General Usage', () => {
             })
 
             const { run, readFile, exec, writeFile } = testContext
+
+            // Sanity check: validate ESM config file is present
+            expect(await readFile('monoweave.config.mjs')).toContain('export default ')
+
             // First semantic commit
             await writeFile('packages/pkg-1/README.md', 'Modification.')
             await exec('git add . && git commit -n -m "feat: some fancy addition" && git push')

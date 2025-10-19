@@ -2,7 +2,7 @@ import { Readable } from 'stream'
 
 import { describe, expect, it } from 'vitest'
 
-import { readStream, readStreamString } from '../stream'
+import { readStream, readStreamString } from '../stream.js'
 
 describe('Stream to Chunks', () => {
     it('flushes a stream to an array of chunks', async () => {

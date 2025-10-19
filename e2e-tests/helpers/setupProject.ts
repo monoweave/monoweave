@@ -8,13 +8,14 @@ import {
     cleanUp,
     initGitRepository,
     setupTestRepository,
-    writeConfig,
+    writeConfigCJS,
+    writeConfigESM,
 } from '@monoweave/test-utils'
 import { type MonoweaveConfiguration, type RecursivePartial } from '@monoweave/types'
 import { npath } from '@yarnpkg/fslib'
 
-import { startRegistry, stopRegistry } from './docker'
-import run from './runner'
+import { startRegistry, stopRegistry } from './docker.js'
+import run from './runner.js'
 
 const registryUrl = 'http://localhost:4873'
 
@@ -39,11 +40,11 @@ interface TestContext {
 
 export async function writeConfigWithLocalRegistry(
     config: RecursivePartial<MonoweaveConfiguration>,
-    { cwd }: { cwd: string },
+    { cwd, esm = false }: { cwd: string; esm?: boolean },
 ): Promise<string> {
     return path.relative(
         cwd,
-        await writeConfig({
+        await (esm ? writeConfigESM : writeConfigCJS)({
             cwd,
             config: {
                 registryUrl,
@@ -100,9 +101,11 @@ export function createSetupProjectContext({
 export default async function setupProject({
     repository,
     config,
+    esm = false,
 }: {
     repository: Parameters<typeof setupTestRepository>
     config: RecursivePartial<MonoweaveConfiguration>
+    esm?: boolean
 }): Promise<TestContext & AsyncDisposable> {
     await startRegistry()
 
@@ -117,7 +120,7 @@ export default async function setupProject({
     await initGitRepository(npath.toPortablePath(remotePath))
     await addGitRemote(project, remotePath, 'origin')
 
-    const configFilename = await writeConfigWithLocalRegistry(config, { cwd: project })
+    const configFilename = await writeConfigWithLocalRegistry(config, { cwd: project, esm })
 
     // initial commit
     await exec('git pull --rebase --no-verify origin main', {

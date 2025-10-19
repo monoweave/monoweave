@@ -1,7 +1,7 @@
 import { type MessageName, ThrowReport } from '@yarnpkg/core'
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import logging, { LOG_LEVELS } from '..'
+import logging, { LOG_LEVELS } from '../index.js'
 
 class CollectReport extends ThrowReport {
     reportInfo(name: MessageName | null, text: string) {

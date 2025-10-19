@@ -7,7 +7,7 @@ import { npath, ppath } from '@yarnpkg/fslib'
 import * as npm from '@yarnpkg/plugin-npm'
 import { type Mocked, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { getLatestPackageTags } from '..'
+import { getLatestPackageTags } from '../index.js'
 
 vi.mock('@monoweave/git', async () => vi.importActual('@monoweave/git/test-mocks'))
 

@@ -2,7 +2,7 @@ import { createMonorepoContext } from '@monoweave/test-utils'
 import { structUtils } from '@yarnpkg/core'
 import { describe, expect, it } from 'vitest'
 
-import { parseRepositoryProperty } from '../parseRepositoryProperty'
+import { parseRepositoryProperty } from '../parseRepositoryProperty.js'
 
 describe('parseRepositoryProperty', () => {
     it('parses github repository from manifest url as string', async () => {

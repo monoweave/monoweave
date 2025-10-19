@@ -5,4 +5,4 @@ const ConfigRecommended: MonoweaveConfigFile = {
     conventionalChangelogConfig: false,
 }
 
-export = ConfigRecommended
+export default ConfigRecommended

@@ -1,4 +1,8 @@
+import { createRequire } from 'node:module'
+
 import { type TestProjectInlineConfiguration, defineConfig } from 'vitest/config'
+
+const require = createRequire(import.meta.url)
 
 const CI = Boolean(process.env.CI)
 const ARTIFACT_DIR = process.env.ARTIFACT_DIR || 'artifacts'

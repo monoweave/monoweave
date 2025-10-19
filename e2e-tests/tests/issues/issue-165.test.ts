@@ -1,3 +1,4 @@
+import { createRequire } from 'node:module'
 import path from 'node:path'
 
 import { exec } from '@monoweave/io'
@@ -14,6 +15,8 @@ import { describe, expect, it } from 'vitest'
 
 import { startRegistry } from '#helpers/docker'
 import { createSetupProjectContext, writeConfigWithLocalRegistry } from '#helpers/setupProject'
+
+const require = createRequire(import.meta.url)
 
 // https://github.com/monoweave/monoweave/issues/165
 describe('Issue #165', () => {

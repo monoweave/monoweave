@@ -2,7 +2,7 @@ import { cleanUp, setupContext, setupTestRepository } from '@monoweave/test-util
 import { type PortablePath, npath } from '@yarnpkg/fslib'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
-import { getWorkspacesToPublish } from '..'
+import { getWorkspacesToPublish } from '../index.js'
 
 describe('getWorspacesToPublish', () => {
     let workspacePath: PortablePath
