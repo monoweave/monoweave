@@ -67,7 +67,8 @@ export default async function setupMonorepo(
         cwd?: string
     } = {},
 ): Promise<YarnContext> {
-    const workingDir = cwd ?? (await fs.mkdtemp(path.join(os.tmpdir(), 'monorepo-')))
+    const tmpDir = await fs.realpath(os.tmpdir()) // tmpdir is a symlink on MacOS
+    const workingDir = cwd ?? (await fs.mkdtemp(path.join(tmpDir, 'monorepo-')))
 
     // Generate root package.json
     await writeJSON(path.join(workingDir, 'package.json'), {

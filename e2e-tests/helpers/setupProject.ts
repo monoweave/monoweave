@@ -113,7 +113,7 @@ export default async function setupProject({
     project = await setupTestRepository(...repository)
 
     // remote to push tags/artifacts to
-    remotePath = await fs.mkdtemp(path.join(os.tmpdir(), 'monorepo-'))
+    remotePath = await fs.mkdtemp(path.join(await fs.realpath(os.tmpdir()), 'monorepo-'))
     await initGitRepository(npath.toPortablePath(remotePath))
     await addGitRemote(project, remotePath, 'origin')
 
