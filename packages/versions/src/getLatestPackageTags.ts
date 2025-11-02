@@ -94,6 +94,9 @@ const getLatestPackageTags = async ({
                     ident,
                     registry: registryUrl,
                     jsonResponse: true,
+                    allowOidc: Boolean(
+                        process.env.CI && (process.env.GITHUB_ACTIONS || process.env.GITLAB),
+                    ),
                 }),
             )
 
