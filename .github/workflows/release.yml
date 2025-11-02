@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn run-local \
-            --preset monoweave/preset-manual \
+            --preset monoweave/preset-recommended \
             --log-level 0 \
             --prerelease \
             --package-group-manifest-field group
@@ -59,7 +59,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn run-local \
-            --preset monoweave/preset-manual \
+            --preset monoweave/preset-recommended \
             --log-level 0 \
             --auto-commit-message "chore: release monoweave [skip ci]" \
             --plugins "@monoweave/plugin-github" \
