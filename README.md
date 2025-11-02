@@ -6,7 +6,7 @@
 ![node-current](https://img.shields.io/node/v/@monoweave/cli)
 [![npm](https://img.shields.io/npm/v/@monoweave/cli.svg)](https://www.npmjs.com/package/@monoweave/cli)
 [![npm downloads](https://img.shields.io/npm/dm/@monoweave/cli.svg)](https://npm-stat.com/charts.html?package=@monoweave/cli)
-![Discord](https://img.shields.io/discord/1253743105249902744)
+![Discord](https://discord.gg/Pjt46S85dw)
 
 Monoweave is a tool for managing the versioning and publishing lifecycle of a Yarn-based monorepo.
 
