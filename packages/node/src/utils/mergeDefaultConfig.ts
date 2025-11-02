@@ -30,7 +30,7 @@ export const mergeDefaultConfig = async (
         access: baseConfig.access ?? 'infer',
         persistVersions: baseConfig.persistVersions ?? true,
         autoCommit: baseConfig.autoCommit ?? true,
-        autoCommitMessage: baseConfig.autoCommitMessage ?? 'chore: release [skip ci]',
+        autoCommitMessage: baseConfig.autoCommitMessage ?? 'chore: release packages [skip ci]',
         commitIgnorePatterns: baseConfig.commitIgnorePatterns ?? undefined,
         topological: baseConfig.topological ?? true,
         topologicalDev: baseConfig.topologicalDev ?? false,
