@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: ./.github/actions/setup-env
       - name: Validate Constraints
         run: yarn constraints
@@ -34,7 +34,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [prepare]
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: ./.github/actions/setup-env
       - name: Typecheck
         run: yarn typecheck
@@ -45,7 +45,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [prepare]
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: ./.github/actions/setup-env
       - name: Build
         run: yarn build
@@ -54,7 +54,7 @@ jobs:
       - name: Tests
         run: yarn test:ci
       - name: Upload Artifacts
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: coverage-unit-tests
           path: ./raw-coverage/vitest
@@ -70,7 +70,7 @@ jobs:
         node-version: ['lts/jod', 'current']
     continue-on-error: ${{ matrix.node-version == 'current' }}
     steps:
-        - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         - uses: ./.github/actions/setup-env
           with:
             cache-prefix: ${{ matrix.runner }}
@@ -78,7 +78,7 @@ jobs:
         - name: Run Tests
           run: yarn test:e2e
         - name: Upload Artifacts
-          uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+          uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
           if: matrix.runner == 'ubuntu-latest' && matrix.node-version == 'lts/jod'
           with:
             name: coverage-e2e-tests
@@ -90,15 +90,15 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [tests_e2es, tests, prepare]
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: ./.github/actions/setup-env
       - name: Download Unit Test Coverage
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: coverage-unit-tests
           path: ./raw-coverage/vitest
       - name: Download E2E Coverage
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: coverage-e2e-tests
           path: ./raw-coverage/vitest-e2es
@@ -107,7 +107,7 @@ jobs:
       - name: Log Coverage Files (Vitest E2Es)
         run: ls -la ./raw-coverage/vitest-e2es
       - name: Upload Coverage Report
-        uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./raw-coverage
@@ -123,7 +123,7 @@ jobs:
         node-version: ['24.5.0']
       fail-fast: false
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: ./.github/actions/setup-env
         id: setup
         with:
@@ -137,7 +137,7 @@ jobs:
         run: yarn test:ci
       - name: Upload Artifacts
         if: failure()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: report-artifacts-${{ matrix.runner }}-${{ steps.setup.outputs.node-version }}
           path: ${{ env.ARTIFACT_DIR }}
@@ -148,7 +148,7 @@ jobs:
     needs: [prepare, test_report]
     if: "github.event_name == 'pull_request' && !contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
@@ -166,7 +166,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [prepare, test_report]
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
