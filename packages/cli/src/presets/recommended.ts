@@ -5,9 +5,14 @@ const ConfigRecommended: MonoweaveConfigFile = {
     changesetIgnorePatterns: [
         // Common conventions for test files
         '**/__tests__',
+        '**/__test__',
         '**/*.test.*',
+        '**/*.spec.*',
         // vitest snapshots
         '**/*.snap',
+        // READMEs
+        '**/*.md',
+        '**/*.mdx',
     ],
     changelogFilename: '<packageDir>/CHANGELOG.md',
 }

@@ -89,13 +89,8 @@ async function loadPresetConfig(presetPath: string | null, cwd: PortablePath) {
     if (presetPath) {
         if (presetPath.startsWith('monoweave/')) {
             const presetName = presetPath.split('/')[1]
-            switch (presetName) {
-                case 'preset-recommended':
-                case 'preset-legacy':
-                case 'preset-manual':
-                    return await loadFile(`@monoweave/cli/${presetName}`)
-                default:
-                    break
+            if (presetName.startsWith('preset-')) {
+                return await loadFile(`@monoweave/cli/${presetName}`)
             }
         }
         return await loadFile(await resolvePath(presetPath, cwd))

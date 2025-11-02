@@ -771,7 +771,7 @@ describe('CLI', () => {
             )
         })
 
-        it.each(['recommended', 'legacy', 'manual'])(
+        it.each(['recommended', 'no-artifacts', 'manual'])(
             'reads built-in presets: %s',
             async (preset) => {
                 await using tmpDir = await createTempDir()
