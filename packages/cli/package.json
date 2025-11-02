@@ -68,7 +68,7 @@
     "clipanion": "^4.0.0-rc.4",
     "json5": "^2.2.3",
     "typanion": "^3.14.0",
-    "yaml": "^2.7.0"
+    "yaml": "^2.8.1"
   },
   "engines": {
     "node": ">=v18"
