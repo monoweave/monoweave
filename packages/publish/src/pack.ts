@@ -69,6 +69,9 @@ export const pack = async ({
                     configuration: context.project.configuration,
                     ident,
                     registry: registryUrl,
+                    allowOidc: Boolean(
+                        process.env.CI && (process.env.GITHUB_ACTIONS || process.env.GITLAB),
+                    ),
                 }),
             )
         }
