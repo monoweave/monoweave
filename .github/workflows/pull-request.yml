@@ -158,7 +158,7 @@ jobs:
         uses: monoweave/github-action-preview@main
         with:
           token: ${{ github.token }}
-          monoweave-command: yarn run-local
+          monoweave-command: yarn run-local --preset monoweave/preset-recommended
 
   website:
     name: Website
