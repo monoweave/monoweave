@@ -230,7 +230,7 @@ export interface MonoweaveConfiguration {
      * Whether to run the lifecycle scripts of the packages to publish in topological order,
      * based on dependencies and peerDependencies. This excludes devDependencies from the graph.
      *
-     * @default false
+     * @default true
      */
     topological: boolean
 

@@ -32,7 +32,7 @@ export const mergeDefaultConfig = async (
         autoCommit: baseConfig.autoCommit ?? true,
         autoCommitMessage: baseConfig.autoCommitMessage ?? 'chore: release [skip ci]',
         commitIgnorePatterns: baseConfig.commitIgnorePatterns ?? undefined,
-        topological: baseConfig.topological ?? false,
+        topological: baseConfig.topological ?? true,
         topologicalDev: baseConfig.topologicalDev ?? false,
         jobs: baseConfig.jobs ?? availableParallelism(),
         maxConcurrentReads: baseConfig.maxConcurrentReads ?? 0,
