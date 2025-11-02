@@ -1,7 +1,11 @@
-import { describe, expect, it } from '@jest/globals'
-import { RegistryMode } from '@monoweave/types'
+import { createRequire } from 'module'
 
-import setupProject from 'helpers/setupProject'
+import { RegistryMode } from '@monoweave/types'
+import { describe, expect, it } from 'vitest'
+
+import setupProject from '#helpers/setupProject'
+
+const require = createRequire(import.meta.url)
 
 describe('General Usage', () => {
     it.each(['pnp', 'node-modules'] as const)(

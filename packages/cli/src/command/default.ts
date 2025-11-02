@@ -1,10 +1,19 @@
+import { createRequire } from 'module'
+
 import { ErrorsReported } from '@monoweave/logging'
 import monoweave from '@monoweave/node'
 import { type MonoweaveConfiguration, type RecursivePartial } from '@monoweave/types'
-import { Option } from 'clipanion'
 import * as t from 'typanion'
 
-import { BaseCommand } from './base'
+import { BaseCommand } from './base.js'
+
+const require = createRequire(import.meta.url)
+
+// https://github.com/arcanis/clipanion/issues/178
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+const clipanion = require('clipanion') as typeof import('clipanion')
+
+const { Option } = clipanion
 
 export class MonoweaveCommand extends BaseCommand {
     changesetFilename = Option.String('--changeset-filename', {
@@ -69,6 +78,7 @@ export class MonoweaveCommand extends BaseCommand {
             await monoweave(config)
             return 0
         } catch (err) {
+            console.error(err) // TODO: REMOVE THIS
             if (err instanceof ErrorsReported) {
                 // We've already reported the error, return.
                 return 1

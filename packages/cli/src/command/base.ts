@@ -1,3 +1,5 @@
+import { createRequire } from 'module'
+
 import {
     type MonoweaveConfigFile,
     type MonoweaveConfiguration,
@@ -5,11 +7,19 @@ import {
     RegistryMode,
 } from '@monoweave/types'
 import { npath, ppath } from '@yarnpkg/fslib'
-import { Command, Option } from 'clipanion'
 import * as t from 'typanion'
 
-import readConfigFile from './config/readConfigFile'
-import { detectIsInCI } from './config/utils'
+import readConfigFile from './config/readConfigFile.js'
+import { detectIsInCI } from './config/utils.js'
+
+const require = createRequire(import.meta.url)
+
+// https://github.com/arcanis/clipanion/issues/178
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+const clipanion = require('clipanion') as typeof import('clipanion')
+
+const { Command, Option } = clipanion
 
 export abstract class BaseCommand extends Command {
     preset = Option.String('--preset', {
@@ -70,7 +80,7 @@ export abstract class BaseCommand extends Command {
         description: 'Conventional changelog configuration to use to determine version strategies',
     })
 
-    topological = Option.Boolean('--topological', {
+    topological = Option.Boolean('--topological', true, {
         description: 'Whether to prepare workspaces in topological order',
     })
 

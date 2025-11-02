@@ -16,13 +16,13 @@ For a full list of CLI arguments, run:
 yarn monoweave --help
 ```
 
-To fine-tune monoweave, create a `monoweave.config.js` file and invoke monoweave via:
+To fine-tune monoweave, create a `monoweave.config.mjs` file and invoke monoweave via:
 
 ```bash
-yarn monoweave --config-file monoweave.config.js
+yarn monoweave --config-file monoweave.config.mjs
 ```
 
-Monoweave natively supports: `.js`, `.json`, `.jsonc`, `.json5`, `.yml`, and `.yaml` file extensions. If no configuration file is specified, monoweave will look for the files in no particular order so make sure you don't have duplicate configuration files.
+Monoweave natively supports: `.js`, `.mjs`, `.cjs`, `.json`, `.jsonc`, `.json5`, `.yml`, and `.yaml` file extensions. If no configuration file is specified, monoweave will look for the files in no particular order so make sure you don't have duplicate configuration files.
 
 You can use a preset configuration as a basis for your monoweave config, and add either additional config options or CLI flags to extend the preset. For example:
 
@@ -50,7 +50,7 @@ If you omit a property, a reasonable default will be used. Note that setting a p
 
 ```js
 /** @type {import('@monoweave/types').MonoweaveConfigFile} */
-module.exports = {
+export default {
     preset: 'monoweave/preset-recommended',
 
     // Aggregates changelog entries to a single file instead of the "recommended"
@@ -59,7 +59,11 @@ module.exports = {
 }
 ```
 
-#### monoweave/preset-legacy
+### monoweave/preset-manual
+
+Similar to `@monoweave/preset-recommended` except that parsing of commit messages for determining the next version is disabled. Instead, monoweave exclusively determines the version from `.monoweave` version files.
+
+#### monoweave/preset-no-artifacts (formerly `preset-legacy`)
 
 This is the old behaviour if coming from the predecessor of monoeave: monodeploy.
 

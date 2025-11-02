@@ -1,4 +1,7 @@
+import { createRequire } from 'node:module'
+
 import type { MonoweaveConfiguration } from '@monoweave/types'
+import { npath } from '@yarnpkg/fslib'
 import type { Options as ConventionalCommitsWriterOptions } from 'conventional-changelog-writer'
 import type {
     Commit,
@@ -41,12 +44,8 @@ const resolveConventionalConfig = async ({
 
     const conventionalConfig = coerceConventionalConfig(conventionalChangelogConfig)
 
-    // ghost-imports-ignore-next-line
-    const conventionalConfigModule = require(
-        require.resolve(conventionalConfig.name, {
-            paths: [config.cwd],
-        }),
-    )
+    const nCwd = npath.join(npath.fromPortablePath(config.cwd), 'package.json')
+    const conventionalConfigModule = createRequire(nCwd)(conventionalConfig.name)
 
     return await (typeof conventionalConfigModule === 'function'
         ? conventionalConfigModule(conventionalConfig)

@@ -1,8 +1,10 @@
 import type { MonoweaveConfigFile } from '@monoweave/types'
 
-const ConfigRecommended: MonoweaveConfigFile = {
-    changelogFilename: '<packageDir>/CHANGELOG.md',
+import ConfigRecommended from '@monoweave/cli/preset-recommended'
+
+const ConfigManual: MonoweaveConfigFile = {
+    ...ConfigRecommended,
     conventionalChangelogConfig: false,
 }
 
-export = ConfigRecommended
+export default ConfigManual

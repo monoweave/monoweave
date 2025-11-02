@@ -5,11 +5,16 @@ const ConfigRecommended: MonoweaveConfigFile = {
     changesetIgnorePatterns: [
         // Common conventions for test files
         '**/__tests__',
+        '**/__test__',
         '**/*.test.*',
-        // Jest snapshots
+        '**/*.spec.*',
+        // vitest snapshots
         '**/*.snap',
+        // READMEs
+        '**/*.md',
+        '**/*.mdx',
     ],
     changelogFilename: '<packageDir>/CHANGELOG.md',
 }
 
-export = ConfigRecommended
+export default ConfigRecommended

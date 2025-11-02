@@ -1,8 +1,11 @@
-import { describe, expect, it } from '@jest/globals'
+import { createRequire } from 'module'
+
 import { RegistryMode } from '@monoweave/types'
+import { describe, expect, it } from 'vitest'
 
-import setupProject from 'helpers/setupProject'
+import setupProject from '#helpers/setupProject'
 
+const require = createRequire(import.meta.url)
 describe('Prerelease', () => {
     it('runs the full monoweave pipeline', async () => {
         await using testContext = await setupProject({

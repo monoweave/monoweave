@@ -1,13 +1,13 @@
-import applyVersionStrategies from './applyVersionStrategies'
-import getExplicitVersionStrategies from './explicit/getExplicitVersionStrategies'
+import applyVersionStrategies from './applyVersionStrategies.js'
+import getExplicitVersionStrategies from './explicit/getExplicitVersionStrategies.js'
 import {
     parseDeferredVersionFile,
     writeDeferredVersionFile,
-} from './explicit/getManualVersionStrategies'
-import { getModifiedPackages } from './explicit/getModifiedPackages'
-import getImplicitVersionStrategies from './getImplicitVersionStrategies'
-import getLatestPackageTags from './getLatestPackageTags'
-import mergeVersionStrategies from './mergeVersionStrategies'
+} from './explicit/getManualVersionStrategies.js'
+import { getModifiedPackages } from './explicit/getModifiedPackages.js'
+import getImplicitVersionStrategies from './getImplicitVersionStrategies.js'
+import getLatestPackageTags from './getLatestPackageTags.js'
+import mergeVersionStrategies from './mergeVersionStrategies.js'
 
 export {
     applyVersionStrategies,

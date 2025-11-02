@@ -7,34 +7,36 @@ import { type PortablePath, npath, ppath } from '@yarnpkg/fslib'
 import JSON5 from 'json5'
 import YAML from 'yaml'
 
-import validateConfigFile from './validateConfigFile'
+import validateConfigFile from './validateConfigFile.js'
 
 class ResolveFailure extends Error {}
 
 const DEFAULT_CONFIG_BASENAME = 'monoweave.config'
 
+const JSON_EXT = new Set<string>(['.json', '.jsonc', '.json5'])
+const YAML_EXT = new Set<string>(['.yml', '.yaml'])
+
 async function loadFile(filename: string): Promise<unknown> {
     const ext = path.extname(filename)
-    if (ext === '.mjs' || ext === '.cjs') {
-        const mod = await import(filename)
-        if ('default' in mod && mod.default) {
-            return mod.default
-        }
-        return mod
-    }
-    if (!ext || ext === '.js' || ext === '.ts') {
-        return require(filename)
-    }
 
-    const contents = await fs.promises.readFile(filename, { encoding: 'utf-8' })
-    if (ext === '.json' || ext === '.jsonc' || ext === '.json5') {
+    if (JSON_EXT.has(ext)) {
+        const contents = await fs.promises.readFile(filename, { encoding: 'utf-8' })
         return await JSON5.parse(contents)
     }
-    if (ext === '.yml' || ext === '.yaml') {
+    if (YAML_EXT.has(ext)) {
+        const contents = await fs.promises.readFile(filename, { encoding: 'utf-8' })
         return await YAML.parse(contents, { strict: false })
     }
 
-    throw new Error(`Invalid file extension '${ext}' for monoweave configuration file.`)
+    if (typeof require !== 'undefined' && (ext === '.cjs' || ext === '.cts')) {
+        return require(filename)
+    }
+
+    const mod = await import(filename)
+    if ('default' in mod && mod.default) {
+        return mod.default
+    }
+    return mod
 }
 
 async function resolvePath(name: string, cwd: PortablePath): Promise<string> {
@@ -86,15 +88,9 @@ function merge(base: any, overrides: any) {
 async function loadPresetConfig(presetPath: string | null, cwd: PortablePath) {
     if (presetPath) {
         if (presetPath.startsWith('monoweave/')) {
-            switch (presetPath.split('/')[1]) {
-                case 'preset-recommended':
-                    return await loadFile('../../presets/recommended')
-                case 'preset-legacy':
-                    return await loadFile('../../presets/legacy')
-                case 'preset-manual':
-                    return await loadFile('../../presets/manual')
-                default:
-                    break
+            const presetName = presetPath.split('/')[1]
+            if (presetName.startsWith('preset-')) {
+                return await loadFile(`@monoweave/cli/${presetName}`)
             }
         }
         return await loadFile(await resolvePath(presetPath, cwd))

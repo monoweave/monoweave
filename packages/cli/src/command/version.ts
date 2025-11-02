@@ -1,14 +1,22 @@
+import { createRequire } from 'node:module'
 import path from 'path'
 
 import { ErrorsReported } from '@monoweave/logging'
 import { getPackageCandidatesForManualRelease } from '@monoweave/node'
 import { type DeferredVersionRecord, type PackageStrategyType } from '@monoweave/types'
 import { writeDeferredVersionFile } from '@monoweave/versions'
-import { Option } from 'clipanion'
 import * as t from 'typanion'
 
-import { BaseCommand } from './base'
-import { detectIsInCI } from './config/utils'
+import { BaseCommand } from './base.js'
+import { detectIsInCI } from './config/utils.js'
+
+const require = createRequire(import.meta.url)
+
+// https://github.com/arcanis/clipanion/issues/178
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+const clipanion = require('clipanion') as typeof import('clipanion')
+
+const { Option } = clipanion
 
 const promptPackage = async ({
     pkgName,

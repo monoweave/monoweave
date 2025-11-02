@@ -10,7 +10,7 @@ import {
 import logging from '@monoweave/logging'
 import { type MonoweaveConfiguration, type YarnContext } from '@monoweave/types'
 
-import createReleaseGitTags from './createReleaseGitTags'
+import createReleaseGitTags from './createReleaseGitTags.js'
 
 export const createPublishCommit = async ({
     config,

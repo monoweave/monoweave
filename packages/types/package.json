@@ -1,6 +1,7 @@
 {
   "name": "@monoweave/types",
   "version": "1.20.0",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/monoweave/monoweave.git",
@@ -44,16 +45,16 @@
   },
   "dependencies": {
     "@yarnpkg/core": "^4.4.4",
-    "tapable": "^2.2.1"
+    "tapable": "^2.3.0"
   },
   "peerDependencies": {
     "@yarnpkg/core": "^4.4.4"
   },
   "devDependencies": {
-    "@jest/globals": "^30.0.0-alpha.6",
-    "@types/node": "^22.10.5",
-    "tsx": "^4.20.3",
-    "typedoc": "^0.28.13",
-    "typescript": "^5.9.2"
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.6",
+    "typedoc": "^0.28.14",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
   }
 }

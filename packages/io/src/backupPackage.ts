@@ -6,7 +6,7 @@ import logging from '@monoweave/logging'
 import type { MonoweaveConfiguration, YarnContext } from '@monoweave/types'
 import { Report } from '@yarnpkg/core'
 
-import getPackageJsonPaths from './getPackageJsonPaths'
+import getPackageJsonPaths from './getPackageJsonPaths.js'
 
 export const backupPackageJsons = async ({
     config,
@@ -16,7 +16,7 @@ export const backupPackageJsons = async ({
     context: YarnContext
 }): Promise<string> => {
     const packageJsonPaths = await getPackageJsonPaths(config, context)
-    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'package-jsons-'))
+    const tmpDir = await fs.mkdtemp(path.join(await fs.realpath(os.tmpdir()), 'package-jsons-'))
     await fs.chmod(tmpDir, 0o744) /* rwx-r-r */
 
     logging.debug(`[Savepoint] Saving working tree (key: ${tmpDir})`, { report: context.report })

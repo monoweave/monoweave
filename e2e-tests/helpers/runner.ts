@@ -1,7 +1,11 @@
+import fs from 'fs'
+import { createRequire } from 'module'
 import path from 'path'
 
 import { type ExecException, exec } from '@monoweave/io'
 import { isNodeError } from '@monoweave/types'
+
+const require = createRequire(import.meta.url)
 
 const scriptPath = require.resolve('@monoweave/cli')
 
@@ -10,30 +14,25 @@ export default async function run({ cwd, args = '' }: { cwd: string; args: strin
     stderr: string | undefined
     error?: ExecException | Error
 }> {
-    const nycBin = require.resolve('nyc/bin/nyc', {
-        paths: [process.cwd()],
-    })
-    const nycConfig = require.resolve('./nyc.config.js', {
-        paths: [process.cwd()],
-    })
     const tsx = require.resolve('tsx', {
         paths: [process.cwd()],
     })
 
     const tsconfig = path.join(process.cwd(), 'tsconfig.json')
 
+    const coverageDir = path.resolve(process.cwd(), 'raw-coverage/vitest-e2es')
+    await fs.promises.mkdir(coverageDir, { recursive: true })
+
     try {
-        const { stdout, stderr } = await exec(
-            `node ${nycBin} --nycrc-path ${nycConfig} --cwd ${process.cwd()} node --import ${tsx} ${scriptPath} ${args}`,
-            {
-                cwd,
-                env: {
-                    ...process.env,
-                    TSX_TSCONFIG_PATH: tsconfig,
-                    NODE_ENV: 'production',
-                },
+        const { stdout, stderr } = await exec(`node --import ${tsx} ${scriptPath} ${args}`, {
+            cwd,
+            env: {
+                ...process.env,
+                TSX_TSCONFIG_PATH: tsconfig,
+                NODE_ENV: 'production',
+                NODE_V8_COVERAGE: coverageDir,
             },
-        )
+        })
         if (process.env.DEBUG?.includes('test:e2e')) {
             if (stdout) console.error(stdout)
             if (stderr) console.error(stderr)
