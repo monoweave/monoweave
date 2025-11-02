@@ -80,7 +80,7 @@ export abstract class BaseCommand extends Command {
         description: 'Conventional changelog configuration to use to determine version strategies',
     })
 
-    topological = Option.Boolean('--topological', {
+    topological = Option.Boolean('--topological', true, {
         description: 'Whether to prepare workspaces in topological order',
     })
 

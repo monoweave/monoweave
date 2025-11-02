@@ -82,7 +82,7 @@ exports[`CLI > CLI Args > passes empty config if no cli flags set 1`] = `
   "prereleaseNPMTag": undefined,
   "registryMode": undefined,
   "registryUrl": undefined,
-  "topological": undefined,
+  "topological": true,
   "topologicalDev": undefined,
   "versionStrategy": {
     "minimumStrategy": undefined,
