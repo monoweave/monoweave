@@ -238,7 +238,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.14.0, @babel/core@npm:^7.20.12, @babel/core@npm:^7.28.4":
+"@babel/core@npm:^7.14.0, @babel/core@npm:^7.20.12, @babel/core@npm:^7.28.5":
   version: 7.28.5
   resolution: "@babel/core@npm:7.28.5"
   dependencies:
@@ -3244,9 +3244,9 @@ __metadata:
     "@monoweave/logging": "workspace:*"
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
-    "@types/conventional-changelog-writer": "npm:^4.0.10"
-    "@types/conventional-commits-parser": "npm:^5.0.1"
-    "@types/node": "npm:^22.18.10"
+    "@types/conventional-changelog-writer": "npm:^4.0.11"
+    "@types/conventional-commits-parser": "npm:^5.0.2"
+    "@types/node": "npm:^22.18.13"
     "@yarnpkg/core": "npm:^4.4.4"
     "@yarnpkg/fslib": "npm:^3.1.3"
     "@yarnpkg/shell": "npm:^4.1.3"
@@ -3279,7 +3279,7 @@ __metadata:
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:^2.0.0"
     "@monoweave/versions": "workspace:^2.0.0"
-    "@types/node": "npm:^22.18.10"
+    "@types/node": "npm:^22.18.13"
     "@yarnpkg/cli": "npm:^4.10.3"
     "@yarnpkg/core": "npm:^4.4.4"
     "@yarnpkg/fslib": "npm:^3.1.3"
@@ -3324,7 +3324,7 @@ __metadata:
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
     "@tophat/conventional-changelog-config": "npm:^1.0.1"
-    "@types/node": "npm:^22.18.10"
+    "@types/node": "npm:^22.18.13"
     "@yarnpkg/core": "npm:^4.4.4"
     "@yarnpkg/fslib": "npm:^3.1.3"
     "@yarnpkg/shell": "npm:^4.1.3"
@@ -3338,7 +3338,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monoweave/gatsby@workspace:gatsby"
   dependencies:
-    "@babel/core": "npm:^7.28.4"
+    "@babel/core": "npm:^7.28.5"
     "@mdx-js/loader": "npm:^2.3.0"
     "@mdx-js/react": "npm:^2.3.0"
     "@types/babel__core": "npm:^7.20.5"
@@ -3384,8 +3384,8 @@ __metadata:
     "@monoweave/logging": "workspace:*"
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
-    "@types/micromatch": "npm:^4.0.9"
-    "@types/node": "npm:^22.18.10"
+    "@types/micromatch": "npm:^4.0.10"
+    "@types/node": "npm:^22.18.13"
     "@yarnpkg/core": "npm:^4.4.4"
     "@yarnpkg/fslib": "npm:^3.1.3"
     "@yarnpkg/shell": "npm:^4.1.3"
@@ -3408,7 +3408,7 @@ __metadata:
     "@monoweave/logging": "workspace:*"
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
-    "@types/node": "npm:^22.18.10"
+    "@types/node": "npm:^22.18.13"
     "@types/semver": "npm:^7.7.1"
     "@yarnpkg/core": "npm:^4.4.4"
     "@yarnpkg/fslib": "npm:^3.1.3"
@@ -3428,7 +3428,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monoweave/logging@workspace:packages/logging"
   dependencies:
-    "@types/node": "npm:^22.18.10"
+    "@types/node": "npm:^22.18.13"
     "@yarnpkg/core": "npm:^4.4.4"
     vitest: "npm:^3.2.4"
   peerDependencies:
@@ -3449,17 +3449,17 @@ __metadata:
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
     "@noahnu/eslint-config": "npm:^3.0.0"
-    "@noahnu/eslint-import-resolver-require": "npm:^1.0.1"
+    "@noahnu/eslint-import-resolver-require": "npm:^1.0.2"
     "@noahnu/yarn-semver-up": "npm:^0.0.3"
-    "@swc/core": "npm:^1.13.20"
+    "@swc/core": "npm:^1.14.0"
     "@tophat/commitlint-config": "npm:^1.0.2"
     "@tophat/conventional-changelog-config": "npm:^1.0.1"
-    "@types/node": "npm:^22.18.10"
-    "@typescript-eslint/eslint-plugin": "npm:^8.46.0"
-    "@typescript-eslint/parser": "npm:^8.46.0"
-    "@typescript-eslint/utils": "npm:^8.46.0"
+    "@types/node": "npm:^22.18.13"
+    "@typescript-eslint/eslint-plugin": "npm:^8.46.2"
+    "@typescript-eslint/parser": "npm:^8.46.2"
+    "@typescript-eslint/utils": "npm:^8.46.2"
     "@vitest/coverage-v8": "npm:^3.2.4"
-    "@vitest/eslint-plugin": "npm:^1.3.17"
+    "@vitest/eslint-plugin": "npm:^1.4.0"
     "@yarnpkg/cli": "npm:^4.10.3"
     "@yarnpkg/core": "npm:^4.4.4"
     "@yarnpkg/fslib": "npm:^3.1.3"
@@ -3506,8 +3506,8 @@ __metadata:
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:^2.0.0"
     "@monoweave/versions": "workspace:^2.0.0"
-    "@types/micromatch": "npm:^4.0.9"
-    "@types/node": "npm:^22.18.10"
+    "@types/micromatch": "npm:^4.0.10"
+    "@types/node": "npm:^22.18.13"
     "@yarnpkg/cli": "npm:^4.10.3"
     "@yarnpkg/core": "npm:^4.4.4"
     "@yarnpkg/fslib": "npm:^3.1.3"
@@ -3531,7 +3531,7 @@ __metadata:
     "@monoweave/types": "workspace:^2.0.0"
     "@octokit/core": "npm:^6.1.6"
     "@octokit/plugin-throttling": "npm:^9.6.1"
-    "@types/node": "npm:^22.18.10"
+    "@types/node": "npm:^22.18.13"
     "@yarnpkg/core": "npm:^4.4.4"
     "@yarnpkg/fslib": "npm:^3.1.3"
     "@yarnpkg/shell": "npm:^4.1.3"
@@ -3580,7 +3580,7 @@ __metadata:
     "@monoweave/io": "workspace:*"
     "@monoweave/node": "workspace:*"
     "@monoweave/types": "workspace:*"
-    "@types/node": "npm:^22.18.10"
+    "@types/node": "npm:^22.18.13"
     "@yarnpkg/cli": "npm:^4.6.0"
     "@yarnpkg/core": "npm:^4.2.0"
     "@yarnpkg/fslib": "npm:^3.1.1"
@@ -3592,7 +3592,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monoweave/types@workspace:packages/types"
   dependencies:
-    "@types/node": "npm:^22.18.10"
+    "@types/node": "npm:^22.18.13"
     "@yarnpkg/core": "npm:^4.4.4"
     tapable: "npm:^2.3.0"
     tsx: "npm:^4.20.6"
@@ -3615,8 +3615,8 @@ __metadata:
     "@monoweave/logging": "workspace:*"
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
-    "@types/conventional-commits-parser": "npm:^5.0.1"
-    "@types/micromatch": "npm:^4.0.9"
+    "@types/conventional-commits-parser": "npm:^5.0.2"
+    "@types/micromatch": "npm:^4.0.10"
     "@types/semver": "npm:^7.7.1"
     "@yarnpkg/cli": "npm:^4.10.3"
     "@yarnpkg/core": "npm:^4.4.4"
@@ -3738,17 +3738,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noahnu/eslint-import-resolver-require@npm:^1.0.0, @noahnu/eslint-import-resolver-require@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@noahnu/eslint-import-resolver-require@npm:1.0.1"
+"@noahnu/eslint-import-resolver-require@npm:^1.0.0, @noahnu/eslint-import-resolver-require@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@noahnu/eslint-import-resolver-require@npm:1.0.2"
   dependencies:
-    debug: "npm:^4.4.0"
+    debug: "npm:^4.4.3"
     eslint-import-resolver-node: "npm:^0.3.9"
   peerDependencies:
-    eslint-plugin-import: ">= 2.31.0"
+    eslint-plugin-import: ">= 2.32.0"
   bin:
     eslint-import-resolver-require: ./lib/bin.js
-  checksum: 10/7246a686e812866f19c2135cbda8b18ae73252f46e2aed788df2f874655658962dbecc18962d443bcab3cdeb7e89fe72a99dab59087bc939247954d8dfa858dd
+  checksum: 10/808de326f75a578cf170c29713e54a5c271948e518066f2ac38612afee1f534002b782400441d4928152ba4dd8e70ba6c535fd1083d04bb96416dca94275e7b0
   languageName: node
   linkType: hard
 
@@ -4937,7 +4937,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.13.20":
+"@swc/core@npm:^1.14.0":
   version: 1.14.0
   resolution: "@swc/core@npm:1.14.0"
   dependencies:
@@ -5190,22 +5190,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/conventional-changelog-writer@npm:^4.0.1, @types/conventional-changelog-writer@npm:^4.0.10":
-  version: 4.0.10
-  resolution: "@types/conventional-changelog-writer@npm:4.0.10"
+"@types/conventional-changelog-writer@npm:^4.0.1, @types/conventional-changelog-writer@npm:^4.0.11":
+  version: 4.0.11
+  resolution: "@types/conventional-changelog-writer@npm:4.0.11"
   dependencies:
     "@types/conventional-commits-parser": "npm:*"
     "@types/node": "npm:*"
-  checksum: 10/a7067d123a27e307c1a7c8ea6593f9f288584ee598fae9b625dedbc44a1d290bc9c30d69682021afe06d963a2aea089daf32e58dc481a7ccb8df55e6886d4951
+  checksum: 10/6035a297c5d216a7e1c62358c29c9ac5ac6ff81bbd7bd38608caecc78febd2a87c22c719c273686f022a20dd5417e387ad35a275e225000c366e1c84e8542887
   languageName: node
   linkType: hard
 
-"@types/conventional-commits-parser@npm:*, @types/conventional-commits-parser@npm:^5.0.0, @types/conventional-commits-parser@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "@types/conventional-commits-parser@npm:5.0.1"
+"@types/conventional-commits-parser@npm:*, @types/conventional-commits-parser@npm:^5.0.0, @types/conventional-commits-parser@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "@types/conventional-commits-parser@npm:5.0.2"
   dependencies:
     "@types/node": "npm:*"
-  checksum: 10/ac98a31ed04c7b45029ef8197ff393904346a2431cb13a914991c402d47289bb41b9f219459464668376095d6ca713c948d6b7692375c353f090dc3e230ff77c
+  checksum: 10/c6f9a47f66dc4f8d0de89ba44f47a1574db010b012c082c43ff1a86856053424e84dd53f59f88ab7cd64b9b20f7ee8957553aba2408768a128a9feb8d0ecfd60
   languageName: node
   linkType: hard
 
@@ -5411,12 +5411,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/micromatch@npm:^4.0.9":
-  version: 4.0.9
-  resolution: "@types/micromatch@npm:4.0.9"
+"@types/micromatch@npm:^4.0.10":
+  version: 4.0.10
+  resolution: "@types/micromatch@npm:4.0.10"
   dependencies:
     "@types/braces": "npm:*"
-  checksum: 10/324f4bcb4a7caa2048bdd650f442d2c24b5bf6bc95e4d63d4741bd234fdcf3cde140217bd477b2c02c7fb0034c7293037fd7b61429ace84e997dd3b4d3b2b2f7
+  checksum: 10/192b53ffb6c74349c91bdc4d8a38de3d240e919a69525c12415f658d9844e413550e6e676f42e3cd787679c200f4250a746044c8d81d0b716eeaefbb60d120c8
   languageName: node
   linkType: hard
 
@@ -5434,7 +5434,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^22.18.10":
+"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^22.18.13":
   version: 22.18.13
   resolution: "@types/node@npm:22.18.13"
   dependencies:
@@ -5661,7 +5661,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^8.46.0":
+"@typescript-eslint/eslint-plugin@npm:^8.46.2":
   version: 8.46.2
   resolution: "@typescript-eslint/eslint-plugin@npm:8.46.2"
   dependencies:
@@ -5715,7 +5715,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^8.46.0":
+"@typescript-eslint/parser@npm:^8.46.2":
   version: 8.46.2
   resolution: "@typescript-eslint/parser@npm:8.46.2"
   dependencies:
@@ -5966,7 +5966,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:8.46.2, @typescript-eslint/utils@npm:^6.0.0 || ^7.0.0 || ^8.0.0, @typescript-eslint/utils@npm:^8.46.0, @typescript-eslint/utils@npm:^8.46.1":
+"@typescript-eslint/utils@npm:8.46.2, @typescript-eslint/utils@npm:^6.0.0 || ^7.0.0 || ^8.0.0, @typescript-eslint/utils@npm:^8.46.1, @typescript-eslint/utils@npm:^8.46.2":
   version: 8.46.2
   resolution: "@typescript-eslint/utils@npm:8.46.2"
   dependencies:
@@ -6189,7 +6189,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/eslint-plugin@npm:^1.3.17":
+"@vitest/eslint-plugin@npm:^1.4.0":
   version: 1.4.0
   resolution: "@vitest/eslint-plugin@npm:1.4.0"
   dependencies:
@@ -9669,7 +9669,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.6, debug@npm:^4.3.7, debug@npm:^4.4.0, debug@npm:^4.4.1":
+"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.6, debug@npm:^4.3.7, debug@npm:^4.4.0, debug@npm:^4.4.1, debug@npm:^4.4.3":
   version: 4.4.3
   resolution: "debug@npm:4.4.3"
   dependencies:
