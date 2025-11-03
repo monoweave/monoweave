@@ -51,7 +51,7 @@
     "@yarnpkg/core": "^4.4.4"
   },
   "devDependencies": {
-    "@types/node": "^22.18.10",
+    "@types/node": "^22.18.13",
     "tsx": "^4.20.6",
     "typedoc": "^0.28.14",
     "typescript": "^5.9.3",

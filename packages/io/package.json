@@ -37,7 +37,7 @@
     "@monoweave/logging": "workspace:*",
     "@monoweave/test-utils": "workspace:*",
     "@monoweave/types": "workspace:*",
-    "@types/node": "^22.18.10",
+    "@types/node": "^22.18.13",
     "@types/semver": "^7.7.1",
     "@yarnpkg/core": "^4.4.4",
     "@yarnpkg/fslib": "^3.1.3",
