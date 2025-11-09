@@ -42,7 +42,7 @@
   "dependencies": {
     "conventional-changelog-writer": "^7.0.1",
     "conventional-commits-parser": "^5.0.0",
-    "p-limit": "^6.2.0"
+    "p-limit": "^7.2.0"
   },
   "devDependencies": {
     "@monoweave/git": "workspace:*",
