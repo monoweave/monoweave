@@ -35,8 +35,8 @@
     "@monoweave/io": "workspace:^2.0.0",
     "@monoweave/logging": "workspace:^2.0.0",
     "@monoweave/types": "workspace:^2.0.0",
-    "@yarnpkg/core": "^4.4.4",
-    "@yarnpkg/fslib": "^3.1.3",
+    "@yarnpkg/core": "^4.5.0",
+    "@yarnpkg/fslib": "^3.1.4",
     "@yarnpkg/shell": "^4.1.3"
   },
   "dependencies": {
@@ -53,8 +53,8 @@
     "@types/conventional-changelog-writer": "^4.0.11",
     "@types/conventional-commits-parser": "^5.0.2",
     "@types/node": "^22.18.13",
-    "@yarnpkg/core": "^4.4.4",
-    "@yarnpkg/fslib": "^3.1.3",
+    "@yarnpkg/core": "^4.5.0",
+    "@yarnpkg/fslib": "^3.1.4",
     "@yarnpkg/shell": "^4.1.3",
     "vitest": "^3.2.4"
   }
