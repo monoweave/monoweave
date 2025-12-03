@@ -1,6 +1,6 @@
 {
   "name": "@monoweave/versions",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "type": "module",
   "repository": {
     "type": "git",
@@ -57,12 +57,12 @@
     "vitest": "^4.0.15"
   },
   "peerDependencies": {
-    "@monoweave/changelog": "workspace:^2.1.0",
-    "@monoweave/dependencies": "workspace:^2.1.0",
-    "@monoweave/git": "workspace:^2.1.0",
-    "@monoweave/io": "workspace:^2.1.0",
-    "@monoweave/logging": "workspace:^2.1.0",
-    "@monoweave/types": "workspace:^2.1.0",
+    "@monoweave/changelog": "workspace:^2.2.0",
+    "@monoweave/dependencies": "workspace:^2.2.0",
+    "@monoweave/git": "workspace:^2.2.0",
+    "@monoweave/io": "workspace:^2.2.0",
+    "@monoweave/logging": "workspace:^2.2.0",
+    "@monoweave/types": "workspace:^2.2.0",
     "@yarnpkg/cli": "^4.12.0",
     "@yarnpkg/core": "^4.5.0",
     "@yarnpkg/fslib": "^3.1.4",
