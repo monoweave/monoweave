@@ -42,7 +42,9 @@ describe('CLI - Version', () => {
         await using temp = await createTempDir()
 
         vi.spyOn(monoweave, 'getPackageCandidatesForManualRelease').mockResolvedValue({
-            packages: new Map([]),
+            packages: new Map<string, { currentVersion: string | undefined; modified: boolean }>(
+                [],
+            ),
             versionFolder: temp.dir,
         })
 

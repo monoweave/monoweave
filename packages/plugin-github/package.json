@@ -33,7 +33,7 @@
     "@monoweave/test-utils": "workspace:*",
     "@types/node": "^22.18.13",
     "tapable": "^2.3.0",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.15"
   },
   "dependencies": {
     "@monoweave/git": "workspace:^2.1.0",
