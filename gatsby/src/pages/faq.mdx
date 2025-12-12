@@ -207,3 +207,13 @@ _If you notice an error or inaccuracy in the above comparison table, please open
 9. Pull Request Previews: Monoweave has a [GitHub Action](https://github.com/monoweave/github-action-preview) for pull request previews. It can be adapted for other CI systems if there's demand.
 10. GitHub Releases: Monoweave implements GitHub releases using the monoweave plugin system. We have some open issues tracking additional functionality for the plugin.
 11. Plugin Support: Monoweave exposes [tappable](https://github.com/webpack/tapable) hooks, this is how the GitHub releases functionality is added. Since Monoweave uses Yarn internally, Yarn plugins can also be used to extend monoweave.
+
+
+### How can I use Monoweave with [NPM's trusted publishing workflow](https://docs.npmjs.com/trusted-publishers)?
+
+Note that NPM's trusted publishing has a few limitations:
+- You must first publish a package before you can enable trusted publishing. To workaround this chicken and egg problem, you can first publish a "dummy" package, for example with a tool such as https://github.com/azu/setup-npm-trusted-publish.
+- Trusted publishing needs to be enabled per package and cannot just be turned on for a npm scope.
+- You can only use a single workflow filename and environment, which means if you're using trusted publishing with private packages, you may have difficulty using the Monoweave Preview github action as that action also needs to fetch dist tags using the trusted workflow and environment.
+
+If you still want to proceed with NPM's trusted publishing, then after creating your initial packages, and enabling trusted publishing in npm, add the `id-token: write` permission to your GitHub Actions workflow and ensure you're not passing in any npm auth tokens in your `.yarnrc.yml` file. Any explicit auth tokens will take precedence over the trusted publishing workflow.
