@@ -40,7 +40,7 @@
     "@monoweave/io": "workspace:^2.2.0",
     "@monoweave/logging": "workspace:^2.2.0",
     "@monoweave/types": "workspace:^2.2.0",
-    "@octokit/core": "^6.1.6",
+    "@octokit/core": "^7.0.6",
     "@octokit/plugin-throttling": "^9.6.1",
     "@yarnpkg/core": "^4.5.0",
     "@yarnpkg/fslib": "^3.1.4",
