@@ -65,7 +65,7 @@
         "@monoweave/plugin-github": "workspace:*",
         "@monoweave/test-utils": "workspace:*",
         "@monoweave/types": "workspace:*",
-        "@noahnu/eslint-config": "^3.0.0",
+        "@noahnu/eslint-config": "^4.0.3",
         "@noahnu/eslint-import-resolver-require": "^1.0.3",
         "@noahnu/yarn-semver-up": "^0.0.5",
         "@swc/core": "^1.15.7",
