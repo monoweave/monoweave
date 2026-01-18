@@ -6,6 +6,6 @@
 export function detectIsInCI() {
     return Boolean(
         'CI' in process.env &&
-            !['', '0', 'false', 'undefined', 'null'].includes((process.env.CI || '').toLowerCase()),
+        !['', '0', 'false', 'undefined', 'null'].includes((process.env.CI || '').toLowerCase()),
     )
 }

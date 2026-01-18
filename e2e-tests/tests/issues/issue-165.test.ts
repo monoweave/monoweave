@@ -49,9 +49,8 @@ describe('Issue #165', () => {
                 dryRun: false,
                 autoCommit: true,
                 autoCommitMessage: 'chore: release',
-                conventionalChangelogConfig: require.resolve(
-                    '@tophat/conventional-changelog-config',
-                ),
+                conventionalChangelogConfig:
+                    require.resolve('@tophat/conventional-changelog-config'),
                 git: {
                     push: true,
                     remote: 'origin',
