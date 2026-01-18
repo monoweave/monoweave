@@ -184,9 +184,7 @@ describe('Monoweave', () => {
         mockNPM._setTag_('pkg-1', '0.0.1')
         mockGit._commitFiles_('sha1', 'feat: some new feature!', ['./packages/pkg-1/README.md'])
 
-        await expect(async () => {
-            await monoweave(monoweaveConfig)
-        }).rejects.toThrow()
+        await expect(monoweave(monoweaveConfig)).rejects.toThrow()
 
         spyPublish.mockRestore()
     })
