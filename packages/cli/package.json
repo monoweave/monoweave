@@ -45,11 +45,11 @@
   },
   "devDependencies": {
     "@monoweave/test-utils": "workspace:*",
-    "@types/node": "^22.18.13",
-    "vitest": "^4.0.15"
+    "@types/node": "^22.19.3",
+    "vitest": "^4.0.16"
   },
   "dependencies": {
-    "@inquirer/prompts": "^7.9.0",
+    "@inquirer/prompts": "^7.10.1",
     "@monoweave/changelog": "workspace:^2.2.0",
     "@monoweave/dependencies": "workspace:^2.2.0",
     "@monoweave/git": "workspace:^2.2.0",
@@ -68,7 +68,7 @@
     "clipanion": "^4.0.0-rc.4",
     "json5": "^2.2.3",
     "typanion": "^3.14.0",
-    "yaml": "^2.8.1"
+    "yaml": "^2.8.2"
   },
   "engines": {
     "node": ">=v18"

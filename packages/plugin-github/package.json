@@ -31,9 +31,9 @@
   },
   "devDependencies": {
     "@monoweave/test-utils": "workspace:*",
-    "@types/node": "^22.18.13",
+    "@types/node": "^22.19.3",
     "tapable": "^2.3.0",
-    "vitest": "^4.0.15"
+    "vitest": "^4.0.16"
   },
   "dependencies": {
     "@monoweave/git": "workspace:^2.2.0",
