@@ -67,7 +67,7 @@
         "@monoweave/types": "workspace:*",
         "@noahnu/eslint-config": "^3.0.0",
         "@noahnu/eslint-import-resolver-require": "^1.0.2",
-        "@noahnu/yarn-semver-up": "^0.0.4",
+        "@noahnu/yarn-semver-up": "^0.0.5",
         "@swc/core": "^1.14.0",
         "@tophat/commitlint-config": "^1.0.2",
         "@tophat/conventional-changelog-config": "^1.0.1",
