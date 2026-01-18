@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - uses: ./.github/actions/setup-env
       - name: Validate Constraints
         run: yarn constraints
@@ -34,7 +34,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [prepare]
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - uses: ./.github/actions/setup-env
       - name: Typecheck
         run: yarn typecheck
@@ -45,7 +45,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [prepare]
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - uses: ./.github/actions/setup-env
       - name: Build
         run: yarn build
@@ -70,7 +70,7 @@ jobs:
         node-version: ['lts/jod', 'current']
     continue-on-error: ${{ matrix.node-version == 'current' }}
     steps:
-        - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         - uses: ./.github/actions/setup-env
           with:
             cache-prefix: ${{ matrix.runner }}
@@ -90,7 +90,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [tests_e2es, tests, prepare]
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - uses: ./.github/actions/setup-env
       - name: Download Unit Test Coverage
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
@@ -123,7 +123,7 @@ jobs:
         node-version: ['24.5.0']
       fail-fast: false
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - uses: ./.github/actions/setup-env
         id: setup
         with:
@@ -148,7 +148,7 @@ jobs:
     needs: [prepare, test_report]
     if: "github.event_name == 'pull_request' && !contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
@@ -166,7 +166,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [prepare, test_report]
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
