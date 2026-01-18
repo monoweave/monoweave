@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
       - uses: ./.github/actions/setup-env
       - name: Validate Constraints
         run: yarn constraints
@@ -34,7 +34,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [prepare]
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
       - uses: ./.github/actions/setup-env
       - name: Typecheck
         run: yarn typecheck
@@ -45,7 +45,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [prepare]
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
       - uses: ./.github/actions/setup-env
       - name: Build
         run: yarn build
@@ -70,7 +70,7 @@ jobs:
         node-version: ['lts/jod', 'current']
     continue-on-error: ${{ matrix.node-version == 'current' }}
     steps:
-        - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         - uses: ./.github/actions/setup-env
           with:
             cache-prefix: ${{ matrix.runner }}
@@ -90,7 +90,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [tests_e2es, tests, prepare]
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
       - uses: ./.github/actions/setup-env
       - name: Download Unit Test Coverage
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
@@ -107,7 +107,7 @@ jobs:
       - name: Log Coverage Files (Vitest E2Es)
         run: ls -la ./raw-coverage/vitest-e2es
       - name: Upload Coverage Report
-        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./raw-coverage
@@ -123,7 +123,7 @@ jobs:
         node-version: ['24.5.0']
       fail-fast: false
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
       - uses: ./.github/actions/setup-env
         id: setup
         with:
@@ -148,7 +148,7 @@ jobs:
     needs: [prepare, test_report]
     if: "github.event_name == 'pull_request' && !contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
@@ -166,7 +166,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: [prepare, test_report]
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
