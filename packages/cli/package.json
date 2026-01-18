@@ -49,7 +49,7 @@
     "vitest": "^4.0.16"
   },
   "dependencies": {
-    "@inquirer/prompts": "^7.10.1",
+    "@inquirer/prompts": "^8.1.0",
     "@monoweave/changelog": "workspace:^2.2.0",
     "@monoweave/dependencies": "workspace:^2.2.0",
     "@monoweave/git": "workspace:^2.2.0",
