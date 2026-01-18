@@ -113,22 +113,22 @@ describe('Monoweave (Dry Run)', () => {
     })
 
     it('throws an error if invoked with invalid cwd', async () => {
-        await expect(async () => {
-            await monoweave({
+        await expect(
+            monoweave({
                 ...monoweaveConfig,
                 cwd: String(undefined),
-            })
-        }).rejects.toThrow(/Invalid cwd/)
+            }),
+        ).rejects.toThrow(/Invalid cwd/)
     })
 
     it('throws an error if invoked in a non-project', async () => {
         await using tmp = await createTempDir()
-        await expect(async () => {
-            await monoweave({
+        await expect(
+            monoweave({
                 ...monoweaveConfig,
                 cwd: tmp.dir,
-            })
-        }).rejects.toThrow(/No project/)
+            }),
+        ).rejects.toThrow(/No project/)
     })
 
     it('does not publish if no changes detected', async () => {

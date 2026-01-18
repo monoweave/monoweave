@@ -155,11 +155,10 @@ describe('getLatestPackageTags', () => {
         })
 
         await expect(
-            async () =>
-                await getLatestPackageTags({
-                    config,
-                    context,
-                }),
+            getLatestPackageTags({
+                config,
+                context,
+            }),
         ).rejects.toEqual(mockError)
 
         mockNPM.npmHttpUtils.get = mockGet
