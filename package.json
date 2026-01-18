@@ -57,7 +57,7 @@
         "update:yarn": "corepack use yarn@^4 && yarn && yarn up \"@yarnpkg/*\" && yarn constraints --fix && yarn dedupe"
     },
     "devDependencies": {
-        "@commitlint/cli": "^19.8.1",
+        "@commitlint/cli": "^20.2.0",
         "@monoweave/cli": "workspace:*",
         "@monoweave/git": "workspace:*",
         "@monoweave/io": "workspace:*",
