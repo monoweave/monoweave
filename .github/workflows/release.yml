@@ -12,6 +12,7 @@ permissions:
   issues: write
   pull-requests: write
   packages: write
+  id-token: write
 
 jobs:
   pre-release-check:
@@ -44,7 +45,6 @@ jobs:
       - name: Publish via Monoweave (Pre-release)
         if: github.ref != 'refs/heads/main'
         env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn run-local \
@@ -55,7 +55,6 @@ jobs:
       - name: Publish via Monoweave
         if: github.ref == 'refs/heads/main'
         env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn run-local \
