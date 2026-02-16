@@ -1,12 +1,13 @@
 #!/bin/bash
 
-if ! command -v nvm &>/dev/null; then
-    echo "Missing nvm.";
-    return;
+if command -v fnm &>/dev/null; then
+    fnm use --corepack-enabled --install-if-missing
+elif command -v nvm &>/dev/null; then
+    . "${NVM_DIR:-~/.nvm}"/nvm.sh;
+    nvm install &>/dev/null;
+else
+    echo "We recommend installing fnm or nvm to ensure you are on the correct version of NodeJS for this project."
 fi
-
-. "${NVM_DIR:-~/.nvm}"/nvm.sh;
-nvm install &>/dev/null;
 
 if [[ ! "$*" == *"--no-corepack"* ]]; then
     npm install -g corepack;
