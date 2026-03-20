@@ -7,6 +7,16 @@ import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest
 
 const scriptPath = path.join(__dirname, '..', 'index.ts')
 
+function aggregatedStdoutFromSpy(spy: { mock: { calls: unknown[][] } }): string {
+    return spy.mock.calls
+        .map(([chunk]) => {
+            if (typeof chunk === 'string') return chunk
+            if (Buffer.isBuffer(chunk)) return chunk.toString('utf8')
+            return ''
+        })
+        .join('')
+}
+
 vi.mock('@monoweave/node', async () => ({
     ...(await vi.importActual('@monoweave/node')),
 }))
@@ -25,6 +35,7 @@ describe('CLI - Version', () => {
     })
 
     afterEach(() => {
+        vi.restoreAllMocks()
         vi.resetModules()
     })
 
@@ -52,11 +63,9 @@ describe('CLI - Version', () => {
         await vi.importActual('../index')
 
         await waitFor(async () => {
-            expect(spyLog).toHaveBeenCalledWith(expect.stringMatching(/No packages detected/))
+            expect(aggregatedStdoutFromSpy(spyLog)).toMatch(/No packages detected/)
         })
-        expect(spyLog).not.toHaveBeenCalledWith(
-            expect.stringMatching(/A version file has been written/),
-        )
+        expect(aggregatedStdoutFromSpy(spyLog)).not.toMatch(/A version file has been written/)
     })
 
     describe('Non-Interactive Mode', () => {
@@ -80,10 +89,11 @@ describe('CLI - Version', () => {
             setArgs('version --no-interactive')
             await vi.importActual('../index')
 
+            // File can appear before the last stdout chunk is observed; aggregate write() args
+            // (string or Buffer, possibly split across calls) and wait for both.
             await waitFor(async () => {
-                expect(spyLog).toHaveBeenCalledWith(
-                    expect.stringMatching(/A version file has been written/),
-                )
+                expect(await fs.promises.readdir(temp.dir)).toHaveLength(1)
+                expect(aggregatedStdoutFromSpy(spyLog)).toMatch(/A version file has been written/)
             })
 
             const versionFiles = await fs.promises.readdir(temp.dir)
@@ -119,9 +129,8 @@ describe('CLI - Version', () => {
             await vi.importActual('../index')
 
             await waitFor(async () => {
-                expect(spyLog).toHaveBeenCalledWith(
-                    expect.stringMatching(/A version file has been written/),
-                )
+                expect(await fs.promises.readdir(temp.dir)).toHaveLength(1)
+                expect(aggregatedStdoutFromSpy(spyLog)).toMatch(/A version file has been written/)
             })
 
             const versionFiles = await fs.promises.readdir(temp.dir)

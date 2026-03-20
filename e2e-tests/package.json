@@ -8,8 +8,8 @@
         "test:registry:start": "docker run -itd -p 4873:4873 --name monoweave-registry monoweave-test-registry",
         "test:registry:stop": "docker stop monoweave-registry && docker container rm monoweave-registry",
         "test:registry": "run test:registry:build && run test:registry:start",
-        "bin:test": "E2E=1 run workspace:test --pool=forks --poolOptions.forks.singleThread=true --no-file-parallelism",
-        "bin:test:debug": "E2E=1 run bin:vitest:debug --pool=forks --poolOptions.forks.singleThread=true --no-file-parallelism --testTimeout=60000000",
+        "bin:test": "E2E=1 run workspace:test",
+        "bin:test:debug": "E2E=1 run bin:vitest:debug",
         "test": "E2E=1 run bin:test --project=E2E -- $(pwd)",
         "test:watch": "E2E=1 run bin:test --watch --project=E2E --"
     },
@@ -24,12 +24,12 @@
         "@monoweave/types": "workspace:*",
         "@tophat/conventional-changelog-config": "^1.0.1",
         "@types/node": "^22.19.3",
-        "@yarnpkg/core": "^4.5.0",
-        "@yarnpkg/fslib": "^3.1.4",
+        "@yarnpkg/core": "^4.6.0",
+        "@yarnpkg/fslib": "^3.1.5",
         "@yarnpkg/shell": "^4.1.3",
         "helpers": "link:./helpers",
         "tsx": "^4.21.0",
-        "vitest": "^3.2.4"
+        "vitest": "^4.1.0"
     },
     "author": {
         "name": "noahnu",

@@ -33,14 +33,14 @@
   "peerDependencies": {
     "@monoweave/logging": "workspace:^2.2.0",
     "@monoweave/types": "workspace:^2.2.0",
-    "@yarnpkg/core": "^4.5.0"
+    "@yarnpkg/core": "^4.6.0"
   },
   "devDependencies": {
     "@monoweave/logging": "workspace:*",
     "@monoweave/test-utils": "workspace:*",
     "@monoweave/types": "workspace:*",
-    "@yarnpkg/core": "^4.5.0",
-    "@yarnpkg/fslib": "^3.1.4",
-    "vitest": "^4.0.16"
+    "@yarnpkg/core": "^4.6.0",
+    "@yarnpkg/fslib": "^3.1.5",
+    "vitest": "^4.1.0"
   }
 }

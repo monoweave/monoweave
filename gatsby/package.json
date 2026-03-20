@@ -38,7 +38,7 @@
     "loader-utils": "^3.3.1",
     "prop-types": "^15.8.1",
     "remark-gfm": "^4.0.1",
-    "vitest": "^3.2.4"
+    "vitest": "^4.1.0"
   },
   "scripts": {
     "build:gatsby": "rm -rf .cache public && gatsby build --prefix-paths \"$@\" && rsync -rtuc --delete public/ ../docs/",
