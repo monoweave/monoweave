@@ -115,12 +115,13 @@ describe('prependChangelogFile', () => {
 
     it('skips writing if in dry-run mode', async () => {
         const cwd = workspacePath
+        const changelogPath = path.join(cwd, 'changelog')
         await createFile({
             filePath: 'changelog',
             cwd,
             content: '<!-- MONOWEAVE:BELOW -->',
         })
-        const writeMock = vi.spyOn(fs, 'writeFile')
+        const contentsBefore = await fs.readFile(changelogPath, { encoding: 'utf8' })
         const config = await getMonoweaveConfig({
             baseBranch: 'main',
             commitSha: 'sha-1',
@@ -133,7 +134,6 @@ describe('prependChangelogFile', () => {
             'pkg-1': { version: '1.0.0', changelog: 'wowchanges', tag: null, group: 'pkg-1' },
         }
 
-        // TODO: Better assertion.
         await expect(
             prependChangelogFile({
                 config,
@@ -142,7 +142,8 @@ describe('prependChangelogFile', () => {
                 workspaces: new Set(),
             }),
         ).resolves.toBeUndefined()
-        expect(writeMock).not.toHaveBeenCalled()
+        // Assert on disk, not fs.writeFile — the spy sees every writeFile in the worker.
+        expect(await fs.readFile(changelogPath, { encoding: 'utf8' })).toEqual(contentsBefore)
     })
 
     it('writes to the changelog file', async () => {

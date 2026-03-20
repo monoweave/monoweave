@@ -8,6 +8,10 @@ const CI = Boolean(process.env.CI)
 const ARTIFACT_DIR = process.env.ARTIFACT_DIR || 'artifacts'
 
 const sharedTestConfig: TestProjectInlineConfiguration['test'] = {
+    // One worker, one file at a time — avoids cross-test pollution (global process state,
+    // shared mocks, process.stdout) when suites are sensitive to ordering or isolation.
+    fileParallelism: false,
+    maxWorkers: 1,
     setupFiles: ['./testUtils/setup.ts'],
     environment: 'node',
     exclude: [
@@ -21,6 +25,7 @@ const sharedTestConfig: TestProjectInlineConfiguration['test'] = {
     ],
     testTimeout: 30_000,
     sequence: {
+        concurrent: false,
         hooks: 'list',
     },
 }
