@@ -171,20 +171,15 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
       - uses: ./.github/actions/setup-env
-        with:
-          node-version: 22 # https://github.com/gatsbyjs/gatsby/issues/39223
       - name: Build Website
         if: "github.event_name == 'pull_request'"
         run: yarn docs
       - name: Build & Deploy Website
         if: "github.event_name == 'push' && github.ref == 'refs/heads/main'"
-        run: |
-          git checkout gh-pages
-          git reset --hard main
-          yarn docs
-          git add docs
-          git commit -m "chore: update website" -n
-          git push --force origin gh-pages
+        env:
+          GIT_USER: github-actions[bot]
+          GIT_PASS: ${{ secrets.GITHUB_TOKEN }}
+        run: yarn workspace @monoweave/docs-site deploy
 
   required_checks:
     name: Required Checks
