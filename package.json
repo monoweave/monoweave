@@ -51,9 +51,8 @@
         "workspace:test": "yarn bin:vitest",
         "workspace:types:watch": "tsc -p $0 --noEmit --emitDeclarationOnly false --pretty --watch",
         "run-local": "tsx $(yarn bin monoweave)",
-        "docs": "run :docs build",
-        "docs:dev": "run :docs develop",
-        ":docs": "yarn workspace @monoweave/gatsby",
+        "docs": "yarn workspace @monoweave/docs-site build",
+        "docs:dev": "yarn workspace @monoweave/docs-site start",
         ":e2e": "yarn workspace @monoweave/e2e-tests",
         "update:yarn": "corepack use yarn@^4 && yarn && yarn up \"@yarnpkg/*\" && yarn constraints --fix && yarn dedupe"
     },

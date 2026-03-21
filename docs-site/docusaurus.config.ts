@@ -33,6 +33,17 @@ const config: Config = {
         locales: ['en'],
     },
 
+    plugins: [
+        [
+            'docusaurus-plugin-typedoc',
+            {
+                entryPoints: ['../packages/types/src/types.ts'],
+                tsconfig: '../packages/types/tsconfig.json',
+                out: 'api',
+            },
+        ],
+    ],
+
     presets: [
         [
             'classic',
@@ -41,8 +52,7 @@ const config: Config = {
                     sidebarPath: false,
                     // Please change this to your repo.
                     // Remove this to remove the "edit this page" links.
-                    editUrl:
-                        'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+                    editUrl: 'https://github.com/monoweave/monoweave/tree/main/docs-site/',
                 },
                 theme: {
                     customCss: './src/css/custom.css',
@@ -60,18 +70,7 @@ const config: Config = {
         },
         footer: {
             style: 'dark',
-            links: [
-                {
-                    title: 'Docs',
-                    items: [
-                        {
-                            label: 'Tutorial',
-                            to: '/docs/intro',
-                        },
-                    ],
-                },
-            ],
-            copyright: `Copyright © ${new Date().getFullYear()} Monoweave. Built with Docusaurus.`,
+            copyright: `<a href="https://noahnu.com/" rel="noreferrer" target="_blank">noahnu</a> © ${new Date().getFullYear()}`,
         },
         prism: {
             theme: prismThemes.github,

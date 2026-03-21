@@ -4927,9 +4927,12 @@ __metadata:
     "@mdx-js/react": "npm:^3.0.0"
     "@types/react": "npm:^19.2.14"
     clsx: "npm:^2.0.0"
+    docusaurus-plugin-typedoc: "npm:^1.4.2"
     prism-react-renderer: "npm:^2.3.0"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
+    typedoc: "npm:^0.28.17"
+    typedoc-plugin-markdown: "npm:^4.11.0"
     typescript: "npm:~5.6.2"
   languageName: unknown
   linkType: soft
@@ -12857,6 +12860,17 @@ __metadata:
   dependencies:
     esutils: "npm:^2.0.2"
   checksum: 10/b4b28f1df5c563f7d876e7461254a4597b8cabe915abe94d7c5d1633fed263fcf9a85e8d3836591fc2d040108e822b0d32758e5ec1fe31c590dc7e08086e3e48
+  languageName: node
+  linkType: hard
+
+"docusaurus-plugin-typedoc@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "docusaurus-plugin-typedoc@npm:1.4.2"
+  dependencies:
+    typedoc-docusaurus-theme: "npm:^1.4.0"
+  peerDependencies:
+    typedoc-plugin-markdown: ">=4.8.0"
+  checksum: 10/1d66505021efca3546c3457619932b2ad4d754a96103f3b2685c1772cf6a54311a83f686979c0bfde68f79a0f7960bad331f6315065e42b62373b5539319477a
   languageName: node
   linkType: hard
 
@@ -27691,9 +27705,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.28.15":
-  version: 0.28.16
-  resolution: "typedoc@npm:0.28.16"
+"typedoc-docusaurus-theme@npm:*, typedoc-docusaurus-theme@npm:^1.4.0":
+  version: 1.4.2
+  resolution: "typedoc-docusaurus-theme@npm:1.4.2"
+  peerDependencies:
+    typedoc-plugin-markdown: ">=4.8.0"
+  checksum: 10/238186fbb4508f60cef1a3c44e4895f2a3ad198152959cf57c7efb52e7dffee32b76b5b56c1c148f1f615832ec6b6d71d236d3768bb3ef7066601b8b43daf424
+  languageName: node
+  linkType: hard
+
+"typedoc-plugin-markdown@npm:*, typedoc-plugin-markdown@npm:^4.11.0":
+  version: 4.11.0
+  resolution: "typedoc-plugin-markdown@npm:4.11.0"
+  peerDependencies:
+    typedoc: 0.28.x
+  checksum: 10/dbde98e76536f6bd713041cfc22b07adacdec8a314da9d1848b5daa9e0de46ef471718b916a2938cac627bc45b0609a3d1765b795aa96aeea2771093207d4faf
+  languageName: node
+  linkType: hard
+
+"typedoc@npm:*, typedoc@npm:^0.28.15, typedoc@npm:^0.28.17":
+  version: 0.28.17
+  resolution: "typedoc@npm:0.28.17"
   dependencies:
     "@gerrit0/mini-shiki": "npm:^3.17.0"
     lunr: "npm:^2.3.9"
@@ -27704,7 +27736,7 @@ __metadata:
     typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x || 5.9.x
   bin:
     typedoc: bin/typedoc
-  checksum: 10/657afd087d88a14cf77ad941de8913041a6a025e87c78833a5ee58a52b8252b685730394ab7920781b0b2faa0507b1c9d87fcf82dd86d1b788420716fc17ded3
+  checksum: 10/09bf15a30c51c7e16533865fb7988cece90c9eb10f7fa239b7db0ec8000c69b63c6a9ee999f40e4783311a6b0d641fb384b76c273a12fcd09f3ef5e9315902f6
   languageName: node
   linkType: hard
 
