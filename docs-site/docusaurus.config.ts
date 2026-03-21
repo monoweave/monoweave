@@ -80,6 +80,20 @@ const config: Config = {
         },
         navbar: {
             title: 'Monoweave',
+            items: [
+                { to: '/docs/intro', label: 'Home', position: 'left' },
+                { to: '/docs/getting-started', label: 'Getting Started', position: 'left' },
+                { to: '/docs/configuration', label: 'Configuration', position: 'left' },
+                { to: '/docs/plugins', label: 'Plugins', position: 'left' },
+                { to: '/docs/architecture', label: 'Architecture', position: 'left' },
+                { to: '/docs/faq', label: 'FAQ', position: 'left' },
+                { to: '/docs/contributing', label: 'Contributing', position: 'left' },
+                {
+                    href: 'https://github.com/monoweave/monoweave',
+                    label: 'View GitHub Project',
+                    position: 'right',
+                },
+            ],
         },
         footer: {
             style: 'dark',
