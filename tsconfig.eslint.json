@@ -5,7 +5,6 @@
         "*.cjs",
         "*.mjs",
         "./e2e-tests",
-        "./gatsby",
         "./docs-site",
         "./packages",
         "./testUtils",

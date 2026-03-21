@@ -24,9 +24,9 @@ const config = [
             '@typescript-eslint/no-require-imports': 'off',
         },
     },
-    { ignores: ['**/.*', 'packages/**/*.js', '**/lib', 'gatsby/public', 'artifacts', 'coverage'] },
+    { ignores: ['**/.*', 'packages/**/*.js', '**/lib', 'artifacts', 'coverage'] },
     {
-        files: ['gatsby/src/**/*.{ts,tsx}', 'docs-site/src/**/*.{ts,tsx}'],
+        files: ['docs-site/src/**/*.{ts,tsx}'],
         languageOptions: {
             globals: {
                 ...globals.browser,
