@@ -1,4 +1,18 @@
 {
     "extends": "./tsconfig.json",
-    "include": ["./__mocks__", "*.cjs", "*.mjs", "./e2e-tests", "./gatsby", "./packages", "./testUtils", "./*.js", "./*.ts",  "./*.cts", "./*.mts", "./eslint.config.cjs"],
+    "include": [
+        "./__mocks__",
+        "*.cjs",
+        "*.mjs",
+        "./e2e-tests",
+        "./gatsby",
+        "./docs-site",
+        "./packages",
+        "./testUtils",
+        "./*.js",
+        "./*.ts",
+        "./*.cts",
+        "./*.mts",
+        "./eslint.config.cjs",
+    ],
 }

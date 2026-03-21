@@ -20,7 +20,8 @@
         "packages/*",
         "testUtils",
         "e2e-tests",
-        "gatsby"
+        "gatsby",
+        "docs-site"
     ],
     "exports": {
         "./package.json": "./package.json"

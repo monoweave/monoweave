@@ -26,7 +26,7 @@ const config = [
     },
     { ignores: ['**/.*', 'packages/**/*.js', '**/lib', 'gatsby/public', 'artifacts', 'coverage'] },
     {
-        files: ['gatsby/src/**/*.{ts,tsx}'],
+        files: ['gatsby/src/**/*.{ts,tsx}', 'docs-site/src/**/*.{ts,tsx}'],
         languageOptions: {
             globals: {
                 ...globals.browser,
