@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_monoweave_docs_site=globalThis.webpackChunk_monoweave_docs_site||[]).push([[600],{7146(s){s.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"api"}')}}]);
