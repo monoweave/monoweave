@@ -18,7 +18,7 @@ const config = [
     },
     {
         languageOptions: {
-            parserOptions: { project: './tsconfig.eslint.json', tsconfigRootDir: __dirname },
+            parserOptions: { projectService: true, tsconfigRootDir: __dirname },
         },
         rules: {
             '@typescript-eslint/no-require-imports': 'off',
