@@ -32,6 +32,7 @@ const config = [
             'artifacts',
             'coverage',
             'docs-site/build',
+            'docs-site/api',
         ],
     },
     {
@@ -40,6 +41,11 @@ const config = [
             globals: {
                 ...globals.browser,
             },
+        },
+        rules: {
+            // @docusaurus/* are virtual modules resolved by Docusaurus's webpack config,
+            // not by Node module resolution, so the import resolver cannot find them.
+            'import-x/no-unresolved': ['error', { ignore: ['^@docusaurus/'] }],
         },
     },
 ]
