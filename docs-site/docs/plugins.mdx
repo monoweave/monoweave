@@ -1,11 +1,8 @@
 ---
-path: '/plugins'
+id: 'plugins'
 title: 'Plugins'
+sidebar_position: 4
 ---
-
-export { Layout as default } from '../components/Layout'
-
-## Plugins
 
 You can add a plugin via a config file or CLI:
 
@@ -57,4 +54,3 @@ We use [tapable](https://github.com/webpack/tapable) for an experimental plugin 
 #### onReleaseAvailable
 
 This hook is triggered once a release is available, after publishing to npm, and after pushing any artifacts such as git tags to the repository (assuming running with autoCommit and push mode).
-

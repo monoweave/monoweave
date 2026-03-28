@@ -1,11 +1,9 @@
 ---
-path: "/getting-started"
+id: "getting-started"
 title: "Getting Started"
+sidebar_position: 2
 ---
 
-export { Layout as default } from '../components/Layout'
-
-## Getting Started
 
 Prerequisites & Environment Supported:
 
@@ -30,7 +28,7 @@ yarn monoweave
 
   You'll be extending this file as you make changes to your project's publish configuration.
 
-3. If your packages require a compilation step (e.g. TypeScript, Babel), do this in a 'prepack' lifecycle hook per workspace. For more information about when prepack is called, [see Lifecycle Scripts](/architecture#lifecycle-scripts).
+3. If your packages require a compilation step (e.g. TypeScript, Babel), do this in a 'prepack' lifecycle hook per workspace. For more information about when prepack is called, [see Lifecycle Scripts](./architecture#lifecycle-scripts).
 
 4. In CI, add a step:
 
@@ -49,7 +47,7 @@ yarn monoweave
 
 ### API
 
-Monoweave supports both a Command Line Interface, as well as a Node API. Explanation of configuration options can be found at [Configuration](/configuration).
+Monoweave supports both a Command Line Interface, as well as a Node API. Explanation of configuration options can be found at [Configuration](./configuration).
 
 #### CLI
 
