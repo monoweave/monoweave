@@ -24,7 +24,16 @@ const config = [
             '@typescript-eslint/no-require-imports': 'off',
         },
     },
-    { ignores: ['**/.*', 'packages/**/*.js', '**/lib', 'artifacts', 'coverage'] },
+    {
+        ignores: [
+            '**/.*',
+            'packages/**/*.js',
+            '**/lib',
+            'artifacts',
+            'coverage',
+            'docs-site/build',
+        ],
+    },
     {
         files: ['docs-site/src/**/*.{ts,tsx}'],
         languageOptions: {
