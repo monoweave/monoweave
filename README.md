@@ -77,7 +77,7 @@ See the [Contributing Guide](https://monoweave.github.io/monoweave/contributing)
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -108,6 +108,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://papooch.github.io/"><img src="https://avatars.githubusercontent.com/u/46406259?v=4?s=50" width="50px;" alt="Ondřej Švanda"/><br /><sub><b>Ondřej Švanda</b></sub></a><br /><a href="https://github.com/monoweave/monoweave/commits?author=Papooch" title="Code">💻</a> <a href="https://github.com/monoweave/monoweave/commits?author=Papooch" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://dra.pe"><img src="https://avatars.githubusercontent.com/u/539437?v=4?s=50" width="50px;" alt="Shawn Drape"/><br /><sub><b>Shawn Drape</b></sub></a><br /><a href="https://github.com/monoweave/monoweave/commits?author=shawndrape" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/sajitron"><img src="https://avatars.githubusercontent.com/u/29444228?v=4?s=50" width="50px;" alt="Adams"/><br /><sub><b>Adams</b></sub></a><br /><a href="https://github.com/monoweave/monoweave/commits?author=sajitron" title="Documentation">📖</a> <a href="#infra-sajitron" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     </tr>
   </tbody>
 </table>
