@@ -4272,7 +4272,7 @@ __metadata:
     "@monoweave/types": "workspace:*"
     "@noahnu/eslint-config": "npm:^3.0.0"
     "@noahnu/eslint-import-resolver-require": "npm:^1.0.3"
-    "@noahnu/yarn-semver-up": "npm:^0.0.5"
+    "@noahnu/yarn-semver-up": "npm:^0.0.6"
     "@swc/core": "npm:^1.15.7"
     "@tophat/commitlint-config": "npm:^1.0.2"
     "@tophat/conventional-changelog-config": "npm:^1.0.1"
@@ -4534,9 +4534,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noahnu/yarn-semver-up@npm:^0.0.5":
-  version: 0.0.5
-  resolution: "@noahnu/yarn-semver-up@npm:0.0.5"
+"@noahnu/yarn-semver-up@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "@noahnu/yarn-semver-up@npm:0.0.6"
   dependencies:
     "@types/debug": "npm:^4.1.12"
     "@yarnpkg/cli": "npm:^4.12.0"
@@ -4551,7 +4551,7 @@ __metadata:
     typanion: "npm:^3.14.0"
   bin:
     yarn-semver-up: ./lib/bin.js
-  checksum: 10/d1a988144c1f76b8d4062eb416e98bf8f53f7e2bfd8779ad9aa77d01632fd20d6a2a121a55ffbe68842dbb4ef6b901534015eafe39d3ec138c1994d22fdfca95
+  checksum: 10/5381ffddbe23ce24f86d3d38aad2070437e205ba0b641197c1880feda8508f63017cd6b8fbdffb935149bb6a92b423006bc1ce6999b7096afc563afe835f9e53
   languageName: node
   linkType: hard
 
