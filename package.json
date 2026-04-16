@@ -76,10 +76,10 @@
         "@typescript-eslint/utils": "^8.53.0",
         "@vitest/coverage-v8": "^4.1.0",
         "@vitest/eslint-plugin": "^1.6.12",
-        "@yarnpkg/cli": "^4.13.0",
-        "@yarnpkg/core": "^4.6.0",
+        "@yarnpkg/cli": "^4.14.0",
+        "@yarnpkg/core": "^4.7.0",
         "@yarnpkg/fslib": "^3.1.5",
-        "@yarnpkg/plugin-npm": "^3.4.1",
+        "@yarnpkg/plugin-npm": "^3.5.0",
         "@yarnpkg/plugin-pack": "^4.0.4",
         "@yarnpkg/sdks": "^3.2.3",
         "@yarnpkg/shell": "^4.1.3",
@@ -110,5 +110,5 @@
             "built": false
         }
     },
-    "packageManager": "yarn@4.13.0+sha512.5c20ba010c99815433e5c8453112165e673f1c7948d8d2b267f4b5e52097538658388ebc9f9580656d9b75c5cc996f990f611f99304a2197d4c56d21eea370e7"
+    "packageManager": "yarn@4.14.0+sha512.31053dd4c730c75e8665ad00bbfe07a7bed08aef54c5edfd8d484463680180b1c87035a61b9e15ff2cad310a329176cac433009e2d402ac69d1386f9445d7ccb"
 }
