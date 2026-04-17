@@ -59,7 +59,7 @@
     "@monoweave/publish": "workspace:^2.3.0",
     "@monoweave/types": "workspace:^2.3.0",
     "@monoweave/versions": "workspace:^2.3.0",
-    "@yarnpkg/cli": "^4.14.0",
+    "@yarnpkg/cli": "^4.14.1",
     "@yarnpkg/core": "^4.7.0",
     "@yarnpkg/fslib": "^3.1.5",
     "@yarnpkg/plugin-npm": "^3.5.0",
