@@ -23,7 +23,7 @@
         "@monoweave/test-utils": "workspace:*",
         "@monoweave/types": "workspace:*",
         "@tophat/conventional-changelog-config": "^1.0.1",
-        "@types/node": "^22.19.15",
+        "@types/node": "^25.5.0",
         "@yarnpkg/core": "^4.7.0",
         "@yarnpkg/fslib": "^3.1.5",
         "@yarnpkg/shell": "^4.1.3",
