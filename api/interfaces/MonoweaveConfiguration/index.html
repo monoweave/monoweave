@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Interface: MonoweaveConfiguration | Monoweave</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://monoweave.github.io/monoweave/api/interfaces/MonoweaveConfiguration"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-api-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-api-current"><meta data-rh="true" property="og:title" content="Interface: MonoweaveConfiguration | Monoweave"><meta data-rh="true" name="description" content="Defined in13"><meta data-rh="true" property="og:description" content="Defined in13"><link data-rh="true" rel="canonical" href="https://monoweave.github.io/monoweave/api/interfaces/MonoweaveConfiguration"><link data-rh="true" rel="alternate" href="https://monoweave.github.io/monoweave/api/interfaces/MonoweaveConfiguration" hreflang="en"><link data-rh="true" rel="alternate" href="https://monoweave.github.io/monoweave/api/interfaces/MonoweaveConfiguration" hreflang="x-default"><link rel="stylesheet" href="/monoweave/assets/css/styles.58580f2a.css">
-<script src="/monoweave/assets/js/runtime~main.7e9e0f85.js" defer="defer"></script>
+<script src="/monoweave/assets/js/runtime~main.36e428e8.js" defer="defer"></script>
 <script src="/monoweave/assets/js/main.e31e058f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -12,13 +12,13 @@
 <symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
 </defs></svg>
 <script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_e3rL" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/monoweave/"><b class="navbar__title text--truncate">Monoweave</b></a><a class="navbar__item navbar__link" href="/monoweave/docs/intro">Home</a><a class="navbar__item navbar__link" href="/monoweave/docs/getting-started">Getting Started</a><a class="navbar__item navbar__link" href="/monoweave/docs/configuration">Configuration</a><a class="navbar__item navbar__link" href="/monoweave/docs/plugins">Plugins</a><a class="navbar__item navbar__link" href="/monoweave/docs/architecture">Architecture</a><a class="navbar__item navbar__link" href="/monoweave/docs/faq">FAQ</a><a class="navbar__item navbar__link" href="/monoweave/docs/contributing">Contributing</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/monoweave/monoweave" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">View GitHub Project<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_kYlC"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_lULQ colorModeToggle_X1aX"><button class="clean-btn toggleButton_LkjD toggleButtonDisabled_PHf1" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_jb04 lightToggleIcon_lOlx"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_jb04 darkToggleIcon_As65"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_jb04 systemToggleIcon_abx4"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_F7sx"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_ZsBZ"><div class="docsWrapper_lzT4"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_C4Ql" type="button"></button><div class="docRoot_peGR"><main class="docMainContainer_bPoS docMainContainerEnhanced_VBM3"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_p3TY"><div class="docItemContainer_o9Ol"><article><div class="tocCollapsible_mUtx theme-doc-toc-mobile tocMobile_lVHS"><button type="button" class="clean-btn tocCollapsibleButton_YuLd">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Interface: MonoweaveConfiguration</h1></header>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L13" target="_blank" rel="noopener noreferrer" class="">types.ts:13</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L13" target="_blank" rel="noopener noreferrer" class="">types.ts:13</a></p>
 <h2 class="anchor anchorTargetStickyNavbar_KkPi" id="properties">Properties<a href="#properties" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_KkPi" id="access">access?<a href="#access" class="hash-link" aria-label="Direct link to access?" title="Direct link to access?" translate="no">​</a></h3>
 <blockquote>
 <p><code>optional</code> <strong>access?</strong>: <code>&quot;infer&quot;</code> | <code>&quot;public&quot;</code> | <code>&quot;restricted&quot;</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L167" target="_blank" rel="noopener noreferrer" class="">types.ts:167</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L167" target="_blank" rel="noopener noreferrer" class="">types.ts:167</a></p>
 <p>This overrides the access defined in the publishConfig of individual
 workspaces. Set this to &#x27;infer&#x27; to respect individual workspace configurations.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default">Default<a href="#default" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
@@ -28,7 +28,7 @@ workspaces. Set this to &#x27;infer&#x27; to respect individual workspace config
 <blockquote>
 <p><strong>autoCommit</strong>: <code>boolean</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L194" target="_blank" rel="noopener noreferrer" class="">types.ts:194</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L194" target="_blank" rel="noopener noreferrer" class="">types.ts:194</a></p>
 <p>Whether to automatically create a release commit after a publish. If using autoCommit,
 you must also have one of &#x27;persistVersions&#x27; or &#x27;changelogFilename&#x27; set.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default-1">Default<a href="#default-1" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
@@ -38,7 +38,7 @@ you must also have one of &#x27;persistVersions&#x27; or &#x27;changelogFilename
 <blockquote>
 <p><strong>autoCommitMessage</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L201" target="_blank" rel="noopener noreferrer" class="">types.ts:201</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L201" target="_blank" rel="noopener noreferrer" class="">types.ts:201</a></p>
 <p>The commit message to use when autoCommit is enabled.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default-2">Default<a href="#default-2" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
 <div class="language-ts codeBlockContainer_Q9i4 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_MyCb"><pre tabindex="0" class="prism-code language-ts codeBlock_RNBD thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_wNDI"><span class="token-line" style="color:#393A34"><span class="token string" style="color:#e3116c">&quot;chore: release [skip ci]&quot;</span><br></span></code></pre></div></div>
@@ -47,7 +47,7 @@ you must also have one of &#x27;persistVersions&#x27; or &#x27;changelogFilename
 <blockquote>
 <p><code>optional</code> <strong>changelogFilename?</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L141" target="_blank" rel="noopener noreferrer" class="">types.ts:141</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L141" target="_blank" rel="noopener noreferrer" class="">types.ts:141</a></p>
 <p>The filename to write changelogs to, assuming a conventional changelog config has been set.
 Use &#x27;<packagedir>&#x27; to reference the cwd of an individual workspace. You should also enable
 &#x27;autoCommit&#x27; when this is set so that the changelogs are committed to your repo.</packagedir></p>
@@ -56,7 +56,7 @@ Use &#x27;<packagedir>&#x27; to reference the cwd of an individual workspace. Yo
 <blockquote>
 <p><code>optional</code> <strong>changesetFilename?</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L134" target="_blank" rel="noopener noreferrer" class="">types.ts:134</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L134" target="_blank" rel="noopener noreferrer" class="">types.ts:134</a></p>
 <p>The filename to write the changeset to. This is a metadata file which after a monoweave
 run, will contain change history useful for external scripts. Set to &#x27;-&#x27; to write to stdout.</p>
 <hr>
@@ -64,7 +64,7 @@ run, will contain change history useful for external scripts. Set to &#x27;-&#x2
 <blockquote>
 <p><code>optional</code> <strong>changesetIgnorePatterns?</strong>: <code>string</code>[]</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L150" target="_blank" rel="noopener noreferrer" class="">types.ts:150</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L150" target="_blank" rel="noopener noreferrer" class="">types.ts:150</a></p>
 <p>An array of micromatch globs which will be used to filter out modified files. You can
 use this to skip modifications to &#x27;test files&#x27; as part of the &#x27;how this package changed&#x27;
 determination.</p>
@@ -75,7 +75,7 @@ determination.</p>
 <blockquote>
 <p><code>optional</code> <strong>commitIgnorePatterns?</strong>: (<code>string</code> | <code>RegExp</code>)[]</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L210" target="_blank" rel="noopener noreferrer" class="">types.ts:210</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L210" target="_blank" rel="noopener noreferrer" class="">types.ts:210</a></p>
 <p>An array of regular expressions which will be used to filter out commits from the
 explicit package bump detection. The patterns are matched against commits of the form:
 <sha> <newline> </newline></sha></p>
@@ -86,7 +86,7 @@ explicit package bump detection. The patterns are matched against commits of the
 <blockquote>
 <p><code>optional</code> <strong>conventionalChangelogConfig?</strong>: <code>string</code> | <code>false</code> | {[<code>key</code>: <code>string</code>]: <code>unknown</code>; <code>name</code>: <code>string</code>; }</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L122" target="_blank" rel="noopener noreferrer" class="">types.ts:122</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L122" target="_blank" rel="noopener noreferrer" class="">types.ts:122</a></p>
 <p>A conventional changelog config package name. This config determines the changelog format,
 as well as the version strategy determiner.</p>
 <p>Set explicitly to false to disable conventional changelog mode and enter a &quot;manual&quot; mode
@@ -98,7 +98,7 @@ that determines versions based on version files.</p>
 <blockquote>
 <p><strong>cwd</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L20" target="_blank" rel="noopener noreferrer" class="">types.ts:20</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L20" target="_blank" rel="noopener noreferrer" class="">types.ts:20</a></p>
 <p>The working directory to run all operations from. Defaults to the
 current working directory.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default-6">Default<a href="#default-6" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
@@ -108,7 +108,7 @@ current working directory.</p>
 <blockquote>
 <p><strong>dryRun</strong>: <code>boolean</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L67" target="_blank" rel="noopener noreferrer" class="">types.ts:67</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L67" target="_blank" rel="noopener noreferrer" class="">types.ts:67</a></p>
 <p>If enabled, any operation performing a destructive action on an external
 system is skipped over. This includes publishing to NPM, committing to git,
 and execution of lifecycle scripts. Use dry run to preview publish changes,
@@ -120,7 +120,7 @@ and to validate your configuration.</p>
 <blockquote>
 <p><strong>forceWriteChangeFiles</strong>: <code>boolean</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L159" target="_blank" rel="noopener noreferrer" class="">types.ts:159</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L159" target="_blank" rel="noopener noreferrer" class="">types.ts:159</a></p>
 <p>By default, the changeset and changelog files are not written in dry run mode, as
 they constitute a change to an external system. Enable force write to write these
 change files, which can be useful for generating publish previews.</p>
@@ -131,7 +131,7 @@ change files, which can be useful for generating publish previews.</p>
 <blockquote>
 <p><strong>git</strong>: <code>object</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L69" target="_blank" rel="noopener noreferrer" class="">types.ts:69</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L69" target="_blank" rel="noopener noreferrer" class="">types.ts:69</a></p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="basebranch">baseBranch?<a href="#basebranch" class="hash-link" aria-label="Direct link to baseBranch?" title="Direct link to baseBranch?" translate="no">​</a></h4>
 <blockquote>
 <p><code>optional</code> <strong>baseBranch?</strong>: <code>string</code></p>
@@ -179,7 +179,7 @@ when publishing to a test registry, where you do not want to modify the main git
 <blockquote>
 <p><strong>jobs</strong>: <code>number</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L250" target="_blank" rel="noopener noreferrer" class="">types.ts:250</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L250" target="_blank" rel="noopener noreferrer" class="">types.ts:250</a></p>
 <p>The maximum number of packages whose lifecycle scripts can be run in parallel. Similar to
 concurrency in Lerna.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default-14">Default<a href="#default-14" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
@@ -189,7 +189,7 @@ concurrency in Lerna.</p>
 <blockquote>
 <p><code>optional</code> <strong>logLevel?</strong>: <code>&quot;0&quot;</code> | <code>&quot;1&quot;</code> | <code>&quot;2&quot;</code> | <code>&quot;3&quot;</code> | <code>null</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L36" target="_blank" rel="noopener noreferrer" class="">types.ts:36</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L36" target="_blank" rel="noopener noreferrer" class="">types.ts:36</a></p>
 <p>Log levels. Control verbosity of output.</p>
 <p>DEBUG: 0</p>
 <p>INFO: 1</p>
@@ -202,7 +202,7 @@ concurrency in Lerna.</p>
 <blockquote>
 <p><strong>maxConcurrentReads</strong>: <code>number</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L258" target="_blank" rel="noopener noreferrer" class="">types.ts:258</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L258" target="_blank" rel="noopener noreferrer" class="">types.ts:258</a></p>
 <p>The maximum number of package metadata to read from the NPM registry simultaneously.
 If no default is set, or set to 0, Monoweave will use its discretion.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default-16">Default<a href="#default-16" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
@@ -212,7 +212,7 @@ If no default is set, or set to 0, Monoweave will use its discretion.</p>
 <blockquote>
 <p><strong>maxConcurrentWrites</strong>: <code>number</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L267" target="_blank" rel="noopener noreferrer" class="">types.ts:267</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L267" target="_blank" rel="noopener noreferrer" class="">types.ts:267</a></p>
 <p>The maximum number of packages to publish to the NPM registry simultaneously. We have seen
 issues in the past with too many concurrent writes for private registries.
 If no default is set, or set to 0, Monoweave will use its discretion.</p>
@@ -223,7 +223,7 @@ If no default is set, or set to 0, Monoweave will use its discretion.</p>
 <blockquote>
 <p><code>optional</code> <strong>packageGroupManifestField?</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L221" target="_blank" rel="noopener noreferrer" class="">types.ts:221</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L221" target="_blank" rel="noopener noreferrer" class="">types.ts:221</a></p>
 <p>The manifest field name to use in workspace grouping. All packages
 within a group will always have the same version and git tag. If unset, all packages
 are versioned independently. Since the group is used for the git tag, it must not contain
@@ -235,7 +235,7 @@ you can use &#x27;publishConfig.group&#x27; to access the group property in your
 <blockquote>
 <p><code>optional</code> <strong>packageGroups?</strong>: <code>Record</code>&lt;<code>string</code>, <a class="" href="/monoweave/api/interfaces/GroupConfiguration"><code>GroupConfiguration</code></a>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L227" target="_blank" rel="noopener noreferrer" class="">types.ts:227</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L227" target="_blank" rel="noopener noreferrer" class="">types.ts:227</a></p>
 <p>Package group specific settings. Note that if no packageGroupManifestField is set,
 each workspace is in its own group.</p>
 <hr>
@@ -243,7 +243,7 @@ each workspace is in its own group.</p>
 <blockquote>
 <p><strong>persistVersions</strong>: <code>boolean</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L179" target="_blank" rel="noopener noreferrer" class="">types.ts:179</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L179" target="_blank" rel="noopener noreferrer" class="">types.ts:179</a></p>
 <p>Whether to persist package.json modifications, i.e. updating the dependency versions
 and the version field of each published workspace. Most publishing tools act as if this
 is enabled. It can be useful to disable version persistence if you do not want your CI
@@ -257,7 +257,7 @@ to your repo.</p>
 <blockquote>
 <p><code>optional</code> <strong>plugins?</strong>: (<code>string</code> | [<code>string</code>, <code>unknown</code>])[]</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L275" target="_blank" rel="noopener noreferrer" class="">types.ts:275</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L275" target="_blank" rel="noopener noreferrer" class="">types.ts:275</a></p>
 <p>An array of Monoweave plugins. See the plugin section of the documentation for more
 information.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default-19">Default<a href="#default-19" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
@@ -267,7 +267,7 @@ information.</p>
 <blockquote>
 <p><strong>prerelease</strong>: <code>boolean</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L284" target="_blank" rel="noopener noreferrer" class="">types.ts:284</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L284" target="_blank" rel="noopener noreferrer" class="">types.ts:284</a></p>
 <p>Whether to run Monoweave in Prerelease mode. In prerelease mode, versions are not
 published to the latest npm dist tag. This is meant for release candidates, and beta
 versions. Version strategy behaviour is also impacted by this mode.</p>
@@ -278,7 +278,7 @@ versions. Version strategy behaviour is also impacted by this mode.</p>
 <blockquote>
 <p><strong>prereleaseId</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L291" target="_blank" rel="noopener noreferrer" class="">types.ts:291</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L291" target="_blank" rel="noopener noreferrer" class="">types.ts:291</a></p>
 <p>The identifier to use in the prerelease tag. Defaults to &#x27;rc&#x27; as in &#x27;1.0.0-rc.1&#x27;.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default-21">Default<a href="#default-21" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
 <div class="language-ts codeBlockContainer_Q9i4 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_MyCb"><pre tabindex="0" class="prism-code language-ts codeBlock_RNBD thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_wNDI"><span class="token-line" style="color:#393A34"><span class="token string" style="color:#e3116c">&quot;rc&quot;</span><br></span></code></pre></div></div>
@@ -287,7 +287,7 @@ versions. Version strategy behaviour is also impacted by this mode.</p>
 <blockquote>
 <p><strong>prereleaseNPMTag</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L298" target="_blank" rel="noopener noreferrer" class="">types.ts:298</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L298" target="_blank" rel="noopener noreferrer" class="">types.ts:298</a></p>
 <p>The npm dist-tag to publish to in prerelease mode. Defaults to &#x27;next&#x27;.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default-22">Default<a href="#default-22" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
 <div class="language-ts codeBlockContainer_Q9i4 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_MyCb"><pre tabindex="0" class="prism-code language-ts codeBlock_RNBD thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_wNDI"><span class="token-line" style="color:#393A34"><span class="token string" style="color:#e3116c">&quot;next&quot;</span><br></span></code></pre></div></div>
@@ -296,7 +296,7 @@ versions. Version strategy behaviour is also impacted by this mode.</p>
 <blockquote>
 <p><strong>registryMode</strong>: <a class="" href="/monoweave/api/enumerations/RegistryMode"><code>RegistryMode</code></a></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L57" target="_blank" rel="noopener noreferrer" class="">types.ts:57</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L57" target="_blank" rel="noopener noreferrer" class="">types.ts:57</a></p>
 <p>By default the latest package versions upon which the version strategy
 is applied is taken from the NPM registry (npm mode). If registryMode is set to &#x27;manifest&#x27;
 the latest version is instead taken from the package.json files. Note that
@@ -309,7 +309,7 @@ the latest version is instead taken from the package.json files. Note that
 <blockquote>
 <p><code>optional</code> <strong>registryUrl?</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L45" target="_blank" rel="noopener noreferrer" class="">types.ts:45</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L45" target="_blank" rel="noopener noreferrer" class="">types.ts:45</a></p>
 <p>The NPM registry URL for fetching package information, and publishing
 packages. Note that this overrides any publishConfig.registryUrl or
 Yarn RC configuration.</p>
@@ -320,7 +320,7 @@ Yarn RC configuration.</p>
 <blockquote>
 <p><strong>topological</strong>: <code>boolean</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L235" target="_blank" rel="noopener noreferrer" class="">types.ts:235</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L235" target="_blank" rel="noopener noreferrer" class="">types.ts:235</a></p>
 <p>Whether to run the lifecycle scripts of the packages to publish in topological order,
 based on dependencies and peerDependencies. This excludes devDependencies from the graph.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default-25">Default<a href="#default-25" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
@@ -330,7 +330,7 @@ based on dependencies and peerDependencies. This excludes devDependencies from t
 <blockquote>
 <p><strong>topologicalDev</strong>: <code>boolean</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L242" target="_blank" rel="noopener noreferrer" class="">types.ts:242</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L242" target="_blank" rel="noopener noreferrer" class="">types.ts:242</a></p>
 <p>Similar to topological, however also consider devDependencies.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default-26">Default<a href="#default-26" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
 <div class="language-ts codeBlockContainer_Q9i4 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_MyCb"><pre tabindex="0" class="prism-code language-ts codeBlock_RNBD thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_wNDI"><span class="token-line" style="color:#393A34"><span class="token boolean" style="color:#36acaa">false</span><br></span></code></pre></div></div>
@@ -339,7 +339,7 @@ based on dependencies and peerDependencies. This excludes devDependencies from t
 <blockquote>
 <p><code>optional</code> <strong>versionStrategy?</strong>: <a class="" href="/monoweave/api/interfaces/VersionStrategyConfiguration"><code>VersionStrategyConfiguration</code></a></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/a284ec144cd99c044bfad03471cd782fe965783d/packages/types/src/types.ts#L186" target="_blank" rel="noopener noreferrer" class="">types.ts:186</a></p>
+<p>Defined in: <a href="https://github.com/monoweave/monoweave/blob/38020a1f76b74c97505c16d9d1e3876f4888bd01/packages/types/src/types.ts#L186" target="_blank" rel="noopener noreferrer" class="">types.ts:186</a></p>
 <p>Customizations to the version strategy logic.</p>
 <h4 class="anchor anchorTargetStickyNavbar_KkPi" id="default-27">Default<a href="#default-27" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default" translate="no">​</a></h4>
 <div class="language-ts codeBlockContainer_Q9i4 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_MyCb"><pre tabindex="0" class="prism-code language-ts codeBlock_RNBD thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_wNDI"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">undefined</span><br></span></code></pre></div></div></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_mvAN thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#access" class="table-of-contents__link toc-highlight">access?</a></li><li><a href="#autocommit" class="table-of-contents__link toc-highlight">autoCommit</a></li><li><a href="#autocommitmessage" class="table-of-contents__link toc-highlight">autoCommitMessage</a></li><li><a href="#changelogfilename" class="table-of-contents__link toc-highlight">changelogFilename?</a></li><li><a href="#changesetfilename" class="table-of-contents__link toc-highlight">changesetFilename?</a></li><li><a href="#changesetignorepatterns" class="table-of-contents__link toc-highlight">changesetIgnorePatterns?</a></li><li><a href="#commitignorepatterns" class="table-of-contents__link toc-highlight">commitIgnorePatterns?</a></li><li><a href="#conventionalchangelogconfig" class="table-of-contents__link toc-highlight">conventionalChangelogConfig?</a></li><li><a href="#cwd" class="table-of-contents__link toc-highlight">cwd</a></li><li><a href="#dryrun" class="table-of-contents__link toc-highlight">dryRun</a></li><li><a href="#forcewritechangefiles" class="table-of-contents__link toc-highlight">forceWriteChangeFiles</a></li><li><a href="#git" class="table-of-contents__link toc-highlight">git</a></li><li><a href="#jobs" class="table-of-contents__link toc-highlight">jobs</a></li><li><a href="#loglevel" class="table-of-contents__link toc-highlight">logLevel?</a></li><li><a href="#maxconcurrentreads" class="table-of-contents__link toc-highlight">maxConcurrentReads</a></li><li><a href="#maxconcurrentwrites" class="table-of-contents__link toc-highlight">maxConcurrentWrites</a></li><li><a href="#packagegroupmanifestfield" class="table-of-contents__link toc-highlight">packageGroupManifestField?</a></li><li><a href="#packagegroups" class="table-of-contents__link toc-highlight">packageGroups?</a></li><li><a href="#persistversions" class="table-of-contents__link toc-highlight">persistVersions</a></li><li><a href="#plugins" class="table-of-contents__link toc-highlight">plugins?</a></li><li><a href="#prerelease" class="table-of-contents__link toc-highlight">prerelease</a></li><li><a href="#prereleaseid" class="table-of-contents__link toc-highlight">prereleaseId</a></li><li><a href="#prereleasenpmtag" class="table-of-contents__link toc-highlight">prereleaseNPMTag</a></li><li><a href="#registrymode" class="table-of-contents__link toc-highlight">registryMode</a></li><li><a href="#registryurl" class="table-of-contents__link toc-highlight">registryUrl?</a></li><li><a href="#topological" class="table-of-contents__link toc-highlight">topological</a></li><li><a href="#topologicaldev" class="table-of-contents__link toc-highlight">topologicalDev</a></li><li><a href="#versionstrategy" class="table-of-contents__link toc-highlight">versionStrategy?</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright"><a href="https://noahnu.com/" rel="noreferrer" target="_blank">noahnu</a> © 2026</div></div></div></footer></div>
