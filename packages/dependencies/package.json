@@ -41,6 +41,6 @@
     "@monoweave/types": "workspace:*",
     "@yarnpkg/core": "^4.7.0",
     "@yarnpkg/fslib": "^3.1.5",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.2"
   }
 }

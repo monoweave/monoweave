@@ -45,11 +45,11 @@
   },
   "devDependencies": {
     "@monoweave/test-utils": "workspace:*",
-    "@types/node": "^22.19.3",
-    "vitest": "^4.1.0"
+    "@types/node": "^22.19.15",
+    "vitest": "^4.1.2"
   },
   "dependencies": {
-    "@inquirer/prompts": "^8.3.0",
+    "@inquirer/prompts": "^8.3.2",
     "@monoweave/changelog": "workspace:^2.4.0",
     "@monoweave/dependencies": "workspace:^2.4.0",
     "@monoweave/git": "workspace:^2.4.0",
@@ -64,11 +64,11 @@
     "@yarnpkg/plugin-npm": "^3.5.0",
     "@yarnpkg/plugin-pack": "^4.0.4",
     "@yarnpkg/shell": "^4.1.3",
-    "ajv": "^8.17.1",
+    "ajv": "^8.18.0",
     "clipanion": "^4.0.0-rc.4",
     "json5": "^2.2.3",
     "typanion": "^3.14.0",
-    "yaml": "^2.8.2"
+    "yaml": "^2.8.3"
   },
   "engines": {
     "node": ">=v18"
