@@ -45,16 +45,16 @@
   },
   "dependencies": {
     "@yarnpkg/core": "^4.7.0",
-    "tapable": "^2.3.0"
+    "tapable": "^2.3.2"
   },
   "peerDependencies": {
     "@yarnpkg/core": "^4.7.0"
   },
   "devDependencies": {
-    "@types/node": "^22.19.3",
+    "@types/node": "^22.19.15",
     "tsx": "^4.21.0",
     "typedoc": "^0.28.18",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.2"
   }
 }
