@@ -70,7 +70,7 @@
         "@swc/core": "^1.15.21",
         "@tophat/commitlint-config": "^1.0.2",
         "@tophat/conventional-changelog-config": "^1.0.1",
-        "@types/node": "^22.19.15",
+        "@types/node": "^25.5.2",
         "@typescript-eslint/eslint-plugin": "^8.57.2",
         "@typescript-eslint/parser": "^8.57.2",
         "@typescript-eslint/utils": "^8.57.2",
