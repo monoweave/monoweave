@@ -8,8 +8,8 @@
         "@monoweave/node": "workspace:*",
         "@monoweave/types": "workspace:*",
         "@types/node": "^22.19.15",
-        "@yarnpkg/cli": "^4.14.1",
-        "@yarnpkg/core": "^4.7.0",
+        "@yarnpkg/cli": "^4.15.0",
+        "@yarnpkg/core": "^4.8.0",
         "@yarnpkg/fslib": "^3.1.5",
         "vitest": "^4.1.2"
     },
