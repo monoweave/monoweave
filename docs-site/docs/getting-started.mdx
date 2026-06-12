@@ -1,9 +1,8 @@
 ---
-id: "getting-started"
-title: "Getting Started"
+id: 'getting-started'
+title: 'Getting Started'
 sidebar_position: 2
 ---
-
 
 Prerequisites & Environment Supported:
 
@@ -26,22 +25,22 @@ yarn monoweave
    preset: monoweave/preset-recommended # or preset-manual for changeset files
    ```
 
-  You'll be extending this file as you make changes to your project's publish configuration.
+You'll be extending this file as you make changes to your project's publish configuration.
 
 3. If your packages require a compilation step (e.g. TypeScript, Babel), do this in a 'prepack' lifecycle hook per workspace. For more information about when prepack is called, [see Lifecycle Scripts](./architecture#lifecycle-scripts).
 
 4. In CI, add a step:
 
-  ```sh
-  yarn monoweave
-  ```
+```sh
+yarn monoweave
+```
 
-  By default, monoweave will create a release commit, add tags, and push the commit to your git remote. To disable the auto push (for example, if you want to create a pull request instead):
+By default, monoweave will create a release commit, add tags, and push the commit to your git remote. To disable the auto push (for example, if you want to create a pull request instead):
 
-  ```sh
-  yarn monoweave --no-push
-  git push --tags
-  ```
+```sh
+yarn monoweave --no-push
+git push --tags
+```
 
 5. If using GitHub Actions, check out If using GitHub Actions, also check out our release preview reusable action: [monoweave/github-action-preview@main](https://github.com/monoweave/github-action-preview) to generate release previews on open pull requests.
 
@@ -65,15 +64,15 @@ Example config file (`monoweave.config.cjs`):
 
 ```js
 module.exports = {
-    git: {
-        commitSha: 'HEAD',
-        remote: 'origin',
-        push: true,
-    },
-    conventionalChangelogConfig: 'conventional-changelog-angular',
-    access: 'infer',
-    persistVersions: false,
-    changesetIgnorePatterns: ['**/*.test.js'],
+  git: {
+    commitSha: 'HEAD',
+    remote: 'origin',
+    push: true,
+  },
+  conventionalChangelogConfig: 'conventional-changelog-angular',
+  access: 'infer',
+  persistVersions: false,
+  changesetIgnorePatterns: ['**/*.test.js'],
 }
 ```
 
@@ -81,14 +80,14 @@ or json/jsonc/json5/yml/yaml:
 
 ```yaml
 git:
-  commitSha: "HEAD"
-  remote: "origin"
+  commitSha: 'HEAD'
+  remote: 'origin'
   push: true
-conventionalChangelogConfig: "conventional-changelog-angular"
-access: "infer"
+conventionalChangelogConfig: 'conventional-changelog-angular'
+access: 'infer'
 persistVersions: false
 changesetIgnorePatterns:
-  - "**/*.test.js"
+  - '**/*.test.js'
 ```
 
 For an experience closer to the Yarn version plugin, or Atlassian's Changesets project, use the manual preset:
@@ -122,20 +121,20 @@ In this mode, you are choosing _not_ to use conventional changelogs.
 To use the API:
 
 ```ts
-import type { MonoweaveConfiguration }  from '@monoweave/types'
+import type { MonoweaveConfiguration } from '@monoweave/types'
 import monoweave from '@monoweave/node'
 
 const config: MonoweaveConfiguration = {
-    cwd: process.cwd(),
-    dryRun: false,
-    git: {
-        commitSha: 'HEAD',
-        remote: 'origin',
-        push: true,
-    },
-    conventionalChangelogConfig: 'conventional-changelog-angular',
-    access: 'infer',
-    persistVersions: false,
+  cwd: process.cwd(),
+  dryRun: false,
+  git: {
+    commitSha: 'HEAD',
+    remote: 'origin',
+    push: true,
+  },
+  conventionalChangelogConfig: 'conventional-changelog-angular',
+  access: 'infer',
+  persistVersions: false,
 }
 const changeset = await monoweave(config)
 ```

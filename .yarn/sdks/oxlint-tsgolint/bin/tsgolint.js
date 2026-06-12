@@ -16,7 +16,7 @@ const isPnpLoaderEnabled = existsSync(absPnpLoaderPath);
 
 if (existsSync(absPnpApiPath)) {
   if (!process.versions.pnp) {
-    // Setup the environment to be able to require eslint/bin/eslint.js
+    // Setup the environment to be able to require oxlint-tsgolint/bin/tsgolint.js
     require(absPnpApiPath).setup();
     if (isPnpLoaderEnabled && register) {
       register(pathToFileURL(absPnpLoaderPath));
@@ -28,5 +28,5 @@ const wrapWithUserWrapper = existsSync(absUserWrapperPath)
   ? exports => absRequire(absUserWrapperPath)(exports)
   : exports => exports;
 
-// Defer to the real eslint/bin/eslint.js your application uses
-module.exports = wrapWithUserWrapper(absRequire(`eslint/bin/eslint.js`));
+// Defer to the real oxlint-tsgolint/bin/tsgolint.js your application uses
+module.exports = wrapWithUserWrapper(absRequire(`oxlint-tsgolint/bin/tsgolint.js`));

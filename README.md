@@ -36,15 +36,15 @@ If using GitHub Actions, also check out our release preview reusable action: [mo
 
 Monoweave only supports [Yarn-modern](https://yarnpkg.com) projects with minimum Node version >=22 (lts/jod). Monoweave may work with older versions of Node, however these older versions are not tested.
 
-| Tool | Package Managers | Monorepo Support | Conventional Commits | Changeset Files | Changelogs | publishConfig overrides | workspace:^ protocol | Version Groups | Pull Request Previews | GitHub Releases | Plugin Support |
-| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
-| [Monoweave](https://github.com/monoweave/monoweave) | yarn | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Lerna](https://github.com/lerna/lerna) | yarn, npm, pnpm | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | 🟨 | ❌ | ✅ | ❌ |
-| [Lerna Lite](https://github.com/lerna-lite/lerna-lite) | yarn, npm, pnpm | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | 🟨 | ❌ | ✅ | ❌ |
-| [Yarn Version Plugin](https://yarnpkg.com/cli/version) | yarn | ✅ | ❌ | ✅ | ❌ | ✅  | ✅ | ❌ | ❌ | ❌ | ✅
-| [Atlassian Changesets](https://github.com/changesets/changesets) | [yarn*](https://github.com/changesets/changesets/pull/674), npm, pnpm | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌
-| [Microsoft Beachball](https://github.com/microsoft/beachball) | yarn, npm, pnpm | ✅ | ❌ |  ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌[*](https://github.com/microsoft/beachball/issues/885) | ❌
-| [Semantic Release](https://github.com/semantic-release/semantic-release) | yarn, npm, pnpm | ❌ | ✅ | ❌ | ✅ | ✅ | N/A | N/A | ❌ | ✅ | ✅ |
+| Tool                                                                     | Package Managers                                                       | Monorepo Support | Conventional Commits | Changeset Files | Changelogs | publishConfig overrides | workspace:^ protocol | Version Groups | Pull Request Previews | GitHub Releases                                           | Plugin Support |
+| ------------------------------------------------------------------------ | ---------------------------------------------------------------------- | ---------------- | -------------------- | --------------- | ---------- | ----------------------- | -------------------- | -------------- | --------------------- | --------------------------------------------------------- | -------------- |
+| [Monoweave](https://github.com/monoweave/monoweave)                      | yarn                                                                   | ✅               | ✅                   | ✅              | ✅         | ✅                      | ✅                   | ✅             | ✅                    | ✅                                                        | ✅             |
+| [Lerna](https://github.com/lerna/lerna)                                  | yarn, npm, pnpm                                                        | ✅               | ✅                   | ❌              | ✅         | ❌                      | ❌                   | 🟨             | ❌                    | ✅                                                        | ❌             |
+| [Lerna Lite](https://github.com/lerna-lite/lerna-lite)                   | yarn, npm, pnpm                                                        | ✅               | ✅                   | ❌              | ✅         | ✅                      | ✅                   | 🟨             | ❌                    | ✅                                                        | ❌             |
+| [Yarn Version Plugin](https://yarnpkg.com/cli/version)                   | yarn                                                                   | ✅               | ❌                   | ✅              | ❌         | ✅                      | ✅                   | ❌             | ❌                    | ❌                                                        | ✅             |
+| [Atlassian Changesets](https://github.com/changesets/changesets)         | [yarn\*](https://github.com/changesets/changesets/pull/674), npm, pnpm | ✅               | ❌                   | ✅              | ✅         | ❌                      | ❌                   | ❌             | ✅                    | ✅                                                        | ❌             |
+| [Microsoft Beachball](https://github.com/microsoft/beachball)            | yarn, npm, pnpm                                                        | ✅               | ❌                   | ✅              | ✅         | ✅                      | ✅                   | ✅             | ❌                    | ❌[\*](https://github.com/microsoft/beachball/issues/885) | ❌             |
+| [Semantic Release](https://github.com/semantic-release/semantic-release) | yarn, npm, pnpm                                                        | ❌               | ✅                   | ❌              | ✅         | ✅                      | N/A                  | N/A            | ❌                    | ✅                                                        | ✅             |
 
 > Legend: ✅ supported, 🟨 partial support, ❌ not supported
 
@@ -77,7 +77,9 @@ See the [Contributing Guide](https://monoweave.github.io/monoweave/contributing)
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):

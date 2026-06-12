@@ -1,9 +1,8 @@
 ---
-id: "configuration"
-title: "Configuring Monoweave"
+id: 'configuration'
+title: 'Configuring Monoweave'
 sidebar_position: 3
 ---
-
 
 For a full list of CLI arguments, run:
 
@@ -46,11 +45,11 @@ If you omit a property, a reasonable default will be used. Note that setting a p
 ```js
 /** @type {import('@monoweave/types').MonoweaveConfigFile} */
 export default {
-    preset: 'monoweave/preset-recommended',
+  preset: 'monoweave/preset-recommended',
 
-    // Aggregates changelog entries to a single file instead of the "recommended"
-    // default of per-workspace.
-    changelogFilename: 'CHANGELOG.md',
+  // Aggregates changelog entries to a single file instead of the "recommended"
+  // default of per-workspace.
+  changelogFilename: 'CHANGELOG.md',
 }
 ```
 

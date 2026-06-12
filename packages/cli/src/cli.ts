@@ -10,10 +10,10 @@ import { MonoweaveCommand } from './command/default.js'
 import { MonoweaveVersionCommand } from './command/version.js'
 
 const cli = new clipanion.Cli({
-    binaryLabel: 'Monoweave',
-    binaryName: 'yarn monoweave',
-    binaryVersion: require('../package.json').version,
-    enableCapture: true,
+  binaryLabel: 'Monoweave',
+  binaryName: 'yarn monoweave',
+  binaryVersion: require('../package.json').version,
+  enableCapture: true,
 })
 
 cli.register(MonoweaveCommand)

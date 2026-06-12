@@ -49,6 +49,8 @@ jobs:
       - uses: ./.github/actions/setup-env
       - name: Build
         run: yarn build
+      - name: Formatting
+        run: yarn format:ci
       - name: Linting
         run: yarn lint:ci
       - name: Tests

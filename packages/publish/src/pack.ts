@@ -8,79 +8,77 @@ import type { LimitFunction } from 'p-limit'
 import { getPublishRegistryUrl } from './getPublishConfig.js'
 
 export const pack = async ({
-    workspace,
-    limitPublish,
+  workspace,
+  limitPublish,
+  config,
+  context,
+  publishTag,
+  publishCommitSha,
+}: {
+  workspace: Workspace
+  limitPublish: LimitFunction
+  publishTag: string
+  config: MonoweaveConfiguration
+  context: YarnContext
+  publishCommitSha: string | undefined
+}) => {
+  const ident = workspace.manifest.name
+  if (!ident) return
+
+  const pkgName = structUtils.stringifyIdent(ident)
+  const registryUrl = await getPublishRegistryUrl({
     config,
     context,
-    publishTag,
-    publishCommitSha,
-}: {
-    workspace: Workspace
-    limitPublish: LimitFunction
-    publishTag: string
-    config: MonoweaveConfiguration
-    context: YarnContext
-    publishCommitSha: string | undefined
-}) => {
-    const ident = workspace.manifest.name
-    if (!ident) return
+    workspace,
+  })
 
-    const pkgName = structUtils.stringifyIdent(ident)
-    const registryUrl = await getPublishRegistryUrl({
-        config,
-        context,
-        workspace,
-    })
-
-    if (!registryUrl) {
-        logging.info(
-            `[Publish] '${pkgName}' (${publishTag}: ${workspace.manifest.version}, skipping registry)`,
-            { report: context.report },
-        )
-        return
-    }
-
-    const globalAccess = config.access
-    const access = globalAccess === 'infer' ? undefined : globalAccess
-
+  if (!registryUrl) {
     logging.info(
-        `[Publish] ${pkgName} (${publishTag}: ${workspace.manifest.version}, ${registryUrl}; ${access})`,
-        { report: context.report },
+      `[Publish] '${pkgName}' (${publishTag}: ${workspace.manifest.version}, skipping registry)`,
+      { report: context.report },
     )
+    return
+  }
 
-    const filesToPack = await packUtils.genPackList(workspace)
-    const pack = await packUtils.genPackStream(workspace, filesToPack)
-    const buffer = await miscUtils.bufferStream(pack)
-    const body = await npmPublishUtils.makePublishBody(workspace, buffer, {
-        access,
-        tag: publishTag,
-        registry: registryUrl,
-        gitHead: publishCommitSha,
-    })
+  const globalAccess = config.access
+  const access = globalAccess === 'infer' ? undefined : globalAccess
 
-    const identUrl = npmHttpUtils.getIdentUrl(ident)
+  logging.info(
+    `[Publish] ${pkgName} (${publishTag}: ${workspace.manifest.version}, ${registryUrl}; ${access})`,
+    { report: context.report },
+  )
 
-    try {
-        if (!config.dryRun) {
-            assertProductionOrTest()
-            await limitPublish(() =>
-                npmHttpUtils.put(identUrl, body, {
-                    authType: npmHttpUtils.AuthType.ALWAYS_AUTH,
-                    configuration: context.project.configuration,
-                    ident,
-                    registry: registryUrl,
-                    allowOidc: Boolean(
-                        process.env.CI && (process.env.GITHUB_ACTIONS || process.env.GITLAB),
-                    ),
-                }),
-            )
-        }
-        logging.info(`[Publish] '${pkgName}' published.`, { report: context.report })
-    } catch (err) {
-        logging.error(err, {
-            report: context.report,
-            extras: `[Publish] Failed to publish '${pkgName}' to ${identUrl} (${publishTag}: ${body['dist-tags']?.[publishTag]}, ${registryUrl}; ${body.access})`,
-        })
-        throw err
+  const filesToPack = await packUtils.genPackList(workspace)
+  const pack = await packUtils.genPackStream(workspace, filesToPack)
+  const buffer = await miscUtils.bufferStream(pack)
+  const body = await npmPublishUtils.makePublishBody(workspace, buffer, {
+    access,
+    tag: publishTag,
+    registry: registryUrl,
+    gitHead: publishCommitSha,
+  })
+
+  const identUrl = npmHttpUtils.getIdentUrl(ident)
+
+  try {
+    if (!config.dryRun) {
+      assertProductionOrTest()
+      await limitPublish(() =>
+        npmHttpUtils.put(identUrl, body, {
+          authType: npmHttpUtils.AuthType.ALWAYS_AUTH,
+          configuration: context.project.configuration,
+          ident,
+          registry: registryUrl,
+          allowOidc: Boolean(process.env.CI && (process.env.GITHUB_ACTIONS || process.env.GITLAB)),
+        }),
+      )
     }
+    logging.info(`[Publish] '${pkgName}' published.`, { report: context.report })
+  } catch (err) {
+    logging.error(err, {
+      report: context.report,
+      extras: `[Publish] Failed to publish '${pkgName}' to ${identUrl} (${publishTag}: ${body['dist-tags']?.[publishTag]}, ${registryUrl}; ${body.access})`,
+    })
+    throw err
+  }
 }

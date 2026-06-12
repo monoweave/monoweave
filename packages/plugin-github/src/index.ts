@@ -4,8 +4,8 @@ export const PluginName = 'GitHub Plugin'
 import { type PluginOptions, createPluginInternals } from './plugin.js'
 
 export default function GitHubPlugin(
-    { onReleaseAvailable }: Pick<PluginHooks, 'onReleaseAvailable'>,
-    options?: PluginOptions | undefined,
+  { onReleaseAvailable }: Pick<PluginHooks, 'onReleaseAvailable'>,
+  options?: PluginOptions,
 ): void {
-    onReleaseAvailable.tapPromise(PluginName, createPluginInternals(options ?? {}))
+  onReleaseAvailable.tapPromise(PluginName, createPluginInternals(options ?? {}))
 }
