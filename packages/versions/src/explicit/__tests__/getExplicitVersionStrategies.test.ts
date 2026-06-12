@@ -2,12 +2,12 @@ import path from 'path'
 
 import { exec } from '@monoweave/io'
 import {
-    cleanUp,
-    createCommit,
-    createFile,
-    getMonoweaveConfig,
-    setupContext,
-    setupTestRepository,
+  cleanUp,
+  createCommit,
+  createFile,
+  getMonoweaveConfig,
+  setupContext,
+  setupTestRepository,
 } from '@monoweave/test-utils'
 import { type PortablePath, npath } from '@yarnpkg/fslib'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
@@ -15,173 +15,173 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { getExplicitVersionStrategies } from '../../index.js'
 
 describe('getExplicitVersionStrategies', () => {
-    let tempRepositoryRoot: PortablePath
+  let tempRepositoryRoot: PortablePath
 
-    beforeEach(async () => {
-        tempRepositoryRoot = await setupTestRepository()
-    })
-    afterEach(async () => {
-        await cleanUp([tempRepositoryRoot])
-    })
+  beforeEach(async () => {
+    tempRepositoryRoot = await setupTestRepository()
+  })
+  afterEach(async () => {
+    await cleanUp([tempRepositoryRoot])
+  })
 
-    it('produces strategies if a package has commited changes', async () => {
-        const cwd = tempRepositoryRoot
-        const context = await setupContext(cwd)
-        await createCommit('feat: initial commit', cwd)
-        await exec('git checkout -b test-branch', { cwd: npath.toPortablePath(cwd) })
-        await createFile({ filePath: path.join('packages', 'pkg-1', 'test.js'), cwd })
-        const mockMessage = 'feat: woa'
-        await createCommit(mockMessage, cwd)
-        const headSha = (
-            await exec('git rev-parse HEAD', {
-                cwd: npath.toPortablePath(cwd),
-            })
-        ).stdout.trim()
-        const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
-            config: await getMonoweaveConfig({
-                cwd,
-                commitSha: headSha,
-                baseBranch: 'main',
-            }),
-            context,
-        })
-
-        expect(strategies).toEqual(
-            new Map([
-                [
-                    'pkg-1',
-                    {
-                        commits: [{ body: `${mockMessage}\n\n`, sha: headSha }],
-                        type: 'minor',
-                    },
-                ],
-            ]),
-        )
+  it('produces strategies if a package has commited changes', async () => {
+    const cwd = tempRepositoryRoot
+    const context = await setupContext(cwd)
+    await createCommit('feat: initial commit', cwd)
+    await exec('git checkout -b test-branch', { cwd: npath.toPortablePath(cwd) })
+    await createFile({ filePath: path.join('packages', 'pkg-1', 'test.js'), cwd })
+    const mockMessage = 'feat: woa'
+    await createCommit(mockMessage, cwd)
+    const headSha = (
+      await exec('git rev-parse HEAD', {
+        cwd: npath.toPortablePath(cwd),
+      })
+    ).stdout.trim()
+    const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
+      config: await getMonoweaveConfig({
+        cwd,
+        commitSha: headSha,
+        baseBranch: 'main',
+      }),
+      context,
     })
 
-    it('ignores ignored commits based on ignore patterns', async () => {
-        const cwd = tempRepositoryRoot
-        const context = await setupContext(cwd)
-        await createCommit('feat: initial commit', cwd)
-        await exec('git checkout -b test-branch', { cwd: npath.toPortablePath(cwd) })
+    expect(strategies).toEqual(
+      new Map([
+        [
+          'pkg-1',
+          {
+            commits: [{ body: `${mockMessage}\n\n`, sha: headSha }],
+            type: 'minor',
+          },
+        ],
+      ]),
+    )
+  })
 
-        await createFile({ filePath: path.join('packages', 'pkg-1', 'test.js'), cwd })
-        await createCommit('feat: ignore-me!', cwd)
+  it('ignores ignored commits based on ignore patterns', async () => {
+    const cwd = tempRepositoryRoot
+    const context = await setupContext(cwd)
+    await createCommit('feat: initial commit', cwd)
+    await exec('git checkout -b test-branch', { cwd: npath.toPortablePath(cwd) })
 
-        await createFile({ filePath: path.join('packages', 'pkg-2', 'test.js'), cwd })
-        const mockMessage = 'feat: pick me!'
-        await createCommit(mockMessage, cwd)
+    await createFile({ filePath: path.join('packages', 'pkg-1', 'test.js'), cwd })
+    await createCommit('feat: ignore-me!', cwd)
 
-        const headSha = (
-            await exec('git rev-parse HEAD', {
-                cwd: npath.toPortablePath(cwd),
-            })
-        ).stdout.trim()
+    await createFile({ filePath: path.join('packages', 'pkg-2', 'test.js'), cwd })
+    const mockMessage = 'feat: pick me!'
+    await createCommit(mockMessage, cwd)
 
-        const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
-            config: {
-                ...(await getMonoweaveConfig({
-                    cwd,
-                    commitSha: headSha,
-                    baseBranch: 'main',
-                })),
-                commitIgnorePatterns: ['ignore-me'],
-            },
-            context,
-        })
+    const headSha = (
+      await exec('git rev-parse HEAD', {
+        cwd: npath.toPortablePath(cwd),
+      })
+    ).stdout.trim()
 
-        expect(strategies.has('pkg-1')).toBe(false)
-        expect(strategies).toEqual(
-            new Map([
-                [
-                    'pkg-2',
-                    {
-                        commits: [{ body: `${mockMessage}\n\n`, sha: headSha }],
-                        type: 'minor',
-                    },
-                ],
-            ]),
-        )
+    const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
+      config: {
+        ...(await getMonoweaveConfig({
+          cwd,
+          commitSha: headSha,
+          baseBranch: 'main',
+        })),
+        commitIgnorePatterns: ['ignore-me'],
+      },
+      context,
     })
 
-    it('ignores ignored files', async () => {
-        const cwd = tempRepositoryRoot
-        const context = await setupContext(cwd)
-        await createCommit('feat: initial commit', cwd)
-        await exec('git checkout -b test-branch', { cwd: npath.toPortablePath(cwd) })
+    expect(strategies.has('pkg-1')).toBe(false)
+    expect(strategies).toEqual(
+      new Map([
+        [
+          'pkg-2',
+          {
+            commits: [{ body: `${mockMessage}\n\n`, sha: headSha }],
+            type: 'minor',
+          },
+        ],
+      ]),
+    )
+  })
 
-        await createFile({ filePath: path.join('packages', 'pkg-1', 'test.js'), cwd })
-        await createFile({ filePath: path.join('packages', 'pkg-2', 'test.test.js'), cwd })
+  it('ignores ignored files', async () => {
+    const cwd = tempRepositoryRoot
+    const context = await setupContext(cwd)
+    await createCommit('feat: initial commit', cwd)
+    await exec('git checkout -b test-branch', { cwd: npath.toPortablePath(cwd) })
 
-        const mockMessage = 'feat: woa'
-        await createCommit(mockMessage, cwd)
-        const headSha = (
-            await exec('git rev-parse HEAD', {
-                cwd: npath.toPortablePath(cwd),
-            })
-        ).stdout.trim()
+    await createFile({ filePath: path.join('packages', 'pkg-1', 'test.js'), cwd })
+    await createFile({ filePath: path.join('packages', 'pkg-2', 'test.test.js'), cwd })
 
-        const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
-            config: {
-                ...(await getMonoweaveConfig({
-                    cwd,
-                    commitSha: headSha,
-                    baseBranch: 'main',
-                })),
-                changesetIgnorePatterns: ['**/*.test.js', '**/*.md'],
-            },
-            context,
-        })
+    const mockMessage = 'feat: woa'
+    await createCommit(mockMessage, cwd)
+    const headSha = (
+      await exec('git rev-parse HEAD', {
+        cwd: npath.toPortablePath(cwd),
+      })
+    ).stdout.trim()
 
-        expect(strategies.has('pkg-2')).toBe(false)
-        expect(strategies).toEqual(
-            new Map([
-                [
-                    'pkg-1',
-                    {
-                        commits: [{ body: `${mockMessage}\n\n`, sha: headSha }],
-                        type: 'minor',
-                    },
-                ],
-            ]),
-        )
+    const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
+      config: {
+        ...(await getMonoweaveConfig({
+          cwd,
+          commitSha: headSha,
+          baseBranch: 'main',
+        })),
+        changesetIgnorePatterns: ['**/*.test.js', '**/*.md'],
+      },
+      context,
     })
 
-    it('coerces none determiner results to the minimum strategy', async () => {
-        const cwd = tempRepositoryRoot
-        const context = await setupContext(cwd)
-        await createCommit('feat: initial commit', cwd)
-        await exec('git checkout -b test-branch', { cwd: npath.toPortablePath(cwd) })
-        await createFile({ filePath: path.join('packages', 'pkg-1', 'test.js'), cwd })
-        const mockMessage = 'chore: woa'
-        await createCommit(mockMessage, cwd)
-        const headSha = (
-            await exec('git rev-parse HEAD', {
-                cwd: npath.toPortablePath(cwd),
-            })
-        ).stdout.trim()
-        const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
-            config: await getMonoweaveConfig({
-                cwd,
-                commitSha: headSha,
-                baseBranch: 'main',
-                versionStrategy: {
-                    minimumStrategy: 'minor',
-                },
-            }),
-            context,
-        })
+    expect(strategies.has('pkg-2')).toBe(false)
+    expect(strategies).toEqual(
+      new Map([
+        [
+          'pkg-1',
+          {
+            commits: [{ body: `${mockMessage}\n\n`, sha: headSha }],
+            type: 'minor',
+          },
+        ],
+      ]),
+    )
+  })
 
-        expect(strategies).toEqual(
-            new Map([
-                [
-                    'pkg-1',
-                    {
-                        commits: [{ body: `${mockMessage}\n\n`, sha: headSha }],
-                        type: 'minor',
-                    },
-                ],
-            ]),
-        )
+  it('coerces none determiner results to the minimum strategy', async () => {
+    const cwd = tempRepositoryRoot
+    const context = await setupContext(cwd)
+    await createCommit('feat: initial commit', cwd)
+    await exec('git checkout -b test-branch', { cwd: npath.toPortablePath(cwd) })
+    await createFile({ filePath: path.join('packages', 'pkg-1', 'test.js'), cwd })
+    const mockMessage = 'chore: woa'
+    await createCommit(mockMessage, cwd)
+    const headSha = (
+      await exec('git rev-parse HEAD', {
+        cwd: npath.toPortablePath(cwd),
+      })
+    ).stdout.trim()
+    const { intentionalStrategies: strategies } = await getExplicitVersionStrategies({
+      config: await getMonoweaveConfig({
+        cwd,
+        commitSha: headSha,
+        baseBranch: 'main',
+        versionStrategy: {
+          minimumStrategy: 'minor',
+        },
+      }),
+      context,
     })
+
+    expect(strategies).toEqual(
+      new Map([
+        [
+          'pkg-1',
+          {
+            commits: [{ body: `${mockMessage}\n\n`, sha: headSha }],
+            type: 'minor',
+          },
+        ],
+      ]),
+    )
+  })
 })

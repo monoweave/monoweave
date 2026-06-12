@@ -1,8 +1,8 @@
 {
-    "extends": "../tsconfig.json",
-    "compilerOptions": {
-        "declarationDir": "./lib",
-        "outDir": "./lib"
-    },
-    "include": ["./src", "./src/command/config/schema.json"],
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "declarationDir": "./lib",
+    "outDir": "./lib"
+  },
+  "include": ["./src", "./src/command/config/schema.json"]
 }

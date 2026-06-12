@@ -4,7 +4,6 @@ title: 'FAQ'
 sidebar_position: 6
 ---
 
-
 ### Can Monoweave be used without Yarn Modern/Berry?
 
 No. Monoweave uses Yarn Modern's public API to do most of the heavy lifting in reading and writing to your project.
@@ -68,124 +67,124 @@ Fixed version mode can be achieved by setting the `packageGroupManifestField` in
 Monoweave only supports [Yarn-modern](https://yarnpkg.com) projects with minimum Node version >=18.19.
 
 <div class="scroll">
-<table class="plain">
+  <table class="plain">
     <thead>
-        <tr>
-            <th>Tool</th>
-            <th>Package Managers</th>
-            <th>Monorepo Support</th>
-            <th>Conventional Commits</th>
-            <th>Changeset Files</th>
-            <th>Changelogs</th>
-            <th>publishConfig overrides</th>
-            <th>workspace:^ protocol</th>
-            <th>Version Groups</th>
-            <th>Pull Request Previews</th>
-            <th>GitHub Releases</th>
-            <th>Plugin Support</th>
-        </tr>
+      <tr>
+        <th>Tool</th>
+        <th>Package Managers</th>
+        <th>Monorepo Support</th>
+        <th>Conventional Commits</th>
+        <th>Changeset Files</th>
+        <th>Changelogs</th>
+        <th>publishConfig overrides</th>
+        <th>workspace:^ protocol</th>
+        <th>Version Groups</th>
+        <th>Pull Request Previews</th>
+        <th>GitHub Releases</th>
+        <th>Plugin Support</th>
+      </tr>
     </thead>
     <tbody>
-        <tr>
-            <th>[Monoweave](https://github.com/monoweave/monoweave)</th>
-            <td>yarn</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-        </tr>
-        <tr>
-            <th>[Lerna](https://github.com/lerna/lerna)</th>
-            <td>yarn, npm, pnpm</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>❌</td>
-            <td>🟨</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>❌</td>
-        </tr>
-        <tr>
-            <th>[Lerna Lite](https://github.com/lerna-lite/lerna-lite)</th>
-            <td>yarn, npm, pnpm</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>🟨</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>❌</td>
-        </tr>
-        <tr>
-            <th>[Yarn Version Plugin](https://yarnpkg.com/cli/version)</th>
-            <td>yarn</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>❌</td>
-            <td>❌</td>
-            <td>✅</td>
-        </tr>
-        <tr>
-            <th>[Atlassian Changesets](https://github.com/changesets/changesets)</th>
-            <td>[yarn*](https://github.com/changesets/changesets/pull/674), npm, pnpm</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>❌</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>❌</td>
-        </tr>
-        <tr>
-            <th>[Microsoft Beachball](https://github.com/microsoft/beachball)</th>
-            <td>yarn, npm, pnpm</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>❌[*](https://github.com/microsoft/beachball/issues/885)</td>
-            <td>❌</td>
-        </tr>
-        <tr>
-            <th>[Semantic Release](https://github.com/semantic-release/semantic-release)</th>
-            <td>yarn, npm, pnpm</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>N/A</td>
-            <td>N/A</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>✅</td>
-        </tr>
+      <tr>
+        <th>[Monoweave](https://github.com/monoweave/monoweave)</th>
+        <td>yarn</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <th>[Lerna](https://github.com/lerna/lerna)</th>
+        <td>yarn, npm, pnpm</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>🟨</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <th>[Lerna Lite](https://github.com/lerna-lite/lerna-lite)</th>
+        <td>yarn, npm, pnpm</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>🟨</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <th>[Yarn Version Plugin](https://yarnpkg.com/cli/version)</th>
+        <td>yarn</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <th>[Atlassian Changesets](https://github.com/changesets/changesets)</th>
+        <td>[yarn*](https://github.com/changesets/changesets/pull/674), npm, pnpm</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <th>[Microsoft Beachball](https://github.com/microsoft/beachball)</th>
+        <td>yarn, npm, pnpm</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>❌[*](https://github.com/microsoft/beachball/issues/885)</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <th>[Semantic Release](https://github.com/semantic-release/semantic-release)</th>
+        <td>yarn, npm, pnpm</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>✅</td>
+      </tr>
     </tbody>
-</table>
+  </table>
 </div>
 
 > Legend: ✅ supported, 🟨 partial support, ❌ not supported
@@ -206,10 +205,10 @@ _If you notice an error or inaccuracy in the above comparison table, please open
 10. GitHub Releases: Monoweave implements GitHub releases using the monoweave plugin system. We have some open issues tracking additional functionality for the plugin.
 11. Plugin Support: Monoweave exposes [tappable](https://github.com/webpack/tapable) hooks, this is how the GitHub releases functionality is added. Since Monoweave uses Yarn internally, Yarn plugins can also be used to extend monoweave.
 
-
 ### How can I use Monoweave with [NPM's trusted publishing workflow](https://docs.npmjs.com/trusted-publishers)?
 
 Note that NPM's trusted publishing has a few limitations:
+
 - You must first publish a package before you can enable trusted publishing. To workaround this chicken and egg problem, you can first publish a "dummy" package, for example with a tool such as https://github.com/azu/setup-npm-trusted-publish.
 - Trusted publishing needs to be enabled per package and cannot just be turned on for a npm scope.
 - You can only use a single workflow filename and environment, which means if you're using trusted publishing with private packages, you may have difficulty using the Monoweave Preview github action as that action also needs to fetch dist tags using the trusted workflow and environment.

@@ -6,6 +6,4 @@
 
 ### Bug Fixes
 
-* initial commit, forked from tophat/monodeploy under Apache 2.0 license (#1) ([7d56314](https://github.com/monoweave/monoweave/commits/7d56314))
-
-
+- initial commit, forked from tophat/monodeploy under Apache 2.0 license (#1) ([7d56314](https://github.com/monoweave/monoweave/commits/7d56314))

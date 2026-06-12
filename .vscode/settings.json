@@ -1,0 +1,16 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  },
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "oxc.path.oxfmt": ".yarn/sdks/oxfmt/bin/oxfmt",
+  "oxc.path.oxlint": ".yarn/sdks/oxlint/bin/oxlint",
+  "oxc.path.tsgolint": ".yarn/sdks/oxlint-tsgolint/bin/tsgolint"
+}

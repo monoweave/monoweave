@@ -1,11 +1,11 @@
 export interface TemplateContext {
-    version: string
-    title: string
-    host: string
-    owner: any
-    repository: string
-    repoUrl: string
-    currentTag: string
-    previousTag: string | undefined
-    linkCompare: boolean
+  version: string
+  title: string
+  host: string
+  owner: any
+  repository: string
+  repoUrl: string
+  currentTag: string
+  previousTag: string | undefined
+  linkCompare: boolean
 }

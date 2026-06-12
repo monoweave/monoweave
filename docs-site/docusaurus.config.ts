@@ -5,105 +5,105 @@ import { themes as prismThemes } from 'prism-react-renderer'
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-    title: 'Monoweave',
+  title: 'Monoweave',
 
-    // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
-    future: {
-        v4: true, // Improve compatibility with the upcoming Docusaurus v4
-    },
+  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
+  future: {
+    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+  },
 
-    // Set the production url of your site here
-    url: 'https://monoweave.github.io',
-    // Set the /<baseUrl>/ pathname under which your site is served
-    // For GitHub pages deployment, it is often '/<projectName>/'
-    baseUrl: '/monoweave/',
+  // Set the production url of your site here
+  url: 'https://monoweave.github.io',
+  // Set the /<baseUrl>/ pathname under which your site is served
+  // For GitHub pages deployment, it is often '/<projectName>/'
+  baseUrl: '/monoweave/',
 
-    // GitHub pages deployment config.
-    // If you aren't using GitHub pages, you don't need these.
-    organizationName: 'monoweave', // Usually your GitHub org/user name.
-    projectName: 'monoweave', // Usually your repo name.
+  // GitHub pages deployment config.
+  // If you aren't using GitHub pages, you don't need these.
+  organizationName: 'monoweave', // Usually your GitHub org/user name.
+  projectName: 'monoweave', // Usually your repo name.
 
-    onBrokenLinks: 'throw',
+  onBrokenLinks: 'throw',
 
-    markdown: {
-        format: 'detect',
-    },
+  markdown: {
+    format: 'detect',
+  },
 
-    // Even if you don't use internationalization, you can use this field to set
-    // useful metadata like html lang. For example, if your site is Chinese, you
-    // may want to replace "en" with "zh-Hans".
-    i18n: {
-        defaultLocale: 'en',
-        locales: ['en'],
-    },
+  // Even if you don't use internationalization, you can use this field to set
+  // useful metadata like html lang. For example, if your site is Chinese, you
+  // may want to replace "en" with "zh-Hans".
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en'],
+  },
 
-    plugins: [
-        [
-            'docusaurus-plugin-typedoc',
-            {
-                entryPoints: ['../packages/types/src/types.ts'],
-                tsconfig: '../packages/types/tsconfig.json',
-                out: 'api',
-            },
-        ],
-        [
-            '@docusaurus/plugin-content-docs',
-            {
-                id: 'api',
-                path: 'api',
-                routeBasePath: 'api',
-                sidebarPath: false,
-            },
-        ],
+  plugins: [
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        entryPoints: ['../packages/types/src/types.ts'],
+        tsconfig: '../packages/types/tsconfig.json',
+        out: 'api',
+      },
     ],
-
-    presets: [
-        [
-            'classic',
-            {
-                docs: {
-                    sidebarPath: false,
-                    // Please change this to your repo.
-                    // Remove this to remove the "edit this page" links.
-                    editUrl: 'https://github.com/monoweave/monoweave/tree/main/docs-site/',
-                },
-                theme: {
-                    customCss: './src/css/custom.css',
-                },
-            } satisfies Preset.Options,
-        ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'api',
+        path: 'api',
+        routeBasePath: 'api',
+        sidebarPath: false,
+      },
     ],
+  ],
 
-    themeConfig: {
-        colorMode: {
-            respectPrefersColorScheme: true,
+  presets: [
+    [
+      'classic',
+      {
+        docs: {
+          sidebarPath: false,
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl: 'https://github.com/monoweave/monoweave/tree/main/docs-site/',
         },
-        navbar: {
-            title: 'Monoweave',
-            items: [
-                { to: '/docs/intro', label: 'Home', position: 'left' },
-                { to: '/docs/getting-started', label: 'Getting Started', position: 'left' },
-                { to: '/docs/configuration', label: 'Configuration', position: 'left' },
-                { to: '/docs/plugins', label: 'Plugins', position: 'left' },
-                { to: '/docs/architecture', label: 'Architecture', position: 'left' },
-                { to: '/docs/faq', label: 'FAQ', position: 'left' },
-                { to: '/docs/contributing', label: 'Contributing', position: 'left' },
-                {
-                    href: 'https://github.com/monoweave/monoweave',
-                    label: 'View GitHub Project',
-                    position: 'right',
-                },
-            ],
+        theme: {
+          customCss: './src/css/custom.css',
         },
-        footer: {
-            style: 'dark',
-            copyright: `<a href="https://noahnu.com/" rel="noreferrer" target="_blank">noahnu</a> © ${new Date().getFullYear()}`,
+      } satisfies Preset.Options,
+    ],
+  ],
+
+  themeConfig: {
+    colorMode: {
+      respectPrefersColorScheme: true,
+    },
+    navbar: {
+      title: 'Monoweave',
+      items: [
+        { to: '/docs/intro', label: 'Home', position: 'left' },
+        { to: '/docs/getting-started', label: 'Getting Started', position: 'left' },
+        { to: '/docs/configuration', label: 'Configuration', position: 'left' },
+        { to: '/docs/plugins', label: 'Plugins', position: 'left' },
+        { to: '/docs/architecture', label: 'Architecture', position: 'left' },
+        { to: '/docs/faq', label: 'FAQ', position: 'left' },
+        { to: '/docs/contributing', label: 'Contributing', position: 'left' },
+        {
+          href: 'https://github.com/monoweave/monoweave',
+          label: 'View GitHub Project',
+          position: 'right',
         },
-        prism: {
-            theme: prismThemes.github,
-            darkTheme: prismThemes.dracula,
-        },
-    } satisfies Preset.ThemeConfig,
+      ],
+    },
+    footer: {
+      style: 'dark',
+      copyright: `<a href="https://noahnu.com/" rel="noreferrer" target="_blank">noahnu</a> © ${new Date().getFullYear()}`,
+    },
+    prism: {
+      theme: prismThemes.github,
+      darkTheme: prismThemes.dracula,
+    },
+  } satisfies Preset.ThemeConfig,
 }
 
 export default config
