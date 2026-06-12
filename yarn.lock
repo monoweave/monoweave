@@ -4064,7 +4064,7 @@ __metadata:
     prism-react-renderer: "npm:^2.4.1"
     react: "npm:^19.2.4"
     react-dom: "npm:^19.2.4"
-    typedoc: "npm:^0.28.18"
+    typedoc: "npm:^0.28.19"
     typedoc-plugin-markdown: "npm:^4.11.0"
     typescript: "npm:~5.9.3"
   languageName: unknown
@@ -4291,7 +4291,7 @@ __metadata:
     "@yarnpkg/core": "npm:^4.8.0"
     tapable: "npm:^2.3.2"
     tsx: "npm:^4.21.0"
-    typedoc: "npm:^0.28.18"
+    typedoc: "npm:^0.28.19"
     typescript: "npm:^5.9.3"
     vitest: "npm:^4.1.8"
   peerDependencies:
@@ -17969,7 +17969,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:*, typedoc@npm:^0.28.18":
+"typedoc@npm:*, typedoc@npm:^0.28.19":
   version: 0.28.19
   resolution: "typedoc@npm:0.28.19"
   dependencies:
