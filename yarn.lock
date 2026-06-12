@@ -4112,7 +4112,7 @@ __metadata:
     conventional-changelog-writer: "npm:^7.0.1"
     conventional-commits-parser: "npm:^5.0.0"
     p-limit: "npm:^7.3.0"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
   peerDependencies:
     "@monoweave/git": "workspace:^2.5.0"
     "@monoweave/io": "workspace:^2.5.0"
@@ -4139,7 +4139,7 @@ __metadata:
     "@monoweave/types": "workspace:^2.5.0"
     "@monoweave/versions": "workspace:^2.5.0"
     "@types/node": "npm:^22.19.15"
-    "@yarnpkg/cli": "npm:^4.15.0"
+    "@yarnpkg/cli": "npm:^4.16.0"
     "@yarnpkg/core": "npm:^4.8.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/plugin-npm": "npm:^3.6.0"
@@ -4149,7 +4149,7 @@ __metadata:
     clipanion: "npm:^4.0.0-rc.4"
     json5: "npm:^2.2.3"
     typanion: "npm:^3.14.0"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
     yaml: "npm:^2.8.3"
   bin:
     monoweave: ./src/index.ts
@@ -4165,7 +4165,7 @@ __metadata:
     "@monoweave/types": "workspace:*"
     "@yarnpkg/core": "npm:^4.8.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
   peerDependencies:
     "@monoweave/logging": "workspace:^2.5.0"
     "@monoweave/types": "workspace:^2.5.0"
@@ -4212,7 +4212,7 @@ __metadata:
     "@yarnpkg/shell": "npm:^4.1.3"
     helpers: "link:./helpers"
     tsx: "npm:^4.21.0"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
   languageName: unknown
   linkType: soft
 
@@ -4230,7 +4230,7 @@ __metadata:
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/shell": "npm:^4.1.3"
     micromatch: "npm:^4.0.8"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
   peerDependencies:
     "@monoweave/io": "workspace:^2.5.0"
     "@monoweave/logging": "workspace:^2.5.0"
@@ -4254,7 +4254,7 @@ __metadata:
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/shell": "npm:^4.1.3"
     semver: "npm:^7.7.4"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
   peerDependencies:
     "@monoweave/logging": "workspace:^2.5.0"
     "@monoweave/types": "workspace:^2.5.0"
@@ -4270,7 +4270,7 @@ __metadata:
   dependencies:
     "@types/node": "npm:^22.19.15"
     "@yarnpkg/core": "npm:^4.8.0"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
   peerDependencies:
     "@yarnpkg/core": ^4.8.0
   languageName: unknown
@@ -4298,14 +4298,14 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.57.2"
     "@typescript-eslint/parser": "npm:^8.57.2"
     "@typescript-eslint/utils": "npm:^8.57.2"
-    "@vitest/coverage-v8": "npm:^4.1.2"
-    "@vitest/eslint-plugin": "npm:^1.6.13"
-    "@yarnpkg/cli": "npm:^4.15.0"
+    "@vitest/coverage-v8": "npm:^4.1.8"
+    "@vitest/eslint-plugin": "npm:^1.6.19"
+    "@yarnpkg/cli": "npm:^4.16.0"
     "@yarnpkg/core": "npm:^4.8.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/plugin-npm": "npm:^3.6.0"
     "@yarnpkg/plugin-pack": "npm:^4.0.4"
-    "@yarnpkg/sdks": "npm:^3.2.3"
+    "@yarnpkg/sdks": "npm:^3.3.0"
     "@yarnpkg/shell": "npm:^4.1.3"
     "@yarnpkg/types": "npm:^4.0.1"
     all-contributors-cli: "npm:^6.26.1"
@@ -4323,13 +4323,8 @@ __metadata:
     prettier: "npm:^3.8.1"
     tsx: "npm:^4.21.0"
     typescript: "npm:^5.9.3"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
     yaml-validator: "npm:^5.1.0"
-  dependenciesMeta:
-    core-js:
-      built: false
-    core-js-pure:
-      built: false
   languageName: unknown
   linkType: soft
 
@@ -4348,7 +4343,7 @@ __metadata:
     "@monoweave/versions": "workspace:^2.5.0"
     "@types/micromatch": "npm:^4.0.10"
     "@types/node": "npm:^22.19.15"
-    "@yarnpkg/cli": "npm:^4.15.0"
+    "@yarnpkg/cli": "npm:^4.16.0"
     "@yarnpkg/core": "npm:^4.8.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/plugin-npm": "npm:^3.6.0"
@@ -4356,7 +4351,7 @@ __metadata:
     "@yarnpkg/shell": "npm:^4.1.3"
     micromatch: "npm:^4.0.8"
     tapable: "npm:^2.3.2"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
   languageName: unknown
   linkType: soft
 
@@ -4376,7 +4371,7 @@ __metadata:
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/shell": "npm:^4.1.3"
     tapable: "npm:^2.3.2"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
   languageName: unknown
   linkType: soft
 
@@ -4390,21 +4385,21 @@ __metadata:
     "@monoweave/logging": "workspace:*"
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
-    "@yarnpkg/cli": "npm:^4.15.0"
+    "@yarnpkg/cli": "npm:^4.16.0"
     "@yarnpkg/core": "npm:^4.8.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/plugin-npm": "npm:^3.6.0"
     "@yarnpkg/plugin-pack": "npm:^4.0.4"
     "@yarnpkg/shell": "npm:^4.1.3"
     p-limit: "npm:^7.3.0"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
   peerDependencies:
     "@monoweave/dependencies": "workspace:^2.5.0"
     "@monoweave/git": "workspace:^2.5.0"
     "@monoweave/io": "workspace:^2.5.0"
     "@monoweave/logging": "workspace:^2.5.0"
     "@monoweave/types": "workspace:^2.5.0"
-    "@yarnpkg/cli": ^4.15.0
+    "@yarnpkg/cli": ^4.16.0
     "@yarnpkg/core": ^4.8.0
     "@yarnpkg/fslib": ^3.1.5
     "@yarnpkg/plugin-npm": ^3.6.0
@@ -4421,10 +4416,10 @@ __metadata:
     "@monoweave/node": "workspace:*"
     "@monoweave/types": "workspace:*"
     "@types/node": "npm:^22.19.15"
-    "@yarnpkg/cli": "npm:^4.15.0"
+    "@yarnpkg/cli": "npm:^4.16.0"
     "@yarnpkg/core": "npm:^4.8.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
   languageName: unknown
   linkType: soft
 
@@ -4438,7 +4433,7 @@ __metadata:
     tsx: "npm:^4.21.0"
     typedoc: "npm:^0.28.18"
     typescript: "npm:^5.9.3"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
   peerDependencies:
     "@yarnpkg/core": ^4.8.0
   languageName: unknown
@@ -4458,7 +4453,7 @@ __metadata:
     "@types/conventional-commits-parser": "npm:^5.0.2"
     "@types/micromatch": "npm:^4.0.10"
     "@types/semver": "npm:^7.7.1"
-    "@yarnpkg/cli": "npm:^4.15.0"
+    "@yarnpkg/cli": "npm:^4.16.0"
     "@yarnpkg/core": "npm:^4.8.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/plugin-npm": "npm:^3.6.0"
@@ -4468,7 +4463,7 @@ __metadata:
     micromatch: "npm:^4.0.8"
     p-limit: "npm:^7.3.0"
     semver: "npm:^7.7.4"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.8"
     yaml: "npm:^2.8.3"
   peerDependencies:
     "@monoweave/changelog": "workspace:^2.5.0"
@@ -4477,7 +4472,7 @@ __metadata:
     "@monoweave/io": "workspace:^2.5.0"
     "@monoweave/logging": "workspace:^2.5.0"
     "@monoweave/types": "workspace:^2.5.0"
-    "@yarnpkg/cli": ^4.15.0
+    "@yarnpkg/cli": ^4.16.0
     "@yarnpkg/core": ^4.8.0
     "@yarnpkg/fslib": ^3.1.5
     "@yarnpkg/plugin-npm": ^3.6.0
@@ -6645,12 +6640,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-v8@npm:^4.1.2":
-  version: 4.1.4
-  resolution: "@vitest/coverage-v8@npm:4.1.4"
+"@vitest/coverage-v8@npm:^4.1.8":
+  version: 4.1.8
+  resolution: "@vitest/coverage-v8@npm:4.1.8"
   dependencies:
     "@bcoe/v8-coverage": "npm:^1.0.2"
-    "@vitest/utils": "npm:4.1.4"
+    "@vitest/utils": "npm:4.1.8"
     ast-v8-to-istanbul: "npm:^1.0.0"
     istanbul-lib-coverage: "npm:^3.2.2"
     istanbul-lib-report: "npm:^3.0.1"
@@ -6660,18 +6655,18 @@ __metadata:
     std-env: "npm:^4.0.0-rc.1"
     tinyrainbow: "npm:^3.1.0"
   peerDependencies:
-    "@vitest/browser": 4.1.4
-    vitest: 4.1.4
+    "@vitest/browser": 4.1.8
+    vitest: 4.1.8
   peerDependenciesMeta:
     "@vitest/browser":
       optional: true
-  checksum: 10/75c7bfa08d4a410dce09688a7bb1c06b782f90b785a51aea424806621dc90ce21663cf2e8f6f28e3c3c1be708932c5274408cd7cfda51e39dd3e0ae523cca133
+  checksum: 10/08d9ea65ca4cc007a1f1cdc85ea36d51bfa91a9b2f0e9ad27436b777629b4138e33dba2f68c8e68b01343310bf9d5624ad1d6d24553a5b289b66da51561259eb
   languageName: node
   linkType: hard
 
-"@vitest/eslint-plugin@npm:^1.6.13":
-  version: 1.6.16
-  resolution: "@vitest/eslint-plugin@npm:1.6.16"
+"@vitest/eslint-plugin@npm:^1.6.19":
+  version: 1.6.19
+  resolution: "@vitest/eslint-plugin@npm:1.6.19"
   dependencies:
     "@typescript-eslint/scope-manager": "npm:^8.58.0"
     "@typescript-eslint/utils": "npm:^8.58.0"
@@ -6687,29 +6682,29 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 10/422fdc9a80ad88adcd7b1e07fc88866784e57a00e562e1711988264f8912850c5ebf0efec815280b5f6258fcb481133c9fd2c32d04a82ff429e9b976aa2b04db
+  checksum: 10/7d34be943459c5833c83b1ab059c01ad3978ab51b86ff9c3bbe83f3e7789bc24b9af884b0d5b355ede21e0b1418014016d09af077f228b33ad338d2e877211c4
   languageName: node
   linkType: hard
 
-"@vitest/expect@npm:4.1.4":
-  version: 4.1.4
-  resolution: "@vitest/expect@npm:4.1.4"
+"@vitest/expect@npm:4.1.8":
+  version: 4.1.8
+  resolution: "@vitest/expect@npm:4.1.8"
   dependencies:
     "@standard-schema/spec": "npm:^1.1.0"
     "@types/chai": "npm:^5.2.2"
-    "@vitest/spy": "npm:4.1.4"
-    "@vitest/utils": "npm:4.1.4"
+    "@vitest/spy": "npm:4.1.8"
+    "@vitest/utils": "npm:4.1.8"
     chai: "npm:^6.2.2"
     tinyrainbow: "npm:^3.1.0"
-  checksum: 10/3317bc42e4ee39cfa2102a9f08f0c7975817a74d9503a14e0b1715e5b8c4ab31c5646c07ef8d2d3f71bdf6f1b3053949b175df9c8457e0c0bb3f38b9e031f259
+  checksum: 10/cb7d78e250ec77b7e180ac3e5f543501488c69b237d7ed97ffe9196c5e946b0e4a37be05a2ec38af7ce7750c1a98286480acdd247286a29c239b08a13b085d4b
   languageName: node
   linkType: hard
 
-"@vitest/mocker@npm:4.1.4":
-  version: 4.1.4
-  resolution: "@vitest/mocker@npm:4.1.4"
+"@vitest/mocker@npm:4.1.8":
+  version: 4.1.8
+  resolution: "@vitest/mocker@npm:4.1.8"
   dependencies:
-    "@vitest/spy": "npm:4.1.4"
+    "@vitest/spy": "npm:4.1.8"
     estree-walker: "npm:^3.0.3"
     magic-string: "npm:^0.30.21"
   peerDependencies:
@@ -6720,56 +6715,56 @@ __metadata:
       optional: true
     vite:
       optional: true
-  checksum: 10/f07f8877635eb03f63981d0d3348bb82fabe7607bbb6b259045bf0b64fae79150b1f399aa7ce42926e4769dc8cde9b7d79d1f665eae2d17b22ecc9ec54663698
+  checksum: 10/fc977703b07d950aa170bafdef988bc7ba88f0a80159d1563ce95696763729ec1f6d015012aad36cf4e1b522d327b205292c56d76692d2a9f72285d694ed3cba
   languageName: node
   linkType: hard
 
-"@vitest/pretty-format@npm:4.1.4":
-  version: 4.1.4
-  resolution: "@vitest/pretty-format@npm:4.1.4"
+"@vitest/pretty-format@npm:4.1.8":
+  version: 4.1.8
+  resolution: "@vitest/pretty-format@npm:4.1.8"
   dependencies:
     tinyrainbow: "npm:^3.1.0"
-  checksum: 10/e06d63ce4f797ad578ee19aeec996f72835a7274ee2eb75dce12d7b45debcda72d054f58b6f4e5dac4424681dc13dbad7ac023c6017fc60406cabea5a352e4c3
+  checksum: 10/56a4b685cdf9f2e9708025f17dab8c0fa990ab06e5b38606a1ddde52a09830a099843da6a1b127ee48217ab023bad7bd23c49eb4969d77dff07df363fad0bb0e
   languageName: node
   linkType: hard
 
-"@vitest/runner@npm:4.1.4":
-  version: 4.1.4
-  resolution: "@vitest/runner@npm:4.1.4"
+"@vitest/runner@npm:4.1.8":
+  version: 4.1.8
+  resolution: "@vitest/runner@npm:4.1.8"
   dependencies:
-    "@vitest/utils": "npm:4.1.4"
+    "@vitest/utils": "npm:4.1.8"
     pathe: "npm:^2.0.3"
-  checksum: 10/a852477adc6254e1d304bcba9b137f98f09a7001a557e8e4f4404518e3ade58a16ab459e83cf223e38cc37dc4b04d1248a14df56b056a0ae68fc54b19a1226fb
+  checksum: 10/278d1482123877343731b3bb822d0280af928252ee263aab73ca189c39de3bb767ce715581870b2e1eb408f7cba01106a6989406cb2ada1332f181912558a3c1
   languageName: node
   linkType: hard
 
-"@vitest/snapshot@npm:4.1.4":
-  version: 4.1.4
-  resolution: "@vitest/snapshot@npm:4.1.4"
+"@vitest/snapshot@npm:4.1.8":
+  version: 4.1.8
+  resolution: "@vitest/snapshot@npm:4.1.8"
   dependencies:
-    "@vitest/pretty-format": "npm:4.1.4"
-    "@vitest/utils": "npm:4.1.4"
+    "@vitest/pretty-format": "npm:4.1.8"
+    "@vitest/utils": "npm:4.1.8"
     magic-string: "npm:^0.30.21"
     pathe: "npm:^2.0.3"
-  checksum: 10/e957cc95274a9663cd59e5b34c99b6e4e5cd989f04dadf9e3cec6c7bc64b4d167229644f31fd44c19c7acbbcb7cbbbb50e8084dbf1e0322ee411a697d80d490a
+  checksum: 10/162ca0eccb72db02081b04307d21ac8d14c8fcd4a840872459274f589b1665f108bd4119dff19d5a2150a0e26b90531791ebec7ee74f0c2c5285b491cebbcfcb
   languageName: node
   linkType: hard
 
-"@vitest/spy@npm:4.1.4":
-  version: 4.1.4
-  resolution: "@vitest/spy@npm:4.1.4"
-  checksum: 10/516e465413fc6a22e0c7e99871f3b9703277c309e94e7247bbdb83a8e807e2da968cf7a30c61503afd6b565787e822786b8aad443210eba5488192a36730f3ab
+"@vitest/spy@npm:4.1.8":
+  version: 4.1.8
+  resolution: "@vitest/spy@npm:4.1.8"
+  checksum: 10/53e948d8f5e229e969e704dc8a54fd42ad715b2b18f401592f4bba97dcf33bd4cf01d11af577d4efe42dc2d90c9e6574ec991531fd8f1bdfee916a1dd0828547
   languageName: node
   linkType: hard
 
-"@vitest/utils@npm:4.1.4":
-  version: 4.1.4
-  resolution: "@vitest/utils@npm:4.1.4"
+"@vitest/utils@npm:4.1.8":
+  version: 4.1.8
+  resolution: "@vitest/utils@npm:4.1.8"
   dependencies:
-    "@vitest/pretty-format": "npm:4.1.4"
+    "@vitest/pretty-format": "npm:4.1.8"
     convert-source-map: "npm:^2.0.0"
     tinyrainbow: "npm:^3.1.0"
-  checksum: 10/f599ae744f0ff45edda90d0c52eea9809b7367adca39fc985f85880322236d089dfdf6625f04913f03a25a160eccbbc0b16dd3201ccc0ae48087992b1ea755d5
+  checksum: 10/13250b9e7825d425cc9a3d22aeb2e8d117c93e96a192138e93d76bfe7d5a391ab3888c5aa9e0394b0314bdff41e441ad7a32b0c0caa00cd202223b88087dcc78
   languageName: node
   linkType: hard
 
@@ -6938,9 +6933,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/cli@npm:^4.12.0, @yarnpkg/cli@npm:^4.15.0":
-  version: 4.15.0
-  resolution: "@yarnpkg/cli@npm:4.15.0"
+"@yarnpkg/cli@npm:^4.12.0, @yarnpkg/cli@npm:^4.16.0":
+  version: 4.16.0
+  resolution: "@yarnpkg/cli@npm:4.16.0"
   dependencies:
     "@yarnpkg/core": "npm:^4.8.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
@@ -6962,10 +6957,10 @@ __metadata:
     "@yarnpkg/plugin-link": "npm:^3.0.2"
     "@yarnpkg/plugin-nm": "npm:^4.0.9"
     "@yarnpkg/plugin-npm": "npm:^3.6.0"
-    "@yarnpkg/plugin-npm-cli": "npm:^4.4.2"
+    "@yarnpkg/plugin-npm-cli": "npm:^4.5.0"
     "@yarnpkg/plugin-pack": "npm:^4.0.4"
     "@yarnpkg/plugin-patch": "npm:^4.0.4"
-    "@yarnpkg/plugin-pnp": "npm:^4.1.6"
+    "@yarnpkg/plugin-pnp": "npm:^4.1.7"
     "@yarnpkg/plugin-pnpm": "npm:^2.2.0"
     "@yarnpkg/plugin-stage": "npm:^4.0.2"
     "@yarnpkg/plugin-typescript": "npm:^4.1.3"
@@ -6979,11 +6974,11 @@ __metadata:
     typanion: "npm:^3.14.0"
   peerDependencies:
     "@yarnpkg/core": ^4.8.0
-  checksum: 10/495e1ad16e50303deb257242b06eaac4f7dd78852cb9656e5cc81d271715f15dd28577c51e43ae61b81b12bb37294558f5b760c93e7c5764b20f93f3eb3ee671
+  checksum: 10/d955ec70c6d7629dc4ed2c4eea410e06423254604017ada65bd8fee4950ab8ca9e658e9f8c9610921fdef9b0af4d866c2f958490241d0f2b8e4b3371ed571684
   languageName: node
   linkType: hard
 
-"@yarnpkg/core@npm:^4.4.2, @yarnpkg/core@npm:^4.4.3, @yarnpkg/core@npm:^4.5.0, @yarnpkg/core@npm:^4.8.0":
+"@yarnpkg/core@npm:^4.4.2, @yarnpkg/core@npm:^4.5.0, @yarnpkg/core@npm:^4.8.0":
   version: 4.8.0
   resolution: "@yarnpkg/core@npm:4.8.0"
   dependencies:
@@ -7304,9 +7299,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/plugin-npm-cli@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "@yarnpkg/plugin-npm-cli@npm:4.4.2"
+"@yarnpkg/plugin-npm-cli@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "@yarnpkg/plugin-npm-cli@npm:4.5.0"
   dependencies:
     "@yarnpkg/fslib": "npm:^3.1.5"
     clipanion: "npm:^4.0.0-rc.2"
@@ -7316,11 +7311,11 @@ __metadata:
     tslib: "npm:^2.4.0"
     typanion: "npm:^3.14.0"
   peerDependencies:
-    "@yarnpkg/cli": ^4.15.0
+    "@yarnpkg/cli": ^4.16.0
     "@yarnpkg/core": ^4.8.0
     "@yarnpkg/plugin-npm": ^3.6.0
     "@yarnpkg/plugin-pack": ^4.0.4
-  checksum: 10/336e109b505211b208c740fbeb03d5c85b9cdbf904400693db81c38363a912a419e79b309bca734ce47e625784220424984dc6ea18f9943d0da3ae383e1da670
+  checksum: 10/f1214e5453f24711ace7a7a345fc57336002c24703060be5d710daa9340473502439d9927ee9158b78374b3f98c56ea9b45707d21ebe8a716d92b85bc32aca60
   languageName: node
   linkType: hard
 
@@ -7374,20 +7369,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/plugin-pnp@npm:^4.1.6":
-  version: 4.1.6
-  resolution: "@yarnpkg/plugin-pnp@npm:4.1.6"
+"@yarnpkg/plugin-pnp@npm:^4.1.6, @yarnpkg/plugin-pnp@npm:^4.1.7":
+  version: 4.1.7
+  resolution: "@yarnpkg/plugin-pnp@npm:4.1.7"
   dependencies:
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/plugin-stage": "npm:^4.0.2"
-    "@yarnpkg/pnp": "npm:^4.1.6"
+    "@yarnpkg/pnp": "npm:^4.1.7"
     clipanion: "npm:^4.0.0-rc.2"
     micromatch: "npm:^4.0.2"
     tslib: "npm:^2.4.0"
   peerDependencies:
-    "@yarnpkg/cli": ^4.15.0
+    "@yarnpkg/cli": ^4.16.0
     "@yarnpkg/core": ^4.8.0
-  checksum: 10/ab9fbae2ecfd5649f7144deac763dbbbdc9f4cbe72181175917d7df8638b0e803282be156a60add63fd8274d066b99808d61ab5b9b5b5f70557730985d233751
+  checksum: 10/7dcdd7eb04abe49e82a9a925f42f73d269442837e025a2500610cd1a40025acb1268dd6fbb97164cd8a0e654f4f223b97c0f80626f292e6ef5380f64ad7dd60b
   languageName: node
   linkType: hard
 
@@ -7479,22 +7474,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/pnp@npm:^4.1.1, @yarnpkg/pnp@npm:^4.1.6":
-  version: 4.1.6
-  resolution: "@yarnpkg/pnp@npm:4.1.6"
+"@yarnpkg/pnp@npm:^4.1.1, @yarnpkg/pnp@npm:^4.1.6, @yarnpkg/pnp@npm:^4.1.7":
+  version: 4.1.7
+  resolution: "@yarnpkg/pnp@npm:4.1.7"
   dependencies:
     "@types/node": "npm:^18.19.124"
     "@yarnpkg/fslib": "npm:^3.1.5"
-  checksum: 10/a449286f23d380c3f997fe09d370261d974fe75a701fc250f0e0557f7d346f2857fc84e56cb3ba9d09c21d88fc65d597097ccf2889685514cf138be160ae4721
+  checksum: 10/7e37f25086daf3226e79572fd871f503fb5e751a55f3a182fb73f111b5a99d70f991e32f561c9a62067312dea4f3f1aacc1ead4fd2869ffd2ffe018c795262cc
   languageName: node
   linkType: hard
 
-"@yarnpkg/sdks@npm:^3.2.3":
-  version: 3.2.3
-  resolution: "@yarnpkg/sdks@npm:3.2.3"
+"@yarnpkg/sdks@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@yarnpkg/sdks@npm:3.3.0"
   dependencies:
-    "@yarnpkg/core": "npm:^4.4.3"
-    "@yarnpkg/fslib": "npm:^3.1.2"
+    "@yarnpkg/core": "npm:^4.8.0"
+    "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/parsers": "npm:^3.0.3"
     chalk: "npm:^4.1.2"
     clipanion: "npm:^4.0.0-rc.2"
@@ -7503,7 +7498,7 @@ __metadata:
     tslib: "npm:^2.4.0"
   bin:
     sdks: ./lib/cli.js
-  checksum: 10/373f3a1075624c2a73ab2bba13b02bf866076e1f12a97870651bdbd8323e179c60227e3322f0619ae13bf023d725bb3bec2370cbda5a7e6cdb17fedb725bda44
+  checksum: 10/6e8e63bc95f1abc8ea1d4c198f4d882b4f2993f5cb92cf03423bc98531364d6efa52d5a5023e64eaffd2734971552f4f9d7339ee0499be06b802461a4acca030
   languageName: node
   linkType: hard
 
@@ -19283,17 +19278,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:^4.1.2":
-  version: 4.1.4
-  resolution: "vitest@npm:4.1.4"
+"vitest@npm:^4.1.8":
+  version: 4.1.8
+  resolution: "vitest@npm:4.1.8"
   dependencies:
-    "@vitest/expect": "npm:4.1.4"
-    "@vitest/mocker": "npm:4.1.4"
-    "@vitest/pretty-format": "npm:4.1.4"
-    "@vitest/runner": "npm:4.1.4"
-    "@vitest/snapshot": "npm:4.1.4"
-    "@vitest/spy": "npm:4.1.4"
-    "@vitest/utils": "npm:4.1.4"
+    "@vitest/expect": "npm:4.1.8"
+    "@vitest/mocker": "npm:4.1.8"
+    "@vitest/pretty-format": "npm:4.1.8"
+    "@vitest/runner": "npm:4.1.8"
+    "@vitest/snapshot": "npm:4.1.8"
+    "@vitest/spy": "npm:4.1.8"
+    "@vitest/utils": "npm:4.1.8"
     es-module-lexer: "npm:^2.0.0"
     expect-type: "npm:^1.3.0"
     magic-string: "npm:^0.30.21"
@@ -19311,12 +19306,12 @@ __metadata:
     "@edge-runtime/vm": "*"
     "@opentelemetry/api": ^1.9.0
     "@types/node": ^20.0.0 || ^22.0.0 || >=24.0.0
-    "@vitest/browser-playwright": 4.1.4
-    "@vitest/browser-preview": 4.1.4
-    "@vitest/browser-webdriverio": 4.1.4
-    "@vitest/coverage-istanbul": 4.1.4
-    "@vitest/coverage-v8": 4.1.4
-    "@vitest/ui": 4.1.4
+    "@vitest/browser-playwright": 4.1.8
+    "@vitest/browser-preview": 4.1.8
+    "@vitest/browser-webdriverio": 4.1.8
+    "@vitest/coverage-istanbul": 4.1.8
+    "@vitest/coverage-v8": 4.1.8
+    "@vitest/ui": 4.1.8
     happy-dom: "*"
     jsdom: "*"
     vite: ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -19347,7 +19342,7 @@ __metadata:
       optional: false
   bin:
     vitest: vitest.mjs
-  checksum: 10/c5608c506ae9ab3d0baa7445290c240941ad54a93eb853a005b2fe518efb1b28282945e0565ca16a624cca5b23af0c33ee34fbc2c38e6664ea54b08b9a22a653
+  checksum: 10/b9f1308436717da9558b36e149cac6bab8e3730aa7e90b49f9d7a84ba853e353d8afba7d406dc0abec731fb2a9ea9e92b89aba06b94b1a2802203048b43468af
   languageName: node
   linkType: hard
 
