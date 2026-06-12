@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Architecture | Monoweave</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://monoweave.github.io/monoweave/docs/architecture"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Architecture | Monoweave"><meta data-rh="true" name="description" content="Code Organization"><meta data-rh="true" property="og:description" content="Code Organization"><link data-rh="true" rel="canonical" href="https://monoweave.github.io/monoweave/docs/architecture"><link data-rh="true" rel="alternate" href="https://monoweave.github.io/monoweave/docs/architecture" hreflang="en"><link data-rh="true" rel="alternate" href="https://monoweave.github.io/monoweave/docs/architecture" hreflang="x-default"><link rel="stylesheet" href="/monoweave/assets/css/styles.58580f2a.css">
-<script src="/monoweave/assets/js/runtime~main.c9b7c8cb.js" defer="defer"></script>
+<script src="/monoweave/assets/js/runtime~main.c83bb23d.js" defer="defer"></script>
 <script src="/monoweave/assets/js/main.e31e058f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -59,12 +59,8 @@ b. Automatic: If a conventional changelog configuration is provided, it will be 
 <li class="">This is the lifecycle hook that you should be using for any compilation, such as compiling TypeScript to JavaScript. Errors thrown here, or in any early pre lifecycle script, will abort the publish process.</li>
 </ul>
 </li>
-<li class="">
-<delete>publish</delete>
-<ul>
-<li class="">At this &quot;stage&quot; we pack and publish each package. We do not call any &#x27;publish&#x27; lifecycle scripts here.</li>
-</ul>
-</li>
+<li class=""><delete>publish</delete>- At this &quot;stage&quot; we pack and publish each package. We do not call any
+&#x27;publish&#x27; lifecycle scripts here.</li>
 <li class="">postpack<!-- -->
 <ul>
 <li class="">This is guaranteed to execute after packing the archive, regardless of failure. This is useful script for build directory cleanup.</li>
