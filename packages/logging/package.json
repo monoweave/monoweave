@@ -32,10 +32,10 @@
   },
   "devDependencies": {
     "@types/node": "^22.19.15",
-    "@yarnpkg/core": "^4.8.0",
-    "vitest": "^4.1.8"
+    "@yarnpkg/core": "^4.9.0",
+    "vitest": "^4.1.9"
   },
   "peerDependencies": {
-    "@yarnpkg/core": "^4.8.0"
+    "@yarnpkg/core": "^4.9.0"
   }
 }
