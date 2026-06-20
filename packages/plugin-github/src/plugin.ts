@@ -20,6 +20,13 @@ export interface PluginOptions {
    * @default {false}
    */
   includeImplicitUpdates?: boolean | undefined
+
+  /**
+   * Whether to mark the release as the latest release.
+   *
+   * @default {true}
+   */
+  makeLatest?: boolean | undefined
 }
 
 export const createPluginInternals =
@@ -126,6 +133,7 @@ export const createPluginInternals =
           body: combinedChangelog,
           draft: false,
           prerelease: config.prerelease,
+          make_latest: options.makeLatest ?? true,
         })
       }
     }
