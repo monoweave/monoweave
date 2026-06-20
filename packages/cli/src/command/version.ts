@@ -25,7 +25,7 @@ const promptPackage = async ({
 }: {
   pkgName: string
   currentVersion: string | undefined
-  defaultValue?: string | undefined
+  defaultValue?: PackageStrategyType | undefined
 }): Promise<PackageStrategyType | null> => {
   const { select } = await import('@inquirer/prompts')
 

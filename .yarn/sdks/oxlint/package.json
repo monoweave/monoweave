@@ -1,6 +1,6 @@
 {
   "name": "oxlint",
-  "version": "1.69.0-sdk",
+  "version": "1.70.0-sdk",
   "main": "dist/index.js",
   "type": "commonjs",
   "bin": {
