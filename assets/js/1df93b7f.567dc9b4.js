@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_monoweave_docs_site=self.webpackChunk_monoweave_docs_site||[]).push([["452"],{5146(e,s,o){o.r(s),o.d(s,{default:()=>r});var t=o(459),n=o(4559),c=o(4548);function r(){return(0,t.jsx)(n.rd,{to:(0,c.Ay)("/docs/intro")})}}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_monoweave_docs_site=self.webpackChunk_monoweave_docs_site||[]).push([["25"],{7146(e){e.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"api"}')}}]);
