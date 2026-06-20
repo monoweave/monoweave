@@ -214,6 +214,7 @@ describe('GitHub Plugin', () => {
         repo: 'repo',
         tag_name: 'pkg-1@1.0.0',
         prerelease: false,
+        make_latest: true,
         body: 'Implicit version bump due to dependency updates.',
       }),
     )
@@ -285,6 +286,7 @@ describe('GitHub Plugin', () => {
         repo: 'repo',
         tag_name: 'pkg-1@1.0.0',
         prerelease: false,
+        make_latest: true,
         body: 'a new feature',
       }),
     )
@@ -292,6 +294,41 @@ describe('GitHub Plugin', () => {
     // No warnings or errors
     expect(spyWarning).not.toHaveBeenCalled()
     expect(spyError).not.toHaveBeenCalled()
+  })
+
+  it('does not mark release as latest when makeLatest is false', async () => {
+    await using context = await createMonorepoContext(
+      {
+        'pkg-1': {},
+      },
+      { root: { repository: 'https://github.com/example/repo.git' } },
+    )
+    const config = {
+      ...(await getMonoweaveConfig({
+        cwd: context.project.cwd,
+        baseBranch: 'main',
+        commitSha: 'shashasha',
+      })),
+    }
+
+    process.env.GITHUB_TOKEN = 'abc'
+
+    const spyRequest = vi.spyOn(requestModule, 'request')
+    await createPluginInternals({ makeLatest: false })(context, config, {
+      'pkg-1': {
+        version: '1.0.0',
+        tag: 'pkg-1@1.0.0',
+        changelog: 'a new feature',
+        group: 'pkg-1',
+      },
+    })
+    expect(spyRequest).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.any(String),
+      expect.objectContaining({
+        make_latest: false,
+      }),
+    )
   })
 
   it('defaults to GH_TOKEN if GITHUB_TOKEN not specified', async () => {

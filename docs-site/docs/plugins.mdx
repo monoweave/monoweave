@@ -45,6 +45,14 @@ plugins: [
 ]
 ```
 
+By default, created releases are marked as the latest release on GitHub. To change this behaviour, set `makeLatest` to `false`:
+
+```raw
+plugins: [
+  ['@monoweave/plugin-github', { makeLatest: false }]
+]
+```
+
 ## Plugin Development
 
 We use [tapable](https://github.com/webpack/tapable) for an experimental plugin system.
