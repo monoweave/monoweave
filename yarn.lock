@@ -3563,7 +3563,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/prompts@npm:^8.5.1":
+"@inquirer/prompts@npm:^8.5.2":
   version: 8.5.2
   resolution: "@inquirer/prompts@npm:8.5.2"
   dependencies:
@@ -4127,7 +4127,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monoweave/cli@workspace:packages/cli"
   dependencies:
-    "@inquirer/prompts": "npm:^8.5.1"
+    "@inquirer/prompts": "npm:^8.5.2"
     "@monoweave/changelog": "workspace:^2.7.0"
     "@monoweave/dependencies": "workspace:^2.7.0"
     "@monoweave/git": "workspace:^2.7.0"
