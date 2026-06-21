@@ -79,11 +79,11 @@
     "@yarnpkg/types": "^4.0.1",
     "all-contributors-cli": "^6.26.1",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.6",
+    "lint-staged": "^17.0.7",
     "oxfmt": "^0.55.0",
     "oxlint": "^1.70.0",
     "oxlint-tsgolint": "^0.23.0",
-    "tsx": "^4.22.3",
+    "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9",
     "yaml-validator": "^5.1.0"
