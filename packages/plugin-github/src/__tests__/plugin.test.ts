@@ -214,7 +214,7 @@ describe('GitHub Plugin', () => {
         repo: 'repo',
         tag_name: 'pkg-1@1.0.0',
         prerelease: false,
-        make_latest: true,
+        make_latest: 'true',
         body: 'Implicit version bump due to dependency updates.',
       }),
     )
@@ -286,7 +286,7 @@ describe('GitHub Plugin', () => {
         repo: 'repo',
         tag_name: 'pkg-1@1.0.0',
         prerelease: false,
-        make_latest: true,
+        make_latest: 'true',
         body: 'a new feature',
       }),
     )
@@ -326,7 +326,7 @@ describe('GitHub Plugin', () => {
       expect.anything(),
       expect.any(String),
       expect.objectContaining({
-        make_latest: false,
+        make_latest: 'false',
       }),
     )
   })
