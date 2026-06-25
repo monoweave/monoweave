@@ -133,7 +133,10 @@ export const createPluginInternals =
           body: combinedChangelog,
           draft: false,
           prerelease: config.prerelease,
-          make_latest: options.makeLatest ?? true,
+          // The GitHub REST API expects make_latest as a string enum
+          // ('true' | 'false' | 'legacy'), not a boolean.
+          // See: https://docs.github.com/en/rest/releases/releases#create-a-release
+          make_latest: (options.makeLatest ?? true) ? 'true' : 'false',
         })
       }
     }
