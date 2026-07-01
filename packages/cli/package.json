@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@monoweave/test-utils": "workspace:*",
-    "@types/node": "^22.19.20",
+    "@types/node": "^22.19.21",
     "vitest": "^4.1.9"
   },
   "dependencies": {
