@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { pathToFileURL } from 'node:url'
 
 import type { MonoweaveConfigFile } from '@monoweave/types'
 import { structUtils } from '@yarnpkg/core'
@@ -32,7 +33,8 @@ async function loadFile(filename: string): Promise<unknown> {
     return require(filename)
   }
 
-  const mod = await import(filename)
+  const importPath = path.isAbsolute(filename) ? pathToFileURL(filename).href : filename
+  const mod = await import(importPath)
   if ('default' in mod && mod.default) {
     return mod.default
   }
