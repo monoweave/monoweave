@@ -67,7 +67,7 @@
     "@noahnu/yarn-semver-up": "^0.0.6",
     "@tophat/commitlint-config": "^1.0.2",
     "@tophat/conventional-changelog-config": "^1.0.1",
-    "@types/node": "^22.19.21",
+    "@types/node": "^26.0.0",
     "@vitest/coverage-v8": "^4.1.9",
     "@yarnpkg/cli": "^4.17.0",
     "@yarnpkg/core": "^4.9.0",
