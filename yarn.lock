@@ -4104,7 +4104,7 @@ __metadata:
     "@monoweave/types": "workspace:*"
     "@types/conventional-changelog-writer": "npm:^4.0.11"
     "@types/conventional-commits-parser": "npm:^5.0.2"
-    "@types/node": "npm:^22.19.21"
+    "@types/node": "npm:^26.0.0"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/shell": "npm:^4.1.3"
@@ -4137,7 +4137,7 @@ __metadata:
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:^2.7.0"
     "@monoweave/versions": "workspace:^2.7.0"
-    "@types/node": "npm:^22.19.21"
+    "@types/node": "npm:^26.0.0"
     "@yarnpkg/cli": "npm:^4.17.0"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
@@ -4206,7 +4206,7 @@ __metadata:
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
     "@tophat/conventional-changelog-config": "npm:^1.0.1"
-    "@types/node": "npm:^22.19.21"
+    "@types/node": "npm:^26.0.0"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/shell": "npm:^4.1.3"
@@ -4225,7 +4225,7 @@ __metadata:
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
     "@types/micromatch": "npm:^4.0.10"
-    "@types/node": "npm:^22.19.21"
+    "@types/node": "npm:^26.0.0"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/shell": "npm:^4.1.3"
@@ -4248,7 +4248,7 @@ __metadata:
     "@monoweave/logging": "workspace:*"
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
-    "@types/node": "npm:^22.19.21"
+    "@types/node": "npm:^26.0.0"
     "@types/semver": "npm:^7.7.1"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
@@ -4268,7 +4268,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monoweave/logging@workspace:packages/logging"
   dependencies:
-    "@types/node": "npm:^22.19.21"
+    "@types/node": "npm:^26.0.0"
     "@yarnpkg/core": "npm:^4.9.0"
     vitest: "npm:^4.1.9"
   peerDependencies:
@@ -4291,7 +4291,7 @@ __metadata:
     "@noahnu/yarn-semver-up": "npm:^0.0.6"
     "@tophat/commitlint-config": "npm:^1.0.2"
     "@tophat/conventional-changelog-config": "npm:^1.0.1"
-    "@types/node": "npm:^22.19.21"
+    "@types/node": "npm:^26.0.0"
     "@vitest/coverage-v8": "npm:^4.1.9"
     "@yarnpkg/cli": "npm:^4.17.0"
     "@yarnpkg/core": "npm:^4.9.0"
@@ -4328,7 +4328,7 @@ __metadata:
     "@monoweave/types": "workspace:^2.7.0"
     "@monoweave/versions": "workspace:^2.7.0"
     "@types/micromatch": "npm:^4.0.10"
-    "@types/node": "npm:^22.19.21"
+    "@types/node": "npm:^26.0.0"
     "@yarnpkg/cli": "npm:^4.17.0"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
@@ -4352,7 +4352,7 @@ __metadata:
     "@monoweave/types": "workspace:^2.7.0"
     "@octokit/core": "npm:^7.0.6"
     "@octokit/plugin-throttling": "npm:^11.0.3"
-    "@types/node": "npm:^22.19.21"
+    "@types/node": "npm:^26.0.0"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/shell": "npm:^4.1.3"
@@ -4401,7 +4401,7 @@ __metadata:
     "@monoweave/io": "workspace:*"
     "@monoweave/node": "workspace:*"
     "@monoweave/types": "workspace:*"
-    "@types/node": "npm:^22.19.21"
+    "@types/node": "npm:^26.0.0"
     "@yarnpkg/cli": "npm:^4.17.0"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
@@ -4413,7 +4413,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monoweave/types@workspace:packages/types"
   dependencies:
-    "@types/node": "npm:^22.19.21"
+    "@types/node": "npm:^26.0.0"
     "@yarnpkg/core": "npm:^4.9.0"
     tapable: "npm:^2.3.3"
     tsx: "npm:^4.22.4"
@@ -6475,12 +6475,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^22.19.21":
-  version: 22.20.0
-  resolution: "@types/node@npm:22.20.0"
+"@types/node@npm:*, @types/node@npm:^26.0.0":
+  version: 26.1.0
+  resolution: "@types/node@npm:26.1.0"
   dependencies:
-    undici-types: "npm:~6.21.0"
-  checksum: 10/527db73c68206572fc6209eb8a739c26ea17ba0bd99f776e73654082f9210fb2145a5a5726bdfc5896d41d22e5ae9b8987dcac3dca51774f1ad1a72fc4e7511f
+    undici-types: "npm:~8.3.0"
+  checksum: 10/fee720e8ddf8aa66a22bc5cf3209347f8dcc07cbf7475f966761684f04fb34b819739a311edbf87271d6c7f9f50b1f015d3ff9e36d67d04264aafe18ac9a3796
   languageName: node
   linkType: hard
 
@@ -18539,10 +18539,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici-types@npm:~6.21.0":
-  version: 6.21.0
-  resolution: "undici-types@npm:6.21.0"
-  checksum: 10/ec8f41aa4359d50f9b59fa61fe3efce3477cc681908c8f84354d8567bb3701fafdddf36ef6bff307024d3feb42c837cf6f670314ba37fc8145e219560e473d14
+"undici-types@npm:~8.3.0":
+  version: 8.3.0
+  resolution: "undici-types@npm:8.3.0"
+  checksum: 10/6681d2837ac75a75ac1cc46090aa2b8ddc7c6b8ecc295a6cdb06838752a730da3d8afeecf05e5ab7903160eafad3a8b6ffa1927e5ded260590f4d4fef18646d5
   languageName: node
   linkType: hard
 
