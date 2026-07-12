@@ -64,7 +64,7 @@
     "@monoweave/plugin-github": "workspace:*",
     "@monoweave/test-utils": "workspace:*",
     "@monoweave/types": "workspace:*",
-    "@noahnu/yarn-semver-up": "^0.0.6",
+    "@noahnu/yarn-semver-up": "^0.0.7",
     "@tophat/commitlint-config": "^1.0.2",
     "@tophat/conventional-changelog-config": "^1.0.1",
     "@types/node": "^26.0.0",
