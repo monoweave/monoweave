@@ -4288,7 +4288,7 @@ __metadata:
     "@monoweave/plugin-github": "workspace:*"
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
-    "@noahnu/yarn-semver-up": "npm:^0.0.6"
+    "@noahnu/yarn-semver-up": "npm:^0.0.7"
     "@tophat/commitlint-config": "npm:^1.0.2"
     "@tophat/conventional-changelog-config": "npm:^1.0.1"
     "@types/node": "npm:^26.0.0"
@@ -4490,9 +4490,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noahnu/yarn-semver-up@npm:^0.0.6":
-  version: 0.0.6
-  resolution: "@noahnu/yarn-semver-up@npm:0.0.6"
+"@noahnu/yarn-semver-up@npm:^0.0.7":
+  version: 0.0.7
+  resolution: "@noahnu/yarn-semver-up@npm:0.0.7"
   dependencies:
     "@types/debug": "npm:^4.1.12"
     "@yarnpkg/cli": "npm:^4.12.0"
@@ -4503,11 +4503,11 @@ __metadata:
     clipanion: "npm:^4.0.0-rc.4"
     debug: "npm:^4.4.3"
     micromatch: "npm:^4.0.8"
-    semver: "npm:^7.7.3"
+    semver: "npm:^7.7.4"
     typanion: "npm:^3.14.0"
   bin:
     yarn-semver-up: ./lib/bin.js
-  checksum: 10/5381ffddbe23ce24f86d3d38aad2070437e205ba0b641197c1880feda8508f63017cd6b8fbdffb935149bb6a92b423006bc1ce6999b7096afc563afe835f9e53
+  checksum: 10/c8291e8f56cbbf9a491920e6ad2ae9bcd13829897feb5218c36bc6764f0012d48f9037cb4beb2fbbc30c777d0ae08d1770332d1b80930c2c81dd7f0fbb5e19e9
   languageName: node
   linkType: hard
 
@@ -17218,7 +17218,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.1.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.5.2, semver@npm:^7.5.3, semver@npm:^7.5.4, semver@npm:^7.6.0, semver@npm:^7.7.3, semver@npm:^7.8.5":
+"semver@npm:^7.1.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.5.2, semver@npm:^7.5.3, semver@npm:^7.5.4, semver@npm:^7.6.0, semver@npm:^7.7.4, semver@npm:^7.8.5":
   version: 7.8.5
   resolution: "semver@npm:7.8.5"
   bin:
