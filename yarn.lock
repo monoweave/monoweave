@@ -4138,7 +4138,7 @@ __metadata:
     "@monoweave/types": "workspace:^2.7.0"
     "@monoweave/versions": "workspace:^2.7.0"
     "@types/node": "npm:^26.0.0"
-    "@yarnpkg/cli": "npm:^4.17.0"
+    "@yarnpkg/cli": "npm:^4.17.1"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/plugin-npm": "npm:^3.7.0"
@@ -4293,7 +4293,7 @@ __metadata:
     "@tophat/conventional-changelog-config": "npm:^1.0.1"
     "@types/node": "npm:^26.0.0"
     "@vitest/coverage-v8": "npm:^4.1.9"
-    "@yarnpkg/cli": "npm:^4.17.0"
+    "@yarnpkg/cli": "npm:^4.17.1"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/plugin-npm": "npm:^3.7.0"
@@ -4329,7 +4329,7 @@ __metadata:
     "@monoweave/versions": "workspace:^2.7.0"
     "@types/micromatch": "npm:^4.0.10"
     "@types/node": "npm:^26.0.0"
-    "@yarnpkg/cli": "npm:^4.17.0"
+    "@yarnpkg/cli": "npm:^4.17.1"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/plugin-npm": "npm:^3.7.0"
@@ -4371,7 +4371,7 @@ __metadata:
     "@monoweave/logging": "workspace:*"
     "@monoweave/test-utils": "workspace:*"
     "@monoweave/types": "workspace:*"
-    "@yarnpkg/cli": "npm:^4.17.0"
+    "@yarnpkg/cli": "npm:^4.17.1"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/plugin-npm": "npm:^3.7.0"
@@ -4385,7 +4385,7 @@ __metadata:
     "@monoweave/io": "workspace:^2.7.0"
     "@monoweave/logging": "workspace:^2.7.0"
     "@monoweave/types": "workspace:^2.7.0"
-    "@yarnpkg/cli": ^4.17.0
+    "@yarnpkg/cli": ^4.17.1
     "@yarnpkg/core": ^4.9.0
     "@yarnpkg/fslib": ^3.1.5
     "@yarnpkg/plugin-npm": ^3.7.0
@@ -4402,7 +4402,7 @@ __metadata:
     "@monoweave/node": "workspace:*"
     "@monoweave/types": "workspace:*"
     "@types/node": "npm:^26.0.0"
-    "@yarnpkg/cli": "npm:^4.17.0"
+    "@yarnpkg/cli": "npm:^4.17.1"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     vitest: "npm:^4.1.9"
@@ -4439,7 +4439,7 @@ __metadata:
     "@types/conventional-commits-parser": "npm:^5.0.2"
     "@types/micromatch": "npm:^4.0.10"
     "@types/semver": "npm:^7.7.1"
-    "@yarnpkg/cli": "npm:^4.17.0"
+    "@yarnpkg/cli": "npm:^4.17.1"
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/plugin-npm": "npm:^3.7.0"
@@ -4458,7 +4458,7 @@ __metadata:
     "@monoweave/io": "workspace:^2.7.0"
     "@monoweave/logging": "workspace:^2.7.0"
     "@monoweave/types": "workspace:^2.7.0"
-    "@yarnpkg/cli": ^4.17.0
+    "@yarnpkg/cli": ^4.17.1
     "@yarnpkg/core": ^4.9.0
     "@yarnpkg/fslib": ^3.1.5
     "@yarnpkg/plugin-npm": ^3.7.0
@@ -6990,16 +6990,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/cli@npm:^4.12.0, @yarnpkg/cli@npm:^4.17.0":
-  version: 4.17.0
-  resolution: "@yarnpkg/cli@npm:4.17.0"
+"@yarnpkg/cli@npm:^4.12.0, @yarnpkg/cli@npm:^4.17.1":
+  version: 4.17.1
+  resolution: "@yarnpkg/cli@npm:4.17.1"
   dependencies:
     "@yarnpkg/core": "npm:^4.9.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/libzip": "npm:^3.2.2"
     "@yarnpkg/parsers": "npm:^3.0.3"
     "@yarnpkg/plugin-catalog": "npm:^1.0.2"
-    "@yarnpkg/plugin-compat": "npm:^4.0.12"
+    "@yarnpkg/plugin-compat": "npm:^4.0.13"
     "@yarnpkg/plugin-constraints": "npm:^4.0.5"
     "@yarnpkg/plugin-dlx": "npm:^4.0.2"
     "@yarnpkg/plugin-essentials": "npm:^4.6.1"
@@ -7016,7 +7016,7 @@ __metadata:
     "@yarnpkg/plugin-npm": "npm:^3.7.0"
     "@yarnpkg/plugin-npm-cli": "npm:^4.5.0"
     "@yarnpkg/plugin-pack": "npm:^4.0.4"
-    "@yarnpkg/plugin-patch": "npm:^4.0.4"
+    "@yarnpkg/plugin-patch": "npm:^4.0.5"
     "@yarnpkg/plugin-pnp": "npm:^4.2.0"
     "@yarnpkg/plugin-pnpm": "npm:^2.3.0"
     "@yarnpkg/plugin-stage": "npm:^4.0.2"
@@ -7031,7 +7031,7 @@ __metadata:
     typanion: "npm:^3.14.0"
   peerDependencies:
     "@yarnpkg/core": ^4.9.0
-  checksum: 10/7089e670e9baed90cde2e34678fe7cd9c1242b2141f4f754f5634e07ce6d63463dc0b7a952e2767c0c9a93d1319adacfb6a0f2da7a2271d0b4f47b852a724081
+  checksum: 10/e91a2eea7f6dd5f33980302016cf10faee3272830b9c2136ace7738d73c0ea3c0459f81ac7a3c68c11df1fda7a6c4540f6a0a5921150b495efeee25dff0d09f0
   languageName: node
   linkType: hard
 
@@ -7146,15 +7146,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/plugin-compat@npm:^4.0.12":
-  version: 4.0.12
-  resolution: "@yarnpkg/plugin-compat@npm:4.0.12"
+"@yarnpkg/plugin-compat@npm:^4.0.13":
+  version: 4.0.13
+  resolution: "@yarnpkg/plugin-compat@npm:4.0.13"
   dependencies:
     "@yarnpkg/extensions": "npm:^2.0.6"
   peerDependencies:
-    "@yarnpkg/core": ^4.4.2
-    "@yarnpkg/plugin-patch": ^4.0.3
-  checksum: 10/83ffc85a42bfdf1c2ba3e38a1677dbb1a519d319f2c136ce7a1d827be6023253a65183c0cdcfc6269fca8e2997b5d1835221dfb991feb1ddf500278410421380
+    "@yarnpkg/core": ^4.9.0
+    "@yarnpkg/plugin-patch": ^4.0.5
+  checksum: 10/64d2d802a40538e95cf07ca6a77562e4ee1bca7e9babf20f20869fe479272b20715d941e4f6e46993fcb6a88cbbe3f9b54a6b46aa84915f6976c780765d50de8
   languageName: node
   linkType: hard
 
@@ -7411,18 +7411,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/plugin-patch@npm:^4.0.4":
-  version: 4.0.4
-  resolution: "@yarnpkg/plugin-patch@npm:4.0.4"
+"@yarnpkg/plugin-patch@npm:^4.0.5":
+  version: 4.0.5
+  resolution: "@yarnpkg/plugin-patch@npm:4.0.5"
   dependencies:
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/libzip": "npm:^3.2.2"
     clipanion: "npm:^4.0.0-rc.2"
     tslib: "npm:^2.4.0"
   peerDependencies:
-    "@yarnpkg/cli": ^4.15.0
-    "@yarnpkg/core": ^4.8.0
-  checksum: 10/e8063dae44b5cb0b383e6799c9627e0cff16aa896197a21980504ae90d59f7f34743cc0a0192abfab0febc3f148b8eaa2120c4812b34949fef8607a6058e8d18
+    "@yarnpkg/cli": ^4.17.1
+    "@yarnpkg/core": ^4.9.0
+  checksum: 10/9257b945ffa3f562bc0dcd2154adbb6c83043a7e977636e0d6f48f29a87f1f93646bebdb6e59b5acc35807b2cc7585497a22debe18128867a4bd5e798329c84c
   languageName: node
   linkType: hard
 
@@ -16908,14 +16908,14 @@ __metadata:
 
 "resolve@patch:resolve@npm%3A^1.10.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.11#optional!builtin<compat/resolve>":
   version: 1.22.11
-  resolution: "resolve@patch:resolve@npm%3A1.22.11#optional!builtin<compat/resolve>::version=1.22.11&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.22.11#optional!builtin<compat/resolve>::version=1.22.11&hash=9bd1a5"
   dependencies:
     is-core-module: "npm:^2.16.1"
     path-parse: "npm:^1.0.7"
     supports-preserve-symlinks-flag: "npm:^1.0.0"
   bin:
     resolve: bin/resolve
-  checksum: 10/fd342cad25e52cd6f4f3d1716e189717f2522bfd6641109fe7aa372f32b5714a296ed7c238ddbe7ebb0c1ddfe0b7f71c9984171024c97cf1b2073e3e40ff71a8
+  checksum: 10/c990146fed81dd7792c56c1d62c170a8c8330bee86ef5d2524f0b1db79cfd9a6e2b4ad3cd4742b2685e51117b67be5d6f8cfd6ffa9c57bd64a1c8c8c9ff4c965
   languageName: node
   linkType: hard
 
