@@ -60,9 +60,8 @@ describe('Patch Package Manifests', () => {
     expect(manifest3.version).toBe('3.0.0')
 
     expect(manifest1.dependencies.get(manifest2.name!.identHash)!.range).toBe('workspace:^2.0.0')
-    expect(manifest1.peerDependencies.get(manifest3.name!.identHash)!.range).toBe(
-      'workspace:^3.0.0',
-    )
+    // peer deps default to workspace:* and bare aliases are preserved on disk
+    expect(manifest1.peerDependencies.get(manifest3.name!.identHash)!.range).toBe('workspace:*')
     expect(manifest2.dependencies.get(manifest3.name!.identHash)!.range).toBe('workspace:^3.0.0')
   })
 
@@ -237,16 +236,18 @@ describe('Patch Package Manifests', () => {
     expect(manifest1.dependencies.get(manifest2.name!.identHash)!.range).toBe('workspace:^2.0.0')
   })
 
-  it('preserves bare workspace:^ and workspace:~ aliases on disk', async () => {
+  it('preserves bare workspace:^, workspace:~, and workspace:* aliases on disk', async () => {
     await using context = await createMonorepoContext({
       'pkg-1': {
         dependencies: [
           ['pkg-2', 'workspace:^'],
           ['pkg-3', 'workspace:~'],
+          ['pkg-4', 'workspace:*'],
         ],
       },
       'pkg-2': {},
       'pkg-3': {},
+      'pkg-4': {},
     })
     const config = {
       ...(await getMonoweaveConfig({
@@ -260,15 +261,17 @@ describe('Patch Package Manifests', () => {
     const workspace1 = identToWorkspace(context, 'pkg-1')
     const workspace2 = identToWorkspace(context, 'pkg-2')
     const workspace3 = identToWorkspace(context, 'pkg-3')
+    const workspace4 = identToWorkspace(context, 'pkg-4')
 
     await patchPackageJsons({
       config,
       context,
-      workspaces: new Set([workspace1, workspace2, workspace3]),
+      workspaces: new Set([workspace1, workspace2, workspace3, workspace4]),
       registryTags: new Map([
         ['pkg-1', '1.0.0'],
         ['pkg-2', '0.3.1'],
         ['pkg-3', '0.3.1'],
+        ['pkg-4', '0.3.1'],
       ]),
     })
 
@@ -279,13 +282,18 @@ describe('Patch Package Manifests', () => {
     expect(workspace1.manifest.dependencies.get(workspace3.manifest.name!.identHash)!.range).toBe(
       '^0.3.1',
     )
+    expect(workspace1.manifest.dependencies.get(workspace4.manifest.name!.identHash)!.range).toBe(
+      '^0.3.1',
+    )
 
     // Persist path: bare aliases must stay unpinned so yarn.lock descriptors stay stable
     const manifest1 = await loadManifest(context, 'pkg-1')
     const manifest2 = await loadManifest(context, 'pkg-2')
     const manifest3 = await loadManifest(context, 'pkg-3')
+    const manifest4 = await loadManifest(context, 'pkg-4')
     expect(manifest1.dependencies.get(manifest2.name!.identHash)!.range).toBe('workspace:^')
     expect(manifest1.dependencies.get(manifest3.name!.identHash)!.range).toBe('workspace:~')
+    expect(manifest1.dependencies.get(manifest4.name!.identHash)!.range).toBe('workspace:*')
   })
 
   it('does not modify disk in dry run mode', async () => {
@@ -386,9 +394,12 @@ describe('Patch Package Manifests', () => {
         const manifest3 = await loadManifest(context, 'pkg-3')
 
         expect(manifest3.version).toBe(fromVersion)
-        expect(manifest1.peerDependencies.get(manifest3.name!.identHash)!.range).toBe(
-          `workspace:^${expectedVersion}`,
-        )
+        // Publish path: in-memory peer deps get the coerced concrete range
+        expect(
+          workspace1.manifest.peerDependencies.get(workspace3.manifest.name!.identHash)!.range,
+        ).toBe(`^${expectedVersion}`)
+        // Persist path: bare workspace:* alias stays unpinned on disk
+        expect(manifest1.peerDependencies.get(manifest3.name!.identHash)!.range).toBe('workspace:*')
       },
     )
   })

@@ -65,12 +65,11 @@ const patchPackageJsons = async ({
         const dependencyIdent = structUtils.convertToIdent(descriptor)
 
         // If dependency is using "workspace:" protocol, preserve it when
-        // persisting manifest. Bare caret/tilde aliases must stay unpinned so
-        // yarn.lock descriptors remain stable across releases. workspace:* is
-        // still rewritten to a concrete caret range (existing publish behavior).
+        // persisting manifest.
+        // Bare aliases (workspace:^, workspace:~, workspace:*) must stay
+        // unpinned so yarn.lock descriptors remain stable across releases.
         if (descriptor.range.startsWith('workspace:')) {
-          const isBareAlias =
-            descriptor.range === 'workspace:^' || descriptor.range === 'workspace:~'
+          const isBareAlias = /^workspace:[*^~]$/.test(descriptor.range)
           workspaceProtocols[dependentSetKey].push(
             structUtils.makeDescriptor(
               dependencyIdent,
