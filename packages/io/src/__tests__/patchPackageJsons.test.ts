@@ -237,6 +237,57 @@ describe('Patch Package Manifests', () => {
     expect(manifest1.dependencies.get(manifest2.name!.identHash)!.range).toBe('workspace:^2.0.0')
   })
 
+  it('preserves bare workspace:^ and workspace:~ aliases on disk', async () => {
+    await using context = await createMonorepoContext({
+      'pkg-1': {
+        dependencies: [
+          ['pkg-2', 'workspace:^'],
+          ['pkg-3', 'workspace:~'],
+        ],
+      },
+      'pkg-2': {},
+      'pkg-3': {},
+    })
+    const config = {
+      ...(await getMonoweaveConfig({
+        cwd: context.project.cwd,
+        baseBranch: 'main',
+        commitSha: 'shashasha',
+      })),
+      persistVersions: true,
+    }
+
+    const workspace1 = identToWorkspace(context, 'pkg-1')
+    const workspace2 = identToWorkspace(context, 'pkg-2')
+    const workspace3 = identToWorkspace(context, 'pkg-3')
+
+    await patchPackageJsons({
+      config,
+      context,
+      workspaces: new Set([workspace1, workspace2, workspace3]),
+      registryTags: new Map([
+        ['pkg-1', '1.0.0'],
+        ['pkg-2', '0.3.1'],
+        ['pkg-3', '0.3.1'],
+      ]),
+    })
+
+    // Publish path: in-memory manifests still get concrete semver ranges
+    expect(workspace1.manifest.dependencies.get(workspace2.manifest.name!.identHash)!.range).toBe(
+      '^0.3.1',
+    )
+    expect(workspace1.manifest.dependencies.get(workspace3.manifest.name!.identHash)!.range).toBe(
+      '^0.3.1',
+    )
+
+    // Persist path: bare aliases must stay unpinned so yarn.lock descriptors stay stable
+    const manifest1 = await loadManifest(context, 'pkg-1')
+    const manifest2 = await loadManifest(context, 'pkg-2')
+    const manifest3 = await loadManifest(context, 'pkg-3')
+    expect(manifest1.dependencies.get(manifest2.name!.identHash)!.range).toBe('workspace:^')
+    expect(manifest1.dependencies.get(manifest3.name!.identHash)!.range).toBe('workspace:~')
+  })
+
   it('does not modify disk in dry run mode', async () => {
     await using context = await createMonorepoContext({
       'pkg-1': {
