@@ -44,11 +44,11 @@
     "docs": "tsx ./generateDocs.ts"
   },
   "dependencies": {
-    "@yarnpkg/core": "^4.9.0",
+    "@yarnpkg/core": "^4.9.1",
     "tapable": "^2.3.3"
   },
   "peerDependencies": {
-    "@yarnpkg/core": "^4.9.0"
+    "@yarnpkg/core": "^4.9.1"
   },
   "devDependencies": {
     "@types/node": "^26.0.0",
