@@ -76,6 +76,19 @@ module.exports = {
 }
 ```
 
+When using conventional changelog mode, install a supported preset in your project.
+Monoweave requires presets compatible with `conventional-changelog-writer` v9+
+(render-function templates, not Handlebars):
+
+- `conventional-changelog-angular` **≥9**
+- `conventional-changelog-conventionalcommits` **≥10**
+- Custom presets that export render-function writer options and either the legacy
+  (`parserOpts` / `writerOpts` / `recommendedBumpOpts.whatBump`) or modern
+  (`parser` / `writer` / `whatBump`) field names
+
+Older Handlebars-based presets (for example `conventional-changelog-angular` ≤8)
+are not supported.
+
 or json/jsonc/json5/yml/yaml:
 
 ```yaml

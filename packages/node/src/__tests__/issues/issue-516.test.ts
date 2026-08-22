@@ -47,7 +47,7 @@ const setupExampleMonorepo = async (): Promise<YarnContext> => {
         name: null, // setupMonorepo sets 'name' to undefined if explicitly set to null
         private: true,
         dependencies: {
-          'conventional-changelog-angular': '7.0.0',
+          'conventional-changelog-angular': '9.4.0',
         },
       },
     },

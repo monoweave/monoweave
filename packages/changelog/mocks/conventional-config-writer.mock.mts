@@ -8,13 +8,15 @@ export default async function createPreset() {
   }
   const writerOpts = {
     transform(commit: any, _context: any) {
-      console.error('here?')
+      if (!commit.type) {
+        return
+      }
+
       return {
         ...commit,
-        mainTemplate: '',
-        headerPartial: '',
-        commitPartial: '',
-        footerPartial: '',
+        type: commit.type,
+        subject: commit.subject || commit.header,
+        shortHash: typeof commit.hash === 'string' ? commit.hash.substring(0, 7) : commit.shortHash,
       }
     },
     groupBy: 'type',

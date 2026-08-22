@@ -26,7 +26,7 @@ describe('resolveConventionalConfig', () => {
       config: monoweaveConfig as MonoweaveConfiguration,
     })
 
-    expect(config).toEqual({
+    expect(config).toMatchObject({
       parserOpts: {
         name: expect.stringContaining('conventional-config-fn'),
       },

@@ -1,11 +1,9 @@
-import { createRequire } from 'module'
-
 import { RegistryMode } from '@monoweave/types'
 import { describe, expect, it } from 'vitest'
 
+import { conventionalChangelogConfig } from '#helpers/conventionalChangelogConfig'
 import setupProject from '#helpers/setupProject'
 
-const require = createRequire(import.meta.url)
 describe('Prerelease', () => {
   it('runs the full monoweave pipeline', async () => {
     await using testContext = await setupProject({
@@ -27,7 +25,7 @@ describe('Prerelease', () => {
         dryRun: false,
         autoCommit: true,
         autoCommitMessage: 'chore: release',
-        conventionalChangelogConfig: require.resolve('@tophat/conventional-changelog-config'),
+        conventionalChangelogConfig,
         git: {
           push: true,
           remote: 'origin',

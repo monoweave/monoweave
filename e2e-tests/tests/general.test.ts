@@ -1,11 +1,8 @@
-import { createRequire } from 'module'
-
 import { RegistryMode } from '@monoweave/types'
 import { describe, expect, it } from 'vitest'
 
+import { conventionalChangelogConfig } from '#helpers/conventionalChangelogConfig'
 import setupProject from '#helpers/setupProject'
-
-const require = createRequire(import.meta.url)
 
 describe('General Usage', () => {
   it.each(['pnp', 'node-modules'] as const)(
@@ -33,7 +30,7 @@ describe('General Usage', () => {
           dryRun: false,
           autoCommit: true,
           autoCommitMessage: 'chore: release',
-          conventionalChangelogConfig: require.resolve('@tophat/conventional-changelog-config'),
+          conventionalChangelogConfig,
           git: {
             push: true,
             remote: 'origin',

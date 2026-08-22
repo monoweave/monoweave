@@ -1,4 +1,3 @@
-import { createRequire } from 'node:module'
 import path from 'node:path'
 
 import { exec } from '@monoweave/io'
@@ -13,10 +12,9 @@ import { RegistryMode } from '@monoweave/types'
 import { npath } from '@yarnpkg/fslib'
 import { describe, expect, it } from 'vitest'
 
+import { conventionalChangelogConfig } from '#helpers/conventionalChangelogConfig'
 import { startRegistry } from '#helpers/docker'
 import { createSetupProjectContext, writeConfigWithLocalRegistry } from '#helpers/setupProject'
-
-const require = createRequire(import.meta.url)
 
 // https://github.com/monoweave/monoweave/issues/165
 describe('Issue #165', () => {
@@ -49,7 +47,7 @@ describe('Issue #165', () => {
         dryRun: false,
         autoCommit: true,
         autoCommitMessage: 'chore: release',
-        conventionalChangelogConfig: require.resolve('@tophat/conventional-changelog-config'),
+        conventionalChangelogConfig,
         git: {
           push: true,
           remote: 'origin',

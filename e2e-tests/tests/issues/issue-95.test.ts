@@ -1,11 +1,8 @@
-import { createRequire } from 'module'
-
 import { RegistryMode } from '@monoweave/types'
 import { describe, expect, it } from 'vitest'
 
+import { conventionalChangelogConfig } from '#helpers/conventionalChangelogConfig'
 import setupProject from '#helpers/setupProject'
-
-const require = createRequire(import.meta.url)
 
 // https://github.com/monoweave/monoweave/issues/95
 describe('Issue #95', () => {
@@ -22,7 +19,7 @@ describe('Issue #95', () => {
         dryRun: false,
         autoCommit: true,
         autoCommitMessage: 'chore: release',
-        conventionalChangelogConfig: require.resolve('@tophat/conventional-changelog-config'),
+        conventionalChangelogConfig,
         git: {
           push: true,
           remote: 'origin',
