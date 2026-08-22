@@ -43,6 +43,10 @@ const patchPackageJsons = async ({
       for (const descriptor of dependencySet.values()) {
         const depPackageName = structUtils.stringifyIdent(descriptor)
 
+        // Leave catalog: ranges intact so Yarn's beforeWorkspacePacking hook can
+        // replace them with catalog entry ranges at publish time.
+        if (descriptor.range.startsWith('catalog:')) continue
+
         let dependencyVersion = registryTags.get(depPackageName)
         if (!dependencyVersion) continue
 
