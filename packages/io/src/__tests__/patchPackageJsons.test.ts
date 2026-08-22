@@ -4,6 +4,7 @@ import { createMonorepoContext, getMonoweaveConfig } from '@monoweave/test-utils
 import { type YarnContext } from '@monoweave/types'
 import { Manifest, type Workspace, structUtils } from '@yarnpkg/core'
 import { npath } from '@yarnpkg/fslib'
+import { packUtils } from '@yarnpkg/plugin-pack'
 import { describe, expect, it } from 'vitest'
 
 import { patchPackageJsons } from '../index.js'
@@ -282,6 +283,69 @@ describe('Patch Package Manifests', () => {
     expect(workspace1.manifest.version).toBe('1.0.0')
     expect(workspace2.manifest.version).toBe('2.0.0')
     expect(workspace3.manifest.version).toBe('3.0.0')
+  })
+
+  it('preserves catalog protocol ranges for packing', async () => {
+    await using context = await createMonorepoContext(
+      {
+        'pkg-1': {
+          dependencies: [
+            ['pkg-2', 'catalog:'],
+            ['pkg-3', 'catalog:utils'],
+          ],
+        },
+        'pkg-2': { version: '2.0.0' },
+        'pkg-3': { version: '3.0.0' },
+      },
+      {
+        catalog: { 'pkg-2': '^2.0.0' },
+        catalogs: { utils: { 'pkg-3': '^3.0.0' } },
+      },
+    )
+    const config = {
+      ...(await getMonoweaveConfig({
+        cwd: context.project.cwd,
+        baseBranch: 'main',
+        commitSha: 'shashasha',
+      })),
+      persistVersions: true,
+    }
+
+    const workspace1 = identToWorkspace(context, 'pkg-1')
+    const workspace2 = identToWorkspace(context, 'pkg-2')
+    const workspace3 = identToWorkspace(context, 'pkg-3')
+
+    await patchPackageJsons({
+      config,
+      context,
+      workspaces: new Set([workspace1, workspace2, workspace3]),
+      registryTags: new Map([
+        ['pkg-1', '1.0.0'],
+        ['pkg-2', '2.1.0'],
+        ['pkg-3', '3.1.0'],
+      ]),
+    })
+
+    expect(workspace1.manifest.dependencies.get(workspace2.manifest.name!.identHash)!.range).toBe(
+      'catalog:',
+    )
+    expect(workspace1.manifest.dependencies.get(workspace3.manifest.name!.identHash)!.range).toBe(
+      'catalog:utils',
+    )
+
+    const manifest1 = await loadManifest(context, 'pkg-1')
+    expect(manifest1.dependencies.get(workspace2.manifest.name!.identHash)!.range).toBe('catalog:')
+    expect(manifest1.dependencies.get(workspace3.manifest.name!.identHash)!.range).toBe(
+      'catalog:utils',
+    )
+
+    const packed = (await packUtils.genPackageManifest(workspace1)) as {
+      dependencies?: Record<string, string>
+    }
+    expect(packed.dependencies).toEqual({
+      'pkg-2': '^2.0.0',
+      'pkg-3': '^3.0.0',
+    })
   })
 
   describe('Coerce Peer Dependency Version Strategy', () => {

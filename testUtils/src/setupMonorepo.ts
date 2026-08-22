@@ -58,16 +58,28 @@ type ProjectRootInitConfiguration = PackageInitConfiguration &
     repository: string
   }>
 
+type CatalogEntries = Record<string, string>
+type NamedCatalogs = Record<string, CatalogEntries>
+
+function formatYamlMap(entries: CatalogEntries, indent: number): string[] {
+  const prefix = ' '.repeat(indent)
+  return Object.entries(entries).map(([key, value]) => `${prefix}${key}: "${value}"`)
+}
+
 export default async function setupMonorepo(
   monorepo: Record<string, PackageInitConfiguration>,
   {
     root,
     nodeLinker = 'pnp',
     cwd,
+    catalog,
+    catalogs,
   }: {
     root?: ProjectRootInitConfiguration
     nodeLinker?: 'pnp' | 'pnpm' | 'node-modules'
     cwd?: string
+    catalog?: CatalogEntries
+    catalogs?: NamedCatalogs
   } = {},
 ): Promise<YarnContext> {
   const tmpDir = await fs.realpath(os.tmpdir()) // tmpdir is a symlink on MacOS
@@ -110,23 +122,32 @@ export default async function setupMonorepo(
 
   // Generate .yarnrc.yml
   const authIdent = Buffer.from('test-user:test-password').toString('base64')
-  await fs.writeFile(
-    path.join(workingDir, '.yarnrc.yml'),
-    [
-      `nodeLinker: ${nodeLinker}`,
-      'enableGlobalCache: false',
-      'pnpEnableEsmLoader: false',
-      ...(process.env.E2E === '1'
-        ? [
-            "unsafeHttpWhitelist: ['localhost']",
-            'npmAlwaysAuth: true',
-            'npmRegistryServer: "http://localhost:4873"',
-            `npmRegistries:\n  "//localhost:4873":\n    npmAuthIdent: "${authIdent}"\n    npmAlwaysAuth: true`,
-          ]
-        : []),
-    ].join('\n'),
-    'utf-8',
-  )
+  const yarnrcLines = [
+    `nodeLinker: ${nodeLinker}`,
+    'enableGlobalCache: false',
+    'pnpEnableEsmLoader: false',
+    ...(process.env.E2E === '1'
+      ? [
+          "unsafeHttpWhitelist: ['localhost']",
+          'npmAlwaysAuth: true',
+          'npmRegistryServer: "http://localhost:4873"',
+          `npmRegistries:\n  "//localhost:4873":\n    npmAuthIdent: "${authIdent}"\n    npmAlwaysAuth: true`,
+        ]
+      : []),
+  ]
+
+  if (catalog && Object.keys(catalog).length) {
+    yarnrcLines.push('catalog:', ...formatYamlMap(catalog, 2))
+  }
+
+  if (catalogs && Object.keys(catalogs).length) {
+    yarnrcLines.push('catalogs:')
+    for (const [name, entries] of Object.entries(catalogs)) {
+      yarnrcLines.push(`  ${name}:`, ...formatYamlMap(entries, 4))
+    }
+  }
+
+  await fs.writeFile(path.join(workingDir, '.yarnrc.yml'), yarnrcLines.join('\n'), 'utf-8')
 
   // Initialize project
   const context: YarnContext = await setupContext(npath.toPortablePath(workingDir))
@@ -143,9 +164,21 @@ export default async function setupMonorepo(
 
 export async function createMonorepoContext(
   monorepo: Record<string, PackageInitConfiguration>,
-  { root, debug, cwd }: { root?: ProjectRootInitConfiguration; cwd?: string; debug?: boolean } = {},
+  {
+    root,
+    debug,
+    cwd,
+    catalog,
+    catalogs,
+  }: {
+    root?: ProjectRootInitConfiguration
+    cwd?: string
+    debug?: boolean
+    catalog?: CatalogEntries
+    catalogs?: NamedCatalogs
+  } = {},
 ): Promise<AsyncDisposable & YarnContext> {
-  const context = await setupMonorepo(monorepo, { root, cwd })
+  const context = await setupMonorepo(monorepo, { root, cwd, catalog, catalogs })
 
   return {
     ...context,
