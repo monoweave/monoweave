@@ -31,17 +31,17 @@
   },
   "devDependencies": {
     "@monoweave/test-utils": "workspace:*",
-    "@types/node": "^26.0.0",
+    "@types/node": "^26.2.0",
     "tapable": "^2.3.3",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.11"
   },
   "dependencies": {
     "@monoweave/git": "workspace:^2.7.0",
     "@monoweave/io": "workspace:^2.7.0",
     "@monoweave/logging": "workspace:^2.7.0",
     "@monoweave/types": "workspace:^2.7.0",
-    "@octokit/core": "^7.0.6",
-    "@octokit/plugin-throttling": "^11.0.3",
+    "@octokit/core": "^7.0.7",
+    "@octokit/plugin-throttling": "^11.0.5",
     "@yarnpkg/core": "^4.9.1",
     "@yarnpkg/fslib": "^3.1.5",
     "@yarnpkg/shell": "^4.1.3"

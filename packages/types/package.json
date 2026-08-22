@@ -51,10 +51,10 @@
     "@yarnpkg/core": "^4.9.1"
   },
   "devDependencies": {
-    "@types/node": "^26.0.0",
-    "tsx": "^4.22.4",
-    "typedoc": "^0.28.19",
+    "@types/node": "^26.2.0",
+    "tsx": "^4.23.12",
+    "typedoc": "^0.28.20",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.11"
   }
 }
