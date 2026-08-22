@@ -4,8 +4,8 @@ import { parseRepositoryProperty } from '@monoweave/git'
 import { readStream, readStreamString } from '@monoweave/io'
 import type { CommitMessage, MonoweaveConfiguration, YarnContext } from '@monoweave/types'
 import { structUtils } from '@yarnpkg/core'
-import conventionalChangelogWriter from 'conventional-changelog-writer'
-import conventionalCommitsParser, { type Commit } from 'conventional-commits-parser'
+import { writeChangelogStream } from 'conventional-changelog-writer'
+import { parseCommitsStream, type Commit } from 'conventional-commits-parser'
 
 import { defaultChangelogWriter } from './defaultChangelogWriter.js'
 import resolveConventionalConfig from './resolveConventionalConfig.js'
@@ -56,13 +56,10 @@ export const generateChangelogEntry = async ({
 
   const commitsStream = Readable.from(
     commits.map((commit) => `${commit.body}\n-hash-\n${commit.sha}`),
-  ).pipe(conventionalCommitsParser(conventionalConfig.parserOpts))
+  ).pipe(parseCommitsStream(conventionalConfig.parserOpts))
   const conventionalCommits = await readStream<Commit>(commitsStream)
 
-  const changelogWriter = conventionalChangelogWriter(
-    templateContext,
-    conventionalConfig.writerOpts,
-  )
+  const changelogWriter = writeChangelogStream(templateContext, conventionalConfig.writerOpts)
 
   async function* transformedCommits() {
     for (const commit of conventionalCommits) {

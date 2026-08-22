@@ -70,7 +70,7 @@ const setupExampleMonorepo = async (): Promise<YarnContext> => {
     {
       root: {
         dependencies: {
-          'conventional-changelog-angular': '7.0.0',
+          'conventional-changelog-angular': '9.4.0',
         },
       },
     },

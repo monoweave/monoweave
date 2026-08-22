@@ -7,7 +7,7 @@ import type {
   PackageStrategyType,
   StrategyDeterminer,
 } from '@monoweave/types'
-import conventionalCommitsParser, { type Commit } from 'conventional-commits-parser'
+import { parseCommitsStream, type Commit } from 'conventional-commits-parser'
 
 export const STRATEGY = {
   MAJOR: 0,
@@ -24,13 +24,10 @@ export const getDefaultRecommendedStrategy: StrategyDeterminer = async (
   const FEATURE_TYPES = ['feat']
   const BREAKING_CHANGE = 'breaking change'
 
-  const parser = conventionalCommitsParser({
+  const parser = parseCommitsStream({
     headerPattern: /^(\w*)(?:\((.*)\))?: (.*)$/,
     headerCorrespondence: ['type', 'scope', 'subject'],
-    noteKeywords: [
-      'BREAKING CHANGE',
-      ...[...PATCH_TYPES, ...FEATURE_TYPES].map((prefix) => `${prefix}(?:\\(.*\\))?`),
-    ],
+    noteKeywords: ['BREAKING CHANGE', /feat(?:\(.*\))?/, /fix(?:\(.*\))?/, /perf(?:\(.*\))?/],
     revertPattern: /^(revert:|Revert)\s([\s\S]*?)\s*This reverts commit (\w*)\./,
     revertCorrespondence: ['prefix', 'header', 'hash'],
   })
@@ -88,7 +85,7 @@ export const createGetConventionalRecommendedStrategy =
     const conventionalConfig = await resolveConventionalConfig({ config })
 
     const commitsStream = Readable.from(commits).pipe(
-      conventionalCommitsParser(conventionalConfig.parserOpts),
+      parseCommitsStream(conventionalConfig.parserOpts),
     )
     const conventionalCommits = await readStream<Commit>(commitsStream)
 
