@@ -47,8 +47,8 @@
   "devDependencies": {
     "@monoweave/test-utils": "workspace:*",
     "@types/micromatch": "^4.0.10",
-    "@types/node": "^26.0.0",
-    "vitest": "^4.1.9"
+    "@types/node": "^26.2.0",
+    "vitest": "^4.1.11"
   },
   "dependencies": {
     "@monoweave/changelog": "workspace:^2.7.0",
