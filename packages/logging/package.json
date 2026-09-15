@@ -31,7 +31,7 @@
     "prepack": "run workspace:build \"$(pwd)\""
   },
   "devDependencies": {
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.3.0",
     "@yarnpkg/core": "^4.9.1",
     "vitest": "^4.1.11"
   },
