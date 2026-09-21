@@ -3903,7 +3903,7 @@ __metadata:
     "@yarnpkg/shell": "npm:^4.1.3"
     conventional-changelog-writer: "npm:^9.2.1"
     conventional-commits-parser: "npm:^7.1.2"
-    p-limit: "npm:^7.3.1"
+    p-limit: "npm:^7.3.2"
     vitest: "npm:^4.1.11"
   peerDependencies:
     "@monoweave/git": "workspace:^2.7.0"
@@ -4167,7 +4167,7 @@ __metadata:
     "@yarnpkg/plugin-npm": "npm:^3.7.1"
     "@yarnpkg/plugin-pack": "npm:^4.0.5"
     "@yarnpkg/shell": "npm:^4.1.3"
-    p-limit: "npm:^7.3.1"
+    p-limit: "npm:^7.3.2"
     vitest: "npm:^4.1.11"
   peerDependencies:
     "@monoweave/dependencies": "workspace:^2.7.0"
@@ -4236,7 +4236,7 @@ __metadata:
     "@yarnpkg/shell": "npm:^4.1.3"
     conventional-commits-parser: "npm:^7.1.2"
     micromatch: "npm:^4.0.8"
-    p-limit: "npm:^7.3.1"
+    p-limit: "npm:^7.3.2"
     semver: "npm:^7.8.5"
     vitest: "npm:^4.1.11"
     yaml: "npm:^2.9.0"
@@ -13860,12 +13860,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-limit@npm:^7.3.1":
-  version: 7.3.1
-  resolution: "p-limit@npm:7.3.1"
+"p-limit@npm:^7.3.2":
+  version: 7.3.3
+  resolution: "p-limit@npm:7.3.3"
   dependencies:
     yocto-queue: "npm:^1.2.1"
-  checksum: 10/ba8830e0780f994cb5ada4073cd905d1111c3443ec971286cadbe09e65c8753466939c883d70f64d371f5dee5c7a124accc3cc0b42f52a08b2e2c78323bb2d6b
+  checksum: 10/79440f0c98c21b8e78ead262bb3eca47b65e497ea945c03b978474c80fa55276695da409506650df1d60b8a1830f656b580c430dc02a74978759efdf8a00532d
   languageName: node
   linkType: hard
 
