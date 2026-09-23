@@ -50,7 +50,7 @@
     "@monoweave/logging": "workspace:*",
     "@monoweave/test-utils": "workspace:*",
     "@monoweave/types": "workspace:*",
-    "@types/node": "^26.4.0",
+    "@types/node": "^26.4.1",
     "@yarnpkg/core": "^4.9.1",
     "@yarnpkg/fslib": "^3.1.5",
     "@yarnpkg/shell": "^4.1.3",
