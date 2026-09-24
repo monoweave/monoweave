@@ -33,7 +33,7 @@
   "devDependencies": {
     "@types/node": "^26.4.1",
     "@yarnpkg/core": "^4.9.1",
-    "vitest": "^4.1.11"
+    "vitest": "^5.0.0"
   },
   "peerDependencies": {
     "@yarnpkg/core": "^4.9.1"
