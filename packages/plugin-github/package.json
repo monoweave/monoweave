@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@monoweave/test-utils": "workspace:*",
-    "@types/node": "^26.6.4",
+    "@types/node": "^26.6.5",
     "tapable": "^2.3.3",
     "vite": "^8.3.4",
     "vitest": "^5.0.5"
