@@ -3977,8 +3977,8 @@ __metadata:
     clsx: "npm:^2.1.1"
     docusaurus-plugin-typedoc: "npm:^1.4.3"
     prism-react-renderer: "npm:^2.4.1"
-    react: "npm:^19.3.0"
-    react-dom: "npm:^19.3.0"
+    react: "npm:^19.3.1"
+    react-dom: "npm:^19.3.1"
     typedoc: "npm:^0.28.20"
     typedoc-plugin-markdown: "npm:^4.14.0"
     typescript: "npm:^6.0.3"
@@ -14940,7 +14940,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^19.3.0":
+"react-dom@npm:^19.3.1":
   version: 19.3.1
   resolution: "react-dom@npm:19.3.1"
   dependencies:
@@ -15084,7 +15084,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^19.3.0":
+"react@npm:^19.3.1":
   version: 19.3.1
   resolution: "react@npm:19.3.1"
   checksum: 10/8305f553520125f1b202998d403bf5b69de732d3e9d6ac3d42c53eeabc1c612a4f2ee68f5f9d17277258fc880252b0d5073750317a5c8801c83d9a4382e4b322
