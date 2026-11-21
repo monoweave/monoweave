@@ -63,13 +63,13 @@
     "@noahnu/yarn-semver-up": "^0.0.7",
     "@types/node": "^26.6.6",
     "@vitest/coverage-v8": "^5.0.5",
-    "@yarnpkg/cli": "^4.18.0",
-    "@yarnpkg/core": "^4.9.1",
+    "@yarnpkg/cli": "^4.19.0",
+    "@yarnpkg/core": "^4.9.3",
     "@yarnpkg/fslib": "^3.1.5",
-    "@yarnpkg/plugin-npm": "^3.7.1",
+    "@yarnpkg/plugin-npm": "^3.8.0",
     "@yarnpkg/plugin-pack": "^4.0.5",
-    "@yarnpkg/sdks": "^3.3.1",
-    "@yarnpkg/shell": "^4.1.3",
+    "@yarnpkg/sdks": "^3.3.2",
+    "@yarnpkg/shell": "^4.1.4",
     "@yarnpkg/types": "^4.0.1",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
@@ -82,5 +82,5 @@
     "vitest": "^5.0.5",
     "yaml": "^2.9.1"
   },
-  "packageManager": "yarn@4.18.0+sha512.fcb8716fe7cd0eece141ffc18b92193a9df9204c1ba83189c288835223fc0bbe64af473bab0d5e9927a7daeb5caf2bb07eb2787cc9338ca040ea125f2a1f2f7e"
+  "packageManager": "yarn@4.19.0+sha512.2cb9e5a36f7f11f2bc6ff444830d87368d419e0d83b6a0fb6077d3e6fed0f476c9514dff4ba4d84b049bd34ef32954e550f264ad2fbbfebcba6c89e869530bba"
 }
