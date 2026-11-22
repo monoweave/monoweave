@@ -3895,7 +3895,7 @@ __metadata:
     "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/shell": "npm:^4.1.4"
     conventional-changelog-writer: "npm:^9.3.0"
-    conventional-commits-parser: "npm:^7.1.3"
+    conventional-commits-parser: "npm:^7.1.4"
     p-limit: "npm:^7.3.3"
     vite: "npm:^8.3.5"
     vitest: "npm:^5.0.5"
@@ -4239,7 +4239,7 @@ __metadata:
     "@yarnpkg/plugin-npm": "npm:^3.8.0"
     "@yarnpkg/plugin-pack": "npm:^4.0.5"
     "@yarnpkg/shell": "npm:^4.1.4"
-    conventional-commits-parser: "npm:^7.1.3"
+    conventional-commits-parser: "npm:^7.1.4"
     micromatch: "npm:^4.0.8"
     p-limit: "npm:^7.3.3"
     semver: "npm:^7.8.5"
@@ -8528,15 +8528,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-commits-parser@npm:^7.1.3":
-  version: 7.1.3
-  resolution: "conventional-commits-parser@npm:7.1.3"
+"conventional-commits-parser@npm:^7.1.4":
+  version: 7.1.4
+  resolution: "conventional-commits-parser@npm:7.1.4"
   dependencies:
     "@simple-libs/stream-utils": "npm:^2.0.0"
     argue-cli: "npm:^3.1.0"
   bin:
     conventional-commits-parser: ./dist/cli/index.js
-  checksum: 10/82575781aeef045b8cc3fbcc942fcfb308f71003de5fbb157ac4c683694d5faaad3b552074c90259eab21c04920a56cd00a21073f03993ea7296ec4a33f73e89
+  checksum: 10/77e0471900f2690c00131e6c9e62cc9cc6438b9581396de4c3fe43bf1f7d1fc4a33f81e0d74aed5f90c27f02736169014650f7f3897a98b4e4ff300a40915bd2
   languageName: node
   linkType: hard
 
