@@ -62,7 +62,7 @@
     "@monoweave/types": "workspace:*",
     "@noahnu/yarn-semver-up": "^0.0.7",
     "@types/node": "^26.6.6",
-    "@vitest/coverage-v8": "^5.0.5",
+    "@vitest/coverage-v8": "^5.1.0",
     "@yarnpkg/cli": "^4.19.0",
     "@yarnpkg/core": "^4.9.3",
     "@yarnpkg/fslib": "^3.1.5",
@@ -79,7 +79,7 @@
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "vite": "^8.3.5",
-    "vitest": "^5.0.5",
+    "vitest": "^5.1.0",
     "yaml": "^2.9.1"
   },
   "packageManager": "yarn@4.19.0+sha512.2cb9e5a36f7f11f2bc6ff444830d87368d419e0d83b6a0fb6077d3e6fed0f476c9514dff4ba4d84b049bd34ef32954e550f264ad2fbbfebcba6c89e869530bba"

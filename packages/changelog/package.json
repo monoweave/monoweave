@@ -55,6 +55,6 @@
     "@yarnpkg/fslib": "^3.1.5",
     "@yarnpkg/shell": "^4.1.4",
     "vite": "^8.3.5",
-    "vitest": "^5.0.5"
+    "vitest": "^5.1.0"
   }
 }
